@@ -1,0 +1,179 @@
+body {
+	background-color:#e8e8e8;
+}
+/******************************************************* group header *************************************/
+
+header 
+{
+	
+}
+
+.btn-link:hover,.btn-link:focus {
+	text-decoration:none;
+}
+
+.navbar-fixed-top {
+	box-shadow: 2px 2px 10px #969696;
+}
+
+/******************************************************* end group header *************************************/
+
+/****************************************************** group nav dropdown left ****************************/
+.navbarcolor
+{
+	background-color:#085688; 	
+}
+
+a.navbarcolor {
+	color:#fff;
+}
+
+a:hover.navbarcolor, a:focus.navbarcolor, a:active.navbarcolor {
+	background-color:#1171af;
+	color:#fff;
+}
+
+
+.nav-bg {
+	background-color:#e8e2be;
+	border-radius:0px;
+}
+
+
+.list-item:first-child {
+	border-top-left-radius:0px;
+	border-top-right-radius:0px;
+	border-bottom-left-radius:0px;
+	border-bottom-right-radius:0px;
+}
+
+.fa {
+	padding-left:6px;
+}
+
+
+/******************************************************* group content *************************************/
+.main {
+	margin-top:70px;
+}
+
+.content {
+	margin-top:70px;
+}
+
+.blur {
+	margin-top:60px;
+}
+
+
+/** Steps Progress and Details - START  **/
+.hiddenStepInfo {
+    display: none;
+}
+
+.activeStepInfo {
+    display: block !important;
+}
+
+.underline {
+    text-decoration: underline;
+}
+
+.step {
+    margin-top: 27px;
+}
+
+.progress {
+    position: relative;
+	height:25px;
+}
+
+.progress > .progress-type {
+    position: absolute;
+    left: 0px;
+    font-weight: 800;
+    padding: 3px 30px 2px 10px;
+    color: rgb(255, 255, 255);
+    background-color: rgba(25, 25, 25, 0.2);
+}
+
+.progress > .progress-completed {
+    position: absolute;
+    right: 0px;
+    font-weight: 800;
+    padding: 3px 10px 2px;
+}
+
+.step {
+    text-align: center;
+}
+
+.step .col-md-2 {
+    background-color: #fff;
+    border: 1px solid #C0C0C0;
+    border-right: none;
+}
+
+.step .col-md-2:last-child {
+    border: 1px solid #C0C0C0;
+}
+
+.step .col-md-2:first-child {
+    border-radius: 5px 0 0 5px;
+}
+
+.step .col-md-2:last-child {
+    border-radius: 0 5px 5px 0;
+}
+
+.step .col-md-2:hover {
+    color: #F58723;
+    cursor: pointer;
+}
+
+.step .activestep {
+    color: #F58723;
+    height: 100px;
+    margin-top: -7px;
+    padding-top: 7px;
+    border-left: 6px solid #5CB85C !important;
+    border-right: 6px solid #5CB85C !important;
+    border-top: 3px solid #5CB85C !important;
+    border-bottom: 3px solid #5CB85C !important;
+    vertical-align: central;
+}
+
+.step .fa {
+	font-size:40px;
+	padding-top:15px;
+}
+
+.has-success button span.fa {
+	font-size:20px;
+	padding-top:0px;
+}
+
+.jumbotron {
+	background-color:#ddeaba;
+	box-shadow:0px 0px 16px #888888;
+}
+
+.tclear {
+	clear:both;
+}
+/** END Steps Progress and Details - START  **/
+
+/******************************************************* end group content *************************************/
+
+
+
+
+/******************************************************* group footer *************************************/
+footer  {
+	background-color:#033758;
+	padding:5px 5px;
+	bottom:0;
+	position: fixed;
+	width:100%;
+}
+/******************************************************* end group footer *************************************/
