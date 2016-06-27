@@ -18,47 +18,49 @@ header
 
 /******************************************************* end group header *************************************/
 
-/****************************************************** group nav dropdown left ****************************/
-.navbarcolor
-{
-	background-color:#085688; 	
-}
-
-a.navbarcolor {
-	color:#fff;
-}
-
-a:hover.navbarcolor, a:focus.navbarcolor, a:active.navbarcolor {
-	background-color:#1171af;
-	color:#fff;
-}
-
-
+/****************************************************** group nav dropdown ****************************/
 .nav-bg {
-	background-color:#e8e2be;
-	border-radius:0px;
+	background-color:#054a75;
 }
 
-
-.list-item:first-child {
-	border-top-left-radius:0px;
-	border-top-right-radius:0px;
-	border-bottom-left-radius:0px;
-	border-bottom-right-radius:0px;
+.nav-bg .navbar-brand {
+	color:#fff;
 }
 
-.fa {
-	padding-left:6px;
+.nav-bg .navbar-nav>li>a {
+	color:#fff;
 }
 
+.nav-bg .navbar-nav>li>a:hover, .nav-bg .navbar-nav>li>a:focus, .nav-bg .navbar-nav>li>a:active {
+	color:#fff;
+}
+
+.nav-bg .navbar-nav>.active>a, .nav-bg .navbar-nav>.active>a:hover, .nav-bg .navbar-nav>.active>a:focus {
+	color: #555;
+    background-color: #e8e8e8;
+}
+
+.nav-bg .navbar-nav>li>a {
+	color:#fff;
+}
+
+.nav-bg .navbar-nav>li>a:hover {
+	color:#e8e8e8;
+}
 
 /******************************************************* group content *************************************/
-.main {
-	margin-top:70px;
+.bg-main {
+	background-color:#f5f5f5;
+	padding:8px 12px;
+	border-radius: 4px;
+}
+
+.bg-main h3 {
+	margin:0;
 }
 
 .content {
-	margin-top:70px;
+	margin-top:0px;
 }
 
 .blur {

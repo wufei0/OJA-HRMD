@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="utf-8" />
-   <title>Registration Forms</title>
+   <title>Registration Form</title>
    <link rel="icon" href="images/logo.png" type="image/x-icon">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
