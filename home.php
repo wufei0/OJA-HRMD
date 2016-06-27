@@ -27,13 +27,10 @@
 	
 	
 	<!-- edit style css -->
-	<link rel="stylesheet" href="style/style.css" type="text/css" />
+	<link rel="stylesheet" href="css/style.css" type="text/css" />
 
 	<!-- Latest compiled and minified JavaScript -->
-	
-	
-	
-	
+
 
     <script type="text/javascript" src="js/jquery-1.10.2.min.js"></script>
     <script type="text/javascript" src="js/bootstrap.min.js"></script>
@@ -41,7 +38,7 @@
  </head>
 <body>
 <!------------------------------------------------------------- header ------------------------------------------------------------>
-<header class="navbar navbar-fixed-top "> 
+<header class="navbar"> 
 	<!--<div class="container-fluid">
 		<div class="row">
 			<div class="col-md-12 text-right" style="background-color:#969696;">
@@ -50,26 +47,21 @@
 		</div>
 	</div>-->
 	<!-- Fixed navbar -->
-    <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="navbar navbar-default nav-bg navbar-fixed-top" role="navigation">
       <div class="container">
 		  <div class="row">
 			<div class="col-md-12">
 				
-						<div class="navbar-header">
-							<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-								<span class="sr-only">Toggle navigation</span>
-								<span class="icon-bar"></span>
-								<span class="icon-bar"></span>
-								<span class="icon-bar"></span>
-							</button>
-							<a class="navbar-brand" href="#">PGLU OJA </a>	
-						</div>
-						
-	
-						
-			
-			
-			
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+						<span class="sr-only">Toggle navigation</span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</button>
+					<a class="navbar-brand" href="#">PGLU OJA </a>	
+				</div>
+
 				<div class="navbar-collapse collapse">
 				  <ul class="nav navbar-nav navbar-right">
 					<li class="active"><a href="#">Home</a></li>       
@@ -116,6 +108,24 @@
 		</div>
 		<!--------- end col-md-12 ----------->
 	</div>
+	
+	<div class="row">
+		<div class="col-md-12">
+			<div class="bg-main">
+				
+				
+			
+				<div class="row">
+					<div class="col-md-6">
+						sdfasd
+					</div>
+					<div class="col-md-6">
+						sdfds
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 </div>
 <!------------------------------------------------------------- end content ------------------------------------------------------------>
 
@@ -126,7 +136,7 @@
 		<div class="row">
 		
 			<div class="col-md-6 pull-left">
-				<p style="color:#fff;">Copyright &copy; 2016 HRMD</p>
+				<p style="color:#fff; padding-top:5px;">Copyright &copy; 2016 HRMD</p>
 			</div>
 			<div class="col-md-6 pull-right text-right">
 				<img src="images/logo/hr_logo.png" width="40" height="35" alt="PGLU" title="PGLU" class="img-circle" />&nbsp;

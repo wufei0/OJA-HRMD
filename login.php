@@ -21,7 +21,7 @@
 	
 	
 	<!-- edit style css -->
-	<link rel="stylesheet" href="style/style.css" type="text/css" />
+	<link rel="stylesheet" href="css/style.css" type="text/css" />
 
 	<!-- Latest compiled and minified JavaScript -->
 	
