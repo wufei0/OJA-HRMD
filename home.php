@@ -3,12 +3,10 @@
 	{
     	session_start();
 	}
-	include('essential/connection.php');
+	require_once('essential/session.php');
+	require_once('essential/connection.php');
 
-	// include('session.php');
 
-	// $result=mysqli_query($con, "select * from users where id='$session_id'")or die('Error In Session');
-	// $row=mysqli_fetch_array($result);
 ?>
 
 <!DOCTYPE html>
@@ -17,7 +15,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="icon" href="../../../images/home/icon/pglu.ico" type="image/x-icon">
+<!-- 	<link rel="icon" href="images/home/icon/pglu.ico" type="image/x-icon"> -->
 
     <!-- Latest compiled and minified CSS -->
 	<link href="css/bootstrap.css" rel="stylesheet"/>
@@ -31,9 +29,7 @@
 	<!-- Optional theme -->
 	<!-- edit style css -->
 	<link rel="stylesheet" href="css/style.css" type="text/css" />
-	<script type="text/javascript" src="js/jquery-1.10.2.min.js"></script>
-	<script type="text/javascript" src="js/bootstrap.min.js"></script>
-	<script type="text/javascript" src="js/jquery.growl.js"></script>
+
 
 
 
@@ -54,18 +50,17 @@
 						<span class="icon-bar"></span>
 						<span class="icon-bar"></span>
 					</button>
-					<a class="navbar-brand" href="#">PGLU OJA </a>
+					<a class="navbar-brand" href="home.php" style="color: #e8e8e8;">PGLU OJA</a>
 				</div>
 
-				<div class="navbar-collapse collapse">
-				  <ul class="nav navbar-nav navbar-right">
+				<div id="navHeader" class="navbar-collapse collapse">
+					<ul class="nav navbar-nav navbar-right">
 					<li class="active"><a href="#">Home</a></li>
-					<li><a href="#about">About</a></li>
 					<li class="dropdown">
-					  <a href="#" class="dropdown-toggle" data-toggle="dropdown">Themes <b class="caret"></b></a>
+					  <a href="#" class="dropdown-toggle" data-toggle="dropdown">Services <b class="caret"></b></a>
 					  <ul class="dropdown-menu">
-						<li class="dropdown-header">Admin & Dashboard</li>
-						<li><a href="#">Admin 1</a></li>
+						<!--<li class="dropdown-header">Admin & Dashboard</li>-->
+						<li><a href="#">Job Application</a></li>
 						<li><a href="#">Admin 2</a></li>
 						<li class="divider"></li>
 						<li class="dropdown-header">Portfolio</li>
@@ -73,7 +68,9 @@
 						<li><a href="#">Portfolio 2</a></li>
 					  </ul>
 					</li>
-					<li><a href="#">Contact</a></li>
+					<li><a href="#">Reports</a></li>
+					<li><a href="#">Maintenance</a></li>
+					<li><a href="#">Help</a></li>
 				  </ul>
 				</div>
 			</div>
@@ -88,6 +85,7 @@
 <!-- col-md-12 -->
 <!-- breadcrumb -->
 		<div id="div-breadcrumb" class="col-md-12">
+
 		</div>
 <!-- end breadcrumb -->
 <!-- end col-md-12 -->
@@ -95,15 +93,31 @@
 
 	<div class="row">
 		<div class="col-md-12">
-			<div class="bg-main">
-				<div class="row">
-					<div class="col-md-6">
-						col-md-6 content here
-					</div>
-					<div class="col-md-6">
-						col-md-6 content here
-					</div>
+			<div class="row">
+				<div class ="col-md-1">
+					Level <br>
+					Elementary
 				</div>
+				<div class ="col-md-3">
+					Name of School
+				</div>
+				<div class ="col-md-3">
+					Degree/Course
+				</div>
+				<div class ="col-md-1">
+					Year Graduated
+				</div>
+				<div class ="col-md-1">
+					Highest Level Attained
+				</div>
+				<div class ="col-md-2">
+					Inclusive dates of Attendance
+				</div>
+				<div class ="col-md-1">
+					Scholarship
+				</div>
+
+
 			</div>
 		</div>
 	</div>
@@ -127,48 +141,22 @@
 
 
 <!-- includes -->
-<?php 
+<!-- <?php 
 	// includes modal
 	include('essential/modal.php');
-?>
+?> -->
 <!-- end includes -->
+<script type="text/javascript" src="js/jquery-1.10.2.min.js"></script>
+<script type="text/javascript" src="js/bootstrap.min.js"></script>
+<script type="text/javascript" src="js/jquery.growl.js"></script>
 
-<!-- design scripts -->
-<script language="JavaScript" type="text/javascript">
-
-/*onload script*/
-$(document).ready(function() 
-{
-	renderBreadcrumb('Home');
-});
+<script type="text/javascript" src="script/staticDesign.js"></script>
 
 
-/*render breadcrumb*/
-function renderBreadcrumb(modName)
-{
-
-	jQuery.ajax({
-        type: "POST",
-        url:"essential/breadcrumb.php",
-        dataType:'text',
-        data:{module:modName},
-        success:function(response)
-        {
-        	$('#div-breadcrumb').html(response);
-        },
-        error:function (xhr, ajaxOptions, thrownError){
-             $.growl.error({ message: thrownError });
-        }
-        });
-}
-
-
-</script>
-
-<!-- end design scripts -->
+<!-- <script type="text/javascript" src="script/staticDesign.js" ></script> -->
 
 
 
-<!-- Latest compiled and minified JavaScript -->
+
 </body>
 </html>
