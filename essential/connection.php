@@ -5,6 +5,7 @@ $DB_USER = 'hr';
 $DB_PASS = 'hr';
 $DB_SCHEMA = 'oja';
 
+date_default_timezone_set("Asia/Manila");
 // $con = mysqli_connect("docutracking","hr","hr","oja");
 
 // // Check connection

@@ -6,8 +6,9 @@ if (session_status() == PHP_SESSION_NONE)
     session_start();
 }
 
-
-
+require_once('essential/connection.php');
+//global $DB_HOST, $DB_USER,$DB_PASS, $DB_SCHEMA;
+$con=mysqli_connect($DB_HOST,$DB_USER,$DB_PASS,$DB_SCHEMA);
 
  ?>
 
@@ -22,10 +23,9 @@ if (session_status() == PHP_SESSION_NONE)
     <link rel="icon" href="images/logo.png" type="image/x-icon">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
-    <link rel="stylesheet" type="text/css" href="css/style.css" />
     <link rel="stylesheet" type="text/css" href="css/jquery.growl.css" />
-    <link rel="stylesheet" type="text/css" href="css/style.css" />
     <link rel="stylesheet" type="text/css" href="css/bootstrap-select.css" />
+    <link rel="stylesheet" type="text/css" href="css/style.css" />
     
 
 </head>
@@ -57,160 +57,129 @@ if (session_status() == PHP_SESSION_NONE)
 </header>
 <!-- end header -->
 
-<!-- <div class="container">
 
-     <form id="logInForm" class="form-signin" >
-        <h2 class="form-signin-heading">Please sign in</h2>
-       <label for="username" class="sr-only">Username</label>
-        <input  id="username" class="form-control" placeholder="Username" required="" autofocus="">
-        <label for="inputPassword" class="sr-only">Password</label>
-        <input type="password" id="password" class="form-control" placeholder="Password" required="">
-    <br>
-        <button id="signIn" class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
-      </form>
-
-
-    
-
-
-    </div> -->
-
-    <!------------------------------------------------------------- content ------------------------------------------------------------>
+    <!---------------------------------------------- content ------------------------------------------------------------>
     <div class="content">
         <div class="container">
-            
             <div class="row">
                 <h3 class="well">Registration Form</h3>
-                
                 <form >
                     <!---- Group Personal Information ---->
                     <div class="col-lg-12 well">
                         <div class="row">
-                            
                                 <div class="col-sm-12">
                                     <div class="row">
-                                        
                                         <div class="col-sm-12 form-group">
                                             <h4>I. Personal Information</h4>
                                             <hr>
                                         </div>
-                                        
                                         <div class="col-sm-3 form-group">
                                             <label>Surename</label>
-                                            <input type="text" placeholder="Surename" class="form-control" required>
+                                            <input id="regSurename" type="text" placeholder="Surename" class="form-control" required>
                                         </div>
-                                        
                                         <div class="col-sm-3 form-group">
                                             <label>First Name</label>
-                                            <input type="text" placeholder="Firstname" class="form-control">
+                                            <input id="regFirstName" type="text" placeholder="Firstname" class="form-control" required>
                                         </div>
-                                        
                                         <div class="col-sm-3 form-group">
                                             <label>Middle Name</label>
-                                            <input type="text" placeholder="Middle Name" class="form-control">
+                                            <input id="regMiddleName" type="text" placeholder="Middle Name" class="form-control" required>
                                         </div>
-                                        
                                         <div class="col-sm-3 form-group">
                                             <label>Name Extension (e.g. Jr., Sr.)</label>
-                                            <input type="text" placeholder="Name Extension (e.g. Jr., Sr.)" class="form-control">
+                                            <input id="regNameExt" type="text" placeholder="Name Extension (e.g. Jr., Sr.)" class="form-control" >
                                         </div>
-             
+
                                     </div>
-                            
-                            
                                     <div class="row">
                                         <div class="col-sm-3 form-group">
                                             <label>Date of Birth (mm/dd/yyyy)</label>
                                             <div id="datetimepicker4" class="input-append">
-                                                <input class="form-control" data-format="yyyy/MM/dd" type="date"></input>
+                                                <input id="regDateOfBirth" class="form-control" data-format="yyyy/MM/dd" type="date" required></input>
                                                 <span class="add-on">
                                                   <i data-time-icon="icon-time" data-date-icon="icon-calendar">
                                                   </i>
                                                 </span>
                                             </div>
-                                        </div>  
+                                        </div>
                                         <div class="col-sm-3 form-group">
                                             <label>Place of Birth</label>
-                                            <select class="selectpicker form-control" data-live-search="true">
-                                              <option data-tokens="ketchup mustard">Place...</option>
-                                              <option data-tokens="mustard">Place...</option>
-                                              <option data-tokens="frosting">Place...</option>
-                                            </select>
-                                        </div>  
+                                            <input id="regPlaceOfBirth" type="text" placeholder="Birthplace" class="form-control" required>
+                                        </div>
                                         <div class="col-sm-3 form-group">
                                             <label>Sex</label>
-                                            <select class="selectpicker form-control" data-live-search="true">
-                                              <option data-tokens="ketchup mustard">Male</option>
-                                              <option data-tokens="mustard">Female</option>
-                                              <option data-tokens="frosting">Other</option>
+                                            <select class="selectpicker form-control" >
+                                              <option id="regSex" value="male">Male</option>
+                                              <option value="female">Female</option>
                                             </select>
-                                        </div>  
+                                        </div>
                                         <div class="col-sm-3 form-group">
                                             <label>Civil Status</label>
-                                            <select class="selectpicker form-control" data-live-search="true">
-                                              <option data-tokens="ketchup mustard">Single</option>
-                                              <option data-tokens="mustard">Married</option>
-                                              <option data-tokens="frosting">Other</option>
+                                            <select id="regCivilStatis" class="selectpicker form-control" >
+                                              <option value="single">Single</option>
+                                              <option value="married">Married</option>
+                                              <option value="divorced">Divorced</option>
+                                               <option value="widowed">Widowed</option>
                                             </select>
                                         </div>
                                     </div>
-                                    
+
                                     <div class="row">
                                         <div class="col-sm-4 form-group">
                                             <label>Province</label>
-                                            <select id="regProvince" class="selectpicker form-control" data-live-search="true">
-                                              
+                                            <select id="regProvince" class="selectpicker form-control" data-live-search="true" required>
+                                                <?php
+                                                    $sql="SELECT province_pk, province from m_province order by province";
+                                                    $myQuery=mysqli_query($con,$sql);
+                                                    while($myResult = mysqli_fetch_array($myQuery))
+                                                    {
+                                                        echo "<option value='".$myResult['province_pk']."' >".$myResult['province']."</option>";
+                                                    }
+                                                ?>
                                             </select>
-                                        </div>  
+                                        </div>
                                         <div class="col-sm-4 form-group">
                                             <label>Municipality</label>
-                                            <select class="selectpicker form-control" data-live-search="true">
-                                              <option data-tokens="ketchup mustard">Place...</option>
-                                              <option data-tokens="mustard">Place...</option>
-                                              <option data-tokens="frosting">Place...</option>
+                                            <select id="regMunicipality" class="selectpicker form-control" data-live-search="true" required>
                                             </select>
-                                        </div>  
+                                        </div>
                                         <div class="col-sm-4 form-group">
                                             <label>Barangay</label>
-                                            <select class="selectpicker form-control" data-live-search="true">
-                                              <option data-tokens="ketchup mustard">Place...</option>
-                                              <option data-tokens="mustard">Place...</option>
-                                              <option data-tokens="frosting">Place...</option>
+                                            <select id="regBarangay" class="selectpicker form-control" data-live-search="true" required>
                                             </select>
-                                        </div>      
+                                        </div>
                                     </div>
-                                    
+
                                     <div class="row">
                                         <div class="col-sm-6 form-group">
                                             <label>Email Address</label>
-                                            <input type="text" placeholder="Enter Email Address Here.." class="form-control">
-                                        </div>      
+                                            <input id="Email" type="text" placeholder="Enter Email Address Here.." class="form-control" required>
+                                        </div>
                                         <div class="col-sm-6 form-group">
                                             <label>Cellphone No.</label>
-                                            <input type="text" placeholder="Enter Phone Number Here.." class="form-control">
-                                        </div>  
-                                    </div>                      
-                                            
+                                            <input id="CpNumber" type="text" placeholder="Enter Phone Number Here.." class="form-control" required>
+                                        </div>
+                                    </div>
+
                                 </div>
-                            
+
                         </div>
                     </div>
                     <!---- end Group Personal Information ---->
-                    
+
                     <!---- Group Educational Background ---->
                     <div class="col-lg-12 well">
                         <div class="row">
-                            
+
                                 <div class="col-sm-12">
                                     <div class="row">
-                                        
                                         <div class="col-sm-12 form-group">
                                             <h4>II. Educational Background</h4>
                                             <hr>
                                         </div>
 
                                     </div>  
-                                    
+
                                     <div class="row">
                                         <div class="col-sm-1 form-group">
                                             <label>Level</label>
@@ -234,237 +203,223 @@ if (session_status() == PHP_SESSION_NONE)
                                             <label>Scholarship</label>
                                         </div>
                                     </div>
-                                    
+
                                     <!-- group Elementary -->
                                     <div class="row">
                                         <div class="col-sm-1 form-group">
                                             <label>Elementary</label>
                                         </div>
                                         <div class="col-sm-3 form-group">
-                                            <input type="text" placeholder="Name of School" class="form-control" required>
+                                            <input id="elemSchoolName" type="text" placeholder="Name of School" class="form-control" >
                                         </div>
                                         <div class="col-sm-2 form-group">
-                                            <input type="text" placeholder="Degree Course" class="form-control" required>
+                                            <input id="elemDegree" type="text" placeholder="Degree Course" class="form-control" >
                                         </div>
                                         <div class="col-sm-1 form-group">
-                                            <input type="text" placeholder="Year Graduated" class="form-control" required>
+                                            <input id="elemYearGraduated" type="text" placeholder="Year Graduated" class="form-control" >
                                         </div>
                                         <div class="col-sm-1 form-group">
-                                            <input type="text" placeholder="Highest Level" class="form-control" required>
+                                            <input id="elemHighestLevel" type="text" placeholder="Highest Level" class="form-control" >
                                         </div>
                                         <div class="col-sm-1 form-group" style="padding-right:5px;">
-                                            <input type="text" placeholder="From" class="form-control" required>
+                                            <input id="elemFrom" type="text" placeholder="From" class="form-control" >
                                         </div>
                                         <div class="col-sm-1 form-group" style="padding-left:5px;">
-                                            <input type="text" placeholder="To" class="form-control" required>
+                                            <input id="elemTo" type="text" placeholder="To" class="form-control" >
                                         </div>
                                         <div class="col-sm-2 form-group">
-                                            <input type="text" placeholder="Scholarship" class="form-control" required>
+                                            <input id="elemScholarship" type="text" placeholder="Scholarship" class="form-control" >
                                         </div>
                                     </div>
-                                    
+
                                     <!-- group Secondary -->
                                     <div class="row">
                                         <div class="col-sm-1 form-group">
                                             <label>Secondary</label>
                                         </div>
                                         <div class="col-sm-3 form-group">
-                                            <input type="text" placeholder="Name of School" class="form-control" required>
+                                            <input id="hsSchoolName" type="text" placeholder="Name of School" class="form-control" >
                                         </div>
                                         <div class="col-sm-2 form-group">
-                                            <input type="text" placeholder="Degree Course" class="form-control" required>
+                                            <input id="hsDegree" type="text" placeholder="Degree Course" class="form-control" >
                                         </div>
                                         <div class="col-sm-1 form-group">
-                                            <input type="text" placeholder="Year Graduated" class="form-control" required>
+                                            <input id="hsYearGraduated" type="text" placeholder="Year Graduated" class="form-control" >
                                         </div>
                                         <div class="col-sm-1 form-group">
-                                            <input type="text" placeholder="Highest Level" class="form-control" required>
+                                            <input id="hsHighestLevel" type="text" placeholder="Highest Level" class="form-control" >
                                         </div>
                                         <div class="col-sm-1 form-group" style="padding-right:5px;">
-                                            <input type="text" placeholder="From" class="form-control" required>
+                                            <input id="hsFrom" type="text" placeholder="From" class="form-control" >
                                         </div>
                                         <div class="col-sm-1 form-group" style="padding-left:5px;">
-                                            <input type="text" placeholder="To" class="form-control" required>
+                                            <input id="hsTo" type="text" placeholder="To" class="form-control" >
                                         </div>
                                         <div class="col-sm-2 form-group">
-                                            <input type="text" placeholder="Scholarship" class="form-control" required>
+                                            <input id="hsScholarship" type="text" placeholder="Scholarship" class="form-control" >
                                         </div>
                                     </div>
-                                    
+
                                     <!-- group Vocational -->
                                     <div class="row">
                                         <div class="col-sm-1 form-group">
                                             <label>Vocational / Trade Course</label>
                                         </div>
                                         <div class="col-sm-3 form-group">
-                                            <input type="text" placeholder="Name of School" class="form-control" required>
+                                            <input id="vocSchoolName" type="text" placeholder="Name of School" class="form-control" >
                                         </div>
                                         <div class="col-sm-2 form-group">
-                                            <input type="text" placeholder="Degree Course" class="form-control" required>
+                                            <input id="vocDegree" type="text" placeholder="Degree Course" class="form-control" >
                                         </div>
                                         <div class="col-sm-1 form-group">
-                                            <input type="text" placeholder="Year Graduated" class="form-control" required>
+                                            <input id="vocYearGraduated" type="text" placeholder="Year Graduated" class="form-control" >
                                         </div>
                                         <div class="col-sm-1 form-group">
-                                            <input type="text" placeholder="Highest Level" class="form-control" required>
+                                            <input id="vocHighestLevel" type="text" placeholder="Highest Level" class="form-control" >
                                         </div>
                                         <div class="col-sm-1 form-group" style="padding-right:5px;">
-                                            <input type="text" placeholder="From" class="form-control" required>
+                                            <input id="vocFrom" type="text" placeholder="From" class="form-control" >
                                         </div>
                                         <div class="col-sm-1 form-group" style="padding-left:5px;">
-                                            <input type="text" placeholder="To" class="form-control" required>
+                                            <input id="vocTo" type="text" placeholder="To" class="form-control" >
                                         </div>
                                         <div class="col-sm-2 form-group">
-                                            <input type="text" placeholder="Scholarship" class="form-control" required>
+                                            <input id="vocScholarship" type="text" placeholder="Scholarship" class="form-control" >
                                         </div>
                                     </div>
-                                    
+
                                     <!-- group College -->
                                     <div class="row">
                                         <div class="col-sm-1 form-group">
                                             <label>College</label>
                                         </div>
                                         <div class="col-sm-3 form-group">
-                                            <input type="text" placeholder="Name of School" class="form-control" required>
+                                            <input id="colSchoolName" type="text" placeholder="Name of School" class="form-control" >
                                         </div>
                                         <div class="col-sm-2 form-group">
-                                            <input type="text" placeholder="Degree Course" class="form-control" required>
+                                            <input id="colDegree" type="text" placeholder="Degree Course" class="form-control" >
                                         </div>
                                         <div class="col-sm-1 form-group">
-                                            <input type="text" placeholder="Year Graduated" class="form-control" required>
+                                            <input id="colYearGraduated" type="text" placeholder="Year Graduated" class="form-control" >
                                         </div>
                                         <div class="col-sm-1 form-group">
-                                            <input type="text" placeholder="Highest Level" class="form-control" required>
+                                            <input id="colHighestLevel" type="text" placeholder="Highest Level" class="form-control" >
                                         </div>
                                         <div class="col-sm-1 form-group" style="padding-right:5px;">
-                                            <input type="text" placeholder="From" class="form-control" required>
+                                            <input id="colFrom" type="text" placeholder="From" class="form-control" >
                                         </div>
                                         <div class="col-sm-1 form-group" style="padding-left:5px;">
-                                            <input type="text" placeholder="To" class="form-control" required>
+                                            <input id="colTo" type="text" placeholder="To" class="form-control" >
                                         </div>
                                         <div class="col-sm-2 form-group">
-                                            <input type="text" placeholder="Scholarship" class="form-control" required>
+                                            <input id="colScholarship" type="text" placeholder="Scholarship" class="form-control" >
                                         </div>
                                     </div>
-                                    
+
                                     <!-- group graduate studies -->
                                     <div class="row">
                                         <div class="col-sm-1 form-group">
                                             <label>Graduate Studies</label>
                                         </div>
                                         <div class="col-sm-3 form-group">
-                                            <input type="text" placeholder="Name of School" class="form-control" required>
+                                            <input id="grdSchoolName" type="text" placeholder="Name of School" class="form-control" >
                                         </div>
                                         <div class="col-sm-2 form-group">
-                                            <input type="text" placeholder="Degree Course" class="form-control" required>
+                                            <input id="grdDegree" type="text" placeholder="Degree Course" class="form-control" >
                                         </div>
                                         <div class="col-sm-1 form-group">
-                                            <input type="text" placeholder="Year Graduated" class="form-control" required>
+                                            <input id="grdYearGraduated" type="text" placeholder="Year Graduated" class="form-control" required>
                                         </div>
                                         <div class="col-sm-1 form-group">
-                                            <input type="text" placeholder="Highest Level" class="form-control" required>
+                                            <input id="grdHighestLevel" type="text" placeholder="Highest Level" class="form-control" required>
                                         </div>
                                         <div class="col-sm-1 form-group" style="padding-right:5px;">
-                                            <input type="text" placeholder="From" class="form-control" required>
+                                            <input id="grdFrom" type="text" placeholder="From" class="form-control" required>
                                         </div>
                                         <div class="col-sm-1 form-group" style="padding-left:5px;">
-                                            <input type="text" placeholder="To" class="form-control" required>
+                                            <input id="grdTo" type="text" placeholder="To" class="form-control" required>
                                         </div>
                                         <div class="col-sm-2 form-group">
-                                            <input type="text" placeholder="Scholarship" class="form-control" required>
+                                            <input id="grdScholarship" type="text" placeholder="Scholarship" class="form-control" required>
                                         </div>
                                     </div>
-                                    
+                                    <label style="font-size: 10px;">*Input latest on every Education Level</label>
                                 </div>
-                            
                         </div>
                     </div>
                     <!---- end Group Educational Background ---->
-                    
+
                     <!---- Group Civil Service Eligibility ---->
                     <div class="col-lg-12 well">
                         <div class="row">
-                            
                                 <div class="col-sm-12">
                                     <div class="row">
-                                        
                                         <div class="col-sm-12 form-group">
                                             <h4>III. Civil Service Eligibility</h4>
                                             <hr>
                                         </div>
-                                        
                                         <div class="col-sm-12 form-group">
                                             <label>Career Service / RA 1080 (Board/Bar) Under Special Laws / CES / CSEE</label>
-                                            <input type="text" placeholder="Career Service..." class="form-control" required>
+                                            <input id="eliEligibility" type="text" placeholder="Career Service..." class="form-control" >
                                         </div>
-                                        
                                         <div class="col-sm-12 form-group">
                                             <label>Rating</label>
-                                            <input type="text" placeholder="Rating" class="form-control">
+                                            <input id="eliRating" type="text" placeholder="Rating" class="form-control">
                                         </div>
-                                        
                                         <div class="col-sm-12 form-group">
                                             <label>Date of Examination / Conferment</label>
-                                            <input type="text" placeholder="Date of Examination" class="form-control">
+                                            <input id="eliDateExam" type="text" placeholder="Date of Examination" class="form-control">
                                         </div>
-                                        
                                         <div class="col-sm-12 form-group">
                                             <label>Place of Examination / Conferment</label>
-                                            <input type="text" placeholder="Highest Grade / Level / Units Earned" class="form-control">
+                                            <input id="eliPlaceExam"  type="text" placeholder="Highest Grade / Level / Units Earned" class="form-control">
                                         </div>
                                     </div>
-                                        
                                         <div class="row">
-                                        
                                             <div class="col-sm-6 form-group">
                                                 <label>License (Number)</label>
-                                                <input type="text" placeholder="License Number" class="form-control">
+                                                <input id="eliLicenseNumber" type="text" placeholder="License Number" class="form-control">
                                             </div>
                                             <div class="col-sm-6 form-group">
                                                 <label>License (Date of Release)</label>
-                                                <input type="date" placeholder="License Date of Release" class="form-control">
+                                                <input id="eliDateLicense" type="date" placeholder="License Date of Release" class="form-control">
                                             </div>
-                                            
                                         </div>
-                                                                
                                 </div>
-                            
+
                         </div>
                     </div>
                     <!---- end Group Civil Service Eligibility ---->
-                    
+
                     <!---- Group Skills ---->
                     <div class="col-lg-12 well">
                         <div class="row">
-                            
+
                                 <div class="col-sm-12">
                                     <div class="row">
-                                        
+
                                         <div class="col-sm-12 form-group">
                                             <h4>IV. Skills</h4>
                                             <hr>
                                         </div>
-                                        
+
                                         <div class="col-sm-12 form-group">
                                             <label>Special Skills / Hobbies</label>
-                                            <input type="text" placeholder="Special Skills / Hobbies" class="form-control" required>
+                                            <input id="sklSkill" type="text" placeholder="Special Skills / Hobbies" class="form-control" required>
                                         </div>
-                                        
+
                                         <div class="col-sm-12 form-group">
                                             <label>Non-Academic Distinctions / Recognition</label>
-                                            <input type="text" placeholder="Non-Academic Distinctions / Recognition" class="form-control">
+                                            <input id="sklRecognition" type="text" placeholder="Non-Academic Distinctions / Recognition" class="form-control">
                                         </div>
-                                        
+
                                         <div class="col-sm-12 form-group">
                                             <label>Memebership in Association / Organization</label>
-                                            <input type="text" placeholder="Memebership in Association / Organization" class="form-control">
+                                            <input id="sklOrganization" type="text" placeholder="Memebership in Association / Organization" class="form-control">
                                         </div>
-                                        
-                                        
+
                                     </div>
-                                        
-                                        
-                                                                
+
                                 </div>
                             
                         </div>
@@ -493,10 +448,10 @@ if (session_status() == PHP_SESSION_NONE)
                                             <label>a. Are you a memeber of any indigenous group?</label>
                                             
                                             <label class="radio-inline">
-                                              <input type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1"> Yes
+                                              <input type="radio" name="indigenous" id="inlineRadio1" value="option1" > Yes
                                             </label>
                                             <label class="radio-inline">
-                                              <input type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2"> No
+                                              <input type="radio" name="indigenous" id="inlineRadio2" value="option2" checked> No
                                             </label>
                                             
                                             <input type="text" placeholder="If YES, please specify:" class="form-control">
@@ -506,10 +461,10 @@ if (session_status() == PHP_SESSION_NONE)
                                             <label>b. Are you differently abled?</label>
                                             
                                             <label class="radio-inline">
-                                              <input type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1"> Yes
+                                              <input type="radio" name="abled" id="inlineRadio1" value="option1"> Yes
                                             </label>
                                             <label class="radio-inline">
-                                              <input type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2"> No
+                                              <input type="radio" name="abled" id="inlineRadio2" value="option2" checked> No
                                             </label>
                                             
                                             <input type="text" placeholder="If YES, please specify:" class="form-control">
@@ -519,10 +474,10 @@ if (session_status() == PHP_SESSION_NONE)
                                             <label>c. Are you a solo parent?</label>
                                             
                                             <label class="radio-inline">
-                                              <input type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1"> Yes
+                                              <input type="radio" name="soloparent" id="inlineRadio1" value="option1"> Yes
                                             </label>
                                             <label class="radio-inline">
-                                              <input type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2"> No
+                                              <input type="radio" name="soloparent" id="inlineRadio2" value="option2" checked> No
                                             </label>
                                             
                                             <input type="text" placeholder="If YES, please specify:" class="form-control">
@@ -607,7 +562,7 @@ if (session_status() == PHP_SESSION_NONE)
                     <!---- end Group References ---->
 
                     <!-- button -->
-                    <div class="col-lg-12 well" style="margin-bottom: 60px;">
+                    <div style="margin-bottom: 60px;">
                         <div class="row">
                                 <div class="col-sm-12">
 
@@ -647,6 +602,64 @@ if (session_status() == PHP_SESSION_NONE)
 <script type="text/javascript" src="js/bootstrap-select.js"></script>
 
 <script  type="text/javascript">
+
+// change province event
+// reload municipality
+$('#regProvince').change(function(e){
+
+$('#regMunicipality').empty();
+e.preventDefault();
+    var moduleName = 'registerMunicipality';
+    var provinceName = this.value;
+    jQuery.ajax({
+        type: "POST",
+        url:"lib/getData/dropdown.php",
+        dataType:'html',
+        data:{module:moduleName,provinceName:provinceName},
+        success:function(response)
+        {
+            $('#regMunicipality').empty();
+            // var municipalityList = response;
+            $('#regMunicipality').append(response);
+            // $('#regMunicipality').trigger("chosen:updated");
+            $('#regMunicipality').selectpicker('refresh');
+
+        },
+        error:function (xhr, ajaxOptions, thrownError)
+        {
+            $.growl.error({ message: thrownError });
+        }
+        });
+});
+
+// change municipality event
+// reload barangar
+$('#regMunicipality').change(function(e){
+
+$('#regBarangay').empty();
+e.preventDefault();
+    var moduleName = 'registerBarangay';
+    var municipalityName = this.value;
+    jQuery.ajax({
+        type: "POST",
+        url:"lib/getData/dropdown.php",
+        dataType:'html',
+        data:{module:moduleName,municipalityName:municipalityName},
+        success:function(response)
+        {
+            $('#regBarangay').empty();
+            // var municipalityList = response;
+            $('#regBarangay').append(response);
+            // $('#regMunicipality').trigger("chosen:updated");
+            $('#regBarangay').selectpicker('refresh');
+
+        },
+        error:function (xhr, ajaxOptions, thrownError)
+        {
+            $.growl.error({ message: thrownError });
+        }
+        });
+});
 
 
 </script>

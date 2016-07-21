@@ -1,55 +1,4 @@
-
-.login-container {
-  padding: 20px;
-  max-width: 350px;
-  width: 100% !important;
-  background-color: #F7F7F7;
-  margin: 0 auto;
-  border-radius: 4px;
-  box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.3);
-  overflow: hidden;
-  font-family: arial;
-}
-
-.login-container h1 {
-  text-align: center;
-  font-size: 16px;
-  font-family: arial;
-}
-
-.login-container input[type=submit] {
-  width: 100%;
-  display: block;
-  margin-bottom: 10px;
-  position: relative;
-}
-
-.login-container input[type=text], input[type=password] {
-  height: 30px;
-  font-size: 12px;
-  width: 100%;
-  margin-bottom: 10px;
-  -webkit-appearance: none;
-  background: #fff;
-  border: 1px solid #d9d9d9;
-  border-top: 1px solid #c0c0c0;
-  /* border-radius: 2px; */
-  padding: 0 8px;
-  box-sizing: border-box;
-  -moz-box-sizing: border-box;
-}
-
-.login-container input[type=text]:hover, input[type=password]:hover {
-  border: 1px solid #b9b9b9;
-  border-top: 1px solid #a0a0a0;
-  -moz-box-shadow: inset 0 1px 2px rgba(0,0,0,0.1);
-  -webkit-box-shadow: inset 0 1px 2px rgba(0,0,0,0.1);
-  box-shadow: inset 0 1px 2px rgba(0,0,0,0.1);
-}
-
-
-
-body {
+ body {
 background-color:#e8e8e8;
 }
 /******************************************************* group header *************************************/
@@ -69,73 +18,403 @@ box-shadow: 2px 2px 10px #969696;
 
 /******************************************************* end group header *************************************/
 
-/****************************************************** group nav dropdown left ****************************/
-
-
-a.navbarcolor {
-color:#fff;
+/****** LOGIN MODAL ******/
+.loginmodal-container {
+  padding: 20px;
+  max-width: 350px;
+  width: 100% !important;
+  background-color: #F7F7F7;
+  margin: 0 auto;
+  border-radius: 4px;
+  box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.3);
+  overflow: hidden;
+  font-family: roboto;
 }
 
-a:hover.navbarcolor, a:focus.navbarcolor, a:active.navbarcolor {
-background-color:#1171af;
-color:#fff;
+.loginmodal-container h1 {
+  text-align: center;
+  font-size: 16px;
+  font-family: roboto;
 }
 
+.loginmodal-container input[type=submit] {
+  width: 100%;
+  display: block;
+  margin-bottom: 10px;
+  position: relative;
+}
+
+.loginmodal-container input[type=text], input[type=password] {
+  /*height: 44px;
+  font-size: 16px;*/
+  height: 28px;
+  font-size: 11px;
+  width: 100%;
+  margin-bottom: 10px;
+  -webkit-appearance: none;
+  background: #fff;
+  border: 1px solid #d9d9d9;
+  border-top: 1px solid #c0c0c0;
+  /* border-radius: 2px; */
+  padding: 0 8px;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+}
+
+.loginmodal-container input[type=text]:hover, input[type=password]:hover {
+  border: 1px solid #b9b9b9;
+  border-top: 1px solid #a0a0a0;
+  -moz-box-shadow: inset 0 1px 2px rgba(0,0,0,0.1);
+  -webkit-box-shadow: inset 0 1px 2px rgba(0,0,0,0.1);
+  box-shadow: inset 0 1px 2px rgba(0,0,0,0.1);
+}
+
+.loginmodal {
+  text-align: center;
+  font-size: 14px;
+  font-family: 'Arial', sans-serif;
+  font-weight: 700;
+  height: 36px;
+  padding: 0 8px;
+/* border-radius: 3px; */
+/* -webkit-user-select: none;
+  user-select: none; */
+}
+
+.loginmodal-submit {
+  /* border: 1px solid #3079ed; */
+  border: 0px;
+  color: #fff;
+  text-shadow: 0 1px rgba(0,0,0,0.1); 
+  background-color: #4d90fe;
+  padding: 17px 0px;
+  font-family: roboto;
+  font-size: 14px;
+  /* background-image: -webkit-gradient(linear, 0 0, 0 100%,   from(#4d90fe), to(#4787ed)); */
+}
+
+.loginmodal-submit:hover {
+  /* border: 1px solid #2f5bb7; */
+  border: 0px;
+  text-shadow: 0 1px rgba(0,0,0,0.3);
+  background-color: #357ae8;
+  /* background-image: -webkit-gradient(linear, 0 0, 0 100%,   from(#4d90fe), to(#357ae8)); */
+}
+
+.loginmodal-container a {
+  text-decoration: none;
+  color: #666;
+  font-weight: 400;
+  text-align: center;
+  display: inline-block;
+  opacity: 0.6;
+  transition: opacity ease 0.5s;
+} 
+
+.login-help{
+  font-size: 12px;
+}
+
+
+#logInForm {
+max-width:330px;
+margin:0 auto;
+}
+
+/****************************************************** group nav dropdown ****************************/
 .nav-bg {
-background-color:#064771;
-border-radius:0px;
+background-color:#054a75;
 }
 
-.navbar-default .navbar-nav>li>a {
-	color: #fff;
+.nav-bg .navbar-brand {
+color:#fff;
 }
 
-.navbar-default .navbar-nav>li>a:hover, .navbar-default .navbar-nav>li>a:focus {
-	color: #eee;
+.nav-bg .navbar-nav>li>a {
+color:#fff;
 }
 
-
-.list-item:first-child {
-border-top-left-radius:0px;
-border-top-right-radius:0px;
-border-bottom-left-radius:0px;
-border-bottom-right-radius:0px;
+.nav-bg .navbar-nav>li>a:hover, .nav-bg .navbar-nav>li>a:focus, .nav-bg .navbar-nav>li>a:active {
+color:#fff;
 }
 
-.fa {
-padding-left:6px;
+.nav-bg .navbar-nav>.active>a, .nav-bg .navbar-nav>.active>a:hover, .nav-bg .navbar-nav>.active>a:focus {
+color: #555;
+    background-color: #e8e8e8;
 }
 
+.nav-bg .navbar-nav>li>a {
+color:#fff;
+}
+
+.nav-bg .navbar-nav>li>a:hover {
+color:#e8e8e8;
+}
 
 /******************************************************* group content *************************************/
-.top {
-	margin-top: 100px;
+.bg-main {
+background-color:#f5f5f5;
+padding:8px 12px;
+border-radius: 4px;
+margin-bottom: 60px;
 }
+
+.bg-main h3 {
+  margin:0;
+}
+
+.bg {
+  background-color: #fff;
+  border: 1px solid #ccc;
+  padding: 8px 12px;
+  border-radius: 5px;
+  margin-bottom: 8px;
+}
+
+.bg span {
+  line-height: 25px;
+}
+
+.bg1 {
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin-bottom: 8px;
+}
+
+i.glyphicon {
+  min-width: 20px;
+}
+
+.content {
+margin-top:0px;
+}
+
+.blur {
+margin-top:60px;
+}
+
+
+/** Steps Progress and Details - START  **/
+.hiddenStepInfo {
+    display: none;
+}
+
+.activeStepInfo {
+    display: block !important;
+}
+
+.underline {
+    text-decoration: underline;
+}
+
+.step {
+    margin-top: 27px;
+}
+
+.progress {
+    position: relative;
+height:25px;
+}
+
+.progress > .progress-type {
+    position: absolute;
+    left: 0px;
+    font-weight: 800;
+    padding: 3px 30px 2px 10px;
+    color: rgb(255, 255, 255);
+    background-color: rgba(25, 25, 25, 0.2);
+}
+
+.progress > .progress-completed {
+    position: absolute;
+    right: 0px;
+    font-weight: 800;
+    padding: 3px 10px 2px;
+}
+
+.step {
+    text-align: center;
+}
+
+.step .col-md-2 {
+    background-color: #fff;
+    border: 1px solid #C0C0C0;
+    border-right: none;
+}
+
+.step .col-md-2:last-child {
+    border: 1px solid #C0C0C0;
+}
+
+.step .col-md-2:first-child {
+    border-radius: 5px 0 0 5px;
+}
+
+.step .col-md-2:last-child {
+    border-radius: 0 5px 5px 0;
+}
+
+.step .col-md-2:hover {
+    color: #F58723;
+    cursor: pointer;
+}
+
+.step .activestep {
+    color: #F58723;
+    height: 100px;
+    margin-top: -7px;
+    padding-top: 7px;
+    border-left: 6px solid #5CB85C !important;
+    border-right: 6px solid #5CB85C !important;
+    border-top: 3px solid #5CB85C !important;
+    border-bottom: 3px solid #5CB85C !important;
+    vertical-align: central;
+}
+
+.step .fa {
+font-size:40px;
+padding-top:15px;
+}
+
+.has-success button span.fa {
+font-size:20px;
+padding-top:0px;
+}
+
+.jumbotron {
+background-color:#ddeaba;
+box-shadow:0px 0px 16px #888888;
+}
+
+.tclear {
+clear:both;
+}
+/** END Steps Progress and Details - START  **/
 
 label{
-  font-size:11px;
+font-size:11px;
 }
 
-select{
-  font-size:11px;
-}
 .form-control {
-  height:28px;
-  font-size:11px;
-  padding:6px 8px;
+height:28px;
+font-size:11px;
+padding:6px 8px;
 }
 
 hr {
-  margin-top: 10px;
-  margin-bottom: 0px;
+margin-top: 10px;
+    margin-bottom: 0px;
 }
 
 input[type=radio], input[type=checkbox] {
-  margin:1px 0 0;
+margin:1px 0 0;
 }
 
-h3 {
-  margin-top: 0px;
+.bootstrap-select > .btn {
+width:100%;
+}
+
+.btn {
+font-size:11px;
+}
+
+.input-group-addon {
+padding:0px;
+}
+
+.table>thead>tr>th, .table>tbody>tr>th, .table>tfoot>tr>th, .table>thead>tr>td, .table>tbody>tr>td, .table>tfoot>tr>td {
+  font-size:10px;
+}
+
+.table th {
+  background-color: #5B5C5C;
+  color: #ccc;
+}
+
+.center-block {
+    float: none;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.input-group .icon-addon .form-control {
+    border-radius: 0;
+}
+
+.icon-addon {
+    position: relative;
+    color: #555;
+    display: block;
+}
+
+.icon-addon:after,
+.icon-addon:before {
+    display: table;
+    content: " ";
+}
+
+.icon-addon:after {
+    clear: both;
+}
+
+.icon-addon.addon-md .glyphicon,
+.icon-addon .glyphicon, 
+.icon-addon.addon-md .fa,
+.icon-addon .fa {
+    position: absolute;
+    z-index: 2;
+    left: 10px;
+    font-size: 14px;
+    width: 20px;
+    margin-left: -2.5px;
+    text-align: center;
+    padding: 6px 0;
+    top: 1px
+}
+
+.icon-addon.addon-lg .form-control {
+    line-height: 1.33;
+    height: 46px;
+    font-size: 18px;
+    padding: 10px 16px 10px 40px;
+}
+
+.icon-addon.addon-sm .form-control {
+    height: 30px;
+    padding: 5px 10px 5px 28px;
+    font-size: 12px;
+    line-height: 1.5;
+}
+
+.icon-addon.addon-lg .fa,
+.icon-addon.addon-lg .glyphicon {
+    font-size: 18px;
+    margin-left: 0;
+    left: 11px;
+    top: 4px;
+}
+
+.icon-addon.addon-md .form-control,
+.icon-addon .form-control {
+    padding-left: 30px;
+    float: left;
+    font-weight: normal;
+}
+
+.icon-addon.addon-sm .fa,
+.icon-addon.addon-sm .glyphicon {
+    margin-left: 0;
+    font-size: 12px;
+    left: 5px;
+    top: -1px
+}
+
+.icon-addon .form-control:focus + .glyphicon,
+.icon-addon:hover .glyphicon,
+.icon-addon .form-control:focus + .fa,
+.icon-addon:hover .fa {
+    color: #2580db;
 }
 
 /******************************************************* end group content *************************************/
@@ -152,3 +431,4 @@ position: fixed;
 width:100%;
 }
 /******************************************************* end group footer *************************************/
+

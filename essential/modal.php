@@ -15,8 +15,11 @@
   </div>
 </div>
 
+    <!-- Feedback-->
+<div id="feedbackDiv"></div>
+<!-- End Feedback -->
 
-<script language="JavaScript" type="text/javascript">
+<!-- <script language="JavaScript" type="text/javascript">
 
 // what:    Ajax that will call PHP function to render Login inside Modal
 //          Login Event Handler
@@ -58,4 +61,4 @@ function modalLogin()
 
 
 
-</script>
+</script> -->

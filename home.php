@@ -1,11 +1,8 @@
 <?php
-	if (session_status() == PHP_SESSION_NONE) 
-	{
-    	session_start();
-	}
+
 	require_once('essential/session.php');
 	require_once('essential/connection.php');
-
+	$con=mysqli_connect($DB_HOST,$DB_USER,$DB_PASS,$DB_SCHEMA);
 
 ?>
 
@@ -22,8 +19,10 @@
 	<link href="css/bootstrap-submenu.min.css" rel="stylesheet" />
 	<link rel="stylesheet" type="text/css" href="css/bootstrap-select.css" />
 	<link rel="stylesheet" type="text/css" href="css/jquery.growl.css" />
-	<link rel="stylesheet" type="text/css" href="css/bootstrap-table.css" />
+	<link rel="stylesheet" type="text/css" href="css/bootstrap-table.min.css" />
 	<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
+	<link rel="stylesheet" type="text/css" href="css/jquery.feedBackBox.css" />
+	<link rel="stylesheet" type="text/css" href="css/font-awesome.min.css" />
     <!-- <link rel="stylesheet" type="text/css" href="font-awesome/css/font-awesome.min.css" /> -->
 
 	<!-- Optional theme -->
@@ -54,24 +53,9 @@
 				</div>
 
 				<div id="navHeader" class="navbar-collapse collapse">
-					<ul class="nav navbar-nav navbar-right">
-					<li class="active"><a href="#">Home</a></li>
-					<li class="dropdown">
-					  <a href="#" class="dropdown-toggle" data-toggle="dropdown">Services <b class="caret"></b></a>
-					  <ul class="dropdown-menu">
-						<!--<li class="dropdown-header">Admin & Dashboard</li>-->
-						<li><a href="#">Job Application</a></li>
-						<li><a href="#">Admin 2</a></li>
-						<li class="divider"></li>
-						<li class="dropdown-header">Portfolio</li>
-						<li><a href="#">Portfolio 1</a></li>
-						<li><a href="#">Portfolio 2</a></li>
-					  </ul>
-					</li>
-					<li><a href="#">Reports</a></li>
-					<li><a href="#">Maintenance</a></li>
-					<li><a href="#">Help</a></li>
-				  </ul>
+					<?php
+						require_once('essential/navigation.php');
+					?>
 				</div>
 			</div>
 		  </div>
@@ -85,7 +69,10 @@
 <!-- col-md-12 -->
 <!-- breadcrumb -->
 		<div id="div-breadcrumb" class="col-md-12">
-
+			<?php
+				require_once('essential/breadcrumb.php');
+				Bhome();
+			?>
 		</div>
 <!-- end breadcrumb -->
 <!-- end col-md-12 -->
@@ -93,34 +80,82 @@
 
 	<div class="row">
 		<div class="col-md-12">
-			<div class="row">
-				<div class ="col-md-1">
-					Level <br>
-					Elementary
-				</div>
-				<div class ="col-md-3">
-					Name of School
-				</div>
-				<div class ="col-md-3">
-					Degree/Course
-				</div>
-				<div class ="col-md-1">
-					Year Graduated
-				</div>
-				<div class ="col-md-1">
-					Highest Level Attained
-				</div>
-				<div class ="col-md-2">
-					Inclusive dates of Attendance
-				</div>
-				<div class ="col-md-1">
-					Scholarship
-				</div>
-
-
+			<div class="panel panel-default">
+				 <div class="panel-heading">
+				 	<i class="fa fa-bar-chart-o fa-fw"></i> List of Open Positions
+				 	<table id="tblPositionList"  data-toggle="table" data-search="true" data-pagination="true"
+					class="display table table-bordered">
+						<thead>
+							<tr>
+								<th data-field="jobApplivationNo" data-visible="false">JobAppId</th>
+								<th data-field="department" data-sortable="true">Departnemt</th>
+								<th data-field="itemNo" data-sortable="true">Item No</th>
+								<th data-field="position" data-sortable="true">Position</th>
+								<th data-field="salaryGrade" data-sortable="true">Salary Grade</th>
+								<th data-field="datePost" data-sortable="true">Date Posted</th>
+								<th data-field="qualification" data-sortable="true">Qualification</th>
+							</tr>
+						</thead>
+					</table>
+				 </div>
 			</div>
 		</div>
 	</div>
+	<<!-- div class="row">
+		<div class="col-md-6">
+			<div class="panel panel-default">
+				 <div class="panel-heading">
+				 	<i class="fa fa-bar-chart-o fa-fw"></i> Current Applied Positions
+				 	<table id="1"  data-toggle="table" data-search="true" data-pagination="true"
+					class="display table table-bordered">
+						<thead>
+							<tr>
+								<th data-field="jobApplivationNo" data-visible="false">JobAppId</th>
+								<th data-field="department" data-sortable="true">Departnemt</th>
+								<th data-field="itemNo" data-sortable="true">Item No</th>
+								<th data-field="position" data-sortable="true">Position</th>
+								<th data-field="salaryGrade" data-sortable="true">Salary Grade</th>
+								<th data-field="datePost" data-sortable="true">Date Posted</th>
+								<th data-field="qualification" data-sortable="true">Qualification</th>
+							</tr>
+						</thead>
+					</table>
+				 </div>
+			</div>
+		</div>
+		<div class="col-md-6">
+			<div class="panel panel-default">
+				 <div class="panel-heading">
+				 	<i class="fa fa-bar-chart-o fa-fw"></i> Applied Positions List
+				 	<table id="2"  data-toggle="table" data-search="true" data-pagination="true"
+					class="display table table-bordered">
+						<thead>
+							<tr>
+								<th data-field="jobApplivationNo" data-visible="false">JobAppId</th>
+								<th data-field="department" data-sortable="true">Departnemt</th>
+								<th data-field="itemNo" data-sortable="true">Item No</th>
+								<th data-field="position" data-sortable="true">Position</th>
+								<th data-field="salaryGrade" data-sortable="true">Salary Grade</th>
+								<th data-field="datePost" data-sortable="true">Date Posted</th>
+								<th data-field="qualification" data-sortable="true">Qualification</th>
+							</tr>
+						</thead>
+					</table>
+				 </div>
+			</div>
+		</div>
+	</div> -->
+	<div class="row">
+		<div class="col-md-12">
+			<div class="panel panel-default">
+				 <div class="panel-heading">
+					<div id="chart_div"></div>
+				 </div>
+			</div>
+		</div>
+	</div>
+
+
 </div>
 <!-- end content -->
 <!-- footer -->
@@ -141,19 +176,178 @@
 
 
 <!-- includes -->
-<!-- <?php 
+<?php
 	// includes modal
 	include('essential/modal.php');
-?> -->
+?>
 <!-- end includes -->
 <script type="text/javascript" src="js/jquery-1.10.2.min.js"></script>
 <script type="text/javascript" src="js/bootstrap.min.js"></script>
 <script type="text/javascript" src="js/jquery.growl.js"></script>
+<script type="text/javascript" src="js/bootstrap-table.min.js"></script>
+<script type="text/javascript" src="js/jquery.feedBackBox.js"></script>
+<script type="text/javascript" src="js/blockUI.js"></script>
+<script type="text/javascript" src="js/linechart.js"></script>
 
 <script type="text/javascript" src="script/staticDesign.js"></script>
+<script type="text/javascript" src="script/loginScript.js"></script>
+<script type="text/javascript">
 
 
-<!-- <script type="text/javascript" src="script/staticDesign.js" ></script> -->
+$(document).ready(function(){
+	$('#feedbackDiv').feedBackBox();
+	loadPositionList();
+
+});
+
+
+
+function loadPositionList()
+{
+	$.blockUI();
+	var mod="joblist";
+	jQuery.ajax({
+	type: "POST",
+	url:"lib/getData/retrievedata.php",
+	dataType:"json", // Data type, HTML, json etc.
+	data:{module:mod},
+	beforeSend: function() {
+
+		$('#tblPositionList').bootstrapTable("showLoading");
+	},
+	success:function(response){
+		$('#tblPositionList').bootstrapTable("hideLoading");
+		$('#tblPositionList').bootstrapTable("load",response);
+		$('#1').bootstrapTable("load",response);
+		$('#2').bootstrapTable("load",response);
+
+		$.unblockUI();
+	},
+	error:function (xhr, ajaxOptions, thrownError){
+		$.growl.error({ message: thrownError });
+		$.unblockUI();
+	}
+	});
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+///////////////////////GOOOOOGLE
+
+google.charts.load('current', {'packages':['line', 'corechart']});
+      google.charts.setOnLoadCallback(drawChart);
+
+    function drawChart() {
+
+      var button = document.getElementById('change-chart');
+      var chartDiv = document.getElementById('chart_div');
+
+      var data = new google.visualization.DataTable();
+      data.addColumn('date', 'Month');
+      data.addColumn('number', "Average Temperature");
+      data.addColumn('number', "Average Hours of Daylight");
+
+      data.addRows([
+        [new Date(2014, 0),  -.5,  5.7],
+        [new Date(2014, 1),   .4,  8.7],
+        [new Date(2014, 2),   .5,   12],
+        [new Date(2014, 3),  2.9, 15.3],
+        [new Date(2014, 4),  6.3, 18.6],
+        [new Date(2014, 5),    9, 20.9],
+        [new Date(2014, 6), 10.6, 19.8],
+        [new Date(2014, 7), 10.3, 16.6],
+        [new Date(2014, 8),  7.4, 13.3],
+        [new Date(2014, 9),  4.4,  9.9],
+        [new Date(2014, 10), 1.1,  6.6],
+        [new Date(2014, 11), -.2,  4.5]
+      ]);
+
+      var materialOptions = {
+        chart: {
+          title: 'Applicants Monthly Trend'
+        },
+        width: 1000,
+        height: 1000,
+        series: {
+          // Gives each series an axis name that matches the Y-axis below.
+          0: {axis: 'count'},
+          1: {axis: 'Month'}
+        },
+        axes: {
+          // Adds labels to each axis; they don't have to match the axis names.
+          y: {
+            Temps: {label: 'Temps (Celsius)'},
+            Daylight: {label: 'Daylight'}
+          }
+        }
+      };
+
+      var classicOptions = {
+        title: 'Average Temperatures and Daylight in Iceland Throughout the Year',
+        width: 900,
+        height: 500,
+        // Gives each series an axis that matches the vAxes number below.
+        series: {
+          0: {targetAxisIndex: 0},
+          1: {targetAxisIndex: 1}
+        },
+        vAxes: {
+          // Adds titles to each axis.
+          0: {title: 'Temps (Celsius)'},
+          1: {title: 'Daylight'}
+        },
+        hAxis: {
+          ticks: [new Date(2014, 0), new Date(2014, 1), new Date(2014, 2), new Date(2014, 3),
+                  new Date(2014, 4),  new Date(2014, 5), new Date(2014, 6), new Date(2014, 7),
+                  new Date(2014, 8), new Date(2014, 9), new Date(2014, 10), new Date(2014, 11)
+                 ]
+        },
+        vAxis: {
+          viewWindow: {
+            max: 30
+          }
+        }
+      };
+
+      function drawMaterialChart() {
+        var materialChart = new google.charts.Line(chartDiv);
+        materialChart.draw(data, materialOptions);
+        button.innerText = 'Change to Classic';
+        button.onclick = drawClassicChart;
+      }
+
+      function drawClassicChart() {
+        var classicChart = new google.visualization.LineChart(chartDiv);
+        classicChart.draw(data, classicOptions);
+        button.innerText = 'Change to Material';
+        button.onclick = drawMaterialChart;
+      }
+
+      drawMaterialChart();
+
+    }
+</script>
 
 
 
