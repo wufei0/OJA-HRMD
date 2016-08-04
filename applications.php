@@ -147,7 +147,7 @@
 <script type="text/javascript" src="js/bootstrap-table.min.js"></script>
 <script type="text/javascript" src="js/jquery.feedBackBox.js"></script>
 
-
+<script type="text/javascript" src="script/loginScript.js"></script>
 <script type="text/javascript" src="script/staticDesign.js"></script>
 
 <script type="text/javascript">
@@ -157,7 +157,30 @@ $(document).ready(function(){
 
 });
 
+function loadPositionList()
+{
+	$.blockUI();
+	var mod="joblist";
+	jQuery.ajax({
+	type: "POST",
+	url:"lib/getData/retrievedata.php",
+	dataType:"json", // Data type, HTML, json etc.
+	data:{module:mod},
+	beforeSend: function() {
 
+		$('#tblPositionList').bootstrapTable("showLoading");
+	},
+	success:function(response){
+		$('#tblPositionList').bootstrapTable("hideLoading");
+		$('#tblPositionList').bootstrapTable("load",response);
+
+		$.unblockUI();
+	},
+	error:function (xhr, ajaxOptions, thrownError){
+		$.growl.error({ message: thrownError });
+		$.unblockUI();
+	}
+	});
 
 
 

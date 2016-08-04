@@ -81,10 +81,8 @@
 <div class="col-md-12">
 			<div class="bg-main">
 				<div class="row">
-				
 					<div class="col-md-4" style="border-right:1.5px solid #d0d0d0;">
 						<div id="imaginary_container"> 
-						
 							<div class="input-group stylish-input-group">
 								<input id="txtSearch" type="text" class="form-control"  placeholder="Search" >
 								<span class="input-group-addon">
@@ -114,26 +112,26 @@
 					</div>
 					<div  class="col-md-8">
 						<div id="jobMain" class="bg" style="height:448px; overflow:auto;">
-							
 							<div class="row">
-								<div class="col-md-5">
-									<h4 style="color: #4c758a;"><strong id="txtPosition">Position</strong></h4>
+								<div class="col-md-6 pull-left">
+									<h4 style="color: #4c758a; font-size:28px; margin-top: 0px; margin-bottom: 0px;"><strong id="txtPosition">Position</strong></h4>
 								</div>
-								<div class="col-md-1 col-md-offset-6">
+								<div class="col-md-6 pull-right">
 									<button id="btnApply" type="button" class="btn btn-primary pull-right" >Apply</button>
 								</div>
+								<div class="tclear"></div>
+								<hr style="margin-left: 20px; margin-right: 20px; padding-bottom: 10px;">
 							</div>
-							 
 								<span id="txtJobId" style="display:none;"></span>
-								<i class="glyphicon glyphicon-map-marker"></i><span id="txtDepartment">Department</span><br>
-								<i class="glyphicon glyphicon-check"></i><span id="txtItem">Item No</span><br>
-								<i class="glyphicon glyphicon-usd"></i><span id="txtSg">Salary Grade</span><br>
-								<i class="glyphicon glyphicon-time"></i><span id="txtDate">Post Date</span><br>
+								<i class="glyphicon glyphicon-map-marker spacetxt"></i><span id="txtDepartment">Department</span><br>
+								<i class="glyphicon glyphicon-check spacetxt"></i><span id="txtItem">Item No</span><br>
+								<i class="glyphicon glyphicon-usd spacetxt"></i><span id="txtSg">Salary Grade</span><br>
+								<i class="glyphicon glyphicon-time spacetxt"></i><span id="txtDate">Post Date</span><br>
 						<!-- </div> -->
 						<!-- <div class="bg1 panel panel-primary"> -->
 							  <!-- <div class="panel-heading"> -->
 							    <!-- <h3 class="panel-title"><i class="glyphicon glyphicon-edit" style="color:#fff;"></i><strong>Qualifications<strong></h3> -->
-							    <i class="glyphicon glyphicon-edit" ></i>Qualifications
+							    <i class="glyphicon glyphicon-edit spacetxt" ></i>Qualifications
 							  <!-- </div> -->
 							  <div class="panel-body">
 							    <ul id="txtQualification">
@@ -143,7 +141,7 @@
 						<!-- <div class="bg1 panel panel-primary"> -->
 							  <!-- <div class="panel-heading"> -->
 							    <!-- <h3 class="panel-title"><i class="glyphicon glyphicon-list-alt" style="color:#fff;"></i><strong>Job Description<strong></h3> -->
-							    <i class="glyphicon glyphicon-list-alt"></i>Job Description
+							    <i class="glyphicon glyphicon-list-alt spacetxt"></i>Job Description
 							  <!-- </div> -->
 							  <div class="panel-body">
 							    <ul id="txtJobDesc">
@@ -191,8 +189,7 @@
 <script type="text/javascript" src="js/jquery.feedBackBox.js"></script>
 <script type="text/javascript" src="js/blockUI.js"></script>
 
-
-<script type="text/javascript" src="script/staticDesign.js"></script>
+<script type="text/javascript" src="script/loginScript.js"></script>
 
 <script type="text/javascript">
 
@@ -229,7 +226,7 @@ function btnApplyClick()
 	var jobId=$('#txtJobId').text();
 	jQuery.ajax({
 	type: "POST",
-	url:"lib/postData/applyjob.php",
+	url:"lib/postData/apply.php",
 	dataType:"text", // Data type, HTML, json etc.
 	data:{module:mod,jobId:jobId},
 	beforeSend: function() {
@@ -285,7 +282,7 @@ $('#jobList').on('click-row.bs.table', function (e, row, $element) {
    	var mod="selectedJob";
 	jQuery.ajax({
 	type: "POST",
-	url:"lib/getData/retrievedata.php",
+	url:"lib/getData/apply.php",
 	dataType:"json", // Data type, HTML, json etc.
 	data:{module:mod,jobPK:row['jobApplivationNo']},
 	beforeSend: function() {

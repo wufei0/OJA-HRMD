@@ -2,8 +2,9 @@
 
 	require_once('essential/session.php');
 	require_once('essential/connection.php');
+	require_once('essential/errorDescription.php');
 	$con=mysqli_connect($DB_HOST,$DB_USER,$DB_PASS,$DB_SCHEMA);
-
+	// echo "xx".mail('terryjohnapigo@gmail.com', 'My Subject', "sample text mail function");
 ?>
 
 <!DOCTYPE html>
@@ -78,6 +79,36 @@
 <!-- end col-md-12 -->
 	</div>
 
+<!-- gallery -->
+<div class="row">
+	<div class="col-md-12">
+		<div id="homebanner" class="hero">
+			<div class="container">
+				<div class="row">
+						<div class="col-md-12">
+							<h1></h1>
+							<p>PGLU Online Job Application</p>
+							<img src="images/textonline.gif" width="750" height="60" />
+						<div class="button-text">
+							<a href="#" onclick="logInModal();"> SIGN IN </a>&nbsp;&nbsp;&nbsp;&nbsp;
+							<a href="#" onclick="registerInModal();"> SIGN UP </a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="row">
+	<div class="col-md-12">
+		<div class="video">
+			<img src="images/video/final.gif" alt="video" height="200" class="center-block" />
+		</div>
+	</div>
+</div>
+<!-- end gallery -->
+
 	<div class="row">
 		<div class="col-md-12">
 			<div class="panel panel-default">
@@ -101,7 +132,7 @@
 			</div>
 		</div>
 	</div>
-	<<!-- div class="row">
+	<!-- div class="row">
 		<div class="col-md-6">
 			<div class="panel panel-default">
 				 <div class="panel-heading">
@@ -197,6 +228,13 @@
 $(document).ready(function(){
 	$('#feedbackDiv').feedBackBox();
 	loadPositionList();
+	<?php
+		if (isset($_SESSION['username']))
+		{
+			echo "$('#homebanner').remove();";
+		}
+
+	  ?>
 
 });
 
@@ -253,100 +291,100 @@ function loadPositionList()
 
 
 
-///////////////////////GOOOOOGLE
+	// ///////////////////////GOOOOOGLE
 
-google.charts.load('current', {'packages':['line', 'corechart']});
-      google.charts.setOnLoadCallback(drawChart);
+	// google.charts.load('current', {'packages':['line', 'corechart']});
+	//       google.charts.setOnLoadCallback(drawChart);
 
-    function drawChart() {
+	//     function drawChart() {
 
-      var button = document.getElementById('change-chart');
-      var chartDiv = document.getElementById('chart_div');
+	//       var button = document.getElementById('change-chart');
+	//       var chartDiv = document.getElementById('chart_div');
 
-      var data = new google.visualization.DataTable();
-      data.addColumn('date', 'Month');
-      data.addColumn('number', "Average Temperature");
-      data.addColumn('number', "Average Hours of Daylight");
+	//       var data = new google.visualization.DataTable();
+	//       data.addColumn('date', 'Month');
+	//       data.addColumn('number', "Average Temperature");
+	//       data.addColumn('number', "Average Hours of Daylight");
 
-      data.addRows([
-        [new Date(2014, 0),  -.5,  5.7],
-        [new Date(2014, 1),   .4,  8.7],
-        [new Date(2014, 2),   .5,   12],
-        [new Date(2014, 3),  2.9, 15.3],
-        [new Date(2014, 4),  6.3, 18.6],
-        [new Date(2014, 5),    9, 20.9],
-        [new Date(2014, 6), 10.6, 19.8],
-        [new Date(2014, 7), 10.3, 16.6],
-        [new Date(2014, 8),  7.4, 13.3],
-        [new Date(2014, 9),  4.4,  9.9],
-        [new Date(2014, 10), 1.1,  6.6],
-        [new Date(2014, 11), -.2,  4.5]
-      ]);
+	//       data.addRows([
+	//         [new Date(2014, 0),  -.5,  5.7],
+	//         [new Date(2014, 1),   .4,  8.7],
+	//         [new Date(2014, 2),   .5,   12],
+	//         [new Date(2014, 3),  2.9, 15.3],
+	//         [new Date(2014, 4),  6.3, 18.6],
+	//         [new Date(2014, 5),    9, 20.9],
+	//         [new Date(2014, 6), 10.6, 19.8],
+	//         [new Date(2014, 7), 10.3, 16.6],
+	//         [new Date(2014, 8),  7.4, 13.3],
+	//         [new Date(2014, 9),  4.4,  9.9],
+	//         [new Date(2014, 10), 1.1,  6.6],
+	//         [new Date(2014, 11), -.2,  4.5]
+	//       ]);
 
-      var materialOptions = {
-        chart: {
-          title: 'Applicants Monthly Trend'
-        },
-        width: 1000,
-        height: 1000,
-        series: {
-          // Gives each series an axis name that matches the Y-axis below.
-          0: {axis: 'count'},
-          1: {axis: 'Month'}
-        },
-        axes: {
-          // Adds labels to each axis; they don't have to match the axis names.
-          y: {
-            Temps: {label: 'Temps (Celsius)'},
-            Daylight: {label: 'Daylight'}
-          }
-        }
-      };
+	//       var materialOptions = {
+	//         chart: {
+	//           title: 'Applicants Monthly Trend'
+	//         },
+	//         width: 1000,
+	//         height: 1000,
+	//         series: {
+	//           // Gives each series an axis name that matches the Y-axis below.
+	//           0: {axis: 'count'},
+	//           1: {axis: 'Month'}
+	//         },
+	//         axes: {
+	//           // Adds labels to each axis; they don't have to match the axis names.
+	//           y: {
+	//             Temps: {label: 'Temps (Celsius)'},
+	//             Daylight: {label: 'Daylight'}
+	//           }
+	//         }
+	//       };
 
-      var classicOptions = {
-        title: 'Average Temperatures and Daylight in Iceland Throughout the Year',
-        width: 900,
-        height: 500,
-        // Gives each series an axis that matches the vAxes number below.
-        series: {
-          0: {targetAxisIndex: 0},
-          1: {targetAxisIndex: 1}
-        },
-        vAxes: {
-          // Adds titles to each axis.
-          0: {title: 'Temps (Celsius)'},
-          1: {title: 'Daylight'}
-        },
-        hAxis: {
-          ticks: [new Date(2014, 0), new Date(2014, 1), new Date(2014, 2), new Date(2014, 3),
-                  new Date(2014, 4),  new Date(2014, 5), new Date(2014, 6), new Date(2014, 7),
-                  new Date(2014, 8), new Date(2014, 9), new Date(2014, 10), new Date(2014, 11)
-                 ]
-        },
-        vAxis: {
-          viewWindow: {
-            max: 30
-          }
-        }
-      };
+	//       var classicOptions = {
+	//         title: 'Average Temperatures and Daylight in Iceland Throughout the Year',
+	//         width: 900,
+	//         height: 500,
+	//         // Gives each series an axis that matches the vAxes number below.
+	//         series: {
+	//           0: {targetAxisIndex: 0},
+	//           1: {targetAxisIndex: 1}
+	//         },
+	//         vAxes: {
+	//           // Adds titles to each axis.
+	//           0: {title: 'Temps (Celsius)'},
+	//           1: {title: 'Daylight'}
+	//         },
+	//         hAxis: {
+	//           ticks: [new Date(2014, 0), new Date(2014, 1), new Date(2014, 2), new Date(2014, 3),
+	//                   new Date(2014, 4),  new Date(2014, 5), new Date(2014, 6), new Date(2014, 7),
+	//                   new Date(2014, 8), new Date(2014, 9), new Date(2014, 10), new Date(2014, 11)
+	//                  ]
+	//         },
+	//         vAxis: {
+	//           viewWindow: {
+	//             max: 30
+	//           }
+	//         }
+	//       };
 
-      function drawMaterialChart() {
-        var materialChart = new google.charts.Line(chartDiv);
-        materialChart.draw(data, materialOptions);
-        button.innerText = 'Change to Classic';
-        button.onclick = drawClassicChart;
-      }
+	//       function drawMaterialChart() {
+	//         var materialChart = new google.charts.Line(chartDiv);
+	//         materialChart.draw(data, materialOptions);
+	//         button.innerText = 'Change to Classic';
+	//         button.onclick = drawClassicChart;
+	//       }
 
-      function drawClassicChart() {
-        var classicChart = new google.visualization.LineChart(chartDiv);
-        classicChart.draw(data, classicOptions);
-        button.innerText = 'Change to Material';
-        button.onclick = drawMaterialChart;
-      }
+	//       function drawClassicChart() {
+	//         var classicChart = new google.visualization.LineChart(chartDiv);
+	//         classicChart.draw(data, classicOptions);
+	//         button.innerText = 'Change to Material';
+	//         button.onclick = drawMaterialChart;
+	//       }
 
-      drawMaterialChart();
+	//       drawMaterialChart();
 
-    }
+	//     }
 </script>
 
 
