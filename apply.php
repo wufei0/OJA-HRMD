@@ -22,6 +22,7 @@
 	<link rel="stylesheet" type="text/css" href="css/bootstrap-table.min.css" />
 	<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
 	<link rel="stylesheet" type="text/css" href="css/jquery.feedBackBox.css" />
+	<link rel="stylesheet" type="text/css" href="css/font-awesome.min.css" />
     <!-- <link rel="stylesheet" type="text/css" href="font-awesome/css/font-awesome.min.css" /> -->
 
 	<!-- Optional theme -->
@@ -81,7 +82,7 @@
 <div class="col-md-12">
 			<div class="bg-main">
 				<div class="row">
-					<div class="col-md-4" style="border-right:1.5px solid #d0d0d0;">
+					<div class="col-md-4">
 						<div id="imaginary_container"> 
 							<div class="input-group stylish-input-group">
 								<input id="txtSearch" type="text" class="form-control"  placeholder="Search" >
@@ -125,8 +126,8 @@
 								<span id="txtJobId" style="display:none;"></span>
 								<i class="glyphicon glyphicon-map-marker spacetxt"></i><span id="txtDepartment">Department</span><br>
 								<i class="glyphicon glyphicon-check spacetxt"></i><span id="txtItem">Item No</span><br>
-								<i class="glyphicon glyphicon-usd spacetxt"></i><span id="txtSg">Salary Grade</span><br>
-								<i class="glyphicon glyphicon-time spacetxt"></i><span id="txtDate">Post Date</span><br>
+								<i class="fa fa-rub spacetxt"></i><span id="txtSg">Salary Grade</span><br>
+								<i class="fa fa-calendar spacetxt"></i><span id="txtDate">Post Date</span><br>
 						<!-- </div> -->
 						<!-- <div class="bg1 panel panel-primary"> -->
 							  <!-- <div class="panel-heading"> -->
@@ -167,8 +168,9 @@
 				<p style="color:#fff; padding-top:5px;">Copyright &copy; 2016 HRMD</p>
 			</div>
 			<div class="col-md-6 pull-right text-right">
-				<img src="images/logo/hr_logo.png" width="40" height="35" alt="PGLU" title="PGLU" class="img-circle" />&nbsp;
-				<img src="images/logo/pglu.png" width="40" height="35" alt="PGLU" title="PGLU" class="img-circle" />
+				<img src="images/logo/iluvlaunion.gif" width="46" height="35" alt="I Love La Union" title="I Love La Union" class="img-circle" />&nbsp;
+				<img src="images/logo/pglu.png" width="40" height="35" alt="PGLU" title="PGLU" class="img-circle" />&nbsp;
+				<img src="images/logo/hr_logo.gif" width="40" height="35" alt="HR" title="HR" class="img-circle" />
 			</div>
 		</div>
 	</div>

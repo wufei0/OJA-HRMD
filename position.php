@@ -81,7 +81,7 @@
 <div class="col-md-12">
 			<div class="bg-main">
 				<div class="row">
-					<div class="col-md-4" style="border-right:1.5px solid #d0d0d0;">
+					<div class="col-md-4">
 						<div id="imaginary_container"> 
 							<div class="input-group stylish-input-group">
 								<input id="txtSearch" type="text" class="form-control"  placeholder="Search" >
@@ -120,7 +120,7 @@
 									<div class="row">
 										<div class="col-md-6">
 											<!-- <label><i class="fa fa-ticket" aria-hidden="true"></i> ID:</label> -->
-											<input id="txtId" type="text" class="form-control"/>
+											<input id="txtId" type="hidden" class="form-control"/>
 
 											<label><i class="fa fa-ticket" aria-hidden="true"></i> Position:</label>
 											<input id="txtPosition" type="text" class="form-control"/>
@@ -139,19 +139,19 @@
 											</select>
 										</div>
 										<div class="col-md-3">
-											<label><i class="glyphicon glyphicon-usd spacetxt"></i>
+											<label><i class="fa fa-rub spacetxt"></i>
 												Salary Grade:</label>
 											<input id="txtSalaryGrade" class="form-control" type="number" name="quantity" min="1" max="35"/>
 										</div>
 									</div>
 									<div class="row">
 										<div class="col-md-6">
-											<label><i class="glyphicon glyphicon-time spacetxt"></i>
+											<label><i class="fa fa-calendar spacetxt"></i>
 												Date Posting:</label>
 											<input id="txtDatePost" class="form-control" data-format="yyyy/MM/dd" type="date" required />
 										</div>
 										<div class="col-md-6">
-											<label><i class="glyphicon glyphicon-time spacetxt"></i>
+											<label><i class="fa fa-calendar spacetxt"></i>
 												Date Expire:</label>
 											<input id="txtDateExpire" class="form-control" data-format="yyyy/MM/dd" type="date" required />
 										</div>
@@ -166,14 +166,15 @@
 											   >
 												<thead>
 													<tr>
-														<th data-field="qualificationPk" data-visible="true">qualificationPk</th>
+														<th  data-visible="true" data-checkbox="true"></th>
+														<th data-field="qualificationPk" data-visible="true" >qualificationPk</th>
 														
 														<th data-field="Qualifications"  >Qualification</th>
-														<th data-field="action"  >action</th>
 													</tr>
 												</thead>
 											</table>
-											<button class="pull-right btn btn-primary" style="margin-top: 6px;">Add</button>
+											<button id="DelQualification" class="pull-right btn btn-danger" style="margin-top: 6px;">Del</button>
+											<button id="AddQualification" class="pull-right btn btn-primary" style="margin-top: 6px; margin-right: 4px;">Add</button>
 										</div>
 									</div>
 									<div class="row">
@@ -186,14 +187,14 @@
 											   >
 												<thead>
 													<tr>
+														<th  data-visible="true" data-checkbox="true"></th>
 														<th data-field="jobdescriptionPk" data-visible="true">jobdescriptionPk</th>
-														
 														<th data-field="Description"  >Job Description</th>
-														<th data-field="action"  >action</th>
 													</tr>
 												</thead>
 											</table>
-											<button class="pull-right btn btn-primary" style="margin-top: 6px;">Add</button>
+											<button id="DelJobDesc" class="pull-right btn btn-danger" style="margin-top: 6px;">Del</button>
+											<button id="AddjobDesc" class="pull-right btn btn-primary" style="margin-top: 6px; margin-right: 4px;">Add</button>
 										</div>
 									</div>
 
@@ -217,8 +218,9 @@
 				<p style="color:#fff; padding-top:5px;">Copyright &copy; 2016 HRMD</p>
 			</div>
 			<div class="col-md-6 pull-right text-right">
-				<img src="images/logo/hr_logo.png" width="40" height="35" alt="PGLU" title="PGLU" class="img-circle" />&nbsp;
-				<img src="images/logo/pglu.png" width="40" height="35" alt="PGLU" title="PGLU" class="img-circle" />
+				<img src="images/logo/iluvlaunion.gif" width="46" height="35" alt="I Love La Union" title="I Love La Union" class="img-circle" />&nbsp;
+				<img src="images/logo/pglu.png" width="40" height="35" alt="PGLU" title="PGLU" class="img-circle" />&nbsp;
+				<img src="images/logo/hr_logo.gif" width="40" height="35" alt="HR" title="HR" class="img-circle" />
 			</div>
 		</div>
 	</div>
@@ -273,20 +275,6 @@ function clickSearch()
 
 $('#jobList').on('click-row.bs.table', function (e, row, $element) {
 
-    // alert(row['jobApplivationNo']);
-    // alert($('#jobMain').height());
- //    console.log($('.fixed-table-body').height());
-
- //   	var mod="selectedJob";
-	// jQuery.ajax({
-	// type: "POST",
-	// url:"lib/getData/position.php",
-	// dataType:"json", // Data type, HTML, json etc.
-	// data:{module:mod,jobPK:row['jobApplivationNo']},
-	// beforeSend: function() {
-	// 	$.blockUI();
-	// },
-	// success:function(response){
 		$.blockUI();
 		// $('#txtId').val(row['jobApplivationNo']);
 		$('#txtPosition').val(row['position']);
@@ -303,7 +291,7 @@ $('#jobList').on('click-row.bs.table', function (e, row, $element) {
  		$.each(row['qualification'],function( key, value )
 		{
 			// $('#txtQualification').append(value['jobRequire']);
-			$('#lstRequirement').bootstrapTable('insertRow', {index: 1, row: {  qualificationPk:value['requirementPk'],Qualifications:value['requirementDesc'], action: "<a href='#' title='Delete' onclick='removeRow(\""+ value['requirementPk'] +"\");' ><i class='fa fa-trash' aria-hidden='true'></i></a>" } });
+			$('#lstRequirement').bootstrapTable('insertRow', {index: 1, row: {  qualificationPk:value['requirementPk'],Qualifications:value['requirementDesc'] } });
 			// alert(value['requirementPk']);
 			// counter++;
 			// $table.bootstrapTable('insertRow', {index: , row: row});
@@ -313,30 +301,52 @@ $('#jobList').on('click-row.bs.table', function (e, row, $element) {
  		$.each(row['responsibility'],function( key, value )
 		{
 			// $('#txtQualification').append(value['jobRequire']);
-			$('#lstJobDescription').bootstrapTable('insertRow', {index: 1, row: {  jobdescriptionPk:value['responsibilityPk'], Description:value['responsibilityDesc'], action: "<a href='#' title='Delete'><i class='fa fa-trash' aria-hidden='true'></i></a>" } });
+			$('#lstJobDescription').bootstrapTable('insertRow', {index: 1, row: {  jobdescriptionPk:value['responsibilityPk'], Description:value['responsibilityDesc'] } });
 			// counter++;
 			// alert(value);
 			// $table.bootstrapTable('insertRow', {index: , row: row});
 		});
 
 		$.unblockUI();
-	// },
-	// error:function (xhr, ajaxOptions, thrownError){
-	// 	$.growl.error({ message: thrownError });
-	// 	$.unblockUI();
-	// }
-	// });
+
 
 });
 
-function removeRow(rowToDelete)
-{
-	// alert(rowToDelete);
-	$('#lstRequirement').bootstrapTable('remove', {
-                field: 'qualificationPk',
-                values: rowToDelete
+// function removeRow(rowToDelete)
+// {
+// 	// alert(rowToDelete);
+//    var ids = $.map($('#lstRequirement').bootstrapTable('getSelections'), function (row) {
+//     	// alert(row.Qualifications);
+//         return row.Qualifications;
+//     });
+// 	$('#lstRequirement').bootstrapTable('remove', {
+//                 field: 'qualificationPk',
+//                 values: rowToDelete
+//             });
+//  }
+
+
+
+
+ // var $table = $('#lstRequirement'),
+ //        $button = $('#button');
+    $(function () {
+
+        $('#DelQualification').click(function () {
+            var ids = $.map($('#lstRequirement').bootstrapTable('getSelections'), function (row) {
+            	// alert(row.Qualifications);
+                return row.Qualifications;
             });
- }
+            // alert($('#lstRequirement').bootstrapTable('getSelections'));
+            $('#lstRequirement').bootstrapTable('remove', {
+                field: 'Qualifications',
+                values: ids
+            });
+        });
+    });
+
+
+
 
 </script>
 

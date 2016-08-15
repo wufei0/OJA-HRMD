@@ -4,8 +4,12 @@
 		"selected_items":
 		[
 			[
+				"table",
+				"tableBG"
+			],
+			[
 				"col-",
-				"col-md-12"
+				"col-md-6"
 			],
 			[
 				"pu",
@@ -44,42 +48,67 @@
 	"buffers":
 	[
 		{
-			"file": "apply.php",
+			"contents": "<?php\n\n\nif (session_status() == PHP_SESSION_NONE) \n{\n	session_start();\n}\n\nif (!isset($_POST['module']))\n{\n	echo 'Dont link on this url directly.';\n	die();\n}\n\n// initialize DB connection\ninclude(\"../../essential/connection.php\");\n\nswitch ($_POST['module']) \n{\n	case 'modalAddChild':\n		modalAddChild();\n		break;\n\n	default:\n		echo \"Module is Null.\";\n		die();\n		break;\n\n}\n\nfunction modalAddChild()\n{\n	echo \"<form>\n		<div class='row'>\n			<div class='col-md-12'>\n			</div>\n		</div>\n		<input id='childPK' type='text'> Name: <input type='text' id='childName' placeholder='Name' class='form-control' required> <br>\";\n	echo \"Birthdate: <input type='date' id='childbdate' p class='form-control' required> <br>\";\n	echo \"<button class='btn btn-primary pull-right' type='button'>Add</button></form>\";\n	echo \"<div class='tclear'></div>\";\n}\n\nfunction makeKey($tablename)\n{\n\n	global $DB_HOST, $DB_USER,$DB_PASS, $DB_SCHEMA;\n	$con = new mysqli($DB_HOST,$DB_USER,$DB_PASS,$DB_SCHEMA);\n	$sql=\"SELECT department_pk, description FROM m_department ORDER BY description ASC\";\n\n	$query=$con->query($sql);\n	while ($result=$query->fetch_array(MYSQLI_ASSOC))\n	{\n		echo \"<option value='\".$result['department_pk'].\"' >\".$result['description'].\"</option>\";\n	}\n	$query->close();\n	$con->close();\n}",
+			"file": "lib/gui/pds.php",
+			"file_size": 822,
+			"file_write_time": 131151003342225510,
 			"settings":
 			{
-				"buffer_size": 9886,
+				"buffer_size": 1264,
 				"line_ending": "Windows"
 			}
 		},
 		{
-			"file": "position.php",
+			"file": "home.php",
 			"settings":
 			{
-				"buffer_size": 8920,
+				"buffer_size": 11934,
 				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "lib/authenticate/login.php",
+			"settings":
+			{
+				"buffer_size": 10131,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"contents": "<?php \n	require_once('essential/session.php');\n	require_once('essential/connection.php');\n	require_once('essential/errorDescription.php');\n	$con=mysqli_connect($DB_HOST,$DB_USER,$DB_PASS,$DB_SCHEMA);\n\n?>\n \n<!DOCTYPE html>\n<html>\n<head>\n    <meta charset=\"utf-8\">\n    <meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n	<link rel=\"icon\" href=\"../../../images/home/icon/pglu.ico\" type=\"image/x-icon\">\n	\n    <!-- Latest compiled and minified CSS -->\n	<link href=\"css/bootstrap.css\" rel=\"stylesheet\"/>\n	<link href=\"css/bootstrap-submenu.min.css\" rel=\"stylesheet\" />\n	<link rel=\"stylesheet\" type=\"text/css\" href=\"css/bootstrap-select.css\" />\n	<link rel=\"stylesheet\" type=\"text/css\" href=\"css/jquery.growl.css\" />\n	<link rel=\"stylesheet\" type=\"text/css\" href=\"css/bootstrap-table.min.css\" />\n	<link rel=\"stylesheet\" type=\"text/css\" href=\"css/bootstrap.min.css\" />\n	<link rel=\"stylesheet\" type=\"text/css\" href=\"css/jquery.feedBackBox.css\" />\n	<link rel=\"stylesheet\" type=\"text/css\" href=\"css/font-awesome.min.css\" />\n\n	<!-- Optional theme -->\n	\n	\n	<!-- edit style css -->\n	<link rel=\"stylesheet\" href=\"css/style.css\" type=\"text/css\" />\n\n	<!-- Latest compiled and minified JavaScript -->\n\n </head>\n<body>\n<!------------------------------------------------------------- header ------------------------------------------------------------>\n<header class=\"navbar\">\n	<!-- Fixed navbar -->\n    <div class=\"navbar navbar-default nav-bg navbar-fixed-top\" role=\"navigation\">\n      <div class=\"container\">\n		  <div class=\"row\">\n			<div class=\"col-md-12\">\n				<div class=\"navbar-header\">\n					<button type=\"button\" class=\"navbar-toggle\" data-toggle=\"collapse\" data-target=\".navbar-collapse\">\n						<span class=\"sr-only\">Toggle navigation</span>\n						<span class=\"icon-bar\"></span>\n						<span class=\"icon-bar\"></span>\n						<span class=\"icon-bar\"></span>\n					</button>\n					<a class=\"navbar-brand\" href=\"home.php\" style=\"color: #e8e8e8;\">PGLU OJA</a>\n				</div>\n\n				<div id=\"navHeader\" class=\"navbar-collapse collapse\">\n					<?php\n						require_once('essential/navigation.php');\n					?>\n				</div>\n			</div>\n		  </div>\n	  </div>\n    </div>\n</header>\n<!------------------------------------------------------------- end header ------------------------------------------------------------>\n\n\n<!------------------------------------------------------------- content ------------------------------------------------------------>\n<div class=\"container content\">\n	<div class=\"row\">\n	<!-- col-md-12 -->\n	<!-- breadcrumb -->\n			<div id=\"div-breadcrumb\" class=\"col-md-12\">\n				<?php\n					require_once('essential/breadcrumb.php');\n					Bpds();\n				?>\n			</div>\n	<!-- end breadcrumb -->\n	<!-- end col-md-12 -->\n	</div>\n\n	<div class=\"row\">\n		<div class=\"col-md-12\">\n			<div class=\"card bg-main\">\n\n				<ul class=\"nav nav-tabs\" role=\"tablist\" style=\"font-size:11px;\">\n					<li class=\"active\" role=\"presentation\"><a href=\"#personalinfo\" aria-controls=\"profile\" role=\"tab\" data-toggle=\"tab\">I. Personal Information</a></li>\n					<li role=\"presentation\"><a href=\"#familybg\" aria-controls=\"home\" role=\"tab\" data-toggle=\"tab\">II. Family Background</a></li>\n					<li role=\"presentation\"><a href=\"#educationalbg\" aria-controls=\"messages\" role=\"tab\" data-toggle=\"tab\">III. Educational Background</a></li>\n					<li role=\"presentation\"><a href=\"#csc\" aria-controls=\"messages\" role=\"tab\" data-toggle=\"tab\">IV. Civil Service</a></li>\n					<li role=\"presentation\"><a href=\"#workexper\" aria-controls=\"messages\" role=\"tab\" data-toggle=\"tab\">V. Work Experience</a></li>\n					<li role=\"presentation\"><a href=\"#voluntary\" aria-controls=\"messages\" role=\"tab\" data-toggle=\"tab\">VI. Voluntary Work</a></li>\n					<li role=\"presentation\"><a href=\"#training\" aria-controls=\"messages\" role=\"tab\" data-toggle=\"tab\">VII. Training</a></li>\n					<li role=\"presentation\"><a href=\"#other\" aria-controls=\"messages\" role=\"tab\" data-toggle=\"tab\">VIII. Others</a></li>\n				</ul>\n\n				<div class=\"tab-content\">\n		\n							<div id=\"personalinfo\" class=\"tab-pane fade in active\">\n\n								<div class=\"row\">\n								\n									<div class=\"col-sm-12\">\n										<div class=\"row\">\n											\n											<div class=\"col-sm-12 form-group\">\n												<h4>I. Personal Information</h4>\n												<hr>\n											</div>\n											\n											<div class=\"col-sm-3 form-group\">\n												<label>Surename</label>\n												<input type=\"text\" placeholder=\"Surename\" class=\"form-control\" required>\n											</div>\n											\n											<div class=\"col-sm-3 form-group\">\n												<label>First Name</label>\n												<input type=\"text\" placeholder=\"Firstname\" class=\"form-control\" required>\n											</div>\n											\n											<div class=\"col-sm-3 form-group\">\n												<label>Middle Name</label>\n												<input type=\"text\" placeholder=\"Middle Name\" class=\"form-control\">\n											</div>\n											\n											<div class=\"col-sm-3 form-group\">\n												<label>Name Extension (e.g. Jr., Sr.)</label>\n												<input type=\"text\" placeholder=\"Name Extension (e.g. Jr., Sr.)\" class=\"form-control\">\n											</div>\n				 \n										</div>\n								\n								\n										<div class=\"row\">\n											<div class=\"col-sm-3 form-group\">\n												<label>Date of Birth (mm/dd/yyyy)</label>\n												<div id=\"datetimepicker4\" class=\"input-append\">\n													<input class=\"form-control\" data-format=\"yyyy/MM/dd\" type=\"date\">\n													<span class=\"add-on\">\n													  <i data-time-icon=\"icon-time\" data-date-icon=\"icon-calendar\">\n													  </i>\n													</span>\n												</div>\n											</div>	\n											<div class=\"col-sm-3 form-group\">\n												<label>Place of Birth</label>\n												<input type=\"text\" placeholder=\"Place of Birth\" class=\"form-control\" required>\n												\n											</div>	\n											<div class=\"col-sm-2 form-group\">\n												<label>Sex</label>\n												<select class=\"selectpicker form-control\" data-live-search=\"true\">\n												  <option data-tokens=\"ketchup mustard\">Male</option>\n												  <option data-tokens=\"mustard\">Female</option>\n												  <option data-tokens=\"frosting\">Other</option>\n												</select>\n											</div>	\n											<div class=\"col-sm-2 form-group\">\n												<label>Civil Status</label>\n												<select class=\"selectpicker form-control\" data-live-search=\"true\">\n												  <option data-tokens=\"ketchup mustard\">Single</option>\n												  <option data-tokens=\"mustard\">Married</option>\n												  <option data-tokens=\"frosting\">Other</option>\n												</select>\n											</div>\n											<div class=\"col-sm-2 form-group\">\n												<label>Citizenship</label>											\n												<input type=\"text\" placeholder=\"Citizenship\" class=\"form-control\">\n											</div>\n										</div>\n										\n										<div class=\"row\">	\n											<div class=\"col-sm-1 form-group\">\n												<label>Height <small>(m)</small></label>\n												<input type=\"text\" placeholder=\"Height (m)\" class=\"form-control\" required>\n												\n											</div>	\n											<div class=\"col-sm-1 form-group\">\n												<label>Weight <small>(kg)</small></label>\n												<input type=\"text\" placeholder=\"Weight (kg)\" class=\"form-control\" required>\n											</div>	\n											<div class=\"col-sm-2 form-group\">\n												<label>Blood Type</label>\n												<input type=\"text\" placeholder=\"Blood Type\" class=\"form-control\" required>\n											</div>\n											<div class=\"col-sm-2 form-group\">\n												<label>GSIS ID No.</label>\n												<input type=\"text\" placeholder=\"GSIS ID No.\" class=\"form-control\" required>\n											</div>\n											<div class=\"col-sm-2 form-group\">\n												<label>PAG-IBIG ID No.</label>\n												<input type=\"text\" placeholder=\"PAG-IBIG ID No.\" class=\"form-control\" required>\n											</div>\n											<div class=\"col-sm-2 form-group\">\n												<label>PhilHealth No.</label>\n												<input type=\"text\" placeholder=\"PhilHealth No.\" class=\"form-control\" required>\n											</div>\n											<div class=\"col-sm-2 form-group\">\n												<label>SSS No.</label>\n												<input type=\"text\" placeholder=\"SSS No.\" class=\"form-control\" required>\n											</div>\n										</div>\n										\n										<div class=\"row\">\n											<div class=\"col-sm-3 form-group\">\n												<label><strong style=\"color:#940101;\">Residential Address</strong> Province</label>\n												<select id='resProvince' class=\"selectpicker form-control\" data-live-search=\"true\">\n                                                <?php\n                                                    $sql=\"SELECT province_pk, province from m_province order by province\";\n                                                    $myQuery=mysqli_query($con,$sql);\n                                                    while($myResult = mysqli_fetch_array($myQuery))\n                                                    {\n                                                        echo \"<option value='\".$myResult['province_pk'].\"' >\".$myResult['province'].\"</option>\";\n                                                    }\n                                                ?>\n												</select>\n											</div>	\n											<div class=\"col-sm-3 form-group\">\n												<label>Municipality</label>\n												<select id='resMunicipality' class=\"selectpicker form-control\" data-live-search=\"true\">\n												  \n												</select>\n											</div>	\n											<div class=\"col-sm-3 form-group\">\n												<label>Barangay</label>\n												<select id='resBarangay' class=\"selectpicker form-control\" data-live-search=\"true\">\n												  \n												</select>\n											</div>\n											<div class=\"col-sm-1 form-group\">\n												<label>ZIP Code</label>\n												<input type=\"number\" placeholder=\"ZIP Code\" class=\"form-control\">\n											</div>\n											<div class=\"col-sm-2 form-group\">\n												<label>Telephone No.</label>\n												<input type=\"text\" placeholder=\"Telephone No.\" class=\"form-control\">\n											</div>\n										</div>\n										\n										<div class=\"row\">\n											<div class=\"col-sm-3 form-group\">\n												<label><strong style=\"color:#940101;\">Permanent Address</strong> Province</label>\n												<select id=\"perProvince\" class=\"selectpicker form-control\" data-live-search=\"true\">\n												  <?php\n                                                    $sql=\"SELECT province_pk, province from m_province order by province\";\n                                                    $myQuery=mysqli_query($con,$sql);\n                                                    while($myResult = mysqli_fetch_array($myQuery))\n                                                    {\n                                                        echo \"<option value='\".$myResult['province_pk'].\"' >\".$myResult['province'].\"</option>\";\n                                                    }\n                                                ?>\n												</select>\n											</div>	\n											<div class=\"col-sm-3 form-group\">\n												<label>Municipality</label>\n												<select id='perMunicipality' class=\"selectpicker form-control\" data-live-search=\"true\">\n												  \n												</select>\n											</div>	\n											<div class=\"col-sm-3 form-group\">\n												<label>Barangay</label>\n												<select id='perBarangay' class=\"selectpicker form-control\" data-live-search=\"true\">\n												  \n												</select>\n											</div>\n											<div class=\"col-sm-1 form-group\">\n												<label>ZIP Code</label>\n												<input type=\"number\" placeholder=\"ZIP Code\" class=\"form-control\">\n											</div>\n											<div class=\"col-sm-2 form-group\">\n												<label>Telephone No.</label>\n												<input type=\"text\" placeholder=\"Telephone No.\" class=\"form-control\">\n											</div>\n										</div>\n										\n										<div class=\"row\">\n											<div class=\"col-sm-3 form-group\">\n												<label>Email Address</label>\n												<input type=\"email\" id=\"loginTxtUsername\" placeholder=\"Enter Email Address Here..\" class=\"form-control\">\n\n											</div>		\n											<div class=\"col-sm-3 form-group\">\n												<label>Cellphone No.</label>\n												<input type=\"text\" placeholder=\"Enter Phone Number Here..\" class=\"form-control\">\n											</div>\n											<div class=\"col-sm-3 form-group\">\n												<label>Agency Employee No.</label>\n												<input type=\"text\" placeholder=\"Enter Agency Employee No. Here..\" class=\"form-control\">\n											</div>\n											<div class=\"col-sm-3 form-group\">\n												<label>TIN</label>\n												<input type=\"text\" placeholder=\"Enter TIN Here..\" class=\"form-control\">\n											</div>\n										</div>						\n												\n									</div>\n									\n								</div>\n							\n							</div>\n											\n							<div id=\"familybg\" class=\"tab-pane fade\">\n									\n								<div class=\"row\">\n								\n									<div class=\"col-sm-12\">\n										<div class=\"row\">\n											\n											<div class=\"col-sm-12 form-group\">\n												<h4>II. Family Background</h4>\n												<hr>\n											</div>\n\n										</div>	\n										\n										<!-- group family -->\n										<div class=\"row\">\n											<div class=\"col-sm-4 form-group\">\n												<label>Spouse's Surename</label>\n												<input type=\"text\" placeholder=\"Spouse's Surename\" class=\"form-control\" required>\n											</div>\n											<div class=\"col-sm-4 form-group\">\n												<label>First Name</label>\n												<input type=\"text\" placeholder=\"First Name\" class=\"form-control\" required>\n											</div>\n											<div class=\"col-sm-4 form-group\">\n												<label>Middle Name</label>\n												<input type=\"text\" placeholder=\"Middle Name\" class=\"form-control\" required>\n											</div>\n										</div>\n\n										<div class=\"row\">\n											<div class=\"col-sm-3 form-group\">\n												<label>Occupation</label>\n												<input type=\"text\" placeholder=\"Occupation\" class=\"form-control\" required>\n											</div>\n											<div class=\"col-sm-3 form-group\">\n												<label>Employer/Bus. Name</label>\n												<input type=\"text\" placeholder=\"Employer/Bus. Name\" class=\"form-control\" required>\n											</div>\n											<div class=\"col-sm-3 form-group\">\n												<label>Business Address</label>\n												<input type=\"text\" placeholder=\"Business Address\" class=\"form-control\" required>\n											</div>\n											<div class=\"col-sm-3 form-group\">\n												<label>Telephone No.</label>\n												<input type=\"text\" placeholder=\"To\" class=\"form-control\" required>\n											</div>\n										</div>\n										\n										<div class=\"row\">\n											<div class=\"col-sm-12\">\n												<div class=\"tableBG\">\n													<table id=\"tblChild\" data-toggle=\"table\"\n												   	data-sort-name=\"no\" class=\"table table-bordered\">\n														<thead>\n															<tr>\n																<th  data-visible=\"true\" data-checkbox=\"true\"></th>\n																<th data-field=\"child_PK\">child_PK</th>\n																<th class=\"text-center col-sm-8 form-group\" data-field=\"child\" data-sortable=\"false\">Name of Child (Write full name and list all)</th>\n																<th class=\"text-center col-sm-4 form-group\" data-field=\"birth\" data-sortable=\"true\">Date of Birth (mm/dd/yyyy)</th>\n															</tr>\n														</thead>\n															\n													</table>\n													\n													<div class=\"row\">\n														<div class=\"col-sm-3 form-group\">\n															<label>First Name</label>\n															<input type=\"text\" placeholder=\"First Name...\" class=\"form-control\" required>\n														</div>\n														<div class=\"col-sm-3 form-group\">\n															<label>Middle Name</label>\n															<input type=\"text\" placeholder=\"Middle Name...\" class=\"form-control\" required>\n														</div>\n														<div class=\"col-sm-3 form-group\">\n															<label>Last Name</label>\n															<input type=\"text\" placeholder=\"Last Name...\" class=\"form-control\" required>\n														</div>\n														<div class=\"col-sm-3 form-group\">\n															<label>Birth Date</label>\n															<input type=\"date\" placeholder=\"Birth Date...\" class=\"form-control\" required>\n														</div>\n													</div>\n\n													<button id=\"btnDekChild\" class=\"btn btn-danger pull-right tblBottom\" style=\"margin-left: 4px;\">Del</button>\n													<button id=\"btnAddChild\" class=\"btn btn-primary pull-right tblBottom\">Add</button>\n													<div class=\"tclear\"></div>\n												</div>\n											</div>\n										</div>\n										\n										<div class=\"row\">\n											<div class=\"col-sm-12 form-group\">\n												<label><font style=\"color:#940101;\">(Continue on separate sheet if necessary)</font></label>\n											</div>\n										</div>\n										\n										<div class=\"row\">\n											<div class=\"col-sm-4 form-group\">\n												<label>Father's Surename</label>\n												<input type=\"text\" placeholder=\"Father's Surename\" class=\"form-control\" required>\n											</div>\n											<div class=\"col-sm-4 form-group\">\n												<label>First Name</label>\n												<input type=\"text\" placeholder=\"First Name\" class=\"form-control\" required>\n											</div>\n											<div class=\"col-sm-4 form-group\">\n												<label>Middle Name</label>\n												<input type=\"text\" placeholder=\"Middle Name\" class=\"form-control\" required>\n											</div>\n										</div>\n										\n										<div class=\"row\">\n											<div class=\"col-sm-4 form-group\">\n												<label>Mother's Maiden Surename</label>\n												<input type=\"text\" placeholder=\"Mother's Maiden Surename\" class=\"form-control\" required>\n											</div>\n											<div class=\"col-sm-4 form-group\">\n												<label>First Name</label>\n												<input type=\"text\" placeholder=\"First Name\" class=\"form-control\" required>\n											</div>\n											<div class=\"col-sm-4 form-group\">\n												<label>Middle Name</label>\n												<input type=\"text\" placeholder=\"Middle Name\" class=\"form-control\" required>\n											</div>\n										</div>\n										\n									</div>\n									\n								</div>\n\n							</div>\n											\n							<div id=\"educationalbg\" class=\"tab-pane fade\">\n							\n								<div class=\"row\">\n								\n									<div class=\"col-sm-12\">\n										<div class=\"row\">\n											\n											<div class=\"col-sm-12 form-group\">\n												<h4>III. Educational Background</h4>\n												<hr>\n											</div>\n\n										</div>	\n										\n										<!-- group Educational -->\n										<div class=\"row\">\n											<div class=\"col-sm-12\">\n												<div class=\"tableBG\">\n													<table id=\"#\" data-toggle=\"table\"\n												   	data-sort-name=\"no\" class=\"table table-bordered\">\n														<thead>\n															<tr>\n																<th class=\"text-center col-sm-1 form-group\" data-field=\"level\" data-sortable=\"false\">Level</th>\n																<th class=\"text-center col-sm-3 form-group\" data-field=\"school\" data-sortable=\"true\">Name of School</th>\n																<th class=\"text-center col-sm-2 form-group\" data-field=\"course\" data-sortable=\"true\">Degree Course</th>\n																<th class=\"text-center col-sm-1 form-group\" data-field=\"year\" data-sortable=\"true\">Year Graduated</th>\n																<th class=\"text-center col-sm-1 form-group\" data-field=\"grade\" data-sortable=\"true\">Highest Grade</th>\n																<th class=\"text-center col-sm-1 form-group\" data-field=\"from\" data-sortable=\"true\">Inclusive Dates of Attendance From</th>\n																<th class=\"text-center col-sm-1 form-group\" data-field=\"to\" data-sortable=\"true\">Inclusive Dates of Attendance To</th>\n																<th class=\"text-center col-sm-2 form-group\" data-field=\"scholarship\" data-sortable=\"true\">Scholarship</th>\n															</tr>\n														</thead>\n														\n														<!-- group elementary -->\n														\n													</table>\n\n													<div class=\"row\">\n														<div class=\"col-sm-2 form-group\">\n															<label>Level</label>\n															<select class=\"form-control\">\n																<option>Elementary</option>\n																<option>Secondary</option>\n																<option>Vocational / Trade Course</option>\n																<option>College</option>\n																<option>Graduate Studies</option>\n															</select>\n															\n														</div>\n														<div class=\"col-sm-3 form-group\">\n															<label>Name of School</label>\n															<input type=\"text\" placeholder=\"School...\" class=\"form-control\" required>\n														</div>\n														<div class=\"col-sm-3 form-group\">\n															<label>Degree Course</label>\n															<input type=\"text\" placeholder=\"Course...\" class=\"form-control\" required>\n														</div>\n														<div class=\"col-sm-2 form-group\">\n															<label>Year Graduated</label>\n															<input type=\"date\" placeholder=\"Year...\" class=\"form-control\" required>\n														</div>\n														<div class=\"col-sm-2 form-group\">\n															<label>Highest Grade</label>\n															<input type=\"number\" placeholder=\"Grade...\" class=\"form-control\" required>\n														</div>\n														\n													</div>\n													<div class=\"row\">\n\n														<div class=\"col-sm-3 form-group\">\n															<label>Inclusive Dates of Attendance</label>\n															<input type=\"date\" placeholder=\"From...\" class=\"form-control\" required>\n														</div>\n														<div class=\"col-sm-3 form-group\">\n															<label>Inclusive Dates of Attendance</label>\n															<input type=\"date\" placeholder=\"To...\" class=\"form-control\" required>\n														</div>\n														<div class=\"col-sm-6 form-group\">\n															<label>Scholarship</label>\n															<input type=\"text\" placeholder=\"Scholarship...\" class=\"form-control\" required>\n														</div>\n													</div>\n\n													<button id=\"btnDekChild\" class=\"btn btn-danger pull-right tblBottom\" style=\"margin-left: 4px;\">Del</button>\n													<button id=\"btnAddChild\" class=\"btn btn-primary pull-right tblBottom\">Add</button>\n													<div class=\"tclear\"></div>\n												</div>\n											</div>\n										</div>\n										\n									</div>\n									\n								</div>\n								\n							</div>\n\n							<div id=\"csc\" class=\"tab-pane fade\">\n					\n								<div class=\"row\">\n									<div class=\"col-sm-12\">\n										<div class=\"row\">\n											\n											<div class=\"col-sm-12 form-group\">\n												<h4>IV. Civil Service Eligibility</h4>\n												<hr>\n											</div>\n				 \n										</div>\n										\n										<div class=\"row\">\n											<div class=\"col-sm-12\">\n												<div class=\"tableBG\">\n													<table id=\"#\" data-toggle=\"table\"\n												   	data-sort-name=\"no\" class=\"table table-bordered\">\n														<thead>\n															<tr>\n																<th class=\"text-center col-sm-3 form-group\" data-field=\"service\" data-sortable=\"false\">Career Service / RA 1080</th>\n																<th class=\"text-center col-sm-1 form-group\" data-field=\"rating\" data-sortable=\"true\">Rating</th>\n																<th class=\"text-center col-sm-1 form-group\" data-field=\"dateexam\" data-sortable=\"true\">Date of Examination</th>\n																<th class=\"text-center col-sm-3 form-group\" data-field=\"placeexam\" data-sortable=\"true\">Place of Examination</th>\n																<th class=\"text-center col-sm-2 form-group\" data-field=\"license\" data-sortable=\"true\">License Number</th>\n																<th class=\"text-center col-sm-2 form-group\" data-field=\"release\" data-sortable=\"true\">Date of Release</th>\n															</tr>\n														</thead>\n															\n															<!-- group csc -->\n													</table>\n\n													<div class=\"row\">\n														<div class=\"col-sm-3 form-group\">\n															<label>Career Service / RA 1080</label>\n															<input type=\"text\" placeholder=\"Career Service...\" class=\"form-control\" required>\n														</div>\n														<div class=\"col-sm-1 form-group\">\n															<label>Rating</label>\n															<input type=\"number\" placeholder=\"Rating...\" class=\"form-control\" required>\n														</div>\n														<div class=\"col-sm-2 form-group\">\n															<label>Date of Examination</label>\n															<input type=\"date\" placeholder=\"Date...\" class=\"form-control\" required>\n														</div>\n														<div class=\"col-sm-2 form-group\">\n															<label>Place of Examination</label>\n															<input type=\"text\" placeholder=\"Place...\" class=\"form-control\" required>\n														</div>\n														<div class=\"col-sm-2 form-group\">\n															<label>License Number</label>\n															<input type=\"number\" placeholder=\"Number...\" class=\"form-control\" required>\n														</div>\n														<div class=\"col-sm-2 form-group\">\n															<label>Date of Release</label>\n															<input type=\"date\" placeholder=\"Release...\" class=\"form-control\" required>\n														</div>\n													</div>\n\n														<button id=\"btnDekChild\" class=\"btn btn-danger pull-right tblBottom\" style=\"margin-left: 4px;\">Del</button>\n														<button id=\"btnAddChild\" class=\"btn btn-primary pull-right tblBottom\">Add</button>\n														<div class=\"tclear\"></div>\n												</div>\n											</div>\n										</div>\n												\n									</div>\n								</div>\n								\n							</div>\n							\n							<div id=\"workexper\" class=\"tab-pane fade\">\n								\n								<div class=\"row\">\n									<div class=\"col-sm-12\">\n										<div class=\"row\">\n											\n											<div class=\"col-sm-12 form-group\">\n												<h4>V. Work Experience</h4>\n												<hr>\n											</div>\n										\n										</div>	\n\n										<!-- group Educational -->\n										<div class=\"row\">\n											<div class=\"col-sm-12\">\n												<div class=\"tableBG\">\n													<table id=\"#\" data-toggle=\"table\"\n												   	data-sort-name=\"no\" class=\"table table-bordered\">\n														<thead>\n															<tr>\n																<th class=\"text-center col-sm-1 form-group\" data-field=\"from\" data-sortable=\"false\">Inclusive Dates (mm/dd/yyyy) From</th>\n																<th class=\"text-center col-sm-1 form-group\" data-field=\"to\" data-sortable=\"true\">Inclusive Dates (mm/dd/yyyy) To</th>\n																<th class=\"text-center col-sm-2 form-group\" data-field=\"position\" data-sortable=\"true\">Position Title</th>\n																<th class=\"text-center col-sm-3 form-group\" data-field=\"department\" data-sortable=\"true\">Department / Agency / Office / Company</th>\n																<th class=\"text-center col-sm-1 form-group\" data-field=\"monthly\" data-sortable=\"true\">Monthly Salary</th>\n																<th class=\"text-center col-sm-1 form-group\" data-field=\"salary\" data-sortable=\"true\">Salary Grade</th>\n																<th class=\"text-center col-sm-2 form-group\" data-field=\"status\" data-sortable=\"true\">Status of Appointment</th>\n																<th class=\"text-center col-sm-1 form-group\" data-field=\"service\" data-sortable=\"true\">Gov't Service</th>\n															</tr>\n														</thead>\n														<!-- group work experience -->\n																											\n													</table>\n\n													<div class=\"row\">\n														<div class=\"col-sm-3 form-group\">\n															<label>Inclusive Dates From</label>\n															<input type=\"date\" placeholder=\"From...\" class=\"form-control\" required>\n														</div>\n														<div class=\"col-sm-3 form-group\">\n															<label>Inclusive Dates To</label>\n															<input type=\"date\" placeholder=\"To...\" class=\"form-control\" required>\n														</div>\n														<div class=\"col-sm-6 form-group\">\n															<label>Position Title</label>\n															<input type=\"text\" placeholder=\"Title...\" class=\"form-control\" required>\n														</div>\n													</div>\n													<div class=\"row\">\n														<div class=\"col-sm-4 form-group\">\n															<label>Department / Agency / Office / Company</label>\n															<input type=\"text\" placeholder=\"Department...\" class=\"form-control\" required>\n														</div>\n														<div class=\"col-sm-2 form-group\">\n															<label>Monthly Salary</label>\n															<input type=\"number\" placeholder=\"Salary...\" class=\"form-control\" required>\n														</div>\n														<div class=\"col-sm-3 form-group\">\n															<label>Status of Appointment</label>\n															<input type=\"text\" placeholder=\"Status...\" class=\"form-control\" required>\n														</div>\n														<div class=\"col-sm-3 form-group\">\n															<label>Gov't Service</label>\n															<input type=\"text\" placeholder=\"Service...\" class=\"form-control\" required>\n														</div>\n													</div>\n\n													<button id=\"btnDekChild\" class=\"btn btn-danger pull-right tblBottom\" style=\"margin-left: 4px;\">Del</button>\n													<button id=\"btnAddChild\" class=\"btn btn-primary pull-right tblBottom\">Add</button>\n													<div class=\"tclear\"></div>\n												</div>\n											</div>\n										</div>\n										\n									</div>\n								</div>\n								\n							</div>\n							\n							<div id=\"voluntary\" class=\"tab-pane fade\">\n								\n								<div class=\"row\">\n									<div class=\"col-sm-12\">\n										<div class=\"row\">\n											\n											<div class=\"col-sm-12 form-group\">\n												<h4>VI. Voluntary Work</h4>\n												<hr>\n											</div>\n										\n										</div>	\n\n										<!-- group Voluntary Work -->\n										<div class=\"row\">\n											<div class=\"col-sm-12\">\n												<div class=\"tableBG\">\n													<table id=\"#\" data-toggle=\"table\"\n												   	data-sort-name=\"no\" class=\"table table-bordered\">\n														<thead>\n															<tr>\n																<th class=\"text-center col-sm-5 form-group\" data-field=\"organization\" data-sortable=\"false\">Name & Address of Organization</th>\n																<th class=\"text-center col-sm-1 form-group\" data-field=\"from\" data-sortable=\"true\">Inclusive Date From</th>\n																<th class=\"text-center col-sm-1 form-group\" data-field=\"to\" data-sortable=\"true\">Inclusive Date To</th>\n																<th class=\"text-center col-sm-2 form-group\" data-field=\"hours\" data-sortable=\"true\">Number of Hours</th>\n																<th class=\"text-center col-sm-3 form-group\" data-field=\"work\" data-sortable=\"true\">Position / Nature of Work</th>\n															</tr>\n														</thead>\n														<!-- group work voluntary -->\n														\n													</table>\n\n													<div class=\"row\">\n														<div class=\"col-sm-3 form-group\">\n															<label>Name & Address of Organization</label>\n															<input type=\"text\" placeholder=\"Address...\" class=\"form-control\" required>\n														</div>\n														<div class=\"col-sm-2 form-group\">\n															<label>Inclusive Dates From</label>\n															<input type=\"date\" placeholder=\"From...\" class=\"form-control\" required>\n														</div>\n														<div class=\"col-sm-2 form-group\">\n															<label>Inclusive Dates To</label>\n															<input type=\"date\" placeholder=\"To...\" class=\"form-control\" required>\n														</div>\n														<div class=\"col-sm-2 form-group\">\n															<label>Number of Hours</label>\n															<input type=\"number\" placeholder=\"Hours...\" class=\"form-control\" required>\n														</div>\n														<div class=\"col-sm-3 form-group\">\n															<label>Position / Nature of Work</label>\n															<input type=\"text\" placeholder=\"Position...\" class=\"form-control\" required>\n														</div>\n													</div>\n\n													<button id=\"btnDekChild\" class=\"btn btn-danger pull-right tblBottom\" style=\"margin-left: 4px;\">Del</button>\n													<button id=\"btnAddChild\" class=\"btn btn-primary pull-right tblBottom\">Add</button>\n													<div class=\"tclear\"></div>\n												</div>\n											</div>\n										</div>\n										\n									</div>\n								</div>\n								\n							</div>\n							\n							<div id=\"training\" class=\"tab-pane fade\">\n								\n								<div class=\"row\">\n									<div class=\"col-sm-12\">\n										<div class=\"row\">\n											\n											<div class=\"col-sm-12 form-group\">\n												<h4>VII. Training Programs</h4>\n												<hr>\n											</div>\n										\n										</div>	\n\n										<!-- group Voluntary Work -->\n										<div class=\"row\">\n											<div class=\"col-sm-12\">\n												<div class=\"tableBG\">\n													<table id=\"#\" data-toggle=\"table\"\n												   	data-sort-name=\"no\" class=\"table table-bordered\">\n														<thead>\n															<tr>\n																<th class=\"text-center col-sm-5 form-group\" data-field=\"seminar\" data-sortable=\"false\">Title of Seminar</th>\n																<th class=\"text-center col-sm-1 form-group\" data-field=\"from\" data-sortable=\"true\">Inclusive Date of Attendance From</th>\n																<th class=\"text-center col-sm-1 form-group\" data-field=\"to\" data-sortable=\"true\">Inclusive Date of Attendance To</th>\n																<th class=\"text-center col-sm-2 form-group\" data-field=\"hours\" data-sortable=\"true\">Number of Hours</th>\n																<th class=\"text-center col-sm-3 form-group\" data-field=\"sponsored\" data-sortable=\"true\">Conducted / Sponsored By</th>\n															</tr>\n														</thead>\n														<!-- group work voluntary -->\n														\n													</table>\n\n													<div class=\"row\">\n														<div class=\"col-sm-3 form-group\">\n															<label>Title of Seminar</label>\n															<input type=\"text\" placeholder=\"Seminar...\" class=\"form-control\" required>\n														</div>\n														<div class=\"col-sm-2 form-group\">\n															<label>Inclusive Dates From</label>\n															<input type=\"date\" placeholder=\"From...\" class=\"form-control\" required>\n														</div>\n														<div class=\"col-sm-2 form-group\">\n															<label>Inclusive Dates To</label>\n															<input type=\"date\" placeholder=\"To...\" class=\"form-control\" required>\n														</div>\n														<div class=\"col-sm-2 form-group\">\n															<label>Number of Hours</label>\n															<input type=\"number\" placeholder=\"Hours...\" class=\"form-control\" required>\n														</div>\n														<div class=\"col-sm-3 form-group\">\n															<label>Conducted / Sponsored By</label>\n															<input type=\"text\" placeholder=\"Sponsored...\" class=\"form-control\" required>\n														</div>\n													</div>\n\n													<button id=\"btnDekChild\" class=\"btn btn-danger pull-right tblBottom\" style=\"margin-left: 4px;\">Del</button>\n													<button id=\"btnAddChild\" class=\"btn btn-primary pull-right tblBottom\">Add</button>\n													<div class=\"tclear\"></div>\n												</div>\n											</div>\n										</div>\n										\n									</div>\n								</div>\n								\n							</div>\n							\n							<div id=\"other\" class=\"tab-pane fade\">\n								\n								<div class=\"row\">\n									<div class=\"col-sm-12\">\n										<div class=\"row\">\n											\n											<div class=\"col-sm-12 form-group\">\n												<h4>VIII. Other Information</h4>\n												<hr>\n											</div>\n										\n										</div>	\n\n										<!-- group Voluntary Work -->\n										<div class=\"row\">\n											<div class=\"col-sm-12\">\n												<div class=\"tableBG\">\n													<table id=\"#\" data-toggle=\"table\"\n												   	data-sort-name=\"no\" class=\"table table-bordered\">\n														<thead>\n															<tr>\n																<th class=\"text-center col-sm-4 form-group\" data-field=\"hobbies\" data-sortable=\"false\">Special Skills / Hobbies</th>\n																<th class=\"text-center col-sm-4 form-group\" data-field=\"recognition\" data-sortable=\"true\">Non-Academic Distinctions / Recognition</th>\n																<th class=\"text-center col-sm-4 form-group\" data-field=\"association\" data-sortable=\"true\">Membership in Association / Organization</th>\n															</tr>\n														</thead>\n														<!-- group work voluntary -->\n													</table>\n\n													<div class=\"row\">\n														<div class=\"col-sm-4 form-group\">\n															<label>Special Skills / Hobbies</label>\n															<input type=\"text\" placeholder=\"Hobbies...\" class=\"form-control\" required>\n														</div>\n														<div class=\"col-sm-4 form-group\">\n															<label>Non-Academic Distinctions / Recognition</label>\n															<input type=\"text\" placeholder=\"Recognition...\" class=\"form-control\" required>\n														</div>\n														<div class=\"col-sm-4 form-group\">\n															<label>Membership in Association / Organization</label>\n															<input type=\"text\" placeholder=\"Membership...\" class=\"form-control\" required>\n														</div>\n													</div>\n\n													<button id=\"btnDekChild\" class=\"btn btn-danger pull-right tblBottom\" style=\"margin-left: 4px;\">Del</button>\n													<button id=\"btnAddChild\" class=\"btn btn-primary pull-right tblBottom\">Add</button>\n													<div class=\"tclear\"></div>\n												</div>\n											</div>\n										</div>\n										\n										<div class=\"row\">\n											\n											<div class=\"col-sm-12 form-group\">\n												<label>36. Are you related by consanguinity or affinity to any of the following:</label>\n											</div>\n										</div>\n										\n										<div class=\"row\">\n											<div class=\"col-sm-6 form-group\">\n												<label>a. Within the third degree (for National Government Employees): appointing authority, \n													recommending authority, chief of office/bureau/department or person who has immediate \n													supervision over you in the Office, Bureau or Department where you will be appointed?</label>\n												\n												<label class=\"radio-inline\">\n												  <input type=\"radio\" name=\"thirddegree\" value=\"option1\"> Yes\n												</label>\n												<label class=\"radio-inline\">\n												  <input type=\"radio\" name=\"thirddegree\" value=\"option2\"> No\n												</label>\n												\n												<input type=\"text\" placeholder=\"If YES, give details:\" class=\"form-control\">\n											</div>\n											\n											<div class=\"col-sm-6 form-group\">\n												<label>b. Within the fourth degree (for Local Government Employees): apoointing authority or \n												recommending authority where you will be appointed</label>\n												\n												<label class=\"radio-inline\">\n												  <input type=\"radio\" name=\"fourthdegree\" value=\"option1\"> Yes\n												</label>\n												<label class=\"radio-inline\">\n												  <input type=\"radio\" name=\"fourthdegree\" value=\"option2\"> No\n												</label>\n												\n												<input type=\"text\" placeholder=\"If YES, give details:\" class=\"form-control\">\n											</div>\n											\n										</div>\n										\n										<div class=\"row\">\n											<div class=\"col-sm-6 form-group\">\n												<label>37. a. Have you ever been formally charged?</label>\n												\n												<label class=\"radio-inline\">\n												  <input type=\"radio\" name=\"formally\" value=\"option1\"> Yes\n												</label>\n												<label class=\"radio-inline\">\n												  <input type=\"radio\" name=\"formally\" value=\"option2\"> No\n												</label>\n												\n												<input type=\"text\" placeholder=\"If YES, give details:\" class=\"form-control\">\n											</div>\n											\n											<div class=\"col-sm-6 form-group\">\n												<label>b. Have you ever been guilty of any administrative offense?</label>\n												\n												<label class=\"radio-inline\">\n												  <input type=\"radio\" name=\"guilty\" value=\"option1\"> Yes\n												</label>\n												<label class=\"radio-inline\">\n												  <input type=\"radio\" name=\"guilty\" value=\"option2\"> No\n												</label>\n												\n												<input type=\"text\" placeholder=\"If YES, give details:\" class=\"form-control\">\n											</div>\n											\n										</div>\n										\n										<div class=\"row\">\n											<div class=\"col-sm-12 form-group\">\n												<label>38. Have you ever been convicted of any crime or vioiation of any law, decree, ordinance or regulation\n												by any court or tribunal?</label>\n												\n												<label class=\"radio-inline\">\n												  <input type=\"radio\" name=\"vioiation\" value=\"option1\"> Yes\n												</label>\n												<label class=\"radio-inline\">\n												  <input type=\"radio\" name=\"vioiation\" value=\"option2\"> No\n												</label>\n												\n												<input type=\"text\" placeholder=\"If YES, give details:\" class=\"form-control\">\n											</div>\n										</div>\n										\n										<div class=\"row\">\n											<div class=\"col-sm-12 form-group\">\n												<label>39. Have you ever been separated from the service in any of the following modes: resignation, \n												retirement, dropped from the rolls, disissal, termination, end of term, finished contract, AWOL or \n												phased out, in the public or private sector?</label>\n												\n												<label class=\"radio-inline\">\n												  <input type=\"radio\" name=\"separated\" value=\"option1\"> Yes\n												</label>\n												<label class=\"radio-inline\">\n												  <input type=\"radio\" name=\"separated\" value=\"option2\"> No\n												</label>\n												\n												<input type=\"text\" placeholder=\"If YES, give details:\" class=\"form-control\">\n											</div>\n										</div>\n										\n										<div class=\"row\">\n											<div class=\"col-sm-12 form-group\">\n												<label>40. Have you ever been a candidate in a national or local election (except Barangay election)?</label>\n												\n												<label class=\"radio-inline\">\n												  <input type=\"radio\" name=\"national\" value=\"option1\"> Yes\n												</label>\n												<label class=\"radio-inline\">\n												  <input type=\"radio\" name=\"national\" value=\"option2\"> No\n												</label>\n												\n												<input type=\"text\" placeholder=\"If YES, give details:\" class=\"form-control\">\n											</div>\n										</div>\n										\n										<div class=\"row\">\n											\n											<div class=\"col-sm-12 form-group\">\n												<label>41. Pursuant to: (a) Indigenous People's Act (RA 8371); (b) Magna Carta for Disabled Persons (RA \n												7277); and (c) Solo Parents Welfare Act of 2000 (RA 8972), please answer the following items:</label>\n											</div>\n										</div>\n										\n										<div class=\"row\">\n											<div class=\"col-sm-4 form-group\">\n												<label>a. Are you a member of any indigenous group?</label>\n												\n												<label class=\"radio-inline\">\n												  <input type=\"radio\" name=\"indigenous\" value=\"option1\"> Yes\n												</label>\n												<label class=\"radio-inline\">\n												  <input type=\"radio\" name=\"indigenous\" value=\"option2\"> No\n												</label>\n												\n												<input type=\"text\" placeholder=\"If YES, please specify:\" class=\"form-control\">\n											</div>\n											\n											<div class=\"col-sm-4 form-group\">\n												<label>b. Are you differently abled?</label>\n												\n												<label class=\"radio-inline\">\n												  <input type=\"radio\" name=\"differently\" value=\"option1\"> Yes\n												</label>\n												<label class=\"radio-inline\">\n												  <input type=\"radio\" name=\"differently\" value=\"option2\"> No\n												</label>\n												\n												<input type=\"text\" placeholder=\"If YES, please specify:\" class=\"form-control\">\n											</div>\n											\n											<div class=\"col-sm-4 form-group\">\n												<label>c. Are you a solo parent?</label>\n												\n												<label class=\"radio-inline\">\n												  <input type=\"radio\" name=\"soloparent\" value=\"option1\"> Yes\n												</label>\n												<label class=\"radio-inline\">\n												  <input type=\"radio\" name=\"soloparent\" value=\"option2\"> No\n												</label>\n												\n												<input type=\"text\" placeholder=\"If YES, please specify:\" class=\"form-control\">\n											</div>\n											\n										</div>\n										\n									</div>\n									\n									<div class=\"col-md-12\">\n										<div class=\"row\">\n											<div class=\"col-sm-12 form-group\">\n												<label>42. References</label>\n											</div>\n										</div>\n										<div class=\"row\">\n											<div class=\"col-md-12\">\n												<div class=\"tableBG\">\n													<table id=\"#\" data-toggle=\"table\"\n												   	data-sort-name=\"no\" class=\"table table-bordered\">\n														<thead>\n															<tr>\n																<th class=\"text-center col-sm-4 form-group\" data-field=\"name\" data-sortable=\"false\">Name</th>\n																<th class=\"text-center col-sm-6 form-group\" data-field=\"address\" data-sortable=\"true\">Address</th>\n																<th class=\"text-center col-sm-2 form-group\" data-field=\"telno\" data-sortable=\"true\">Tel. No.</th>\n															</tr>\n														</thead>\n														<!-- group References -->\n													</table>\n\n													<div class=\"row\">\n														<div class=\"col-sm-4 form-group\">\n															<label>Name</label>\n															<input type=\"text\" placeholder=\"Name...\" class=\"form-control\" required>\n														</div>\n														<div class=\"col-sm-4 form-group\">\n															<label>Address</label>\n															<input type=\"text\" placeholder=\"Address...\" class=\"form-control\" required>\n														</div>\n														<div class=\"col-sm-4 form-group\">\n															<label>Tel. No.</label>\n															<input type=\"text\" placeholder=\"Tel. No....\" class=\"form-control\" required>\n														</div>\n													</div>\n\n													<button id=\"#\" class=\"btn btn-danger pull-right tblBottom\" style=\"margin-left: 4px;\">Del</button>\n													<button id=\"btnAddChild\" class=\"btn btn-primary pull-right tblBottom\">Add</button>\n													<div class=\"tclear\"></div>\n												</div>\n											</div>\n										</div>\n									</div>\n								</div>\n								\n							</div>\n							<!--<button class=\"btn btn-primary btn-md btn-block\" name=\"login\">Sign In</button>\n						</form>-->\n					</div>\n				</div>					  \n			</div>\n		</div>\n			\n		</div>\n		<!--------- end col-md-12 ----------->\n	</div>\n\n</div>\n<!--- end content ------->\n\n\n<!------------------------------------------------------------- footer ------------------------------------------------------------>\n<footer class=\"\">\n	<div class=\"container\">\n		<div class=\"row\">\n		\n			<div class=\"col-md-6 pull-left\">\n				<p style=\"color:#fff; padding-top:5px;\">Copyright &copy; 2016 HRMD</p>\n			</div>\n			<div class=\"col-md-6 pull-right text-right\">\n				<img src=\"images/logo/iluvlaunion.gif\" width=\"46\" height=\"35\" alt=\"I Love La Union\" title=\"I Love La Union\" class=\"img-circle\" />&nbsp;\n				<img src=\"images/logo/pglu.png\" width=\"40\" height=\"35\" alt=\"PGLU\" title=\"PGLU\" class=\"img-circle\" />&nbsp;\n				<img src=\"images/logo/hr_logo.gif\" width=\"40\" height=\"35\" alt=\"HR\" title=\"HR\" class=\"img-circle\" />\n			</div>\n			\n		</div>\n	</div>\n</footer>\n<!------------------------------------------------------------- end footer ------------------------------------------------------------>\n\n<?php\n	// includes modal\n	include('essential/modal.php');\n?>\n\n<script type=\"text/javascript\" src=\"js/jquery-1.10.2.min.js\"></script>\n<script type=\"text/javascript\" src=\"js/bootstrap.min.js\"></script>\n<script type=\"text/javascript\" src=\"js/jquery.growl.js\"></script>\n<script type=\"text/javascript\" src=\"js/bootstrap-table.min.js\"></script>\n<script type=\"text/javascript\" src=\"js/jquery.feedBackBox.js\"></script>\n<script type=\"text/javascript\" src=\"js/blockUI.js\"></script>\n<script type=\"text/javascript\" src=\"js/bootstrap-select.js\"></script>\n<script type=\"text/javascript\" src=\"script/loginScript.js\"></script>\n\n<script type=\"text/javascript\">\n\n$(document).ready(function(){\n	$('#feedbackDiv').feedBackBox();\n	\n\n});\n\n\n\n	$('#btnAddChild').click(function(){\n		$.blockUI();\n		var modName = \"modalAddChild\";\n		jQuery.ajax({\n		type: \"POST\",\n		url:\"lib/gui/pds.php\", \n		dataType:'text',\n		data:{module:modName},\n		beforeSend: function() \n		{\n			$('#myModalLabel').html(\"Add Child\"); \n			$('#model-content').html(\"\");\n			$('#modal-footer').html(\"\");\n			$('#myModal').modal('show');\n		},\n		success:function(response)\n		{\n			$('#model-content').html(response);\n		},\n		error:function (xhr, ajaxOptions, thrownError){\n			$.growl.error({ message: thrownError });\n		}\n		});\n		$.unblockUI();\n	});\n\n\nfunction changeProvince(addType)\n{\n	if (addtype == '')\n	{\n		\n	}\n}\n\nfunction changeProvince(addType)\n{\n	if (addtype == '')\n	{\n		\n	}\n}\n\n\n\n$('#resProvince').change(function(e){\n\n$('#resMunicipality').empty();\ne.preventDefault();\n    var moduleName = 'registerMunicipality';\n    var provinceName = this.value;\n    jQuery.ajax({\n        type: \"POST\",\n        url:\"lib/getData/dropdown.php\",\n        dataType:'html',\n        data:{module:moduleName,provinceName:provinceName},\n        success:function(response)\n        {\n            $('#resMunicipality').empty();\n            $('#resMunicipality').append(response);\n            $('#resMunicipality').selectpicker('refresh');\n        },\n        error:function (xhr, ajaxOptions, thrownError)\n        {\n            $.growl.error({ message: thrownError });\n        }\n        });\n});\n\n\n$('#resMunicipality').change(function(e){\n\n	$('#resBarangay').empty();\n	e.preventDefault();\n    var moduleName = 'registerBarangay';\n    var municipalityName = this.value;\n    jQuery.ajax({\n        type: \"POST\",\n        url:\"lib/getData/dropdown.php\",\n        dataType:'html',\n        data:{module:moduleName,municipalityName:municipalityName},\n        success:function(response)\n        {\n            $('#resBarangay').empty();\n            $('#resBarangay').append(response);\n            $('#resBarangay').selectpicker('refresh');\n        },\n        error:function (xhr, ajaxOptions, thrownError)\n        {\n            $.growl.error({ message: thrownError });\n        }\n        });\n});\n\n\n\n</script>\n<!-- Steps Progress and Details - END -->\n\n\n\n\n\n</body>\n</html>",
+			"file": "pds.php",
+			"file_size": 51056,
+			"file_write_time": 131151190587937335,
+			"settings":
+			{
+				"buffer_size": 49895,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"contents": "<?php\n\n\nif (session_status() == PHP_SESSION_NONE)\n{\n    session_start();\n}\n\nrequire_once('essential/connection.php');\n//global $DB_HOST, $DB_USER,$DB_PASS, $DB_SCHEMA;\n$con=mysqli_connect($DB_HOST,$DB_USER,$DB_PASS,$DB_SCHEMA);\n\n ?>\n\n\n\n\n<!DOCTYPE html>\n<html>\n<head>\n    <meta charset=\"utf-8\" />\n    <title>OJA</title>\n    <link rel=\"icon\" href=\"images/logo.png\" type=\"image/x-icon\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\" />\n    <link rel=\"stylesheet\" type=\"text/css\" href=\"css/bootstrap.min.css\" />\n    <link rel=\"stylesheet\" type=\"text/css\" href=\"css/jquery.growl.css\" />\n    <link rel=\"stylesheet\" type=\"text/css\" href=\"css/bootstrap-select.css\" />\n    <link rel=\"stylesheet\" type=\"text/css\" href=\"css/style.css\" />\n    \n\n</head>\n<body>\n\n<!-- header -->\n<header class=\"navbar\">\n\n<!-- Fixed navbar -->\n    <div class=\"navbar navbar-default nav-bg navbar-fixed-top\" role=\"navigation\">\n      <div class=\"container\">\n          <div class=\"row\">\n            <div class=\"col-md-12\">\n                <div class=\"navbar-header\">\n                    <button type=\"button\" class=\"navbar-toggle\" data-toggle=\"collapse\" data-target=\".navbar-collapse\">\n                        <span class=\"sr-only\">Toggle navigation</span>\n                        <span class=\"icon-bar\"></span>\n                        <span class=\"icon-bar\"></span>\n                        <span class=\"icon-bar\"></span>\n                    </button>\n                    <a class=\"navbar-brand\" href=\"home.php\" style=\"color: #e8e8e8;\">PGLU OJA</a>\n                </div>\n\n                \n            </div>\n          </div>\n      </div>\n    </div>\n</header>\n<!-- end header -->\n\n\n    <!---------------------------------------------- content ------------------------------------------------------------>\n    <div class=\"content\">\n        <div class=\"container\">\n            <div class=\"row\">\n                <h3 class=\"well\">Registration Form</h3>\n                <form >\n                    <!---- Group Personal Information ---->\n                    <div class=\"col-lg-12 well\">\n                        <div class=\"row\">\n                                <div class=\"col-sm-12\">\n                                    <div class=\"row\">\n                                        <div class=\"col-sm-12 form-group\">\n                                            <h4>I. Personal Information</h4>\n                                            <hr>\n                                        </div>\n                                        <div class=\"col-sm-3 form-group\">\n                                            <label>Surename</label>\n                                            <input id=\"regSurename\" type=\"text\" placeholder=\"Surename\" class=\"form-control\" required>\n                                        </div>\n                                        <div class=\"col-sm-3 form-group\">\n                                            <label>First Name</label>\n                                            <input id=\"regFirstName\" type=\"text\" placeholder=\"Firstname\" class=\"form-control\" required>\n                                        </div>\n                                        <div class=\"col-sm-3 form-group\">\n                                            <label>Middle Name</label>\n                                            <input id=\"regMiddleName\" type=\"text\" placeholder=\"Middle Name\" class=\"form-control\" required>\n                                        </div>\n                                        <div class=\"col-sm-3 form-group\">\n                                            <label>Name Extension (e.g. Jr., Sr.)</label>\n                                            <input id=\"regNameExt\" type=\"text\" placeholder=\"Name Extension (e.g. Jr., Sr.)\" class=\"form-control\" >\n                                        </div>\n\n                                    </div>\n                                    <div class=\"row\">\n                                        <div class=\"col-sm-3 form-group\">\n                                            <label>Date of Birth (mm/dd/yyyy)</label>\n                                            <div id=\"datetimepicker4\" class=\"input-append\">\n                                                <input id=\"regDateOfBirth\" class=\"form-control\" data-format=\"yyyy/MM/dd\" type=\"date\" required></input>\n                                                <span class=\"add-on\">\n                                                  <i data-time-icon=\"icon-time\" data-date-icon=\"icon-calendar\">\n                                                  </i>\n                                                </span>\n                                            </div>\n                                        </div>\n                                        <div class=\"col-sm-3 form-group\">\n                                            <label>Place of Birth</label>\n                                            <input id=\"regPlaceOfBirth\" type=\"text\" placeholder=\"Birthplace\" class=\"form-control\" required>\n                                        </div>\n                                        <div class=\"col-sm-3 form-group\">\n                                            <label>Sex</label>\n                                            <select class=\"selectpicker form-control\" >\n                                              <option id=\"regSex\" value=\"male\">Male</option>\n                                              <option value=\"female\">Female</option>\n                                            </select>\n                                        </div>\n                                        <div class=\"col-sm-3 form-group\">\n                                            <label>Civil Status</label>\n                                            <select id=\"regCivilStatis\" class=\"selectpicker form-control\" >\n                                              <option value=\"single\">Single</option>\n                                              <option value=\"married\">Married</option>\n                                              <option value=\"divorced\">Divorced</option>\n                                               <option value=\"widowed\">Widowed</option>\n                                            </select>\n                                        </div>\n                                    </div>\n\n                                    <div class=\"row\">\n                                        <div class=\"col-sm-4 form-group\">\n                                            <label>Province</label>\n                                            <select id=\"regProvince\" class=\"selectpicker form-control\" data-live-search=\"true\" required>\n                                                <?php\n                                                    $sql=\"SELECT province_pk, province from m_province order by province\";\n                                                    $myQuery=mysqli_query($con,$sql);\n                                                    while($myResult = mysqli_fetch_array($myQuery))\n                                                    {\n                                                        echo \"<option value='\".$myResult['province_pk'].\"' >\".$myResult['province'].\"</option>\";\n                                                    }\n                                                ?>\n                                            </select>\n                                        </div>\n                                        <div class=\"col-sm-4 form-group\">\n                                            <label>Municipality</label>\n                                            <select id=\"regMunicipality\" class=\"selectpicker form-control\" data-live-search=\"true\" required>\n                                            </select>\n                                        </div>\n                                        <div class=\"col-sm-4 form-group\">\n                                            <label>Barangay</label>\n                                            <select id=\"regBarangay\" class=\"selectpicker form-control\" data-live-search=\"true\" required>\n                                            </select>\n                                        </div>\n                                    </div>\n\n                                    <div class=\"row\">\n                                        <div class=\"col-sm-6 form-group\">\n                                            <label>Email Address</label>\n                                            <input id=\"Email\" type=\"text\" placeholder=\"Enter Email Address Here..\" class=\"form-control\" required>\n                                        </div>\n                                        <div class=\"col-sm-6 form-group\">\n                                            <label>Cellphone No.</label>\n                                            <input id=\"CpNumber\" type=\"text\" placeholder=\"Enter Phone Number Here..\" class=\"form-control\" required>\n                                        </div>\n                                    </div>\n\n                                </div>\n\n                        </div>\n                    </div>\n                    <!---- end Group Personal Information ---->\n\n                    <!---- Group Educational Background ---->\n                    <div class=\"col-lg-12 well\">\n                        <div class=\"row\">\n\n                                <div class=\"col-sm-12\">\n                                    <div class=\"row\">\n                                        <div class=\"col-sm-12 form-group\">\n                                            <h4>II. Educational Background</h4>\n                                            <hr>\n                                        </div>\n\n                                    </div>  \n\n                                    <div class=\"row\">\n                                        <div class=\"col-sm-1 form-group\">\n                                            <label>Level</label>\n                                        </div>\n                                        <div class=\"col-sm-3 form-group\">\n                                            <label>Name of School</label>\n                                        </div>\n                                        <div class=\"col-sm-2 form-group\">\n                                            <label>Degree Course</label>\n                                        </div>\n                                        <div class=\"col-sm-1 form-group\">\n                                            <label>Year Graduated</label>\n                                        </div>\n                                        <div class=\"col-sm-1 form-group\">\n                                            <label>Highest Level</label>\n                                        </div>\n                                        <div class=\"col-sm-2 form-group\">\n                                            <label>Inclusive Dates of Attendance</label>\n                                        </div>\n                                        <div class=\"col-sm-2 form-group\">\n                                            <label>Scholarship</label>\n                                        </div>\n                                    </div>\n\n                                    <!-- group Elementary -->\n                                    <div class=\"row\">\n                                        <div class=\"col-sm-1 form-group\">\n                                            <label>Elementary</label>\n                                        </div>\n                                        <div class=\"col-sm-3 form-group\">\n                                            <input id=\"elemSchoolName\" type=\"text\" placeholder=\"Name of School\" class=\"form-control\" >\n                                        </div>\n                                        <div class=\"col-sm-2 form-group\">\n                                            <input id=\"elemDegree\" type=\"text\" placeholder=\"Degree Course\" class=\"form-control\" >\n                                        </div>\n                                        <div class=\"col-sm-1 form-group\">\n                                            <input id=\"elemYearGraduated\" type=\"text\" placeholder=\"Year Graduated\" class=\"form-control\" >\n                                        </div>\n                                        <div class=\"col-sm-1 form-group\">\n                                            <input id=\"elemHighestLevel\" type=\"text\" placeholder=\"Highest Level\" class=\"form-control\" >\n                                        </div>\n                                        <div class=\"col-sm-1 form-group\" style=\"padding-right:5px;\">\n                                            <input id=\"elemFrom\" type=\"text\" placeholder=\"From\" class=\"form-control\" >\n                                        </div>\n                                        <div class=\"col-sm-1 form-group\" style=\"padding-left:5px;\">\n                                            <input id=\"elemTo\" type=\"text\" placeholder=\"To\" class=\"form-control\" >\n                                        </div>\n                                        <div class=\"col-sm-2 form-group\">\n                                            <input id=\"elemScholarship\" type=\"text\" placeholder=\"Scholarship\" class=\"form-control\" >\n                                        </div>\n                                    </div>\n\n                                    <!-- group Secondary -->\n                                    <div class=\"row\">\n                                        <div class=\"col-sm-1 form-group\">\n                                            <label>Secondary</label>\n                                        </div>\n                                        <div class=\"col-sm-3 form-group\">\n                                            <input id=\"hsSchoolName\" type=\"text\" placeholder=\"Name of School\" class=\"form-control\" >\n                                        </div>\n                                        <div class=\"col-sm-2 form-group\">\n                                            <input id=\"hsDegree\" type=\"text\" placeholder=\"Degree Course\" class=\"form-control\" >\n                                        </div>\n                                        <div class=\"col-sm-1 form-group\">\n                                            <input id=\"hsYearGraduated\" type=\"text\" placeholder=\"Year Graduated\" class=\"form-control\" >\n                                        </div>\n                                        <div class=\"col-sm-1 form-group\">\n                                            <input id=\"hsHighestLevel\" type=\"text\" placeholder=\"Highest Level\" class=\"form-control\" >\n                                        </div>\n                                        <div class=\"col-sm-1 form-group\" style=\"padding-right:5px;\">\n                                            <input id=\"hsFrom\" type=\"text\" placeholder=\"From\" class=\"form-control\" >\n                                        </div>\n                                        <div class=\"col-sm-1 form-group\" style=\"padding-left:5px;\">\n                                            <input id=\"hsTo\" type=\"text\" placeholder=\"To\" class=\"form-control\" >\n                                        </div>\n                                        <div class=\"col-sm-2 form-group\">\n                                            <input id=\"hsScholarship\" type=\"text\" placeholder=\"Scholarship\" class=\"form-control\" >\n                                        </div>\n                                    </div>\n\n                                    <!-- group Vocational -->\n                                    <div class=\"row\">\n                                        <div class=\"col-sm-1 form-group\">\n                                            <label>Vocational / Trade Course</label>\n                                        </div>\n                                        <div class=\"col-sm-3 form-group\">\n                                            <input id=\"vocSchoolName\" type=\"text\" placeholder=\"Name of School\" class=\"form-control\" >\n                                        </div>\n                                        <div class=\"col-sm-2 form-group\">\n                                            <input id=\"vocDegree\" type=\"text\" placeholder=\"Degree Course\" class=\"form-control\" >\n                                        </div>\n                                        <div class=\"col-sm-1 form-group\">\n                                            <input id=\"vocYearGraduated\" type=\"text\" placeholder=\"Year Graduated\" class=\"form-control\" >\n                                        </div>\n                                        <div class=\"col-sm-1 form-group\">\n                                            <input id=\"vocHighestLevel\" type=\"text\" placeholder=\"Highest Level\" class=\"form-control\" >\n                                        </div>\n                                        <div class=\"col-sm-1 form-group\" style=\"padding-right:5px;\">\n                                            <input id=\"vocFrom\" type=\"text\" placeholder=\"From\" class=\"form-control\" >\n                                        </div>\n                                        <div class=\"col-sm-1 form-group\" style=\"padding-left:5px;\">\n                                            <input id=\"vocTo\" type=\"text\" placeholder=\"To\" class=\"form-control\" >\n                                        </div>\n                                        <div class=\"col-sm-2 form-group\">\n                                            <input id=\"vocScholarship\" type=\"text\" placeholder=\"Scholarship\" class=\"form-control\" >\n                                        </div>\n                                    </div>\n\n                                    <!-- group College -->\n                                    <div class=\"row\">\n                                        <div class=\"col-sm-1 form-group\">\n                                            <label>College</label>\n                                        </div>\n                                        <div class=\"col-sm-3 form-group\">\n                                            <input id=\"colSchoolName\" type=\"text\" placeholder=\"Name of School\" class=\"form-control\" >\n                                        </div>\n                                        <div class=\"col-sm-2 form-group\">\n                                            <input id=\"colDegree\" type=\"text\" placeholder=\"Degree Course\" class=\"form-control\" >\n                                        </div>\n                                        <div class=\"col-sm-1 form-group\">\n                                            <input id=\"colYearGraduated\" type=\"text\" placeholder=\"Year Graduated\" class=\"form-control\" >\n                                        </div>\n                                        <div class=\"col-sm-1 form-group\">\n                                            <input id=\"colHighestLevel\" type=\"text\" placeholder=\"Highest Level\" class=\"form-control\" >\n                                        </div>\n                                        <div class=\"col-sm-1 form-group\" style=\"padding-right:5px;\">\n                                            <input id=\"colFrom\" type=\"text\" placeholder=\"From\" class=\"form-control\" >\n                                        </div>\n                                        <div class=\"col-sm-1 form-group\" style=\"padding-left:5px;\">\n                                            <input id=\"colTo\" type=\"text\" placeholder=\"To\" class=\"form-control\" >\n                                        </div>\n                                        <div class=\"col-sm-2 form-group\">\n                                            <input id=\"colScholarship\" type=\"text\" placeholder=\"Scholarship\" class=\"form-control\" >\n                                        </div>\n                                    </div>\n\n                                    <!-- group graduate studies -->\n                                    <div class=\"row\">\n                                        <div class=\"col-sm-1 form-group\">\n                                            <label>Graduate Studies</label>\n                                        </div>\n                                        <div class=\"col-sm-3 form-group\">\n                                            <input id=\"grdSchoolName\" type=\"text\" placeholder=\"Name of School\" class=\"form-control\" >\n                                        </div>\n                                        <div class=\"col-sm-2 form-group\">\n                                            <input id=\"grdDegree\" type=\"text\" placeholder=\"Degree Course\" class=\"form-control\" >\n                                        </div>\n                                        <div class=\"col-sm-1 form-group\">\n                                            <input id=\"grdYearGraduated\" type=\"text\" placeholder=\"Year Graduated\" class=\"form-control\" required>\n                                        </div>\n                                        <div class=\"col-sm-1 form-group\">\n                                            <input id=\"grdHighestLevel\" type=\"text\" placeholder=\"Highest Level\" class=\"form-control\" required>\n                                        </div>\n                                        <div class=\"col-sm-1 form-group\" style=\"padding-right:5px;\">\n                                            <input id=\"grdFrom\" type=\"text\" placeholder=\"From\" class=\"form-control\" required>\n                                        </div>\n                                        <div class=\"col-sm-1 form-group\" style=\"padding-left:5px;\">\n                                            <input id=\"grdTo\" type=\"text\" placeholder=\"To\" class=\"form-control\" required>\n                                        </div>\n                                        <div class=\"col-sm-2 form-group\">\n                                            <input id=\"grdScholarship\" type=\"text\" placeholder=\"Scholarship\" class=\"form-control\" required>\n                                        </div>\n                                    </div>\n                                    <label style=\"font-size: 10px;\">*Input latest on every Education Level</label>\n                                </div>\n                        </div>\n                    </div>\n                    <!---- end Group Educational Background ---->\n\n                    <!---- Group Civil Service Eligibility ---->\n                    <div class=\"col-lg-12 well\">\n                        <div class=\"row\">\n                                <div class=\"col-sm-12\">\n                                    <div class=\"row\">\n                                        <div class=\"col-sm-12 form-group\">\n                                            <h4>III. Civil Service Eligibility</h4>\n                                            <hr>\n                                        </div>\n                                        <div class=\"col-sm-12 form-group\">\n                                            <label>Career Service / RA 1080 (Board/Bar) Under Special Laws / CES / CSEE</label>\n                                            <input id=\"eliEligibility\" type=\"text\" placeholder=\"Career Service...\" class=\"form-control\" >\n                                        </div>\n                                        <div class=\"col-sm-12 form-group\">\n                                            <label>Rating</label>\n                                            <input id=\"eliRating\" type=\"text\" placeholder=\"Rating\" class=\"form-control\">\n                                        </div>\n                                        <div class=\"col-sm-12 form-group\">\n                                            <label>Date of Examination / Conferment</label>\n                                            <input id=\"eliDateExam\" type=\"text\" placeholder=\"Date of Examination\" class=\"form-control\">\n                                        </div>\n                                        <div class=\"col-sm-12 form-group\">\n                                            <label>Place of Examination / Conferment</label>\n                                            <input id=\"eliPlaceExam\"  type=\"text\" placeholder=\"Highest Grade / Level / Units Earned\" class=\"form-control\">\n                                        </div>\n                                    </div>\n                                        <div class=\"row\">\n                                            <div class=\"col-sm-6 form-group\">\n                                                <label>License (Number)</label>\n                                                <input id=\"eliLicenseNumber\" type=\"text\" placeholder=\"License Number\" class=\"form-control\">\n                                            </div>\n                                            <div class=\"col-sm-6 form-group\">\n                                                <label>License (Date of Release)</label>\n                                                <input id=\"eliDateLicense\" type=\"date\" placeholder=\"License Date of Release\" class=\"form-control\">\n                                            </div>\n                                        </div>\n                                </div>\n\n                        </div>\n                    </div>\n                    <!---- end Group Civil Service Eligibility ---->\n\n                    <!---- Group Skills ---->\n                    <div class=\"col-lg-12 well\">\n                        <div class=\"row\">\n\n                                <div class=\"col-sm-12\">\n                                    <div class=\"row\">\n\n                                        <div class=\"col-sm-12 form-group\">\n                                            <h4>IV. Skills</h4>\n                                            <hr>\n                                        </div>\n\n                                        <div class=\"col-sm-12 form-group\">\n                                            <label>Special Skills / Hobbies</label>\n                                            <input id=\"sklSkill\" type=\"text\" placeholder=\"Special Skills / Hobbies\" class=\"form-control\" required>\n                                        </div>\n\n                                        <div class=\"col-sm-12 form-group\">\n                                            <label>Non-Academic Distinctions / Recognition</label>\n                                            <input id=\"sklRecognition\" type=\"text\" placeholder=\"Non-Academic Distinctions / Recognition\" class=\"form-control\">\n                                        </div>\n\n                                        <div class=\"col-sm-12 form-group\">\n                                            <label>Memebership in Association / Organization</label>\n                                            <input id=\"sklOrganization\" type=\"text\" placeholder=\"Memebership in Association / Organization\" class=\"form-control\">\n                                        </div>\n\n                                    </div>\n\n                                </div>\n                            \n                        </div>\n                    </div>\n                    <!---- end Group Skills ---->\n                    \n                    <!---- Group Others ---->\n                    <div class=\"col-lg-12 well\">\n                        <div class=\"row\">\n                            \n                                <div class=\"col-sm-12\">\n                                    <div class=\"row\">\n                                        \n                                        <div class=\"col-sm-12 form-group\">\n                                            <h4>V. Others</h4>\n                                            <hr>\n                                        </div>\n                                        \n                                        <div class=\"col-sm-12 form-group\">\n                                            <label>Pursuant to: (a) Indigenous People's Act (RA 8371); (b) Magna Carta for Disabled Persons (RA 7277); and (c) Solo Parents Welfare Act of 2000 (RA 8972), please answer the following items:</label>\n                                        </div>\n                                    </div>\n                                        \n                                    <div class=\"row\">\n                                        <div class=\"col-sm-4 form-group\">\n                                            <label>a. Are you a memeber of any indigenous group?</label>\n                                            \n                                            <label class=\"radio-inline\">\n                                              <input type=\"radio\" name=\"indigenous\" id=\"inlineRadio1\" value=\"option1\" > Yes\n                                            </label>\n                                            <label class=\"radio-inline\">\n                                              <input type=\"radio\" name=\"indigenous\" id=\"inlineRadio2\" value=\"option2\" checked> No\n                                            </label>\n                                            \n                                            <input type=\"text\" placeholder=\"If YES, please specify:\" class=\"form-control\">\n                                        </div>\n                                        \n                                        <div class=\"col-sm-4 form-group\">\n                                            <label>b. Are you differently abled?</label>\n                                            \n                                            <label class=\"radio-inline\">\n                                              <input type=\"radio\" name=\"abled\" id=\"inlineRadio1\" value=\"option1\"> Yes\n                                            </label>\n                                            <label class=\"radio-inline\">\n                                              <input type=\"radio\" name=\"abled\" id=\"inlineRadio2\" value=\"option2\" checked> No\n                                            </label>\n                                            \n                                            <input type=\"text\" placeholder=\"If YES, please specify:\" class=\"form-control\">\n                                        </div>\n                                        \n                                        <div class=\"col-sm-4 form-group\">\n                                            <label>c. Are you a solo parent?</label>\n                                            \n                                            <label class=\"radio-inline\">\n                                              <input type=\"radio\" name=\"soloparent\" id=\"inlineRadio1\" value=\"option1\"> Yes\n                                            </label>\n                                            <label class=\"radio-inline\">\n                                              <input type=\"radio\" name=\"soloparent\" id=\"inlineRadio2\" value=\"option2\" checked> No\n                                            </label>\n                                            \n                                            <input type=\"text\" placeholder=\"If YES, please specify:\" class=\"form-control\">\n                                        </div>\n                                    </div>\n                                                                \n                                </div>\n                            \n                        </div>\n                    </div>\n                    <!---- end Group Others ---->\n                    \n                    <!---- Group References ---->\n                    <div class=\"col-lg-12 well\">\n                        <div class=\"row\">\n                            \n                                <div class=\"col-sm-12\">\n                                    <div class=\"row\">\n                                        \n                                        <div class=\"col-sm-12 form-group\">\n                                            <h4>VI. References (Person not related by consanguinity or affinity to applicant / appointee)</h4>\n                                            <hr>\n                                        </div>\n                                        \n                                    </div>\n                                        \n                                    <div class=\"row\">\n                                        <div class=\"col-sm-4 form-group\">\n                                            <label>Name</label>\n                                            <input type=\"text\" placeholder=\"Name...\" class=\"form-control\">\n                                        </div>\n                                        \n                                        <div class=\"col-sm-4 form-group\">\n                                            <label>Address</label>\n                                            <input type=\"text\" placeholder=\"Address...\" class=\"form-control\">\n                                        </div>\n                                        \n                                        <div class=\"col-sm-4 form-group\">\n                                            <label>Tel. No.</label>\n                                            <input type=\"text\" placeholder=\"Tel. No...\" class=\"form-control\">\n                                        </div>\n                                    </div>\n                                    \n                                    <div class=\"row\">\n                                        <div class=\"col-sm-4 form-group\">\n                                            <label>Name</label>\n                                            <input type=\"text\" placeholder=\"Name...\" class=\"form-control\">\n                                        </div>\n                                        \n                                        <div class=\"col-sm-4 form-group\">\n                                            <label>Address</label>\n                                            <input type=\"text\" placeholder=\"Address...\" class=\"form-control\">\n                                        </div>\n                                        \n                                        <div class=\"col-sm-4 form-group\">\n                                            <label>Tel. No.</label>\n                                            <input type=\"text\" placeholder=\"Tel. No...\" class=\"form-control\">\n                                        </div>\n                                    </div>\n                                    \n                                    <div class=\"row\">\n                                        <div class=\"col-sm-4 form-group\">\n                                            <label>Name</label>\n                                            <input type=\"text\" placeholder=\"Name...\" class=\"form-control\">\n                                        </div>\n                                        \n                                        <div class=\"col-sm-4 form-group\">\n                                            <label>Address</label>\n                                            <input type=\"text\" placeholder=\"Address...\" class=\"form-control\">\n                                        </div>\n                                        \n                                        <div class=\"col-sm-4 form-group\">\n                                            <label>Tel. No.</label>\n                                            <input type=\"text\" placeholder=\"Tel. No...\" class=\"form-control\">\n                                        </div>\n                                    </div>\n                                                                \n                                </div>\n                            \n                        </div>\n                    </div>\n                    <!---- end Group References ---->\n\n                    <!-- button -->\n                    <div style=\"margin-bottom: 60px;\">\n                        <div class=\"row\">\n                                <div class=\"col-sm-12\">\n\n                                    <button type=\"submit\" class=\"btn btn-primary pull-right\">Submit</button>\n                                                                \n                                </div>\n                        </div>\n                    </div>\n                    <!-- end button -->\n                    \n                </form>\n            </div>\n        </div>\n    </div>\n    <!------------------------------------------------------------- end content ------------------------------------------------------------>\n\n<!-- footer -->\n<footer class=\"\">\n    <div class=\"container\">\n        <div class=\"row\">\n            <div class=\"col-md-6 pull-left\">\n                <p style=\"color:#fff; padding-top:5px;\">Copyright &copy; 2016 HRMD</p>\n            </div>\n            <div class=\"col-md-6 pull-right text-right\">\n                <img src=\"images/logo/hr_logo.png\" width=\"40\" height=\"35\" alt=\"PGLU\" title=\"PGLU\" class=\"img-circle\" />&nbsp;\n                <img src=\"images/logo/pglu.png\" width=\"40\" height=\"35\" alt=\"PGLU\" title=\"PGLU\" class=\"img-circle\" />\n            </div>\n        </div>\n    </div>\n</footer>\n<!-- end footer -->\n\n\n<script type=\"text/javascript\" src=\"js/jquery-1.10.2.min.js\"></script>\n<script type=\"text/javascript\" src=\"js/bootstrap.min.js\"></script>\n<script type=\"text/javascript\" src=\"js/jquery.growl.js\"></script>\n<script type=\"text/javascript\" src=\"js/bootstrap-select.js\"></script>\n\n<script  type=\"text/javascript\">\n\n// change province event\n// reload municipality\n$('#regProvince').change(function(e){\n\n$('#regMunicipality').empty();\ne.preventDefault();\n    var moduleName = 'registerMunicipality';\n    var provinceName = this.value;\n    jQuery.ajax({\n        type: \"POST\",\n        url:\"lib/getData/dropdown.php\",\n        dataType:'html',\n        data:{module:moduleName,provinceName:provinceName},\n        success:function(response)\n        {\n            $('#regMunicipality').empty();\n            $('#regMunicipality').append(response);\n            $('#regMunicipality').selectpicker('refresh');\n\n        },\n        error:function (xhr, ajaxOptions, thrownError)\n        {\n            $.growl.error({ message: thrownError });\n        }\n        });\n});\n\n// change municipality event\n// reload barangar\n$('#regMunicipality').change(function(e){\n\n$('#regBarangay').empty();\ne.preventDefault();\n    var moduleName = 'registerBarangay';\n    var municipalityName = this.value;\n    jQuery.ajax({\n        type: \"POST\",\n        url:\"lib/getData/dropdown.php\",\n        dataType:'html',\n        data:{module:moduleName,municipalityName:municipalityName},\n        success:function(response)\n        {\n            $('#regBarangay').empty();\n            // var municipalityList = response;\n            $('#regBarangay').append(response);\n            // $('#regMunicipality').trigger(\"chosen:updated\");\n            $('#regBarangay').selectpicker('refresh');\n\n        },\n        error:function (xhr, ajaxOptions, thrownError)\n        {\n            $.growl.error({ message: thrownError });\n        }\n        });\n});\n\n\n</script>\n\n\n\n</body>\n</html>",
+			"file": "old.register.php",
+			"file_size": 39688,
+			"file_write_time": 131130263944113032,
+			"settings":
+			{
+				"buffer_size": 38907,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "/C/Users/terry/Desktop/ph_zipcodes.sql",
+			"settings":
+			{
+				"buffer_size": 120202,
+				"line_ending": "Unix"
 			}
 		},
 		{
 			"file": "css/style.css",
 			"settings":
 			{
-				"buffer_size": 7918,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "lib/getData/retrievedata.php",
-			"settings":
-			{
-				"buffer_size": 4556,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "essential/session.php",
-			"settings":
-			{
-				"buffer_size": 473,
+				"buffer_size": 9305,
 				"line_ending": "Windows"
 			}
 		}
@@ -91,12 +120,16 @@
 	"build_varint": "",
 	"command_palette":
 	{
-		"height": 0.0,
-		"last_filter": "",
+		"height": 392.0,
+		"last_filter": "Package Control: ",
 		"selected_items":
 		[
+			[
+				"Package Control: ",
+				"Package Control: Disable Package"
+			]
 		],
-		"width": 0.0
+		"width": 528.0
 	},
 	"console":
 	{
@@ -119,30 +152,38 @@
 		"/D/OneDrive/Projects/OJA-HRMD",
 		"/D/OneDrive/Projects/OJA-HRMD/css",
 		"/D/OneDrive/Projects/OJA-HRMD/essential",
-		"/D/OneDrive/Projects/OJA-HRMD/fonts",
-		"/D/OneDrive/Projects/OJA-HRMD/js",
 		"/D/OneDrive/Projects/OJA-HRMD/lib",
+		"/D/OneDrive/Projects/OJA-HRMD/lib/authenticate",
 		"/D/OneDrive/Projects/OJA-HRMD/lib/getData",
+		"/D/OneDrive/Projects/OJA-HRMD/lib/gui",
 		"/D/OneDrive/Projects/OJA-HRMD/script"
 	],
 	"file_history":
 	[
-		"/D/OneDrive/Projects/OJA-HRMD/css/bootstrap.min.css",
-		"/D/OneDrive/Projects/OJA-HRMD/essential/navigation.php",
+		"/D/OneDrive/Projects/OJA-HRMD/essential/modal.php",
+		"/D/OneDrive/Projects/OJA-HRMD/essential/session.php",
+		"/D/OneDrive/Projects/OJA-HRMD/essential/connection.php",
+		"/D/OneDrive/Projects/OJA-HRMD/applications.php",
+		"/D/OneDrive/Projects/OJA-HRMD/position.php",
+		"/D/OneDrive/Projects/OJA-HRMD/apply.php",
 		"/D/OneDrive/Projects/OJA-HRMD/essential/breadcrumb.php",
-		"/D/OneDrive/Projects/OJA-HRMD/css/style.css",
+		"/C/Users/terry/AppData/Roaming/Sublime Text 3/Packages/BracketHighlighter/bh_core.sublime-settings",
+		"/D/OneDrive/Projects/OJA-HRMD/lib/getData/applications.php",
+		"/D/OneDrive/Projects/OJA-HRMD/essential/navigation.php",
+		"/D/OneDrive/Projects/OJA-HRMD/script/loginScript.js",
 		"/D/OneDrive/Projects/OJA-HRMD/lib/authenticate/login.php",
 		"/D/OneDrive/Projects/OJA-HRMD/home.php",
-		"/D/OneDrive/Projects/OJA-HRMD/apply.php",
-		"/D/OneDrive/Projects/OJA-HRMD/applications.php",
-		"/D/OneDrive/Projects/OJA-HRMD/script/loginScript.js",
+		"/D/OneDrive/Projects/OJA-HRMD/css/style.css",
+		"/D/OneDrive/Projects/OJA-HRMD/activate.php",
+		"/D/OneDrive/Projects/OJA-HRMD/lib/getData/position.php",
+		"/D/OneDrive/Projects/OJA-HRMD/lib/getData/retrievedata.php",
+		"/D/OneDrive/Projects/OJA-HRMD/lib/getData/apply.php",
+		"/D/OneDrive/Projects/OJA-HRMD/lib/postData/apply.php",
+		"/D/OneDrive/Projects/OJA-HRMD/css/bootstrap.min.css",
 		"/D/OneDrive/Projects/OJA-HRMD/essential/errorDescription.php",
-		"/D/OneDrive/Projects/OJA-HRMD/essential/session.php",
-		"/D/OneDrive/Projects/OJA-HRMD/essential/modal.php",
 		"/D/OneDrive/Projects/OJA-HRMD/script/staticDesign.js",
 		"/D/OneDrive/Projects/OJA-HRMD/register.php",
 		"/D/OneDrive/Projects/OJA-HRMD/script/del.loginScript.js",
-		"/D/OneDrive/Projects/OJA-HRMD/lib/getData/retrievedata.php",
 		"/D/OneDrive/Projects/OJA-HRMD/lib/postData/applyjob.php",
 		"/D/OneDrive/Projects/OJA-HRMD/lib/makeKey/key.php",
 		"/D/OneDrive/Projects/OJA-HRMD/js/blockUI.js",
@@ -151,7 +192,6 @@
 		"/D/OneDrive/Projects/OJA-HRMD/lib/getData/dropdown.php",
 		"/D/OneDrive/Projects/OJA-HRMD/js/jquery.feedBackBox.js",
 		"/D/OneDrive/Projects/OJA-HRMD/lib/postData/feedback.php",
-		"/D/OneDrive/Projects/OJA-HRMD/essential/connection.php",
 		"/D/OneDrive/Projects/OJA-HRMD/css/bootstrap-select.css",
 		"/D/OneDrive/Projects/OJA-HRMD/login1.php",
 		"/D/OneDrive/Projects/OJA-HRMD/logout.php",
@@ -175,6 +215,19 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"regMunicipality",
+			"renderRegister",
+			"onclick",
+			"logInModal",
+			"province",
+			"$('#myModal').modal('show');",
+			"register",
+			"	\n",
+			"lstRequirement",
+			"qualificationPk",
+			"jobApplivationNo",
+			"jobRespon",
+			"LoadDepartmentList",
 			"bg-",
 			"fa",
 			"fonts",
@@ -223,24 +276,24 @@
 	"groups":
 	[
 		{
-			"selected": 0,
+			"selected": 3,
 			"sheets":
 			[
 				{
 					"buffer": 0,
-					"file": "apply.php",
+					"file": "lib/gui/pds.php",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 9886,
+						"buffer_size": 1264,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								6820,
-								6820
+								475,
+								412
 							]
 						],
 						"settings":
@@ -248,104 +301,35 @@
 							"auto_complete": false,
 							"bracket_highlighter.busy": false,
 							"bracket_highlighter.locations":
-							{
-								"close":
-								{
-								},
-								"icon":
-								{
-								},
-								"open":
-								{
-								},
-								"unmatched":
-								{
-								}
-							},
-							"bracket_highlighter.regions":
 							[
-								"bh_c_define",
-								"bh_c_define_center",
-								"bh_c_define_open",
-								"bh_c_define_close",
-								"bh_c_define_content",
-								"bh_square",
-								"bh_square_center",
-								"bh_square_open",
-								"bh_square_close",
-								"bh_square_content",
-								"bh_double_quote",
-								"bh_double_quote_center",
-								"bh_double_quote_open",
-								"bh_double_quote_close",
-								"bh_double_quote_content",
-								"bh_round",
-								"bh_round_center",
-								"bh_round_open",
-								"bh_round_close",
-								"bh_round_content",
-								"bh_default",
-								"bh_default_center",
-								"bh_default_open",
-								"bh_default_close",
-								"bh_default_content",
-								"bh_tag",
-								"bh_tag_center",
-								"bh_tag_open",
-								"bh_tag_close",
-								"bh_tag_content",
-								"bh_single_quote",
-								"bh_single_quote_center",
-								"bh_single_quote_open",
-								"bh_single_quote_close",
-								"bh_single_quote_content",
-								"bh_angle",
-								"bh_angle_center",
-								"bh_angle_open",
-								"bh_angle_close",
-								"bh_angle_content",
-								"bh_regex",
-								"bh_regex_center",
-								"bh_regex_open",
-								"bh_regex_close",
-								"bh_regex_content",
-								"bh_curly",
-								"bh_curly_center",
-								"bh_curly_open",
-								"bh_curly_close",
-								"bh_curly_content",
-								"bh_unmatched",
-								"bh_unmatched_center",
-								"bh_unmatched_open",
-								"bh_unmatched_close",
-								"bh_unmatched_content"
 							],
-							"function_name_status_row": -1,
+							"function_name_status_row": 33,
+							"open_with_edit": true,
 							"syntax": "Packages/PHP/PHP.sublime-syntax",
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 3507.0,
+						"translation.y": 216.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 0,
+					"stack_index": 5,
 					"type": "text"
 				},
 				{
 					"buffer": 1,
-					"file": "position.php",
+					"file": "home.php",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 8920,
+						"buffer_size": 11934,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								7072,
-								7072
+								199,
+								199
 							]
 						],
 						"settings":
@@ -353,42 +337,15 @@
 							"auto_complete": false,
 							"bracket_highlighter.busy": false,
 							"bracket_highlighter.locations":
-							{
-								"close":
-								{
-									"1":
-									[
-										7075,
-										7076
-									]
-								},
-								"icon":
-								{
-									"1":
-									[
-										"Packages/BracketHighlighter/icons/double_quote.png",
-										"brackethighlighter.default"
-									]
-								},
-								"open":
-								{
-									"1":
-									[
-										7053,
-										7054
-									]
-								},
-								"unmatched":
-								{
-								}
-							},
+							[
+							],
 							"bracket_highlighter.regions":
 							[
-								"bh_c_define",
-								"bh_c_define_center",
-								"bh_c_define_open",
-								"bh_c_define_close",
-								"bh_c_define_content",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content",
 								"bh_square",
 								"bh_square_center",
 								"bh_square_open",
@@ -399,378 +356,48 @@
 								"bh_double_quote_open",
 								"bh_double_quote_close",
 								"bh_double_quote_content",
-								"bh_round",
-								"bh_round_center",
-								"bh_round_open",
-								"bh_round_close",
-								"bh_round_content",
-								"bh_default",
-								"bh_default_center",
-								"bh_default_open",
-								"bh_default_close",
-								"bh_default_content",
-								"bh_tag",
-								"bh_tag_center",
-								"bh_tag_open",
-								"bh_tag_close",
-								"bh_tag_content",
-								"bh_single_quote",
-								"bh_single_quote_center",
-								"bh_single_quote_open",
-								"bh_single_quote_close",
-								"bh_single_quote_content",
 								"bh_angle",
 								"bh_angle_center",
 								"bh_angle_open",
 								"bh_angle_close",
 								"bh_angle_content",
-								"bh_regex",
-								"bh_regex_center",
-								"bh_regex_open",
-								"bh_regex_close",
-								"bh_regex_content",
-								"bh_curly",
-								"bh_curly_center",
-								"bh_curly_open",
-								"bh_curly_close",
-								"bh_curly_content",
-								"bh_unmatched",
-								"bh_unmatched_center",
-								"bh_unmatched_open",
-								"bh_unmatched_close",
-								"bh_unmatched_content"
-							],
-							"function_name_status_row": 206,
-							"syntax": "Packages/PHP/PHP.sublime-syntax",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 3816.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 1,
-					"type": "text"
-				},
-				{
-					"buffer": 2,
-					"file": "css/style.css",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 7918,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								3609,
-								3609
-							]
-						],
-						"settings":
-						{
-							"bracket_highlighter.busy": false,
-							"bracket_highlighter.locations":
-							{
-								"close":
-								{
-								},
-								"icon":
-								{
-								},
-								"open":
-								{
-								},
-								"unmatched":
-								{
-								}
-							},
-							"bracket_highlighter.regions":
-							[
 								"bh_c_define",
 								"bh_c_define_center",
 								"bh_c_define_open",
 								"bh_c_define_close",
 								"bh_c_define_content",
-								"bh_square",
-								"bh_square_center",
-								"bh_square_open",
-								"bh_square_close",
-								"bh_square_content",
-								"bh_double_quote",
-								"bh_double_quote_center",
-								"bh_double_quote_open",
-								"bh_double_quote_close",
-								"bh_double_quote_content",
-								"bh_round",
-								"bh_round_center",
-								"bh_round_open",
-								"bh_round_close",
-								"bh_round_content",
-								"bh_default",
-								"bh_default_center",
-								"bh_default_open",
-								"bh_default_close",
-								"bh_default_content",
-								"bh_tag",
-								"bh_tag_center",
-								"bh_tag_open",
-								"bh_tag_close",
-								"bh_tag_content",
-								"bh_single_quote",
-								"bh_single_quote_center",
-								"bh_single_quote_open",
-								"bh_single_quote_close",
-								"bh_single_quote_content",
-								"bh_angle",
-								"bh_angle_center",
-								"bh_angle_open",
-								"bh_angle_close",
-								"bh_angle_content",
 								"bh_regex",
 								"bh_regex_center",
 								"bh_regex_open",
 								"bh_regex_close",
 								"bh_regex_content",
-								"bh_curly",
-								"bh_curly_center",
-								"bh_curly_open",
-								"bh_curly_close",
-								"bh_curly_content",
-								"bh_unmatched",
-								"bh_unmatched_center",
-								"bh_unmatched_open",
-								"bh_unmatched_close",
-								"bh_unmatched_content"
-							],
-							"function_name_status_row": 175,
-							"syntax": "Packages/CSS/CSS.sublime-syntax",
-							"tab_size": 2,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": -0.0,
-						"translation.y": 2633.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 2,
-					"type": "text"
-				},
-				{
-					"buffer": 3,
-					"file": "lib/getData/retrievedata.php",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 4556,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								1105,
-								1105
-							]
-						],
-						"settings":
-						{
-							"auto_complete": false,
-							"bracket_highlighter.busy": false,
-							"bracket_highlighter.locations":
-							{
-								"close":
-								{
-									"1":
-									[
-										1692,
-										1693
-									]
-								},
-								"icon":
-								{
-									"1":
-									[
-										"Packages/BracketHighlighter/icons/curly_bracket.png",
-										"brackethighlighter.default"
-									]
-								},
-								"open":
-								{
-									"1":
-									[
-										424,
-										425
-									]
-								},
-								"unmatched":
-								{
-								}
-							},
-							"bracket_highlighter.regions":
-							[
-								"bh_c_define",
-								"bh_c_define_center",
-								"bh_c_define_open",
-								"bh_c_define_close",
-								"bh_c_define_content",
-								"bh_square",
-								"bh_square_center",
-								"bh_square_open",
-								"bh_square_close",
-								"bh_square_content",
-								"bh_double_quote",
-								"bh_double_quote_center",
-								"bh_double_quote_open",
-								"bh_double_quote_close",
-								"bh_double_quote_content",
 								"bh_round",
 								"bh_round_center",
 								"bh_round_open",
 								"bh_round_close",
 								"bh_round_content",
-								"bh_default",
-								"bh_default_center",
-								"bh_default_open",
-								"bh_default_close",
-								"bh_default_content",
-								"bh_tag",
-								"bh_tag_center",
-								"bh_tag_open",
-								"bh_tag_close",
-								"bh_tag_content",
-								"bh_single_quote",
-								"bh_single_quote_center",
-								"bh_single_quote_open",
-								"bh_single_quote_close",
-								"bh_single_quote_content",
-								"bh_angle",
-								"bh_angle_center",
-								"bh_angle_open",
-								"bh_angle_close",
-								"bh_angle_content",
-								"bh_regex",
-								"bh_regex_center",
-								"bh_regex_open",
-								"bh_regex_close",
-								"bh_regex_content",
 								"bh_curly",
 								"bh_curly_center",
 								"bh_curly_open",
 								"bh_curly_close",
 								"bh_curly_content",
-								"bh_unmatched",
-								"bh_unmatched_center",
-								"bh_unmatched_open",
-								"bh_unmatched_close",
-								"bh_unmatched_content"
-							],
-							"function_name_status_row": 49,
-							"syntax": "Packages/PHP/PHP.sublime-syntax",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 594.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 3,
-					"type": "text"
-				},
-				{
-					"buffer": 4,
-					"file": "essential/session.php",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 473,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								473,
-								473
-							]
-						],
-						"settings":
-						{
-							"auto_complete": false,
-							"bracket_highlighter.busy": false,
-							"bracket_highlighter.locations":
-							{
-								"close":
-								{
-								},
-								"icon":
-								{
-								},
-								"open":
-								{
-								},
-								"unmatched":
-								{
-								}
-							},
-							"bracket_highlighter.regions":
-							[
-								"bh_c_define",
-								"bh_c_define_center",
-								"bh_c_define_open",
-								"bh_c_define_close",
-								"bh_c_define_content",
-								"bh_square",
-								"bh_square_center",
-								"bh_square_open",
-								"bh_square_close",
-								"bh_square_content",
-								"bh_double_quote",
-								"bh_double_quote_center",
-								"bh_double_quote_open",
-								"bh_double_quote_close",
-								"bh_double_quote_content",
-								"bh_round",
-								"bh_round_center",
-								"bh_round_open",
-								"bh_round_close",
-								"bh_round_content",
-								"bh_default",
-								"bh_default_center",
-								"bh_default_open",
-								"bh_default_close",
-								"bh_default_content",
-								"bh_tag",
-								"bh_tag_center",
-								"bh_tag_open",
-								"bh_tag_close",
-								"bh_tag_content",
 								"bh_single_quote",
 								"bh_single_quote_center",
 								"bh_single_quote_open",
 								"bh_single_quote_close",
 								"bh_single_quote_content",
-								"bh_angle",
-								"bh_angle_center",
-								"bh_angle_open",
-								"bh_angle_close",
-								"bh_angle_content",
-								"bh_regex",
-								"bh_regex_center",
-								"bh_regex_open",
-								"bh_regex_close",
-								"bh_regex_content",
-								"bh_curly",
-								"bh_curly_center",
-								"bh_curly_open",
-								"bh_curly_close",
-								"bh_curly_content",
 								"bh_unmatched",
 								"bh_unmatched_center",
 								"bh_unmatched_open",
 								"bh_unmatched_close",
-								"bh_unmatched_content"
+								"bh_unmatched_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content"
 							],
-							"function_name_status_row": 25,
+							"function_name_status_row": 5,
 							"syntax": "Packages/PHP/PHP.sublime-syntax",
 							"translate_tabs_to_spaces": false
 						},
@@ -779,6 +406,237 @@
 						"zoom_level": 1.0
 					},
 					"stack_index": 4,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "lib/authenticate/login.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 10131,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								3630,
+								3635
+							]
+						],
+						"settings":
+						{
+							"bracket_highlighter.busy": false,
+							"bracket_highlighter.locations":
+							[
+							],
+							"function_name_status_row": 165,
+							"syntax": "Packages/PHP/PHP.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 2733.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 3,
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "pds.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 49895,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								48438,
+								48438
+							]
+						],
+						"settings":
+						{
+							"auto_complete": false,
+							"bracket_highlighter.busy": false,
+							"bracket_highlighter.locations":
+							[
+							],
+							"bracket_highlighter.regions":
+							[
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content"
+							],
+							"function_name_status_row": 1179,
+							"syntax": "Packages/PHP/PHP.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 6657.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "old.register.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 38907,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								7596,
+								7611
+							]
+						],
+						"settings":
+						{
+							"auto_complete": false,
+							"bracket_highlighter.busy": false,
+							"bracket_highlighter.locations":
+							[
+							],
+							"function_name_status_row": 142,
+							"syntax": "Packages/PHP/PHP.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 2409.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"file": "/C/Users/terry/Desktop/ph_zipcodes.sql",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 120202,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								36167,
+								36167
+							]
+						],
+						"settings":
+						{
+							"bracket_highlighter.busy": false,
+							"bracket_highlighter.locations":
+							[
+							],
+							"function_name_status_row": 809,
+							"syntax": "Packages/SQL/SQL.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 14207.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 6,
+					"file": "css/style.css",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 9305,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								8833,
+								8833
+							]
+						],
+						"settings":
+						{
+							"bracket_highlighter.busy": false,
+							"bracket_highlighter.locations":
+							[
+							],
+							"function_name_status_row": 497,
+							"syntax": "Packages/CSS/CSS.sublime-syntax",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": -0.0,
+						"translation.y": 8586.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 6,
 					"type": "text"
 				}
 			]

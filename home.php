@@ -86,7 +86,7 @@
 			<div class="container">
 				<div class="row">
 						<div class="col-md-12">
-							<h1></h1>
+							
 							<p>PGLU Online Job Application</p>
 							<img src="images/textonline.gif" width="750" height="60" />
 						<div class="button-text">
@@ -103,7 +103,7 @@
 <div class="row">
 	<div class="col-md-12">
 		<div class="video">
-			<img src="images/video/final.gif" alt="video" height="200" class="center-block" />
+			<img src="images/video/final_OJA.gif" alt="video" height="200" class="center-block" />
 		</div>
 	</div>
 </div>
@@ -197,8 +197,9 @@
 				<p style="color:#fff; padding-top:5px;">Copyright &copy; 2016 HRMD</p>
 			</div>
 			<div class="col-md-6 pull-right text-right">
-				<img src="images/logo/hr_logo.png" width="40" height="35" alt="PGLU" title="PGLU" class="img-circle" />&nbsp;
-				<img src="images/logo/pglu.png" width="40" height="35" alt="PGLU" title="PGLU" class="img-circle" />
+				<img src="images/logo/iluvlaunion.gif" width="46" height="35" alt="I Love La Union" title="I Love La Union" class="img-circle" />&nbsp;
+				<img src="images/logo/pglu.png" width="40" height="35" alt="PGLU" title="PGLU" class="img-circle" />&nbsp;
+				<img src="images/logo/hr_logo.gif" width="40" height="35" alt="HR" title="HR" class="img-circle" />
 			</div>
 		</div>
 	</div>

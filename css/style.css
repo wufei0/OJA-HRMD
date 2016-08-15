@@ -339,12 +339,6 @@ padding:0px;
   color: #ccc;
 }
 
-.center-block {
-    float: none;
-    margin-left: auto;
-    margin-right: auto;
-}
-
 .input-group .icon-addon .form-control {
     border-radius: 0;
 }
@@ -438,9 +432,13 @@ font-size: 9px;
 padding:3px;
 }
 
+.fixed-table-container .bs-checkbox .th-inner {
+  padding: 3px;
+}
+
 /** gallery **/
 .hero {
-  min-height: 400px;
+  min-height: 360px;
   z-index: 1;
   background-size: cover;
   background-repeat: no-repeat;
@@ -452,6 +450,7 @@ padding:3px;
   background-image: url(../images/wallpaper.gif);
   background-position: center center;
   height:320px;
+  box-shadow: 2px 3px 5px #000;
 }
 
  .hero h1 {
@@ -463,35 +462,53 @@ padding:3px;
   margin:0;
   margin-left:auto;
   margin-right:auto;
-  margin-bottom:26px;
+  margin-bottom:40px;
+  /*box-shadow: 0 7px 8px -7px black;
+  width: 100%;*/
 }
 
 .hero p {
+  padding-top: 60px;
   font-size:46px;
   color:#fff;
   text-transform:uppercase;
   letter-spacing: 1.5px;
   font-weight:bolder;
+  text-shadow: 2px 2px 5px #000;
 } 
 
 .button-text a {
   padding-top:100px;
   border-radius:30px;
   padding:16px 45px;
-  background-color:#d18e1a;
+  background-color:#ef9600;
   font-size:20px;
   font-weight:bold;
   color:#fff;
+  text-shadow: 1px 1px 3px #000;
+  letter-spacing: 1.2px;
   text-decoration:none;
 }
 
 .button-text a:hover {
-  background-color:#ef9600;
+  background-color:#d18e1a;
 }
 
 .video {
-  margin-top:5px;
   z-index:-1;
+  margin-top: 7px;
+}
+
+.center-block {
+    float: none;
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.tableBG {
+  border: 1px solid #c3c7c7;
+  padding: 10px;
 }
 
 /******************************************************* end group content *************************************/
