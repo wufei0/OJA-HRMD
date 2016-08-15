@@ -257,8 +257,8 @@ function loadPositionList()
 	success:function(response){
 		$('#tblPositionList').bootstrapTable("hideLoading");
 		$('#tblPositionList').bootstrapTable("load",response);
-		$('#1').bootstrapTable("load",response);
-		$('#2').bootstrapTable("load",response);
+		// $('#1').bootstrapTable("load",response);
+		// $('#2').bootstrapTable("load",response);
 
 		$.unblockUI();
 	},

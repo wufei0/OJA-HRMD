@@ -293,138 +293,130 @@
 												<label>TIN</label>
 												<input type="text" placeholder="TIN Here.." class="form-control">
 											</div>
-										</div>						
-												
+										</div>
 									</div>
-									
 								</div>
-							
 							</div>
-											
 							<div id="familybg" class="tab-pane fade">
-									
 								<div class="row">
-								
 									<div class="col-sm-12">
 										<div class="row">
-											
 											<div class="col-sm-12 form-group">
 												<h4>II. Family Background</h4>
 												<hr>
 											</div>
 
-										</div>	
-										
+										</div>
 										<!-- group family -->
 										<div class="row">
 											<div class="col-sm-4 form-group">
-												<label>Spouse's Sure Name</label>
-												<input type="text" placeholder="Spouse's Surename..." class="form-control" required>
+												<label>Spouse's Lastname</label>
+												<input id="fbSpouseLname" type="text" placeholder="Lastname..." class="form-control" required>
 											</div>
 											<div class="col-sm-4 form-group">
-												<label>First Name</label>
-												<input type="text" placeholder="First Name..." class="form-control" required>
+												<label>Firstname</label>
+												<input id="fbSpouseFname" type="text" placeholder="Firstname..." class="form-control" required>
 											</div>
 											<div class="col-sm-4 form-group">
-												<label>Middle Name</label>
-												<input type="text" placeholder="Middle Name..." class="form-control" required>
+												<label>Middlename</label>
+												<input id="fbSpouseMname" type="text" placeholder="Middlename..." class="form-control" required>
 											</div>
 										</div>
 
 										<div class="row">
 											<div class="col-sm-3 form-group">
 												<label>Occupation</label>
-												<input type="text" placeholder="Occupation..." class="form-control" required>
+												<input id="fbOccupation" type="text" placeholder="Occupation..." class="form-control" required>
 											</div>
 											<div class="col-sm-3 form-group">
 												<label>Employer/Bus. Name</label>
-												<input type="text" placeholder="Employer/Bus. Name..." class="form-control" required>
+												<input id="fbEmployer" type="text" placeholder="Employer/Bus. Name..." class="form-control" required>
 											</div>
 											<div class="col-sm-3 form-group">
 												<label>Business Address</label>
-												<input type="text" placeholder="Business Address..." class="form-control" required>
+												<input id="fbBAdd" type="text" placeholder="Business Address..." class="form-control" required>
 											</div>
 											<div class="col-sm-3 form-group">
 												<label>Telephone No.</label>
-												<input type="text" placeholder="Tel. No..." class="form-control" required>
+												<input id="fbBTel" type="text" placeholder="Tel. No..." class="form-control" required>
 											</div>
 										</div>
 										
 										<div class="row">
 											<div class="col-sm-12">
 												<div class="tableBG">
-													<table id="tblChild" data-toggle="table"
+													<table id="fbtblChild" data-toggle="table"
 												   	data-sort-name="no" class="table table-bordered">
 														<thead>
 															<tr>
 																<th  data-visible="true" data-checkbox="true"></th>
 																<th data-field="child_PK">child_PK</th>
-																<th class="text-center col-sm-8 form-group" data-field="child" data-sortable="false">Name of Child (Write full name and list all)</th>
-																<th class="text-center col-sm-4 form-group" data-field="birth" data-sortable="true">Date of Birth (mm/dd/yyyy)</th>
+																<th class="text-center form-group" data-field="childFname" data-sortable="true"> Firstname </th>
+																<th class="text-center form-group" data-field="childMname" data-sortable="true"> Middlename </th>
+																<th class="text-center form-group" data-field="childLname" data-sortable="true"> Lastname </th>
+																<th class="text-center  form-group" data-field="childBirth" data-sortable="true">Date of Birth (mm/dd/yyyy)</th>
 															</tr>
 														</thead>
-															
 													</table>
-													
 													<div class="row">
 														<div class="col-sm-3 form-group">
 															<label>First Name</label>
-															<input type="text" placeholder="First Name..." class="form-control" required>
+															<input id="fbchildFname" type="text" placeholder="First Name..." class="form-control" >
 														</div>
 														<div class="col-sm-3 form-group">
 															<label>Middle Name</label>
-															<input type="text" placeholder="Middle Name..." class="form-control" required>
+															<input id="fbchildMname" type="text" placeholder="Middle Name..." class="form-control" >
 														</div>
 														<div class="col-sm-3 form-group">
 															<label>Last Name</label>
-															<input type="text" placeholder="Last Name..." class="form-control" required>
+															<input id="fbchildLname" type="text" placeholder="Last Name..." class="form-control" >
 														</div>
 														<div class="col-sm-3 form-group">
 															<label>Birth Date</label>
-															<input type="date" placeholder="Birth Date..." class="form-control" required>
+															<input id="fbchildBirth" type="date" placeholder="Birth Date..." class="form-control" >
 														</div>
 													</div>
 
-													<button id="btnDekChild" class="btn btn-danger pull-right tblBottom" style="margin-left: 4px;">Del</button>
-													<button id="btnAddChild" class="btn btn-primary pull-right tblBottom">Add</button>
+													<button id="fbbtnDelChild" class="btn btn-danger pull-right tblBottom" style="margin-left: 4px;">Del</button>
+													<button id="fbbtnAddChild" class="btn btn-primary pull-right tblBottom">Add</button>
 													<div class="tclear"></div>
 												</div>
 											</div>
 										</div>
-										
-										<div class="row">
+
+									<!-- 	<div class="row">
 											<div class="col-sm-12 form-group">
 												<label><font style="color:#940101;">(Continue on separate sheet if necessary)</font></label>
 											</div>
-										</div>
+										</div> -->
 										
 										<div class="row">
 											<div class="col-sm-4 form-group">
-												<label>Father's Sure Name</label>
+												<label>Father's Lastname</label>
 												<input type="text" placeholder="Father's Surename..." class="form-control" required>
 											</div>
 											<div class="col-sm-4 form-group">
-												<label>First Name</label>
-												<input type="text" placeholder="First Name..." class="form-control" required>
+												<label>Firstname</label>
+												<input type="text" placeholder="Firstname..." class="form-control" required>
 											</div>
 											<div class="col-sm-4 form-group">
-												<label>Middle Name</label>
-												<input type="text" placeholder="Middle Name..." class="form-control" required>
+												<label>Middlename</label>
+												<input type="text" placeholder="Middlename..." class="form-control" required>
 											</div>
 										</div>
 										
 										<div class="row">
 											<div class="col-sm-4 form-group">
-												<label>Mother's Maiden Sure Name</label>
-												<input type="text" placeholder="Mother's Maiden Surename..." class="form-control" required>
+												<label>Mother's Maidenname</label>
+												<input type="text" placeholder="Mother's Maidenname..." class="form-control" required>
 											</div>
 											<div class="col-sm-4 form-group">
-												<label>First Name</label>
-												<input type="text" placeholder="First Name..." class="form-control" required>
+												<label>Firstname</label>
+												<input type="text" placeholder="Firstname..." class="form-control" required>
 											</div>
 											<div class="col-sm-4 form-group">
-												<label>Middle Name</label>
-												<input type="text" placeholder="Middle Name..." class="form-control" required>
+												<label>Middlename</label>
+												<input type="text" placeholder="Middlename..." class="form-control" required>
 											</div>
 										</div>
 										
@@ -1070,7 +1062,7 @@
 														</div>
 													</div>
 
-													<button id="#" class="btn btn-danger pull-right tblBottom" style="margin-left: 4px;">Del</button>
+													<button id="btnDelChild" class="btn btn-danger pull-right tblBottom" style="margin-left: 4px;">Del</button>
 													<button id="btnAddChild" class="btn btn-primary pull-right tblBottom">Add</button>
 													<div class="tclear"></div>
 												</div>
@@ -1139,49 +1131,54 @@ $(document).ready(function(){
 });
 
 
-
-	$('#btnAddChild').click(function(){
+//ADD DEPENDENTS
+	$('#fbbtnAddChild').click(function(){
 		$.blockUI();
-		var modName = "modalAddChild";
-		jQuery.ajax({
-		type: "POST",
-		url:"lib/gui/pds.php", 
-		dataType:'text',
-		data:{module:modName},
-		beforeSend: function() 
-		{
-			$('#myModalLabel').html("Add Child"); 
-			$('#model-content').html("");
-			$('#modal-footer').html("");
-			$('#myModal').modal('show');
-		},
-		success:function(response)
-		{
-			$('#model-content').html(response);
-		},
-		error:function (xhr, ajaxOptions, thrownError){
-			$.growl.error({ message: thrownError });
-		}
-		});
+		var rows = [];
+	  	rows.push({
+                childFname: $('#fbchildFname').val(),
+                childMname: $('#fbchildMname').val(),
+                childLname: $('#fbchildLname').val(),
+                childBirth: $('#fbchildBirth').val()
+            });
+		$('#fbtblChild').bootstrapTable('append', rows);
+		$('#fbtblChild').bootstrapTable('scrollTo', 'bottom');
+		$('#fbchildFname').val('');
+		$('#fbchildMname').val('');
+		$('#fbchildLname').val('');
+		$('#fbchildBirth').val('');
 		$.unblockUI();
 	});
 
+//DELETE DEPENDENTS
+$('#fbbtnDelChild').click(function () {
+            var ids = $.map($('#fbtblChild').bootstrapTable('getSelections'), function (row) {
+            	// alert(row.Qualifications);
+                return row.childFname;
+            });
+            // alert($('#lstRequirement').bootstrapTable('getSelections'));
+            $('#fbtblChild').bootstrapTable('remove', {
+                field: 'childFname',
+                values: ids
+            });
+        });
 
-function changeProvince(addType)
-{
-	if (addtype == '')
-	{
-		
-	}
-}
 
-function changeProvince(addType)
-{
-	if (addtype == '')
-	{
+// function changeProvince(addType)
+// {
+// 	if (addtype == '')
+// 	{
 		
-	}
-}
+// 	}
+// }
+
+// function changeProvince(addType)
+// {
+// 	if (addtype == '')
+// 	{
+		
+// 	}
+// }
 
 
 
