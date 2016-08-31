@@ -36,6 +36,7 @@ function joblist()
 {
 	global $DB_HOST, $DB_USER,$DB_PASS, $DB_SCHEMA;
 	$con=mysqli_connect($DB_HOST,$DB_USER,$DB_PASS,$DB_SCHEMA);
+	$returnMessage=array();
 	if (isset($_POST['strFilter']))
 	{
 		$sqlCondition=" WHERE (position LIKE '%".$_POST['strFilter']."%' OR `m_department`.`description` LIKE '%".$_POST['strFilter']."%') AND (postexpire > CURDATE() AND poststart < CURDATE())";

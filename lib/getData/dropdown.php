@@ -41,7 +41,7 @@ function registerMunicipality()
 	$myQuery=mysqli_query($con,$sql);
 	while($myResult=mysqli_fetch_array($myQuery))
 	{
-		echo '<option value="'.$myResult["municipality_pk"].'" >'.$myResult["municipality"].'</option>';
+		echo '<option value="'.$myResult["municipality_pk"].'" >'.strtoupper($myResult["municipality"]).'</option>';
 	}
 	mysqli_free_result($myQuery);
 	mysqli_close($con);
@@ -56,7 +56,7 @@ function registerBarangay()
 	$myQuery=mysqli_query($con,$sql);
 	while($myResult=mysqli_fetch_array($myQuery))
 	{
-		echo '<option value="'.$myResult["barangay_pk"].'" >'.$myResult["barangay"].'</option>';
+		echo '<option value="'.$myResult["barangay_pk"].'" >'.strtoupper($myResult["barangay"]).'</option>';
 	}
 	mysqli_free_result($myQuery);
 	mysqli_close($con);

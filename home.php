@@ -4,7 +4,25 @@
 	require_once('essential/connection.php');
 	require_once('essential/errorDescription.php');
 	$con=mysqli_connect($DB_HOST,$DB_USER,$DB_PASS,$DB_SCHEMA);
-	// echo "xx".mail('terryjohnapigo@gmail.com', 'My Subject', "sample text mail function");
+
+
+// 	$headers   = array();
+// $headers[] = "MIME-Version: 1.0";
+// $headers[] = "Content-type: text/plain; charset=iso-8859-1";
+// $headers[] = "From: Sender Name <jerome.marzan88@gmail.com>";
+// $headers[] = "Bcc: JJ Chong <bcc@domain2.com>";
+// $headers[] = "Reply-To: Recipient Name <jerome.marzan88@gmail.com>";
+// $headers[] = "Subject: {$subject}";
+// $headers[] = "X-Mailer: PHP/".phpversion();
+
+// // mail($to, $subject, $email, implode("\r\n", $headers));
+
+
+// 	if(!mail('terryjohnapigo@gmail.com', 'subject', 'email content', implode("\r\n", $headers)))
+// 	{
+// 		echo "fail";
+// 		die();
+// 	}
 ?>
 
 <!DOCTYPE html>

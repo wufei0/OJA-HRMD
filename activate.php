@@ -16,6 +16,7 @@ if($query->num_rows==1)
 	$result=$query->fetch_array(MYSQLI_ASSOC);
 	$sql="UPDATE security_user SET activate=1 WHERE email = '".$result['email']."' ";
 	$query=$con->query($sql);
+	
 	header('Refresh:3; url=home.php');
 	echo 'Account activated. You can now log in using your email.<br>';
 	echo 'Auto redirecting in 3 sec.';

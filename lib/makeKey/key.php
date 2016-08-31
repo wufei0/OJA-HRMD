@@ -15,6 +15,7 @@ function makeKey($tablename)
 	while($returnValue=mysqli_fetch_array($myQuery))
 	{
 		$last_value=$returnValue['counter']+1;
+		
 	}
 
 	$sql="UPDATE m_counter SET counter = ".$last_value." WHERE tablename = '" .$tablename. "' ";

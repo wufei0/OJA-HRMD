@@ -225,7 +225,7 @@ function registerMe()
 {
 	global $DB_HOST, $DB_USER,$DB_PASS, $DB_SCHEMA;
 	$con = new mysqli($DB_HOST, $DB_USER, $DB_PASS, $DB_SCHEMA);
-
+	$con->autocommit(FALSE);
 	/* check connection */
 	if (mysqli_connect_errno()) 
 	{
@@ -244,12 +244,29 @@ function registerMe()
 		if($stmt->execute())
 		{
 			echo true;
-			$headers  = 'MIME-Version: 1.0' . "\r\n";
-			$headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
-			$headers .= 'From: PGLU Human Resource Management Division' . "\r\n";
-			if (!mail($_POST['emailAdd'],"PGLU Online Application",emailTable(strtoupper($_POST['fname'])." ".strtoupper($_POST['lname']),$activateurl),$headers))
+			$headers   = array();
+			$headers[] = "MIME-Version: 1.0";
+			$headers[] = "Content-type: text/html; charset=iso-8859-1";
+			$headers[] = "From: Sender Name <jerome.marzan88@gmail.com>";
+			$headers[] = "Bcc: JJ Chong <bcc@domain2.com>";
+			$headers[] = "Reply-To: Recipient Name <jerome.marzan88@gmail.com>";
+			$headers[] = "Subject: PGLU Online Application";
+			$headers[] = "X-Mailer: PHP/".phpversion();
+
+			// $headers  = 'MIME-Version: 1.0' . "\r\n";
+			// $headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
+			// $headers .= 'From: PGLU Human Resource Management Division' . "\r\n";
+			if (!mail($_POST['emailAdd'],"PGLU Online Application",emailTable(strtoupper($_POST['fname'])." ".strtoupper($_POST['lname']),$activateurl),implode("\r\n", $headers)))
 			{
-				echo "Activation email not send. Please notify administrator.";
+				echo "Activation email not sent. Please notify administrator.";
+			}
+			else
+			{
+				$sql="INSERT INTO emppersonalinfo(EmpID,EmpLName,EmpFName,EmpEMail,EmpMobile) VALUES ('".$_POST['emailAdd']."','".$_POST['lname']."','".$_POST['fname']."','".$_POST['emailAdd']."','".$_POST['mobileNo']."')";
+				// echo $sql;
+
+				$con->query($sql);
+				$con->commit();
 			}
 		}
 		else
