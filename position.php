@@ -16,7 +16,7 @@
 
     <!-- Latest compiled and minified CSS -->
 	<link href="css/bootstrap.css" rel="stylesheet"/>
-	<link href="css/bootstrap-submenu.min.css" rel="stylesheet" />
+	
 	<link rel="stylesheet" type="text/css" href="css/bootstrap-select.css" />
 	<link rel="stylesheet" type="text/css" href="css/jquery.growl.css" />
 	<link rel="stylesheet" type="text/css" href="css/bootstrap-table.min.css" />
@@ -173,8 +173,18 @@
 													</tr>
 												</thead>
 											</table>
-											<button id="DelQualification" class="pull-right btn btn-danger" style="margin-top: 6px;">Del</button>
-											<button id="AddQualification" class="pull-right btn btn-primary" style="margin-top: 6px; margin-right: 4px;">Add</button>
+											<div class="row" style="margin-top: 0px;">
+												<div class="col-md-6">
+													
+												</div>
+
+												<div class="col-md-6">
+
+													<button id="DelQualification" class="pull-right btn btn-danger" style="margin-top: 6px;">Del</button>
+													<button id="AddQualification" class="pull-right btn btn-primary" style="margin-top: 6px; margin-right: 4px;">Add</button>
+													<input id="#" class="form-control pull-right" style="width:60%; margin-top: 6px; margin-right:4px;" data-format="add" type="type" required />
+												</div>
+											</div>
 										</div>
 									</div>
 									<div class="row">
@@ -193,16 +203,27 @@
 													</tr>
 												</thead>
 											</table>
-											<button id="DelJobDesc" class="pull-right btn btn-danger" style="margin-top: 6px;">Del</button>
-											<button id="AddjobDesc" class="pull-right btn btn-primary" style="margin-top: 6px; margin-right: 4px;">Add</button>
+											<div class="row" style="margin-top: 0px;">
+												<div class="col-md-6">
+													
+												</div>
+
+												<div class="col-md-6">
+													<button id="DelJobDesc" class="pull-right btn btn-danger" style="margin-top: 6px;">Del</button>
+													<button id="AddjobDesc" class="pull-right btn btn-primary" style="margin-top: 6px; margin-right: 4px;">Add</button>
+													<input id="#" class="form-control pull-right" style="width:60%; margin-top: 6px; margin-right:4px;" data-format="add" type="type" required />
+												</div>
+											</div>
 										</div>
 									</div>
 
 								</div>
 							</div>
 
-
 					</div>
+						<button id="#" class="pull-right btn btn-danger" style="margin-right: 4px; width: 60px;">Delete</button>
+						<button id="#" class="pull-right btn btn-primary" style="margin-right: 4px; width: 60px;">Save</button>
+						<button id="#" class="pull-right btn btn-primary" style="margin-right: 4px; width: 60px;">New</button>
 				</div>
 			</div>
 		</div>

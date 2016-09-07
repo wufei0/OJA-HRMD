@@ -78,7 +78,7 @@ function updatePerInfo()
 	}
 
 
-	mysqli_stmt_bind_param($stmt, "ssssiiisssssssssssssssssssssssss",  $perInfo['EmpLName'], $perInfo['EmpMName'], $perInfo['EmpFName'], $perInfo['EmpExtName'], $perBday[1], $perBday[0], $perBday[2], $perInfo['EmpBirthPlace'], $perInfo['EmpSex'], $perInfo['EmpCivilStatus'], $perInfo['EmpCitizenship'], $perInfo['EmpHeight'], $perInfo['EmpWeight'], $perInfo['EmpBloodType'], $perInfo['EmpGSIS'], $perInfo['EmpHDMF'], $perInfo['EmpPH'], $perInfo['EmpSSS'], $perInfo['EmpResAddBrgy'], $perInfo['EmpResAddMun'], $perInfo['EmpResAddProv'], $perInfo['EmpResZipCode'], $perInfo['EmpResTel'], $perInfo['EmpPerAddBrgy'], $perInfo['EmpPerAddMun'], $perInfo['EmpPerAddProv'], $perInfo['EmpPerZipCode'], $perInfo['EmpMobile'],$perInfo['EmpEMail'],  $perInfo['EmpAgencyNo'],$perInfo['EmpAgencyNo'],$perInfo['EmpTIN']);
+	mysqli_stmt_bind_param($stmt, "ssssiiisssssssssssssssssssssssss",  $perInfo['EmpLName'], $perInfo['EmpMName'], $perInfo['EmpFName'], $perInfo['EmpExtName'], $perBday[1], $perBday[0], $perBday[2], $perInfo['EmpBirthPlace'], $perInfo['EmpSex'], $perInfo['EmpCivilStatus'], $perInfo['EmpCitizenship'], $perInfo['EmpHeight'], $perInfo['EmpWeight'], $perInfo['EmpBloodType'], $perInfo['EmpGSIS'], $perInfo['EmpHDMF'], $perInfo['EmpPH'], $perInfo['EmpSSS'], $perInfo['EmpResAddBrgy'], $perInfo['EmpResAddMun'], $perInfo['EmpResAddProv'], $perInfo['EmpResZipCode'], $perInfo['EmpResTel'], $perInfo['EmpPerAddBrgy'], $perInfo['EmpPerAddMun'], $perInfo['EmpPerAddProv'], $perInfo['EmpPerZipCode'], $perInfo['EmpPerTel'],$perInfo['EmpMobile'],  $perInfo['EmpEMail'],$perInfo['EmpAgencyNo'],$perInfo['EmpTIN']);
 
 
 		// mysqli_stmt_execute($stmt);
@@ -125,7 +125,7 @@ function updateFamBackground()
 	$returnMessage=array();
 	$perFamBknd=array();
 	$perFamBknd=$_POST['jsonData'];
-	$perFamBknd=array_map("strtoupper", $_POST['jsonData']);
+	// $perFamBknd=array_map("strtoupper", $_POST['jsonData']);
 // print_r($perFamBknd);
 // print_r($perFamBknd);
 
@@ -139,8 +139,19 @@ function updateFamBackground()
 	  // die('mysqli error: '.mysqli_error($con));
 		$errMsg='mysqli error: '.mysqli_error($con);	
 	}
-
-	mysqli_stmt_bind_param($stmt, "sssssssssssss",  $perFamBknd['EmpSpsLName'], $perFamBknd['EmpSpsMName'],$perFamBknd['EmpSpsFName'],  $perFamBknd['EmpSpsJob'], $perFamBknd['EmpSpsBusDesc'], $perFamBknd['EmpBusAdd'], $perFamBknd['EmpSpsBusTel'], $perFamBknd['EmpFatherLName'], $perFamBknd['EmpFatherMName'], $perFamBknd['EmpFatherFName'], $perFamBknd['EmpMotherLName'], $perFamBknd['EmpMotherMName'], $perFamBknd['EmpMotherFName']);
+	$EmpSpsLName=strtoupper($perFamBknd['EmpSpsLName']);
+	$EmpSpsMName=strtoupper($perFamBknd['EmpSpsMName']);
+	$EmpSpsFName=strtoupper($perFamBknd['EmpSpsFName']);
+	$EmpSpsJob=strtoupper($perFamBknd['EmpSpsJob']);
+	$EmpSpsBusDesc=strtoupper($perFamBknd['EmpSpsBusDesc']);
+	$EmpBusAdd=strtoupper($perFamBknd['EmpBusAdd']);
+	$EmpFatherLName=strtoupper($perFamBknd['EmpFatherLName']);
+	$EmpFatherMName=strtoupper($perFamBknd['EmpFatherMName']);
+	$EmpFatherFName=strtoupper($perFamBknd['EmpFatherFName']);
+	$EmpMotherLName=strtoupper($perFamBknd['EmpMotherLName']);
+	$EmpMotherMName=strtoupper($perFamBknd['EmpMotherMName']);
+	$EmpMotherFName=strtoupper($perFamBknd['EmpMotherFName']);
+	mysqli_stmt_bind_param($stmt, "sssssssssssss", $EmpSpsLName, $EmpSpsMName,$EmpSpsFName,  $EmpSpsJob, $EmpSpsBusDesc, $EmpBusAdd, $perFamBknd['EmpSpsBusTel'], $EmpFatherLName, $EmpFatherMName, $EmpFatherFName, $EmpMotherLName, $EmpMotherMName, $EmpMotherFName);
 
 	// mysqli_stmt_execute($stmt);
 	
@@ -174,7 +185,11 @@ function updateFamBackground()
 			  	// die('mysqli error: '.mysqli_error($con));
 			  	$errMsg='mysqli error: '.mysqli_error($con);
 			}
-			mysqli_stmt_bind_param($stmt, "sssiii",strtoupper($dependent['DpntLName']), strtoupper($dependent['DpntMName']), strtoupper($dependent['DpntFName']),$perDepBday[1],$perDepBday[0],$perDepBday[2]);
+			$DpntLName=strtoupper($dependent['DpntLName']);
+			$DpntMName=strtoupper($dependent['DpntMName']);
+			$DpntFName=strtoupper($dependent['DpntFName']);
+			
+			mysqli_stmt_bind_param($stmt, "sssiii",$DpntLName, $DpntMName, $DpntFName,$perDepBday[1],$perDepBday[0],$perDepBday[2]);
 				if ( !mysqli_execute($stmt) )
 				{
 					$transaction=false;

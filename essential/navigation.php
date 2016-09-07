@@ -1,13 +1,18 @@
 <?php
 
 
-echo '<ul class="nav navbar-nav navbar-right">
+echo '<ul class="nav navbar-nav pull-right">
 		<li ><a href="home.php">Home</a></li>
 		<li class="dropdown">
 			<a href="#" class="dropdown-toggle" data-toggle="dropdown">Application <b class="caret"></b></a>
 			<ul class="dropdown-menu">
-				<li class="dropdown-header">Applicant</li>
-				<li><a href="pds.php">PDS (Personal Data Sheet)</a></li>
+				<li class="dropdown-submenu"><a data-target="#">Personal Data Sheet</a>
+					<ul class="dropdown-menu">
+						<li class="dropdown-header"></li>
+						<li><a href="pds.php">Update PDS</a></li>
+						<li><a href="pds.php">Print PDS</a></li>
+					</ul>
+				</li>
 				<li><a href="apply.php">Apply Job</a></li>
 				<li><a href="applications.php">My Application</a></li>
 				<!-- <li class="divider"></li>
@@ -16,6 +21,7 @@ echo '<ul class="nav navbar-nav navbar-right">
 				<li><a href="#">Portfolio 2</a></li> --!>
 			</ul>
 		</li>
+
 		<li><a href="#">Reports</a></li>
 		<li class="dropdown">
 			<a href="#" class="dropdown-toggle" data-toggle="dropdown">Maintenance <b class="caret"></b></a>
@@ -32,5 +38,67 @@ echo '<ul class="nav navbar-nav navbar-right">
 		<li><a href="#">Help</a></li>
 	</ul>';
 
+
+// echo "
+// // <nav class='navbar navbar-inverse1 navbar-static-top marginBottom-0' role='navigation'>
+// // <div class='collapse navbar-collapse' id='navbar-collapse-1'>
+// // 	<ul class='nav navbar-nav navbar-right'>
+// // 		<li><a href='#'>Homme</a></li>
+
+// // 		<li class='dropdown'><a href='#' class='dropdown-toggle' data-toggle='dropdown'>Test</a>
+// // 			<ul class='dropdown-menu'>
+// // 				<li class='dropdown dropdown-submenu'><a href='#' class='dropdown-toggle' data-toggle='dropdown'>Sub menu</a>
+// // 					<ul class='dropdown-menu'>
+// // 						<li><a href='#'><span>1</span></a></li>
+// // 						<li><a href='#'><span>2</span></a></li>
+// // 					</ul>
+// // 				</li>
+// // 			</ul>
+// // 		</li>
+
+// // 	</ul>
+// // </div>
+// // </nav>
+// ";
+
+// echo '
+// 	<div class="navbar navbar-default navbar-fixed-top" role="navigation">
+//     <div class="container">
+//         <div class="navbar-header">
+//             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">  
+//                 <span class="sr-only">Toggle navigation</span>
+//                 <span class="icon-bar"></span>
+//                 <span class="icon-bar"></span>
+//                 <span class="icon-bar"></span>
+//             </button>
+//         </div>
+//         <div class="collapse navbar-collapse navbar-ex1-collapse">
+//             <ul class="nav navbar-nav">
+//                 <li class="menu-item dropdown">
+//                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">Drop Down<b class="caret"></b></a>
+//                     <ul class="dropdown-menu">
+//                         <li class="menu-item dropdown dropdown-submenu">
+//                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">Level 1</a>
+//                             <ul class="dropdown-menu">
+//                                 <li class="menu-item ">
+//                                     <a href="#">Link 1</a>
+//                                 </li>
+//                                 <li class="menu-item dropdown dropdown-submenu">
+//                                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">Level 2</a>
+//                                     <ul class="dropdown-menu">
+//                                         <li>
+//                                             <a href="#">Link 3</a>
+//                                         </li>
+//                                     </ul>
+//                                 </li>
+//                             </ul>
+//                         </li>
+//                     </ul>
+//                 </li>
+//             </ul>
+//         </div>
+//     </div>
+// </div>
+// ';
 
 ?>

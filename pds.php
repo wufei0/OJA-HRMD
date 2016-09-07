@@ -16,13 +16,17 @@
 	
     <!-- Latest compiled and minified CSS -->
 	<link href="css/bootstrap.css" rel="stylesheet"/>
-	<link href="css/bootstrap-submenu.min.css" rel="stylesheet" />
+
+	
 	<link rel="stylesheet" type="text/css" href="css/bootstrap-select.css" />
 	<link rel="stylesheet" type="text/css" href="css/jquery.growl.css" />
 	<link rel="stylesheet" type="text/css" href="css/bootstrap-table.min.css" />
 	<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
 	<link rel="stylesheet" type="text/css" href="css/jquery.feedBackBox.css" />
 	<link rel="stylesheet" type="text/css" href="css/font-awesome.min.css" />
+	<link href="css/bootstrap-submenu.min.css" rel="stylesheet" />
+	
+	<!-- <link rel="stylesheet" type="text/css" href="css/bootstrap-submenu.css" /> -->
 
 	<!-- Optional theme -->
 	
@@ -37,6 +41,7 @@
 <!------------------------------------------------------------- header ------------------------------------------------------------>
 <header class="navbar">
 	<!-- Fixed navbar -->
+	
     <div class="navbar navbar-default nav-bg navbar-fixed-top" role="navigation">
       <div class="container">
 		  <div class="row">
@@ -51,7 +56,7 @@
 					<a class="navbar-brand" href="home.php" style="color: #e8e8e8;">PGLU OJA</a>
 				</div>
 
-				<div id="navHeader" class="navbar-collapse collapse">
+				<div id="navHeader" class="collapse navbar-collapse">
 					<?php
 						require_once('essential/navigation.php');
 					?>
@@ -60,6 +65,7 @@
 		  </div>
 	  </div>
     </div>
+    
 </header>
 <!------------------------------------------------------------- end header ------------------------------------------------------------>
 
@@ -84,30 +90,29 @@
 			<div class="card bg-main">
 
 				<ul class="nav nav-tabs" role="tablist" style="font-size:11px;">
-					<li id="personalInfo" class="active" role="presentation"><a href="#personalinfo" aria-controls="profile" role="tab" data-toggle="tab">I. Personal Information</a></li>
+					<li id="personalInfo" class="active" role="presentation"><a href="#personalinfos" aria-controls="profile" role="tab" data-toggle="tab">I. Personal Information</a></li>
 					<li id="familyBackground" role="presentation"><a href="#familybg" aria-controls="home" role="tab" data-toggle="tab">II. Family Background</a></li>
-					<li role="presentation"><a href="#educationalbg" aria-controls="messages" role="tab" data-toggle="tab">III. Educational Background</a></li>
-					<li role="presentation"><a href="#csc" aria-controls="messages" role="tab" data-toggle="tab">IV. Civil Service</a></li>
-					<li role="presentation"><a href="#workexper" aria-controls="messages" role="tab" data-toggle="tab">V. Work Experience</a></li>
-					<li role="presentation"><a href="#voluntary" aria-controls="messages" role="tab" data-toggle="tab">VI. Voluntary Work</a></li>
-					<li role="presentation"><a href="#training" aria-controls="messages" role="tab" data-toggle="tab">VII. Training</a></li>
-					<li role="presentation"><a href="#panelOthers" aria-controls="messages" role="tab" data-toggle="tab">VIII. Others</a></li>
+					<li id="educBackground" role="presentation"><a href="#educationalbg" aria-controls="EDhome" role="tab" data-toggle="tab">III. Educational Background</a></li>
+					<li id="csctab"  role="presentation"><a href="#csc" aria-controls="messages" role="tab" data-toggle="tab">IV. Civil Service</a></li>
+					<li id="workExperTab" role="presentation"><a href="#workexper" aria-controls="messages" role="tab" data-toggle="tab">V. Work Experience</a></li>
+					<li id="voluntaryTab" role="presentation"><a href="#voluntary" aria-controls="messages" role="tab" data-toggle="tab">VI. Voluntary Work</a></li>
+					<li id="trainingTab" role="presentation"><a href="#training" aria-controls="messages" role="tab" data-toggle="tab">VII. Training</a></li>
+					<li id="panelotherTab" role="presentation"><a href="#panelOthers" aria-controls="messages" role="tab" data-toggle="tab">VIII. Others</a></li>
 				</ul>
 
 				<div class="tab-content">
-							<div id="personalinfo" class="tab-pane fade in active">
+							<div id="personalinfos" class="tab-pane fade in active">
 
 								<div class="row">
 									
 									<div class="col-sm-12">
-										<a href="#familybg" aria-controls="home" role="tab" data-toggle="tab" onclick="save();">Next</a>
+										
 										<div class="row">
-											
-											<div class="col-sm-12 form-group">
+											<div class="col-sm-12">
 												<h4>I. Personal Information</h4>
 												<hr>
 											</div>
-											
+
 											<div class="col-sm-3 form-group">
 												<label>Surename</label>
 												<input id="EmpLName" type="text" placeholder="Surename" class="form-control" required>
@@ -144,7 +149,7 @@
 											</div>	
 											<div class="col-sm-3 form-group">
 												<label>Place of Birth</label>
-												<input type="text" placeholder="Place of Birth" class="form-control" required>
+												<input id = "EmpBirthPlace"  type="text" placeholder="Place of Birth" class="form-control" required>
 												
 											</div>	
 											<div class="col-sm-2 form-group">
@@ -254,13 +259,13 @@
 											<div class="col-sm-3 form-group">
 												<label>Municipality</label>
 												<select id='EmpPerAddMun' class="selectpicker form-control" data-live-search="true" required>
-												  
+							
 												</select>
 											</div>	
 											<div class="col-sm-3 form-group">
 												<label>Barangay</label>
 												<select id='EmpPerAddBrgy' class="selectpicker form-control" data-live-search="true" required>
-												  
+									
 												</select>
 											</div>
 											<div class="col-sm-1 form-group">
@@ -294,7 +299,15 @@
 												<input id='EmpTIN' type="text" placeholder="TIN Here.." class="form-control" required>
 											</div>
 										</div>
-											<button class="btn btn-primary pull-right tblBottom" onClick="save();">Saves</button><div class="tclear"></div>
+										<div class="row">
+											<div class="col-sm-6 form-group">
+												
+											</div>
+											<div class="col-sm-6 form-group">
+												<!--<button class="btn btn-primary pull-right tblBottom" onClick="save();">Saves</button>-->
+												<a href="#familybg" class="pull-right btn btn-primary" aria-controls="home" role="tab" data-toggle="tab" onclick="save();">Next</a>
+											</div>
+										</div>
 									</div>
 									
 								</div>
@@ -382,8 +395,9 @@
 													</div>
 
 													<button id="fbbtnDelChild" class="btn btn-danger pull-right tblBottom" style="margin-left: 4px;">Del</button>
-													<button id="fbbtnAddChild" class="btn btn-primary pull-right tblBottom">Add</button>
+													<button id="fbbtnAddChild" class="btn btn-success pull-right tblBottom">Add</button>
 													<div class="tclear"></div>
+
 												</div>
 											</div>
 										</div>
@@ -423,10 +437,20 @@
 												<input id="EmpMotherMName" type="text" placeholder="Middlename..." class="form-control" required>
 											</div>
 										</div>
+										<div class="row">
+											<div class="col-md-6 form-group">
+												
+											</div>
+											<div class="col-md-6 form-group">
+												<!--<button class="btn btn-primary pull-right tblBottom" onClick="saveFamB();">Saves</button>-->
+												<a href="#educationalbg" class="pull-right btn btn-primary" aria-controls="educationBg" role="tab" data-toggle="tab" onclick="saveFamB();">Next</a>
+										
+											</div>
+										</div>
 									</div>
 								</div>
-									<button class="btn btn-primary pull-right tblBottom" onClick="saveFamB();">Saves</button>
-									<div class="tclear"></div>
+
+									
 							</div>
 
 							<div id="educationalbg" class="tab-pane fade">
@@ -519,13 +543,22 @@
 													</div>
 
 													<button id="btnDelEducBackground" class="btn btn-danger pull-right tblBottom" style="margin-left: 4px;">Del</button>
-													<button id="btnAddEducBackground" class="btn btn-primary pull-right tblBottom">Add</button>
+													<button id="btnAddEducBackground" class="btn btn-success pull-right tblBottom">Add</button>
 													<div class="tclear"></div>
+												</div>
+												<div class="row" style="margin-top:8px;">
+													<div class="col-md-6 form-group">
+														
+													</div>
+													<div class="col-md-6 form-group">
+														<!--<button class="btn btn-primary pull-right tblBottom" onClick="updateEduc();">Saves</button>
+														<div class="tclear"></div>-->
+														<a href="#csc" class="pull-right btn btn-primary" aria-controls="cscbg" role="tab" data-toggle="tab" onclick="updateEduc();">Next</a>
+													</div>
 												</div>
 											</div>
 										</div>
-										<button class="btn btn-primary pull-right tblBottom" onClick="updateEduc();" style="margin-top: 8px;">Saves</button>
-										<div class="tclear"></div>
+										
 										
 									</div>
 
@@ -595,13 +628,22 @@
 													</div>
 
 														<button id="btnDelCsc" class="btn btn-danger pull-right tblBottom" style="margin-left: 4px;">Del</button>
-														<button id="btnAddCsc" class="btn btn-primary pull-right tblBottom">Add</button>
+														<button id="btnAddCsc" class="btn btn-success pull-right tblBottom">Add</button>
 														<div class="tclear"></div>
+												</div>
+												<div class="row" style="margin-top: 8px;">
+													<div class="col-md-6 form-group">
+														
+													</div>
+													<div class="col-md-6 form-group">
+														<!--<button onclick="updateEligibility();" class="btn btn-primary pull-right tblBottom">Add</button>
+														<div class="tclear"></div>-->
+														<a href="#workexper" class="pull-right btn btn-primary" aria-controls="workexperbg" role="tab" data-toggle="tab" onclick="updateEligibility();">Next</a>
+													</div>
 												</div>
 											</div>
 										</div>
-											<button onclick="updateEligibility();" class="btn btn-primary pull-right tblBottom" style="margin-top: 8px;">Add</button>
-											<div class="tclear"></div>
+											
 									</div>
 
 								</div>
@@ -697,13 +739,22 @@
 													</div>
 
 													<button id="btnDelWorkExp" class="btn btn-danger pull-right tblBottom" style="margin-left: 4px;">Del</button>
-													<button id="btnAddWorkExp" class="btn btn-primary pull-right tblBottom">Add</button>
+													<button id="btnAddWorkExp" class="btn btn-success pull-right tblBottom">Add</button>
 													<div class="tclear"></div>
+												</div>
+												<div class="row" style="margin-top:8px;">
+													<div class="col-md-6 form-group">
+														
+													</div>
+													<div class="col-md-6 form-group">
+														<!--<button onclick="updateWorkExp();" class="btn btn-primary pull-right tblBottom">Add</button>
+														<div class="tclear"></div>-->
+														<a href="#voluntary" class="pull-right btn btn-primary" aria-controls="voluntarybg" role="tab" data-toggle="tab" onclick="updateWorkExp();">Next</a>
+													</div>
 												</div>
 											</div>
 										</div>
-										<button onclick="updateWorkExp();" class="btn btn-primary pull-right tblBottom" style="margin-top:8px;">Add</button>
-										<div class="tclear"></div>
+										
 									</div>
 
 								</div>
@@ -776,13 +827,22 @@
 													</div>
 
 													<button id="btnDelVolOrg" class="btn btn-danger pull-right tblBottom" style="margin-left: 4px;">Del</button>
-													<button id="btnAddVolOrg" class="btn btn-primary pull-right tblBottom">Add</button>
+													<button id="btnAddVolOrg" class="btn btn-success pull-right tblBottom">Add</button>
 													<div class="tclear"></div>
+												</div>
+												<div class="row" style="margin-top:8px;">
+													<div class="col-md-6 form-group">
+														
+													</div>
+													<div class="col-md-6 form-group">
+														<!--<button onclick="updateVolOrg();" class="btn btn-primary pull-right tblBottom">Add</button>
+														<div class="tclear"></div>-->
+														<a href="#training" class="pull-right btn btn-primary" aria-controls="volorgbg" role="tab" data-toggle="tab" onclick="updateVolOrg();">Next</a>
+													</div>
 												</div>
 											</div>
 										</div>
-										<button onclick="updateVolOrg();" class="btn btn-primary pull-right tblBottom" style="margin-top:8px;">Add</button>
-										<div class="tclear"></div>
+										
 									</div>
 									
 								</div>
@@ -849,13 +909,22 @@
 													</div>
 
 													<button id="btnDelTraining" class="btn btn-danger pull-right tblBottom" style="margin-left: 4px;">Del</button>
-													<button id="btnAddTraining" class="btn btn-primary pull-right tblBottom">Add</button>
+													<button id="btnAddTraining" class="btn btn-success pull-right tblBottom">Add</button>
 													<div class="tclear"></div>
+												</div>
+												<div class="row" style="margin-top: 8px;">
+													<div class="col-md-6 form-group">
+														
+													</div>
+													<div class="col-md-6 form-group">
+														<!--<button onclick="updateTraining();" class="btn btn-primary pull-right tblBottom">Add</button>
+														<div class="tclear"></div>-->
+														<a href="#panelOthers" class="pull-right btn btn-primary" aria-controls="trainingbg" role="tab" data-toggle="tab" onclick="updateTraining();">Next</a>
+													</div>
 												</div>
 											</div>
 										</div>
-										<button onclick="updateTraining();" class="btn btn-primary pull-right tblBottom" style="margin-top: 8px;">Add</button>
-										<div class="tclear"></div>
+										
 									</div>
 
 								</div>
@@ -903,7 +972,7 @@
 																</div>
 															</div>
 															<button id="btnDelSkill" class="btn btn-danger pull-right tblBottom" style="margin-left: 4px;">Del</button>
-															<button id="btnAddSkill" class="btn btn-primary pull-right tblBottom">Add</button>
+															<button id="btnAddSkill" class="btn btn-success pull-right tblBottom">Add</button>
 															<div class="tclear"></div>
 														</div>
 
@@ -928,7 +997,7 @@
 																</div>
 															</div>
 															<button id="btnDelRecognition" class="btn btn-danger pull-right tblBottom" style="margin-left: 4px;">Del</button>
-															<button id="btnAddRecognition" class="btn btn-primary pull-right tblBottom">Add</button>
+															<button id="btnAddRecognition" class="btn btn-success pull-right tblBottom">Add</button>
 															<div class="tclear"></div>
 														</div>
 
@@ -953,7 +1022,7 @@
 																</div>
 															</div>
 															<button id="btnDelMembership" class="btn btn-danger pull-right tblBottom" style="margin-left: 4px;">Del</button>
-															<button id="btnAddMembership" class="btn btn-primary pull-right tblBottom">Add</button>
+															<button id="btnAddMembership" class="btn btn-success pull-right tblBottom">Add</button>
 															<div class="tclear"></div>
 														</div>
 													</div>
@@ -979,10 +1048,10 @@
 												  <input id="Q361" type="radio" name="thirddegree" value="YES" checked class="questionRadio"> Yes
 												</label>
 												<label class="radio-inline">
-												  <input type="radio" name="thirddegree" value="NO" > No
+												  <input id="Q361N" type="radio" name="thirddegree" value="NO" class="noAns"> No
 												</label>
 												
-												<input id="A361" type="text" placeholder="If YES, give details:" class="form-control" >
+												<input id="A361" type="text" placeholder="If YES, give details:" class="form-control ans" >
 											</div>
 											
 											<div class="col-sm-6 form-group">
@@ -993,10 +1062,10 @@
 												  <input id="Q362" type="radio" name="fourthdegree" value="YES" checked class="questionRadio"> Yes
 												</label>
 												<label class="radio-inline">
-												  <input type="radio" name="fourthdegree" value="NO" > No
+												  <input id="Q362N" type="radio" name="fourthdegree" value="NO" class="noAns"> No
 												</label>
 												
-												<input id="A362" type="text" placeholder="If YES, give details:" class="form-control" >
+												<input id="A362" type="text" placeholder="If YES, give details:" class="form-control ans" >
 											</div>
 											
 										</div>
@@ -1009,10 +1078,10 @@
 												  <input id="Q371" type="radio" name="formally" value="YES" checked class="questionRadio"> Yes
 												</label>
 												<label class="radio-inline">
-												  <input type="radio" name="formally" value="NO" > No
+												  <input id="Q371N" type="radio" name="formally" value="NO" class="noAns"> No
 												</label>
 												
-												<input id="A371" type="text" placeholder="If YES, give details:" class="form-control" >
+												<input id="A371" type="text" placeholder="If YES, give details:" class="form-control ans" >
 											</div>
 											
 											<div class="col-sm-6 form-group">
@@ -1022,10 +1091,10 @@
 												  <input id="Q372" type="radio" name="guilty" value="YES" checked class="questionRadio"> Yes
 												</label>
 												<label class="radio-inline">
-												  <input type="radio" name="guilty" value="NO"> No
+												  <input id="Q372N" type="radio" name="guilty" value="NO" class="noAns"> No
 												</label>
 												
-												<input id="A372" type="text" placeholder="If YES, give details:" class="form-control">
+												<input id="A372" type="text" placeholder="If YES, give details:" class="form-control ans">
 											</div>
 											
 										</div>
@@ -1039,10 +1108,10 @@
 												  <input id="Q380" type="radio" name="vioiation" value="YES" checked class="questionRadio"> Yes
 												</label>
 												<label class="radio-inline">
-												  <input type="radio" name="vioiation" value="NO"> No
+												  <input id="Q380N" type="radio" name="vioiation" value="NO" class="noAns"> No
 												</label>
 												
-												<input id="A380" type="text" placeholder="If YES, give details:" class="form-control">
+												<input id="A380" type="text" placeholder="If YES, give details:" class="form-control ans">
 											</div>
 										</div>
 										
@@ -1056,10 +1125,10 @@
 												  <input id="Q390" type="radio" name="separated" value="YES" checked class="questionRadio"> Yes
 												</label>
 												<label class="radio-inline">
-												  <input type="radio" name="separated" value="NO"> No
+												  <input id="Q390N" type="radio" name="separated" value="NO" class="noAns"> No
 												</label>
 												
-												<input id="A390" type="text" placeholder="If YES, give details:" class="form-control">
+												<input id="A390" type="text" placeholder="If YES, give details:" class="form-control ans">
 											</div>
 										</div>
 										
@@ -1071,10 +1140,10 @@
 												  <input id="Q400" type="radio" name="national" value="YES" checked class="questionRadio"> Yes
 												</label>
 												<label class="radio-inline">
-												  <input type="radio" name="national" value="NO"> No
+												  <input id="Q400N" type="radio" name="national" value="NO" class="noAns"> No
 												</label>
 												
-												<input id="A400" type="text" placeholder="If YES, give details:" class="form-control">
+												<input id="A400" type="text" placeholder="If YES, give details:" class="form-control ans">
 											</div>
 										</div>
 										
@@ -1094,10 +1163,10 @@
 												  <input id="Q411" type="radio" name="indigenous" value="YES" checked class="questionRadio"> Yes
 												</label>
 												<label class="radio-inline">
-												  <input type="radio" name="indigenous" value="NO"> No
+												  <input id="Q411N" type="radio" name="indigenous" value="NO" class="noAns"> No
 												</label>
 												
-												<input id="A411" type="text" placeholder="If YES, please specify:" class="form-control">
+												<input id="A411" type="text" placeholder="If YES, please specify:" class="form-control ans">
 											</div>
 											
 											<div class="col-sm-4 form-group">
@@ -1107,10 +1176,10 @@
 												  <input id="Q412" type="radio" name="differently" value="YES" checked class="questionRadio"> Yes
 												</label>
 												<label class="radio-inline">
-												  <input type="radio" name="differently" value="NO"> No
+												  <input id="Q412N" type="radio" name="differently" value="NO" class="noAns"> No
 												</label>
 												
-												<input id="A412" type="text" placeholder="If YES, please specify:" class="form-control">
+												<input id="A412" type="text" placeholder="If YES, please specify:" class="form-control ans">
 											</div>
 											
 											<div class="col-sm-4 form-group">
@@ -1120,10 +1189,10 @@
 												  <input id="Q413" type="radio" name="soloparent" value="YES" checked class="questionRadio"> Yes
 												</label>
 												<label class="radio-inline">
-												  <input type="radio" name="soloparent" value="NO"> No
+												  <input id="Q413N" type="radio" name="soloparent" value="NO" class="noAns"> No
 												</label>
 												
-												<input id="A413" type="text" placeholder="If YES, please specify:" class="form-control">
+												<input id="A413" type="text" placeholder="If YES, please specify:" class="form-control ans">
 											</div>
 											
 										</div>
@@ -1208,12 +1277,12 @@
 													</div>
 
 													<button id="btnDelReference" class="btn btn-danger pull-right tblBottom" style="margin-left: 4px;">Del</button>
-													<button id="btnAddReference" class="btn btn-primary pull-right tblBottom">Add</button>
+													<button id="btnAddReference" class="btn btn-success pull-right tblBottom">Add</button>
 													<div class="tclear"></div>
 												</div>
 											</div>
 										</div>
-										<button onclick="updateOthers();" class="btn btn-primary pull-right tblBottom">Submit</button>
+										<button onclick="updateOthers();" class="btn btn-primary pull-right tblBottom">Finish</button>
 													<div class="tclear"></div>
 									</div>
 								</div>
@@ -1267,6 +1336,10 @@
 <script type="text/javascript" src="js/blockUI.js"></script>
 <script type="text/javascript" src="js/bootstrap-select.js"></script>
 <script type="text/javascript" src="script/loginScript.js"></script>
+<script type="text/javascript" src="js/bootstrap-submenu.min.js"></script>
+
+<!-- <script type="text/javascript" src="js/bootstrap-submenu.js"></script> -->
+
 
 <script type="text/javascript">
 var educationNumber=1; //COUNTER FOR EDUCATIONAL BACKGROUND FOR BOOTSTRAP-TABLE
@@ -1278,7 +1351,8 @@ var referencenNumber=1; //COUNTER FOR reference FOR BOOTSTRAP-TABLE
 
 $(document).ready(function(){
 	$('#feedbackDiv').feedBackBox();
-	$('#personalInfo').focus();
+	// $('#personalInfo').focus();
+	initPage();
 });
 
 
@@ -1286,6 +1360,9 @@ $(document).ready(function(){
 	$('#fbbtnAddChild').click(function(e){
 		$.blockUI();
 		e.preventDefault();
+		// var dependentbday=$('#DpntBDay').val();
+		var rowDpntBDay = $('#DpntBDay').val().split('-');
+		// console.log(dateAr[0]);
 		if ($('#DpntFName').val()=='')
 		{
 			$.growl.error({ message: "Fill up all Details." });
@@ -1297,7 +1374,7 @@ $(document).ready(function(){
                 childFname: '<span class="DpntFName">'+$('#DpntFName').val()+'</span>',
                 childMname: '<span class="DpntMName">'+$('#DpntMName').val()+'</span>',
                 childLname: '<span class="DpntLName">'+$('#DpntLName').val()+'</span>',
-                childBirth: '<span class="DpntBDay">'+$('#DpntBDay').val()+'</span>'
+                childBirth: '<span class="DpntBDay">'+rowDpntBDay[1]+'/'+rowDpntBDay[2]+'/'+rowDpntBDay[0]+'</span>'
             });
 		$('#fbtblChild').bootstrapTable('append', rows);
 		$('#fbtblChild').bootstrapTable('scrollTo', 'bottom');
@@ -1309,9 +1386,7 @@ $(document).ready(function(){
 $('#fbbtnDelChild').click(function (e) {
 	e.preventDefault();
             var ids = $.map($('#fbtblChild').bootstrapTable('getSelections'), function (row) {
-            	// alert(row.Qualifications);
-            	// console.log(row.childFname +"a");
-                return row.No;
+            	return row.childFname;
             });
             if (ids=='')
             {
@@ -1321,7 +1396,7 @@ $('#fbbtnDelChild').click(function (e) {
             }
             // alert($('#lstRequirement').bootstrapTable('getSelections'));
             $('#fbtblChild').bootstrapTable('remove', {
-                field: 'No',
+                field: 'childFname',
                 values: ids
             });
         });
@@ -1330,6 +1405,8 @@ $('#fbbtnDelChild').click(function (e) {
 	$('#btnAddEducBackground').click(function(e){
 		$.blockUI();
 		e.preventDefault();
+		var rowEducIncAttDateFromDate = $('#EducIncAttDateFromDate').val().split('-');
+		var rowEducIncAttDateToDate = $('#EducIncAttDateToDate').val().split('-');
 		// console.log($('#EducLvlID').val());
 		if (($('#EducSchoolName').val()=='') || ($('#EducCourse').val()==''))
 		{
@@ -1347,8 +1424,8 @@ $('#fbbtnDelChild').click(function (e) {
                 EducCourse: '<span class="EducCourse">'+$('#EducCourse').val()+'</span>',
                 EducYrGrad: '<span class="EducYrGrad">'+$('#EducYrGrad').val()+'</span>',
                 EducGradeLvlUnits: '<span class="EducGradeLvlUnits">'+$('#EducGradeLvlUnits').val()+'</span>',
-                EducIncAttDateFromDate: '<span class="EducIncAttDateFromDate">'+$('#EducIncAttDateFromDate').val()+'</span>',
-                EducIncAttDateToDate: '<span class="EducIncAttDateToDate">'+$('#EducIncAttDateToDate').val()+'</span>',
+                EducIncAttDateFromDate: '<span class="EducIncAttDateFromDate">'+rowEducIncAttDateFromDate[1]+'/'+rowEducIncAttDateFromDate[2]+'/'+rowEducIncAttDateFromDate[0]+'</span>',
+                EducIncAttDateToDate: '<span class="EducIncAttDateToDate">'+rowEducIncAttDateToDate[1]+'/'+rowEducIncAttDateToDate[2]+'/'+rowEducIncAttDateToDate[0]+'</span>',
                 EducAwards: '<span class="EducAwards">'+$('#EducAwards').val()+'</span>'
             });
 		$('#tblEducation').bootstrapTable('append', rows);
@@ -1384,6 +1461,8 @@ $('#btnDelEducBackground').click(function (e) {
 	$('#btnAddCsc').click(function(e){
 		$.blockUI();
 		e.preventDefault();
+		var rowCSEExamDate = $('#CSEExamDate').val().split('-');
+		var rowCSELicReleaseDate = $('#CSELicReleaseDate').val().split('-');
 		// console.log($('#EducLvlID').val());
 		if (($('#CSEDesc').val()=='') || ($('#CSERating').val()==''))
 		{
@@ -1397,10 +1476,10 @@ $('#btnDelEducBackground').click(function (e) {
   			    No: '<span class="No">'+eligibilityNumber+'</span>',
                 CSEDesc: '<span class="CSEDesc">'+$('#CSEDesc').val()+'</span>',
                 CSERating:  '<span class="CSERating">'+$('#CSERating').val()+'</span>',
-                CSEExamDate: '<span class="CSEExamDate">'+$('#CSEExamDate').val()+'</span>',
+                CSEExamDate: '<span class="CSEExamDate">'+rowCSEExamDate[1]+'/'+rowCSEExamDate[2]+'/'+rowCSEExamDate[0]+'</span>',
                 CSEExamPlace: '<span class="CSEExamPlace">'+$('#CSEExamPlace').val()+'</span>',
                 CSELicNum: '<span class="CSELicNum">'+$('#CSELicNum').val()+'</span>',
-                CSELicReleaseDate: '<span class="CSELicReleaseDate">'+$('#CSELicReleaseDate').val()+'</span>'
+                CSELicReleaseDate: '<span class="CSELicReleaseDate">'+rowCSELicReleaseDate[1]+'/'+rowCSELicReleaseDate[2]+'/'+rowCSELicReleaseDate[0]+'</span>'
                 
             });
 		$('#tblEligibility').bootstrapTable('append', rows);
@@ -1453,6 +1532,8 @@ $('#btnDelCsc').click(function (e) {
 		$.blockUI();
 		e.preventDefault();
 		// console.log($('#EducLvlID').val());
+		var rowWExpFromDate = $('#WExpFromDate').val().split('-');
+		var rowWExpToDate = $('#WExpToDate').val().split('-');
 		if (($('#WExpFromDate').val()=='') || ($('#WExpToDate').val()==''))
 		{
 			$.growl.error({ message: "Fill up all Details." });
@@ -1463,16 +1544,16 @@ $('#btnDelCsc').click(function (e) {
 		var rows = [];
 	  	rows.push({
   			    No: '<span class="No">'+workExperienceNumber+'</span>',
-                WExpFromDate: '<span class="WExpFromDate">'+$('#WExpFromDate').val()+'</span>',
-                WExpToDate:  '<span class="WExpToDate">'+$('#WExpToDate').val()+'</span>',
+                WExpFromDate: '<span class="WExpFromDate">'+rowWExpFromDate[1]+'/'+rowWExpFromDate[2]+'/'+rowWExpFromDate[0]+'</span>',
+                WExpToDate:  '<span class="WExpToDate">'+rowWExpToDate[1]+'/'+rowWExpToDate[2]+'/'+rowWExpToDate[0]+'</span>',
                 WExpPosition: '<span class="WExpPosition">'+$('#WExpPosition').val()+'</span>',
                 WExpEmployer: '<span class="WExpEmployer">'+$('#WExpEmployer').val()+'</span>',
                 WExpSalary: '<span class="WExpSalary">'+$('#WExpSalary').val()+'</span>',
                 SalGrdID: '<span class="SalGrdID">'+$('#SalGrdID').val()+'</span>',
                 AppStID: '<span class="AppStID">'+$('#AppStID').find(":selected").text()+'</span>',
                 WExpIsGov: '<span class="WExpIsGov">'+$('#WExpIsGov').val()+'</span>',
-                ApptStDesc: '<span class="ApptStDesc">'+$('#AppStID').val()+'</span>',
-                
+                ApptStDesc: '<span class="ApptStDesc">'+$('#AppStID').val()+'</span>'
+                // AppStID: '<span class="ApptStDesc">'+value['ApptStDesc']+'</span>',
             });
 		$('#tblWorkExp').bootstrapTable('append', rows);
 		$('#tblWorkExp').bootstrapTable('scrollTo', 'bottom');
@@ -1505,6 +1586,8 @@ $('#btnDelWorkExp').click(function (e) {
 	$('#btnAddVolOrg').click(function(e){
 		$.blockUI();
 		e.preventDefault();
+		var rowVolOrgFromDate = $('#VolOrgFromDate').val().split('-');
+		var rowVolOrgToDate = $('#VolOrgToDate').val().split('-');
 		// console.log($('#EducLvlID').val());
 		if (($('#VolOrgName').val()=='') || ($('#VolOrgAddSt').val()==''))
 		{
@@ -1518,8 +1601,8 @@ $('#btnDelWorkExp').click(function (e) {
   			    No: '<span class="No">'+volOrgNumber+'</span>',
                 VolOrgName: '<span class="VolOrgName">'+$('#VolOrgName').val()+'</span>',
                 VolOrgAddSt:  '<span class="VolOrgAddSt">'+$('#VolOrgAddSt').val()+'</span>',
-                VolOrgFromDate: '<span class="VolOrgFromDate">'+$('#VolOrgFromDate').val()+'</span>',
-                VolOrgToDate: '<span class="VolOrgToDate">'+$('#VolOrgToDate').val()+'</span>',
+                VolOrgFromDate: '<span class="VolOrgFromDate">'+rowVolOrgFromDate[1]+'/'+rowVolOrgFromDate[2]+'/'+rowVolOrgFromDate[0]+'</span>',
+                VolOrgToDate: '<span class="VolOrgToDate">'+rowVolOrgToDate[1]+'/'+rowVolOrgToDate[2]+'/'+rowVolOrgToDate[0]+'</span>',
                 VolOrgHours: '<span class="VolOrgHours">'+$('#VolOrgHours').val()+'</span>',
                 VolOrgDetails: '<span class="VolOrgDetails">'+$('#VolOrgDetails').val()+'</span>'
                 
@@ -1555,6 +1638,8 @@ $('#btnDelVolOrg').click(function (e) {
 	$('#btnAddTraining').click(function(e){
 		$.blockUI();
 		e.preventDefault();
+		var rowTrainFromDate = $('#TrainFromDate').val().split('-');
+		var rowTrainToDate = $('#TrainToDate').val().split('-');
 		// console.log($('#EducLvlID').val());
 		if (($('#TrainDesc').val()=='') || ($('#TrainSponsor').val()==''))
 		{
@@ -1567,8 +1652,8 @@ $('#btnDelVolOrg').click(function (e) {
 	  	rows.push({
   			    No: '<span class="No">'+trainNumber+'</span>',
                 TrainDesc: '<span class="TrainDesc">'+$('#TrainDesc').val()+'</span>',
-                TrainFromDate:  '<span class="TrainFromDate">'+$('#TrainFromDate').val()+'</span>',
-                TrainToDate: '<span class="TrainToDate">'+$('#TrainToDate').val()+'</span>',
+                TrainFromDate:  '<span class="TrainFromDate">'+rowTrainFromDate[1]+'/'+rowTrainFromDate[2]+'/'+rowTrainFromDate[0]+'</span>',
+                TrainToDate: '<span class="TrainToDate">'+rowTrainToDate[1]+'/'+rowTrainToDate[2]+'/'+rowTrainToDate[0]+'</span>',
                 TrainHours: '<span class="TrainHours">'+$('#TrainHours').val()+'</span>',
                 TrainSponsor: '<span class="TrainSponsor">'+$('#TrainSponsor').val()+'</span>'
             });
@@ -1800,12 +1885,12 @@ $('#btnDelReference').click(function (e) {
 
 $('#EmpResAddProv').change(function(e)
 {
-
+$.blockUI();
 $('#EmpResAddMun').empty();
 e.preventDefault();
     var moduleName = 'registerMunicipality';
     var provinceName = this.value;
-    // alert(this.value);
+     // console.log($('#EmpResAddProv').val());
     jQuery.ajax({
         type: "POST",
         url:"lib/getData/dropdown.php",
@@ -1822,11 +1907,12 @@ e.preventDefault();
             $.growl.error({ message: thrownError });
         }
         });
+    $.unblockUI();
 });
 
 
 $('#EmpResAddMun').change(function(e){
-
+$.blockUI();
 	$('#EmpResAddBrgy').empty();
 	e.preventDefault();
     var moduleName = 'registerBarangay';
@@ -1847,16 +1933,18 @@ $('#EmpResAddMun').change(function(e){
             $.growl.error({ message: thrownError });
         }
         });
+    $.unblockUI();
 });
 
 
 
 $('#EmpPerAddProv').change(function(e){
-
+$.blockUI();
 $('#EmpPerAddMun').empty();
 e.preventDefault();
     var moduleName = 'registerMunicipality';
     var provinceName = this.value;
+
     jQuery.ajax({
         type: "POST",
         url:"lib/getData/dropdown.php",
@@ -1873,11 +1961,12 @@ e.preventDefault();
             $.growl.error({ message: thrownError });
         }
         });
+    $.unblockUI();
 });
 
 
 $('#EmpPerAddMun').change(function(e){
-
+$.blockUI();
 	$('#EmpPerAddBrgy').empty();
 	e.preventDefault();
     var moduleName = 'registerBarangay';
@@ -1898,6 +1987,7 @@ $('#EmpPerAddMun').change(function(e){
             $.growl.error({ message: thrownError });
         }
         });
+    $.unblockUI();
 });
 
 
@@ -1955,24 +2045,19 @@ $('li').focusout(function(e){
 // }
 function save() {
 
-$('#personalInfo').removeClass();
-$('#familyBackground').addClass('active');
+
 
 
 	var data = '{';
 	// collect one to one properties
-	$('input,select', $('#personalinfo')).each(function(i, o) { // loop within Family Background
+	$('input,select', $('#personalinfos')).each(function(i, o) { // loop within Family Background
 		if (o.nodeName == 'INPUT') 
 		{
 			console.log(o.id);
 			if ((o.dataset['ignore'] == undefined) ) 
 			{ // skip input elem with ignore dataset
 				if (o.type == 'checkbox') return; // skip select btSelectAll checkbox
-				// if($(this).attr("id"))
-				// {
-					data += '"'+o.id+'":"' + o.value + '",';
-				// }
-				// console.log(o.nodeName);
+				data += '"'+o.id+'":"' + o.value + '",';
 			}
 		}
 		else if (o.nodeName == 'SELECT') 
@@ -1980,7 +2065,6 @@ $('#familyBackground').addClass('active');
 			data += '"'+o.id+'":"' + $(this).find(":selected").text() + '",';
 			// alert(data);
 		}
-		// console.log(o);
 	});
 
 	// // collect many to one properties
@@ -2005,7 +2089,7 @@ $('#familyBackground').addClass('active');
 
 if ($.isEmptyObject( data )) return;
 	var moduleName = 'updatePerInfo';
-   
+   $.blockUI();
     jQuery.ajax({
         type: "POST",
         url:"lib/postData/pds.php",
@@ -2016,6 +2100,8 @@ if ($.isEmptyObject( data )) return;
 			if  (response['message']=='Update Successful')
         	{
         		$.growl.notice({ message: response['message'] });
+        		$('#personalInfo').removeClass();
+				$('#familyBackground').addClass('active');
         	}
         	else
         	{
@@ -2028,12 +2114,14 @@ if ($.isEmptyObject( data )) return;
             $.growl.error({ message: thrownError });
         }
         });
-
+ $.unblockUI();
 }
 
 
 function saveFamB()
 {
+	$('#familyBackground').removeClass();
+$('#educBackground').addClass('active');
 	var data = '{';
 	// collect one to one properties
 	$('table, input', $('#familybg')).each(function(i, o) { // loop within Family Background
@@ -2065,6 +2153,7 @@ function saveFamB()
 	data = JSON.parse(data);
 	console.log(data);
 if ($.isEmptyObject( data )) return;
+$.blockUI();
 	var moduleName = 'updateFamBackground';
     jQuery.ajax({
         type: "POST",
@@ -2087,7 +2176,7 @@ if ($.isEmptyObject( data )) return;
             $.growl.error({ message: thrownError });
         }
         });
-
+ $.unblockUI();
 
 }
 
@@ -2095,6 +2184,8 @@ if ($.isEmptyObject( data )) return;
 
 function updateEduc()
 {
+	$('#educBackground').removeClass();
+$('#csctab').addClass('active');
 var data = '{';
 	// collect one to one properties
 	// $('table, input', $('#educationalbg')).each(function(i, o) { // loop within Family Background
@@ -2127,6 +2218,7 @@ var data = '{';
 	console.log(data);
 	// return;
 if ($.isEmptyObject( data )) return;
+$.blockUI();
 	var moduleName = 'updateEducBackground';
     jQuery.ajax({
         type: "POST",
@@ -2149,10 +2241,13 @@ if ($.isEmptyObject( data )) return;
             $.growl.error({ message: thrownError });
         }
         });
+     $.unblockUI();
 }
 
 function updateEligibility()
 {
+	$('#csctab').removeClass();
+$('#workExperTab').addClass('active');
 	var data = '{';
 
 	// collect many to one properties
@@ -2177,6 +2272,7 @@ function updateEligibility()
 	console.log(data);
 	// return;
 if ($.isEmptyObject( data )) return;
+$.blockUI();
 	var moduleName = 'updateEligibility';
     jQuery.ajax({
         type: "POST",
@@ -2199,6 +2295,7 @@ if ($.isEmptyObject( data )) return;
             $.growl.error({ message: thrownError });
         }
         });
+     $.unblockUI();
 }
 
 
@@ -2206,6 +2303,8 @@ if ($.isEmptyObject( data )) return;
 
 function updateWorkExp()
 {
+	$('#workExperTab').removeClass();
+$('#voluntaryTab').addClass('active');
 	var data = '{';
 	// collect many to one properties
 	if ($($('#tblWorkExp tbody tr')[0]).hasClass('no-records-found')) {
@@ -2229,6 +2328,7 @@ function updateWorkExp()
 	console.log(data);
 	// return;
 	if ($.isEmptyObject( data )) return;
+	$.blockUI();
 	var moduleName = 'updateWorkExp';
     jQuery.ajax({
         type: "POST",
@@ -2251,10 +2351,13 @@ function updateWorkExp()
             $.growl.error({ message: thrownError });
         }
         });
+     $.unblockUI();
 }
 
 function updateVolOrg()
 {
+	$('#voluntaryTab').removeClass();
+$('#trainingTab').addClass('active');
 	var data = '{';
 	// collect many to one properties
 	if ($($('#tblVolWork tbody tr')[0]).hasClass('no-records-found')) {
@@ -2278,6 +2381,7 @@ function updateVolOrg()
 	console.log(data);
 	// return;
 	if ($.isEmptyObject( data )) return;
+	$.blockUI();
 	var moduleName = 'updateVolOrg';
     jQuery.ajax({
         type: "POST",
@@ -2300,10 +2404,13 @@ function updateVolOrg()
             $.growl.error({ message: thrownError });
         }
         });
+     $.unblockUI();
 }
 
 function updateTraining()
 {
+	$('#trainingTab').removeClass();
+$('#panelotherTab').addClass('active');
 	var data = '{';
 	// collect many to one properties
 	if ($($('#tblSeminar tbody tr')[0]).hasClass('no-records-found')) {
@@ -2327,6 +2434,7 @@ function updateTraining()
 	console.log(data);
 	// return;
 if ($.isEmptyObject( data )) return;
+$.blockUI();
 
 	var moduleName = 'updateTraining';
     jQuery.ajax({
@@ -2350,6 +2458,7 @@ if ($.isEmptyObject( data )) return;
             $.growl.error({ message: thrownError });
         }
         });
+     $.unblockUI();
 }
 
 function updateOthers()
@@ -2453,6 +2562,7 @@ if ($($('#tblMembership tbody tr')[0]).hasClass('no-records-found')) {
 	data += '}';
 	data = JSON.parse(data);
 	if ($.isEmptyObject( data )) return;
+	$.blockUI();
 	var moduleName = 'updateOtherInfo';
     jQuery.ajax({
         type: "POST",
@@ -2478,6 +2588,359 @@ if ($($('#tblMembership tbody tr')[0]).hasClass('no-records-found')) {
             $.growl.error({ message: thrownError });
         }
         });
+ $.unblockUI();
+}
+
+
+
+function initPage()
+{
+
+$.blockUI();
+	var moduleName = 'initPage';
+    jQuery.ajax({
+        type: "POST",
+        url:"lib/getData/pds.php",
+        dataType:'json',
+        data:{module:moduleName},
+        success:function(response)
+        {
+        	//personal info
+        	$('#EmpLName').val(response['EmpLName']);
+        	$('#EmpFName').val(response['EmpFName']);
+        	$('#EmpMName').val(response['EmpMName']);
+        	$('#EmpExtName').val(response['EmpExtName']);
+        	$('#EmpBday').val(response['EmpBirthDate']);
+        	$('#EmpBirthPlace').val(response['EmpBirthPlace']);
+        	$('#EmpCitizenship').val(response['EmpCitizenship']);
+        	$('#EmpHeight').val(response['EmpHeight']);
+        	$('#EmpWeight').val(response['EmpWeight']);
+        	$('#EmpBloodType').val(response['EmpBloodType']);
+
+
+
+			$("#EmpResAddProv option").filter(function(){
+			    return $.trim($(this).text()) ==  response['EmpResAddProv'];
+			}).prop('selected', true);
+			$('#EmpResAddProv').selectpicker('refresh');
+
+			$("#EmpPerAddProv option").filter(function(){
+			    return $.trim($(this).text()) ==  response['EmpPerAddProv'];
+			}).prop('selected', true);
+			$('#EmpPerAddProv').selectpicker('refresh');
+
+
+			$("#EmpPerAddProv").trigger("change");
+			$("#EmpResAddProv").trigger("change");
+
+var delay=10;
+			setTimeout(function() 
+			{
+				
+				$("#EmpResAddMun option").filter(function() {
+			    	return $(this).text() == response['EmpResAddMun']; 
+				}).prop('selected', true);
+				$('#EmpResAddMun').selectpicker('refresh');
+
+				$("#EmpPerAddMun option").filter(function() {
+			    	return $(this).text() == response['EmpPerAddMun']; 
+				}).prop('selected', true);
+				$('#EmpPerAddMun').selectpicker('refresh');
+
+				$("#EmpPerAddMun").trigger("change");
+				$("#EmpResAddMun").trigger("change");
+
+
+
+			}, delay);
+
+		
+			setTimeout(function() 
+			{
+				$("#EmpPerAddBrgy option").filter(function() {
+			    	return $(this).text() == response['EmpPerAddBrgy']; 
+				}).prop('selected', true);
+				$('#EmpPerAddBrgy').selectpicker('refresh');
+
+				$("#EmpResAddBrgy option").filter(function() {
+			    	return $(this).text() == response['EmpResAddBrgy']; 
+				}).prop('selected', true);
+				$('#EmpResAddBrgy').selectpicker('refresh');
+			}, 1000);
+
+
+
+        	$('#EmpGSIS').val(response['EmpGSIS']);
+        	$('#EmpHDMF').val(response['EmpHDMF']);
+        	$('#EmpPH').val(response['EmpPH']);
+        	$('#EmpSSS').val(response['EmpSSS']);
+        	$('#EmpPerZipCode').val(response['EmpPerZipCode']);
+        	$('#EmpPerTel').val(response['EmpPerTel']);
+        	$('#EmpResZipCode').val(response['EmpResZipCode']);
+        	$('#EmpResTel').val(response['EmpResTel']);
+        	$('#EmpEMail').val(response['EmpEMail']);
+        	$('#EmpMobile').val(response['EmpMobile']);
+        	$('#EmpAgencyNo').val(response['EmpAgencyNo']);
+        	$('#EmpTIN').val(response['EmpTIN']);
+        	$('#EmpGSIS').val(response['EmpGSIS']);
+
+        	//family background
+        	$('#EmpSpsLName').val(response['EmpSpsLName']);
+        	$('#EmpSpsFName').val(response['EmpSpsFName']);
+        	$('#EmpSpsMName').val(response['EmpSpsMName']);
+        	$('#EmpSpsJob').val(response['EmpSpsJob']);
+        	$('#EmpSpsBusDesc').val(response['EmpSpsBusDesc']);
+        	$('#EmpBusAdd').val(response['EmpSpsBusAddSt']);
+        	$('#EmpSpsBusTel').val(response['EmpSpsBusTel']);
+        	$('#EmpFatherFName').val(response['EmpSpsLName']);
+        	$('#EmpFatherLName').val(response['EmpFatherLName']);
+        	$('#EmpFatherMName').val(response['EmpFatherMName']);
+        	$('#EmpMotherFName').val(response['EmpMotherFName']);
+        	$('#EmpMotherLName').val(response['EmpMotherLName']);
+        	$('#EmpMotherMName').val(response['EmpMotherMName']);
+//dependents
+        	$('#fbtblChild').bootstrapTable('removeAll');
+        	$.each(response[0],function( key, value )
+		{
+			$('#fbtblChild').bootstrapTable('insertRow', {index: 1, row: {  childFname:'<span class="DpntFName">'+value['DpntFName']+'</span>',childMname:'<span class="DpntMName">'+value['DpntMName']+'</span>',childLname:'<span class="DpntLName">'+value['DpntLName']+'</span>',childBirth:'<span class="DpntBDay">'+value['DpntBirthDate']+'</span>'} });
+		});
+//educational background
+ 		$('#tblEducation').bootstrapTable('removeAll');
+        $.each(response[1],function( key, value )
+		{
+			educationNumber++;
+			$('#tblEducation').bootstrapTable('insertRow', {index: 1, row: {  No: '<span class="No">'+educationNumber+'</span>',
+                EducLvlID: '<span class="EducLvlID">'+value['EducLvlID']+'</span>',
+                EducLevel:  '<span class="EducLevel">'+value['EducLevel']+'</span>',
+                EducSchoolName: '<span class="EducSchoolName">'+value['EducSchoolName']+'</span>',
+                EducCourse: '<span class="EducCourse">'+value['EducCourse']+'</span>',
+                EducYrGrad: '<span class="EducYrGrad">'+value['EducYrGrad']+'</span>',
+                EducGradeLvlUnits: '<span class="EducGradeLvlUnits">'+value['EducGradeLvlUnits']+'</span>',
+                EducIncAttDateFromDate: '<span class="EducIncAttDateFromDate">'+value['EducIncAttDateFromDate']+'</span>',
+                EducIncAttDateToDate: '<span class="EducIncAttDateToDate">'+value['EducIncAttDateToDate']+'</span>',
+                EducAwards: '<span class="EducAwards">'+value['EducAwards']+'</span>'
+            }});
+		});
+
+//CSC
+ 		$('#tblEligibility').bootstrapTable('removeAll');
+        $.each(response[2],function( key, value )
+		{
+			eligibilityNumber++;
+			// console.log(('#CSEDesc').val());
+			$('#tblEligibility').bootstrapTable('insertRow', {index: 1, row: {  No: '<span class="No">'+eligibilityNumber+'</span>',
+                CSEDesc: '<span class="CSEDesc">'+value['CSEDesc']+'</span>',
+                CSERating:  '<span class="CSERating">'+value['CSERating']+'</span>',
+                CSEExamDate: '<span class="CSEExamDate">'+value['CSEExamDate']+'</span>',
+                CSEExamPlace: '<span class="CSEExamPlace">'+value['CSEExamPlace']+'</span>',
+                CSELicNum: '<span class="CSELicNum">'+value['CSELicNum']+'</span>',
+                CSELicReleaseDate: '<span class="CSELicReleaseDate">'+value['CSELicReleaseDate']+'</span>'
+            }});
+		});
+
+//WORK EXPERIENCE
+ 		$('#tblWorkExp').bootstrapTable('removeAll');
+        $.each(response[3],function( key, value )
+		{
+			workExperienceNumber++;
+			// console.log(('#CSEDesc').val());
+			$('#tblWorkExp').bootstrapTable('insertRow', {index: 1, row: {   No: '<span class="No">'+workExperienceNumber+'</span>',
+                WExpFromDate: '<span class="WExpFromDate">'+value['WExpFromDate']+'</span>',
+                WExpToDate:  '<span class="WExpToDate">'+value['WExpToDate']+'</span>',
+                WExpPosition: '<span class="WExpPosition">'+value['WExpPosition']+'</span>',
+                WExpEmployer: '<span class="WExpEmployer">'+value['WExpEmployer']+'</span>',
+                WExpSalary: '<span class="WExpSalary">'+value['WExpSalary']+'</span>',
+                SalGrdID: '<span class="SalGrdID">'+value['SalGrdID']+'</span>',
+              AppStID: '<span class="AppStID">'+value['ApptStDesc']+'</span>',
+                WExpIsGov: '<span class="WExpIsGov">'+value['WExpIsGov']+'</span>',
+                  ApptStDesc: '<span class="ApptStDesc">'+value['ApptStID']+'</span>'
+            }});
+		});
+
+
+
+
+
+// VOLUNTARY WORK
+$('#tblVolWork').bootstrapTable('removeAll');
+        $.each(response[4],function( key, value )
+		{
+			volOrgNumber++;
+			// console.log(('#CSEDesc').val());
+			$('#tblVolWork').bootstrapTable('insertRow', {index: 1, row: {    No: '<span class="No">'+volOrgNumber+'</span>',
+                VolOrgName: '<span class="VolOrgName">'+value['VolOrgName']+'</span>',
+                VolOrgAddSt:  '<span class="VolOrgAddSt">'+value['VolOrgAddSt']+'</span>',
+                VolOrgFromDate: '<span class="VolOrgFromDate">'+value['VolOrgFromDate']+'</span>',
+                VolOrgToDate: '<span class="VolOrgToDate">'+value['VolOrgToDate']+'</span>',
+                VolOrgHours: '<span class="VolOrgHours">'+value['VolOrgHours']+'</span>',
+                VolOrgDetails: '<span class="VolOrgDetails">'+value['VolOrgDetails']+'</span>'
+            }});
+		});
+
+
+
+// trainings
+$('#tblSeminar').bootstrapTable('removeAll');
+        $.each(response[5],function( key, value )
+		{
+			trainNumber++;
+			// console.log(('#CSEDesc').val());
+			$('#tblSeminar').bootstrapTable('insertRow', {index: 1, row: {     No: '<span class="No">'+trainNumber+'</span>',
+                TrainDesc: '<span class="TrainDesc">'+value['TrainDesc']+'</span>',
+                TrainFromDate:  '<span class="TrainFromDate">'+value['TrainFromDate']+'</span>',
+                TrainToDate: '<span class="TrainToDate">'+value['TrainToDate']+'</span>',
+                TrainHours: '<span class="TrainHours">'+value['TrainHours']+'</span>',
+                TrainSponsor: '<span class="TrainSponsor">'+value['TrainSponsor']+'</span>'
+            }});
+		});
+
+
+
+// hobby
+$('#tblSkill').bootstrapTable('removeAll');
+        $.each(response[6],function( key, value )
+		{
+			$('#tblSkill').bootstrapTable('insertRow', {index: 1, row: {    SkillDesc: '<span class="SkillDesc">'+value['SkillDesc']+'</span>'
+            }});
+		});
+
+// recognitions
+$('#tblRecognition').bootstrapTable('removeAll');
+        $.each(response[7],function( key, value )
+		{
+			$('#tblRecognition').bootstrapTable('insertRow', {index: 1, row: {    NonAcadRecDetails: '<span class="NonAcadRecDetails">'+value['NonAcadRecDetails']+'</span>'
+            }});
+		});
+
+// membership
+$('#tblMembership').bootstrapTable('removeAll');
+        $.each(response[8],function( key, value )
+		{
+			$('#tblMembership').bootstrapTable('insertRow', {index: 1, row: {    MemAssOrgDesc: '<span class="MemAssOrgDesc">'+value['MemAssOrgDesc']+'</span>'
+            }});
+		});
+
+
+// reference
+$('#tblReference').bootstrapTable('removeAll');
+        $.each(response[9],function( key, value )
+		{
+			referencenNumber++;
+			$('#tblReference').bootstrapTable('insertRow', {index: 1, row: {   referencenNumber: '<span class="referencenNumber">'+referencenNumber+'</span>',
+                RefLName: '<span class="RefLName">'+value['RefLName']+'</span>',
+                RefFName: '<span class="RefFName">'+value['RefFName']+'</span>',
+                RefMName: '<span class="RefMName">'+value['RefMName']+'</span>',
+                RefExtName: '<span class="RefExtName">'+value['RefExtName']+'</span>',
+                RefAddSt: '<span class="RefAddSt">'+value['RefAddSt']+'</span>',
+                RefAddBrgy: '<span class="RefAddBrgy">'+value['RefAddBrgy']+'</span>',
+                RefAddMun: '<span class="RefAddMun">'+value['RefAddMun']+'</span>',
+                RefAddProv: '<span class="RefAddProv">'+value['RefAddProv']+'</span>',
+                RefZipCode: '<span class="RefZipCode">'+value['RefZipCode']+'</span>',
+                RefTel: '<span class="RefTel">'+value['RefTel']+'</span>'
+            }});
+		});
+
+$('.ans').val('');
+$('.noAns').prop('checked', true);
+
+ $.each(response[10],function( key, value )
+		{
+			if (value['QuesID']=='Q361')
+			{
+				if (value['AnsIsYes']=='1')
+				{
+					$('#Q361').prop('checked', true);
+					$('#A361').val(value['AnsDetails']);
+				}
+			}
+			if (value['QuesID']=='Q362')
+			{
+				if (value['AnsIsYes']=='1')
+				{
+					$('#Q362').prop('checked', true);
+					$('#A362').val(value['AnsDetails']);
+				}
+			}
+			if (value['QuesID']=='Q371')
+			{
+				if (value['AnsIsYes']=='1')
+				{
+					$('#Q371').prop('checked', true);
+					$('#A371').val(value['AnsDetails']);
+				}
+			}
+			if (value['QuesID']=='Q372')
+			{
+				if (value['AnsIsYes']=='1')
+				{
+					$('#Q372').prop('checked', true);
+					$('#A372').val(value['AnsDetails']);
+				}
+			}
+			if (value['QuesID']=='Q380')
+			{
+				if (value['AnsIsYes']=='1')
+				{
+					$('#Q380').prop('checked', true);
+					$('#A380').val(value['AnsDetails']);
+				}
+			}
+			if (value['QuesID']=='Q390')
+			{
+				if (value['AnsIsYes']=='1')
+				{
+					$('#Q390').prop('checked', true);
+					$('#A390').val(value['AnsDetails']);
+				}
+			}
+			if (value['QuesID']=='Q400')
+			{
+				if (value['AnsIsYes']=='1')
+				{
+					$('#Q400').prop('checked', true);
+					$('#A400').val(value['AnsDetails']);
+				}
+			}
+			if (value['QuesID']=='Q411')
+			{
+				if (value['AnsIsYes']=='1')
+				{
+					$('#Q411').prop('checked', true);
+					$('#A411').val(value['AnsDetails']);
+				}
+			}
+			if (value['QuesID']=='Q412')
+			{
+				if (value['AnsIsYes']=='1')
+				{
+					$('#Q412').prop('checked', true);
+					$('#A412').val(value['AnsDetails']);
+				}
+			}
+			if (value['QuesID']=='Q413')
+			{
+				if (value['AnsIsYes']=='1')
+				{
+					$('#Q413').prop('checked', true);
+					$('#A413').val(value['AnsDetails']);
+				}
+			}
+		});
+
+
+
+
+        },
+        error:function (xhr, ajaxOptions, thrownError)
+        {
+            $.growl.error({ message: thrownError });
+        }
+        });
+
+
+
+ $.unblockUI();
+
 
 
 }
