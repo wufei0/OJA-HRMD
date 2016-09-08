@@ -10,7 +10,7 @@ echo '<ul class="nav navbar-nav pull-right">
 					<ul class="dropdown-menu">
 						<li class="dropdown-header"></li>
 						<li><a href="pds.php">Update PDS</a></li>
-						<li><a href="pds.php">Print PDS</a></li>
+						<li><a href="lib\pdf\pds.php">Print PDS</a></li>
 					</ul>
 				</li>
 				<li><a href="apply.php">Apply Job</a></li>

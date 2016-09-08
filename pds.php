@@ -164,8 +164,9 @@
 												<select id="EmpCivilStatus" class="selectpicker form-control" required>
 												  <option value="SINGLE" required>SINGLE</option>
 	                                              <option value="MARROED" required>MARRIED</option>
-	                                              <option value="DIVORCED" required>DIVORCED</option>
+	                                              <option value="ANNULED" required>ANNULED</option>
 	                                               <option value="WIDOWED" required>WIDOWED</option>
+	                                                <option value="SEPARATED" required>SEPARATED</option>
 												</select>
 											</div>
 											<div class="col-sm-2 form-group">
@@ -2053,7 +2054,7 @@ function save() {
 	$('input,select', $('#personalinfos')).each(function(i, o) { // loop within Family Background
 		if (o.nodeName == 'INPUT') 
 		{
-			console.log(o.id);
+			// console.log(o.id);
 			if ((o.dataset['ignore'] == undefined) ) 
 			{ // skip input elem with ignore dataset
 				if (o.type == 'checkbox') return; // skip select btSelectAll checkbox
@@ -2120,7 +2121,7 @@ if ($.isEmptyObject( data )) return;
 
 function saveFamB()
 {
-	$('#familyBackground').removeClass();
+$('#familyBackground').removeClass();
 $('#educBackground').addClass('active');
 	var data = '{';
 	// collect one to one properties
@@ -2616,8 +2617,10 @@ $.blockUI();
         	$('#EmpHeight').val(response['EmpHeight']);
         	$('#EmpWeight').val(response['EmpWeight']);
         	$('#EmpBloodType').val(response['EmpBloodType']);
-
-
+        	$('#EmpSex').val(response['EmpSex']);
+        	$('#EmpSex').selectpicker('refresh');
+        	$('#EmpCivilStatus').val(response['EmpCivilStatus']);
+        	$('#EmpCivilStatus').selectpicker('refresh');
 
 			$("#EmpResAddProv option").filter(function(){
 			    return $.trim($(this).text()) ==  response['EmpResAddProv'];

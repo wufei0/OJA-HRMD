@@ -84,12 +84,14 @@
 					<div class="col-md-4">
 						<div id="imaginary_container"> 
 							<div class="input-group stylish-input-group">
+							<!-- <form> -->
 								<input id="txtSearch" type="text" class="form-control"  placeholder="Search" >
 								<span class="input-group-addon">
 									<button id="searchJob" type="submit">
 										<span class="glyphicon glyphicon-search"></span>
 									</button>
 								</span>
+								<!-- </form> -->
 							</div>
 <!-- data-height="420" -->
 							<div id="tableList" class="table">
@@ -167,9 +169,9 @@
 												<thead>
 													<tr>
 														<th  data-visible="true" data-checkbox="true"></th>
-														<th data-field="qualificationPk" data-visible="true" >qualificationPk</th>
+														<th data-field="qualificationPk" data-visible="false" >qualificationPk</th>
 														
-														<th data-field="Qualifications"  >Qualification</th>
+														<th data-field="description"  >Qualification</th>
 													</tr>
 												</thead>
 											</table>
@@ -182,7 +184,7 @@
 
 													<button id="DelQualification" class="pull-right btn btn-danger" style="margin-top: 6px;">Del</button>
 													<button id="AddQualification" class="pull-right btn btn-primary" style="margin-top: 6px; margin-right: 4px;">Add</button>
-													<input id="#" class="form-control pull-right" style="width:60%; margin-top: 6px; margin-right:4px;" data-format="add" type="type" required />
+													<input id="jobrequirement-description" class="form-control pull-right" data-ignore=1 style="width:60%; margin-top: 6px; margin-right:4px;" data-format="add" type="type" required />
 												</div>
 											</div>
 										</div>
@@ -198,8 +200,8 @@
 												<thead>
 													<tr>
 														<th  data-visible="true" data-checkbox="true"></th>
-														<th data-field="jobdescriptionPk" data-visible="true">jobdescriptionPk</th>
-														<th data-field="Description"  >Job Description</th>
+														<th data-field="jobdescriptionPk" data-visible="false">jobdescriptionPk</th>
+														<th data-field="description"  >Job Description</th>
 													</tr>
 												</thead>
 											</table>
@@ -211,7 +213,7 @@
 												<div class="col-md-6">
 													<button id="DelJobDesc" class="pull-right btn btn-danger" style="margin-top: 6px;">Del</button>
 													<button id="AddjobDesc" class="pull-right btn btn-primary" style="margin-top: 6px; margin-right: 4px;">Add</button>
-													<input id="#" class="form-control pull-right" style="width:60%; margin-top: 6px; margin-right:4px;" data-format="add" type="type" required />
+													<input id="jobresponsibility-description" class="form-control pull-right" data-ignore=1 style="width:60%; margin-top: 6px; margin-right:4px;" data-format="add" type="type" required />
 												</div>
 											</div>
 										</div>
@@ -221,9 +223,9 @@
 							</div>
 
 					</div>
-						<button id="#" class="pull-right btn btn-danger" style="margin-right: 4px; width: 60px;">Delete</button>
-						<button id="#" class="pull-right btn btn-primary" style="margin-right: 4px; width: 60px;">Save</button>
-						<button id="#" class="pull-right btn btn-primary" style="margin-right: 4px; width: 60px;">New</button>
+						<button id="btnDelete" class="pull-right btn btn-danger" style="margin-right: 4px; width: 60px;">Delete</button>
+						<button id="btnSave" class="pull-right btn btn-primary" style="margin-right: 4px; width: 60px;">Save</button>
+						<button id="btnNew" class="pull-right btn btn-primary" style="margin-right: 4px; width: 60px;">New</button>
 				</div>
 			</div>
 		</div>
@@ -265,12 +267,14 @@
 
 $(document).ready(function(){
 	$('#feedbackDiv').feedBackBox();
-	clickSearch();
+	$('#searchJob').trigger("click");
 });
 
+$('#searchJob').click(function(){
 
-function clickSearch()
-{
+
+// function clickSearch()
+// {
 	var mod="joblist";
 	var strSearch = $('#txtSearch').val();
 	jQuery.ajax({
@@ -292,12 +296,12 @@ function clickSearch()
 		$.unblockUI();
 	}
 	});
-}
+});
 
 $('#jobList').on('click-row.bs.table', function (e, row, $element) {
 
 		$.blockUI();
-		// $('#txtId').val(row['jobApplivationNo']);
+		$('#txtId').val(row['jobApplivationNo']);
 		$('#txtPosition').val(row['position']);
 		$('#txtItem').val(row['itemNo']);
 		$('#txtSalaryGrade').val(row['salaryGrade']);
@@ -307,25 +311,17 @@ $('#jobList').on('click-row.bs.table', function (e, row, $element) {
 		$('#selDepartment').selectpicker('val',row['department_pk']);
 		$('#selDepartment').selectpicker('refresh');
 		$('#txtId').val(row['jobApplivationNo']);
+
 		$('#lstRequirement').bootstrapTable('removeAll');
-		// var counter =1;
- 		$.each(row['qualification'],function( key, value )
+	$.each(row['qualification'],function( key, value )
 		{
-			// $('#txtQualification').append(value['jobRequire']);
-			$('#lstRequirement').bootstrapTable('insertRow', {index: 1, row: {  qualificationPk:value['requirementPk'],Qualifications:value['requirementDesc'] } });
-			// alert(value['requirementPk']);
-			// counter++;
-			// $table.bootstrapTable('insertRow', {index: , row: row});
+			$('#lstRequirement').bootstrapTable('insertRow', {index: 1, row: {  qualificationPk:value['requirementPk'],description:'<span class="jobrequirement-description">'+value['requirementDesc']+'</span>' } });
 		});
+
 		$('#lstJobDescription').bootstrapTable('removeAll');
-		// counter=1;
  		$.each(row['responsibility'],function( key, value )
 		{
-			// $('#txtQualification').append(value['jobRequire']);
-			$('#lstJobDescription').bootstrapTable('insertRow', {index: 1, row: {  jobdescriptionPk:value['responsibilityPk'], Description:value['responsibilityDesc'] } });
-			// counter++;
-			// alert(value);
-			// $table.bootstrapTable('insertRow', {index: , row: row});
+			$('#lstJobDescription').bootstrapTable('insertRow', {index: 1, row: {  jobdescriptionPk:value['responsibilityPk'], description:'<span class="jobresponsibility-description">'+value['responsibilityDesc']+'</span>' } });
 		});
 
 		$.unblockUI();
@@ -348,19 +344,37 @@ $('#jobList').on('click-row.bs.table', function (e, row, $element) {
 
 
 
+//ADD SKILL
+	$('#AddQualification').click(function(e){
+		$.blockUI();
+		e.preventDefault();
+		// console.log($('#EducLvlID').val());
+		if ($('#jobrequirement-description').val()=='') 
+		{
+			$.growl.error({ message: "Fill up all Details." });
+			$.unblockUI();
+			return;
+		}
+		var rows = [];
+	  	rows.push({
+                description: '<span class="jobrequirement-description">'+$('#jobrequirement-description').val()+'</span>'
+            });
+		$('#lstRequirement').bootstrapTable('append', rows);
+		$('#lstRequirement').bootstrapTable('scrollTo', 'bottom');
+		$('#jobrequirement-description').val('');
+		$.unblockUI();
+	});
 
- // var $table = $('#lstRequirement'),
- //        $button = $('#button');
     $(function () {
 
         $('#DelQualification').click(function () {
             var ids = $.map($('#lstRequirement').bootstrapTable('getSelections'), function (row) {
             	// alert(row.Qualifications);
-                return row.Qualifications;
+                return row.description;
             });
             // alert($('#lstRequirement').bootstrapTable('getSelections'));
             $('#lstRequirement').bootstrapTable('remove', {
-                field: 'Qualifications',
+                field: 'description',
                 values: ids
             });
         });
@@ -368,7 +382,232 @@ $('#jobList').on('click-row.bs.table', function (e, row, $element) {
 
 
 
+//ADD job desc
+	$('#AddjobDesc').click(function(e){
+		$.blockUI();
+		e.preventDefault();
+		// console.log($('#EducLvlID').val());
+		if ($('#jobresponsibility-description').val()=='') 
+		{
+			$.growl.error({ message: "Fill up all Details." });
+			$.unblockUI();
+			return;
+		}
+		var rows = [];
+	  	rows.push({
+                description: '<span class="jobresponsibility-description">'+$('#jobresponsibility-description').val()+'</span>'
+            });
+		$('#lstJobDescription').bootstrapTable('append', rows);
+		$('#lstJobDescription').bootstrapTable('scrollTo', 'bottom');
+		$('#jobresponsibility-description').val('');
+		$.unblockUI();
+	});
 
+    $(function () {
+
+        $('#DelJobDesc').click(function () {
+            var ids = $.map($('#lstJobDescription').bootstrapTable('getSelections'), function (row) {
+            	// alert(row.Qualifications);
+                return row.description;
+            });
+            // alert($('#lstRequirement').bootstrapTable('getSelections'));
+            $('#lstJobDescription').bootstrapTable('remove', {
+                field: 'description',
+                values: ids
+            });
+        });
+    });
+
+//NEW BUTTON
+$('#btnNew').click(function (){
+
+	$('input', $('#jobMain')).each(function(i, o) { // loop within Family Background
+		if (o.nodeName == 'INPUT') 
+		{
+			// console.log(o.id);
+			// if ((o.dataset['ignore'] == undefined) ) 
+			// { // skip input elem with ignore dataset
+				if (o.type == 'input') return; // skip select btSelectAll checkbox
+				o.value = '';
+		}
+		// }
+	
+	});
+	$('#lstJobDescription').bootstrapTable('removeAll');
+	$('#lstRequirement').bootstrapTable('removeAll');
+
+});
+
+//SAVE BUTTON
+$('#btnSave').click(function (){
+var data = '{';
+	// collect one to one properties
+	$('input, select', $('#jobMain')).each(function(i, o) { // loop within Family Background
+		if (o.nodeName == 'INPUT') 
+		{
+			if ((o.dataset['ignore'] == undefined) ) 
+			{ // skip input elem with ignore dat
+				if (o.type == 'checkbox') return; // skip select btSelectAll checkbox
+				data += '"'+o.id+'": "' + o.value + '",';
+			}
+
+		}
+		else if (o.nodeName == 'SELECT')
+		{
+			data += '"'+o.id+'":"' + o.value + '",';
+		}
+
+	});	
+	// collect many to one properties
+	if ($($('#lstRequirement tbody tr')[0]).hasClass('no-records-found')) {
+		// data = data.substring(0,data.length-1);
+	} else {
+		data += '"jobRequirement": [';
+		$('#lstRequirement tbody tr').each(function(i, o) {
+
+			data += '{';
+			$('span', $(o)).each(function(i, o) {
+				data += '"'+o.className+'":"'+o.innerHTML+'",';
+			});
+			data = data.substring(0,data.length-1);
+			data += '},';
+		});
+		data = data.substring(0,data.length-1);
+		data += '],'
+	}
+
+	if ($($('#lstJobDescription tbody tr')[0]).hasClass('no-records-found')) {
+		data = data.substring(0,data.length-1);
+	} else {
+		data += '"jobDescription": [';
+		$('#lstJobDescription tbody tr').each(function(i, o) {
+
+			data += '{';
+			$('span', $(o)).each(function(i, o) {
+				data += '"'+o.className+'":"'+o.innerHTML+'",';
+			});
+			data = data.substring(0,data.length-1);
+			data += '},';
+		});
+		data = data.substring(0,data.length-1);
+		data += ']'
+	}
+
+
+
+
+	data += '}';
+	data = JSON.parse(data);
+	console.log(data);
+	if (!checkRequirement())
+	{
+		return;
+	}
+	var moduleName;
+	if ($('#txtId').val()=='')
+	{
+		moduleName = 'newPosition';
+	}
+	else
+	{
+		moduleName = 'updatePosition';
+	}
+   $.blockUI();
+    jQuery.ajax({
+        type: "POST",
+        url:"lib/postData/position.php",
+        dataType:'json',
+        data:{module:moduleName,jsonData:data},
+        success:function(response)
+        {
+			if  (response['message']=='Successful')
+        	{
+        		$.growl.notice({ message: response['message'] });
+        	}
+        	else
+        	{
+        		$.growl.error({ message: response['message'] });
+        	}
+        },
+        error:function (xhr, ajaxOptions, thrownError)
+        {
+            $.growl.error({ message: thrownError });
+        }
+        });
+ $.unblockUI();
+});
+
+
+$('#btnDelete').click(function(){
+
+	if ($('#txtId').val()=='')	
+	{
+		$.growl.warning({ message: "Select Position to Delete." });
+		return;
+	}
+
+var moduleName='deletePosition';
+$.blockUI();
+    jQuery.ajax({
+        type: "POST",
+        url:"lib/postData/position.php",
+        dataType:'json',
+        data:{module:moduleName,data:$('#txtId').val()},
+        success:function(response)
+        {
+			if  (response['message']=='Successful')
+        	{
+        		$.growl.notice({ message: response['message'] });
+        	}
+        	else
+        	{
+        		$.growl.error({ message: response['message'] });
+        	}
+        },
+        error:function (xhr, ajaxOptions, thrownError)
+        {
+            $.growl.error({ message: thrownError });
+        }
+        });
+ $.unblockUI();
+
+});
+
+
+function checkRequirement()
+{
+	var returnValue;
+	returnValue=true;
+	if ($('#txtItem').val()=='')
+	{
+		returnValue=false;
+	}
+	if ($('#txtPosition').val()=='')
+	{
+		returnValue=false;
+	}
+	if ($('#txtDatePost').val()=='')
+	{
+		returnValue=false;
+	}
+	if ($('#txtDateExpire').val()=='')
+	{
+		returnValue=false;
+	}
+		if ($('#txtSalaryGrade').val()=='')
+	{
+		returnValue=false;
+	}
+
+	if (returnValue==false)
+	{
+		$.growl.warning({ message: 'Input all required fields.' });
+		return false;
+	}
+
+	return true;
+
+}
 </script>
 
 
@@ -376,6 +615,12 @@ $('#jobList').on('click-row.bs.table', function (e, row, $element) {
 
 </body>
 </html>
+
+
+
+
+
+
 
 
 <?php
