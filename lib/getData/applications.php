@@ -1,6 +1,6 @@
 <?php
 
-
+ 
 if (session_status() == PHP_SESSION_NONE) 
 {
 	session_start();
@@ -17,8 +17,8 @@ include("../../essential/connection.php");
 
 switch ($_POST['module']) 
 {
-	case 'showApplications':
-		showApplications();
+	case 'loadMyApplications':
+		loadMyApplications();
 		break;
 
 	default:
@@ -29,7 +29,7 @@ switch ($_POST['module'])
 }
 
 
-function showApplications()
+function loadMyApplications()
 {
 	global $DB_HOST, $DB_USER,$DB_PASS, $DB_SCHEMA;
 	$con = new mysqli($DB_HOST,$DB_USER,$DB_PASS,$DB_SCHEMA);

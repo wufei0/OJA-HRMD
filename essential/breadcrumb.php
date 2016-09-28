@@ -128,6 +128,31 @@ function BmaintenancePosition()
 			</ol>';
 }
 
+function BmaintenanceApplication()
+{
+	echo 	'<ol class="breadcrumb">
+				<li><a href="home.php" onclick="renderBreadcrumb(\'Home\')" >Home</a></li>
+				<li><a href="#">Maintenance</a></li>
+				<li class="active">Applications</li>
+			  	<font class="text-right" style="float:right; font-size:11px; color:#000;">';
+  	linkToLogin();
+	echo 	'</font>
+				  <div class="tclear"></div>
+			</ol>';
+}
+
+function BreportListOfOpenPosition()
+{
+	echo 	'<ol class="breadcrumb">
+				<li><a href="home.php" onclick="renderBreadcrumb(\'Home\')" >Home</a></li>
+				<li><a href="#">Report</a></li>
+				<li class="active">List of Open Position</li>
+			  	<font class="text-right" style="float:right; font-size:11px; color:#000;">';
+  	linkToLogin();
+	echo 	'</font>
+				  <div class="tclear"></div>
+			</ol>';
+}
 
 // // what:	Renders Home breadcrumb
 // // return: 	Echo breadcrumb for Home

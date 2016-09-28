@@ -16,7 +16,6 @@
 
     <!-- Latest compiled and minified CSS -->
 	<link href="css/bootstrap.css" rel="stylesheet"/>
-	
 	<link rel="stylesheet" type="text/css" href="css/bootstrap-select.css" />
 	<link rel="stylesheet" type="text/css" href="css/jquery.growl.css" />
 	<link rel="stylesheet" type="text/css" href="css/bootstrap-table.min.css" />
@@ -537,7 +536,7 @@ var data = '{';
  $.unblockUI();
 });
 
-
+//DELETE POSITION
 $('#btnDelete').click(function(){
 
 	if ($('#txtId').val()=='')	
@@ -546,22 +545,30 @@ $('#btnDelete').click(function(){
 		return;
 	}
 
+	if(!confirm("Delete Position?"))
+	{
+		// alert("delete cancelled.");
+		return;
+	}
+
+
 var moduleName='deletePosition';
 $.blockUI();
     jQuery.ajax({
         type: "POST",
         url:"lib/postData/position.php",
-        dataType:'json',
+        dataType:'text',
         data:{module:moduleName,data:$('#txtId').val()},
         success:function(response)
         {
-			if  (response['message']=='Successful')
+			if  (response =='Successful')
         	{
-        		$.growl.notice({ message: response['message'] });
+        		$.growl.notice({ message: "Delete Success" });
+        		$('#btnNew').trigger("click");
         	}
         	else
         	{
-        		$.growl.error({ message: response['message'] });
+        		$.growl.error({ message: response });
         	}
         },
         error:function (xhr, ajaxOptions, thrownError)

@@ -240,7 +240,10 @@ function registerMe()
 		$salt = uniqid('', true);
 		$hash = sha1($pass . $salt);
 		$activateurl=md5(uniqid('', true));
-		$stmt->bind_param("sssssss", $_POST['emailAdd'], $_POST['fname'], $_POST['lname'], $hash, $_POST['mobileNo'], $salt,$activateurl);
+		$fname=strtoupper($_POST['fname']);
+		$lname=strtoupper($_POST['lname']);
+
+		$stmt->bind_param("sssssss", $_POST['emailAdd'], $fname, $lname, $hash, $_POST['mobileNo'], $salt,$activateurl);
 		if($stmt->execute())
 		{
 			echo true;
@@ -262,7 +265,7 @@ function registerMe()
 			}
 			else
 			{
-				$sql="INSERT INTO emppersonalinfo(EmpID,EmpLName,EmpFName,EmpEMail,EmpMobile) VALUES ('".$_POST['emailAdd']."','".$_POST['lname']."','".$_POST['fname']."','".$_POST['emailAdd']."','".$_POST['mobileNo']."')";
+				$sql="INSERT INTO emppersonalinfo(EmpID,EmpLName,EmpFName,EmpEMail,EmpMobile) VALUES ('".$_POST['emailAdd']."','".$lname."','".$fname."','".$_POST['emailAdd']."','".$_POST['mobileNo']."')";
 				// echo $sql;
 
 				$con->query($sql);
@@ -316,7 +319,7 @@ function emailTable($accountName,$activateLink)
 		border-right: 1px solid #e6e5e3;
 		border-top: none;
 		padding: 10px 30px 5px;
-		color: #333;"><p>To complete your Online Registration, please click on the link below:</p></td>
+		color: #333;"><p>Good day. We had processed your application. We are scheduled your interview and exam on</p></td>
 		</tr>
 		<tr>
 			<td style="border-left: 1px solid #e6e5e3;

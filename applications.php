@@ -162,7 +162,7 @@ $(document).ready(function(){
 function loadMyApplications()
 {
 	$.blockUI();
-	var mod="showApplications";
+	var mod="loadMyApplications";
 	jQuery.ajax({
 	type: "POST",
 	url:"lib/getData/applications.php",

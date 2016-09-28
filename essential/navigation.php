@@ -6,14 +6,15 @@ echo '<ul class="nav navbar-nav pull-right">
 		<li class="dropdown">
 			<a href="#" class="dropdown-toggle" data-toggle="dropdown">Application <b class="caret"></b></a>
 			<ul class="dropdown-menu">
-				<li class="dropdown-submenu"><a data-target="#">Personal Data Sheet</a>
-					<ul class="dropdown-menu">
-						<li class="dropdown-header"></li>
+				<li class="dropdown-header">Personal Data Sheet</li>
+					
+						
 						<li><a href="pds.php">Update PDS</a></li>
-						<li><a href="lib\pdf\pds.php">Print PDS</a></li>
-					</ul>
-				</li>
-				<li><a href="apply.php">Apply Job</a></li>
+						<li><a href="lib\pdf\pds.php" target="_blank">Print PDS</a></li>
+					
+				<li class="divider"></li>
+				<li class="dropdown-header">Application </li>
+				<li><a href="apply.php">Job Openings</a></li>
 				<li><a href="applications.php">My Application</a></li>
 				<!-- <li class="divider"></li>
 				<li class="dropdown-header">Portfolio</li>
@@ -22,13 +23,21 @@ echo '<ul class="nav navbar-nav pull-right">
 			</ul>
 		</li>
 
-		<li><a href="#">Reports</a></li>
+		<li class="dropdown">
+			<a href="#" class="dropdown-toggle" data-toggle="dropdown">Reports <b class="caret"></b></a>
+			<ul class="dropdown-menu">
+				<li class="dropdown-header">Applications</li>
+				<li class=""><a href="rptListofOpenPosition.php">List of Open Position</a></li>
+			</ul>
+
+		</li>
+
 		<li class="dropdown">
 			<a href="#" class="dropdown-toggle" data-toggle="dropdown">Maintenance <b class="caret"></b></a>
 			<ul class="dropdown-menu">
 				<li class="dropdown-header">Job</li>
 				<li><a href="position.php">Position</a></li>
-				<li><a href="applications.php">Applications</a></li>
+				<li><a href="applicationlist.php">Applications</a></li>
 				<li class="divider"></li>
 				<li class="dropdown-header">Portfolio</li>
 				<li><a href="#">Portfolio 1</a></li>

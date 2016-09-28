@@ -256,5 +256,39 @@ if ($transaction)
 
 function deletePosition()
 {
-	
+	global $DB_HOST, $DB_USER,$DB_PASS, $DB_SCHEMA;
+	$con=mysqli_connect($DB_HOST,$DB_USER,$DB_PASS,$DB_SCHEMA);
+	// mysqli_autocommit($con, FALSE);
+	$transaction=true;
+	$errMsg="";
+	$sql="DELETE FROM jobopening WHERE `jobopening_pk`=?";
+
+	$stmt = mysqli_prepare($con,$sql);
+	if ( !$stmt ) 
+	{
+		$transaction=false;
+	  	$errMsg='mysqli error: '.mysqli_error($con);
+	}
+	mysqli_stmt_bind_param($stmt, "s", $_POST['data']);
+
+		if ( !mysqli_execute($stmt) )
+		{
+			$transaction=false;
+			$errMsg='stmt error: '.mysqli_stmt_error($stmt);
+		}
+
+	mysqli_stmt_close($stmt);
+
+	if($transaction)
+	{
+		echo "Successful";
+	}
+	else
+	{
+		echo $errMsg;
+	}
+
+	mysqli_close($con);
+
+
 }

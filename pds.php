@@ -474,7 +474,7 @@
 														<thead>
 															<tr>
 																<th  data-visible="true" data-checkbox="true"></th>
-																<th class="text-center col-sm-1 form-group" data-field="EducLvlID" data-visible="true" data-sortable="false">Level</th>
+																<th class="text-center col-sm-1 form-group" data-field="EducLvlID" data-visible="false" data-sortable="false">Level</th>
 																<th class="text-center col-sm-1 form-group" data-field="No" data-visible="false">No</th>
 																<th class="text-center col-sm-3 form-group" data-field="EducLevel" data-sortable="true">Level</th>
 																<th class="text-center col-sm-3 form-group" data-field="EducSchoolName" data-sortable="true">Name of School</th>
@@ -2153,6 +2153,7 @@ $('#educBackground').addClass('active');
 	data += '}';
 	data = JSON.parse(data);
 	console.log(data);
+	return;
 if ($.isEmptyObject( data )) return;
 $.blockUI();
 	var moduleName = 'updateFamBackground';

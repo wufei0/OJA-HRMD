@@ -311,13 +311,13 @@ $('#jobList').on('click-row.bs.table', function (e, row, $element) {
 		});
 		$('#btnApply').show();
 		// setTimeout($('.fixed-table-body').height($('#jobMain').height()-13),500);
-		$.unblockUI();
+		
 	},
 	error:function (xhr, ajaxOptions, thrownError){
 		$.growl.error({ message: thrownError });
 	}
 	});
-
+$.unblockUI();
 });
 
 </script>
