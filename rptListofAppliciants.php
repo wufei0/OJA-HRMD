@@ -66,7 +66,7 @@
 		<div id="div-breadcrumb" class="col-md-12">
 			<?php
 				require_once('essential/breadcrumb.php');
-				BreportListOfOpenPosition();
+				BreportListOfAppplicant();
 			?>
 		</div>
 		<!-- end breadcrumb -->
@@ -98,21 +98,28 @@
   				</form>
 
   				<div class="table" style="margin-top: 20px;">
-					<table id="tblPositionList"  data-toggle="table"  data-pagination="true"
-					class="display table table-bordered">
+					<table id="tblJobOpening"
+						data-toggle="table"
+						data-height="420"
+						data-sort-name="price"
+						data-sort-order="desc"
+	  					data-pagination="true"
+	  					style="width:1500px;">
 						<thead>
 							<tr>
-								<th data-field="jobApplivationNo" data-visible="false">JobAppId</th>
-								<th data-field="department" data-sortable="true">Departnemt</th>
-								<th data-field="itemNo" data-sortable="true">Item No</th>
-								<th data-field="position" data-sortable="true">Position</th>
-								<th data-field="salaryGrade" data-sortable="true">Salary Grade</th>
-								<th data-field="datePost" data-sortable="true">Date Posted</th>
-								<th data-field="qualification" data-sortable="true">Qualification</th>
+								<th  data-visible="true" data-checkbox="true"></th>
+								<th data-field="ApplicationNo" data-visible="true">Application No</th>
+								<th data-field="Applicant" data-sortable="true" data-sorter="true">Applicant</th>
+								<th data-field="position" data-sortable="true" data-sorter="true">Position</th>
+								<th data-field="itemNo" data-sortable="true" data-sorter="true">Item No</th>
+								<th data-field="department" data-sortable="true" data-sorter="true">Department</th>
+								<th data-width="120" data-field="dateApply" data-sortable="true" data-sorter="true">Date Applied</th>
+								<th data-field="remark" data-sortable="true" data-sorter="true">Remark</th>
+								<th  data-field="dateUpdated" data-sortable="true" data-sorter="true">Date Updated</th>
 							</tr>
 						</thead>
 					</table>
-					<button id="btnPrint" type="button" class="btn btn-primary pull-right" style="margin-top:10px;">
+					<button type="button" class="btn btn-primary pull-right" style="margin-top:10px;">
 				      <span class="glyphicon glyphicon-print"></span> Print
 				    </button>
 					<div class="tclear"></div>
@@ -139,68 +146,52 @@
 <script type="text/javascript">
 
 
-$(document).ready(function(){
-	$('#feedbackDiv').feedBackBox();
-	loadOpenPosition();
+// $(document).ready(function(){
+// 	$('#feedbackDiv').feedBackBox();
+// 	loadApplications();
 
-});
+// });
 
 
-function loadOpenPosition()
-{
-	$.blockUI();
-	var mod="jobOpeningList";
-	var department;
-	if ($('#selDepartment').val()=='%') 
-	{
-		department='%';
-	}
-	else
-	{
-		department=$('#selDepartment').val();
-	}
+// function loadApplications()
+// {
+// 	$.blockUI();
+// 	var mod="jobOpeningList";
+// 	var department;
+// 	if ($('#selDepartment').val('All')) 
+// 	{
+// 		department='All';
+// 	}
+// 	else
+// 	{
+// 		department=$('#selDepartment').val();
+// 	}
 
-console.log(department);
+// console.log(department);
 
-	jQuery.ajax({
-	type: "POST",
-	url:"lib/getData/rptListofOpenPosition.php",
-	dataType:"json", // Data type, HTML, json etc.
-	data:{module:mod,department:department},
-	beforeSend: function() {
+// 	jQuery.ajax({
+// 	type: "POST",
+// 	url:"lib/getData/rptListofOpenPosition.php",
+// 	dataType:"json", // Data type, HTML, json etc.
+// 	data:{module:mod,department:department},
+// 	beforeSend: function() {
 
-		$('#tblPositionList').bootstrapTable("showLoading");
-	},
-	success:function(response){
-		$('#tblPositionList').bootstrapTable("hideLoading");
-		$('#tblPositionList').bootstrapTable("load",response);
+// 		$('#tblJobOpening').bootstrapTable("showLoading");
+// 	},
+// 	success:function(response){
+// 		$('#tblJobOpening').bootstrapTable("hideLoading");
+// 		$('#tblJobOpening').bootstrapTable("load",response);
 
-		$.unblockUI();
-	},
-	error:function (xhr, ajaxOptions, thrownError){
-		$.growl.error({ message: thrownError });
-		$.unblockUI();
-	}
-	});
-}
+// 		$.unblockUI();
+// 	},
+// 	error:function (xhr, ajaxOptions, thrownError){
+// 		$.growl.error({ message: thrownError });
+// 		$.unblockUI();
+// 	}
+// 	});
+// }
 
-$('#selDepartment').change(function (e){
-	loadOpenPosition();
-});
 
-$('#btnPrint').click(function (){
-
-var win = window.open('lib/pdf/rptListofOpenPosition.php?department='+$('#selDepartment').val(), '_blank');
-	if (win) 
-	{
-	    //Browser has allowed it to be opened
-	    win.focus();
-	} else {
-	    //Browser has blocked it
-	   $.growl.error({ message: "Please allows popups on this site" });
-	}
-}
-);
 
 
 
@@ -223,7 +214,7 @@ function LoadDepartmentList()
 	{
 		echo "<option value='".$result['department_pk']."' >".$result['description']."</option>";
 	}
-	echo "<option value='%' selected>Select All</option>";
+	echo "<option value='ALL' selected>Select All</option>";
 	$query->close();
 	$con->close();
 }

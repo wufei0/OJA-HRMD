@@ -33,7 +33,7 @@ $pdf->useTemplate($tplIdx, null, null, 0, 0, true);
 // now write some text above the imported page
 $fontUsed='Helvetica';
 $pdf->SetFont($fontUsed);
-$pdf->SetTextColor(200, 0, 0);
+$pdf->SetTextColor(0, 0, 0);
 $pdf->SetFontSize(12);
 
 //LASTNAME
@@ -107,49 +107,94 @@ $pdf->SetFontSize(10);
 	$pdf->SetXY(130, 61);	
 	if(strlen($employeeInfo['EmpResAddBrgy'].", ".$employeeInfo['EmpResAddMun'].", ".$employeeInfo['EmpResAddProv'])>51)
 	{
-		$pdf->SetFontSize(10);
+		$pdf->SetFontSize(8);
 		$pdf->SetXY(130, 61);
 	}
 	//$pdf->MultiCell(83.5, 3, $employeeInfo['EmpResAddBrgy'].", ".$employeeInfo['EmpResAddMun'].", ".$employeeInfo['EmpResAddProv'],0,'L');
-	$pdf->MultiCell(83.5, 3, $employeeInfo['EmpResAddBrgy'].", ".$employeeInfo['EmpResAddMun'].", ".$employeeInfo['EmpResAddProv'],0,'L');
+	$pdf->MultiCell(83.5, 2.8, $employeeInfo['EmpResAddBrgy'].", ".$employeeInfo['EmpResAddMun'].", ".$employeeInfo['EmpResAddProv'],0,'L');
 	
 	if(strlen($employeeInfo['EmpResAddBrgy'].", ".$employeeInfo['EmpResAddMun'].", ".$employeeInfo['EmpResAddProv'])>51) $pdf->SetFontSize(10);
 
 //RESIDENTIAL ZIPCODE
 	$pdf->SetXY(130, 78.5);
-	$pdf->MultiCell(83.5, 3.5, $employeeInfo['EmpResZipCode'],0,'L');
+	if(strlen($employeeInfo['EmpResZipCode'])>34)
+	{
+		$pdf->SetFontSize(8);
+	}
+	$pdf->MultiCell(83.5, 2.8, $employeeInfo['EmpResZipCode'],0,'L');
+	$pdf->SetFontSize(10);
 
 //RESIDENTIAL TEL NO
 	$pdf->SetXY(130, 84);
-	$pdf->MultiCell(83.5, 3.5, $employeeInfo['EmpResTel'],0,'L');
+	if(strlen($employeeInfo['EmpResTel'])>34)
+	{
+		$pdf->SetFontSize(8);
+	}
+	$pdf->MultiCell(83.5, 2.8, $employeeInfo['EmpResTel'],0,'L');
+	$pdf->SetFontSize(10);
 
 //PERMANENT ADDRESS
-	$pdf->SetXY(130, 90);	
-	$pdf->MultiCell(83.5, 3, $employeeInfo['EmpPerAddBrgy'].", ".$employeeInfo['EmpPerAddMun'].", ".$employeeInfo['EmpPerAddProv'],0,'L');
+	$pdf->SetXY(130, 90);
+	if(strlen($employeeInfo['EmpPerAddBrgy'].", ".$employeeInfo['EmpPerAddMun'].", ".$employeeInfo['EmpPerAddProv'])>51)
+	{
+		$pdf->SetFontSize(8);
+	}
+	$pdf->MultiCell(83.5, 2.8, $employeeInfo['EmpPerAddBrgy'].", ".$employeeInfo['EmpPerAddMun'].", ".$employeeInfo['EmpPerAddProv'],0,'L');
+	if(strlen($employeeInfo['EmpPerAddBrgy'].", ".$employeeInfo['EmpPerAddMun'].", ".$employeeInfo['EmpPerAddProv'])>51) $pdf->SetFontSize(10);
 
 //PERMANENT ZIPCODE
 	$pdf->SetXY(130, 107);
-	$pdf->MultiCell(83.5, 3.5, $employeeInfo['EmpResZipCode'],0,'L');
+	if(strlen($employeeInfo['EmpResZipCode'])>34)
+	{
+		$pdf->SetFontSize(8);
+	}
+	$pdf->MultiCell(83.5, 2.8, $employeeInfo['EmpResZipCode'],0,'L');
+	$pdf->SetFontSize(10);
 
 //PERMANENT TEL NO
 	$pdf->SetXY(130, 113);
-	$pdf->MultiCell(83.5, 3.5, $employeeInfo['EmpResTel'],0,'L');
+	if(strlen($employeeInfo['EmpResTel'])>34)
+	{
+		$pdf->SetFontSize(8);
+	}
+	$pdf->MultiCell(83.5, 2.8, $employeeInfo['EmpResTel'],0,'L');
+	$pdf->SetFontSize(10);
 
 //EMAIL
 	$pdf->SetXY(130, 124.5);
-	$pdf->MultiCell(83.5, 3.5, $employeeInfo['EmpEMail'],0,'L');
+	if(strlen($employeeInfo['EmpEMail'])>34)
+	{
+		$pdf->SetFontSize(8);
+	}
+	$pdf->MultiCell(83.5, 2.8, $employeeInfo['EmpEMail'],0,'L');
+	if(strlen($employeeInfo['EmpEMail'])>34) $pdf->SetFontSize(10);
 
 //CELLPHONE
 	$pdf->SetXY(130, 119);
-	$pdf->MultiCell(83.5, 3.5, $employeeInfo['EmpMobile'],0,'L');
+	if(strlen($employeeInfo['EmpMobile'])>34)
+	{
+		$pdf->SetFontSize(8);
+	}
+	$pdf->MultiCell(83.5, 2.8, $employeeInfo['EmpMobile'],0,'L');
+	$pdf->SetFontSize(10);
 
 //EMPLOYEE AGENCY NO
 	$pdf->SetXY(130, 130);
-	$pdf->MultiCell(83.5, 3.5, $employeeInfo['EmpAgencyNo'],0,'L');
+	if(strlen($employeeInfo['EmpAgencyNo'])>34)
+	{
+		$pdf->SetFontSize(8);
+	}
+	$pdf->MultiCell(83.5, 2.8, $employeeInfo['EmpAgencyNo'],0,'L');
+	$pdf->SetFontSize(10);
 
 //TIN NO
 	$pdf->SetXY(130, 136);
-	$pdf->MultiCell(83.5, 3.5, $employeeInfo['EmpTIN'],0,'L');
+	if(strlen($employeeInfo['EmpTIN'])>34)
+	{
+		$pdf->SetFontSize(8);
+	}
+	$pdf->MultiCell(83.5, 2.8, $employeeInfo['EmpTIN'],0,'L');
+	if(strlen($employeeInfo['EmpTIN'])>34) $pdf->SetFontSize(10);
 
 //GENDER
 	switch ($employeeInfo['EmpSex'])
@@ -189,87 +234,192 @@ $pdf->SetFont($fontUsed);
 
 //CITIZENSHIP
 	$pdf->SetXY(34, 96);
-	$pdf->MultiCell(60, 3, $employeeInfo['EmpCitizenship'],0,'L');
+	if(strlen($employeeInfo['EmpCitizenship'])>24)
+	{
+		$pdf->SetFontSize(8);
+	}
+	$pdf->MultiCell(60, 2.8, $employeeInfo['EmpCitizenship'],0,'L');
+	$pdf->SetFontSize(10);
 
 //HEIGHT
 	$pdf->SetXY(34, 102.5);
-	$pdf->MultiCell(60, 3, $employeeInfo['EmpHeight'],0,'L');
+	if(strlen($employeeInfo['EmpHeight'])>24)
+	{
+		$pdf->SetFontSize(8);
+	}
+	$pdf->MultiCell(60, 2.8, $employeeInfo['EmpHeight'],0,'L');
+	$pdf->SetFontSize(10);
 
 //WEIGHT
 	$pdf->SetXY(34, 108);
-	$pdf->MultiCell(60, 3, $employeeInfo['EmpWeight'],0,'L');
+	if(strlen($employeeInfo['EmpWeight'])>24)
+	{
+		$pdf->SetFontSize(8);
+	}
+	$pdf->MultiCell(60, 2.8, $employeeInfo['EmpWeight'],0,'L');
+	$pdf->SetFontSize(10);
 
 //BLOODTYPE
 	$pdf->SetXY(34, 113.5);
-	$pdf->MultiCell(60, 3, $employeeInfo['EmpBloodType'],0,'L');
+	if(strlen($employeeInfo['EmpBloodType'])>24)
+	{
+		$pdf->SetFontSize(8);
+	}
+	$pdf->MultiCell(60, 2.8, $employeeInfo['EmpBloodType'],0,'L');
+	$pdf->SetFontSize(10);
 
 //GSIS
 	$pdf->SetXY(34, 119.5);
-	$pdf->MultiCell(60, 3, $employeeInfo['EmpGSIS'],0,'L');
+	if(strlen($employeeInfo['EmpGSIS'])>24)
+	{
+		$pdf->SetFontSize(8);
+	}
+	$pdf->MultiCell(60, 2.8, $employeeInfo['EmpGSIS'],0,'L');
+	$pdf->SetFontSize(10);
 
 //PAGIBIG
 	$pdf->SetXY(34, 125.5);
-	$pdf->MultiCell(60, 3, $employeeInfo['EmpHDMF'],0,'L');
+	if(strlen($employeeInfo['EmpHDMF'])>24)
+	{
+		$pdf->SetFontSize(8);
+	}
+	$pdf->MultiCell(60, 2.8, $employeeInfo['EmpHDMF'],0,'L');
+	$pdf->SetFontSize(10);
 
 //PHILHEALTH
 	$pdf->SetXY(34, 131);
-	$pdf->MultiCell(60, 3, $employeeInfo['EmpPH'],0,'L');
+	if(strlen($employeeInfo['EmpPH'])>24)
+	{
+		$pdf->SetFontSize(8);
+	}
+	$pdf->MultiCell(60, 2.8, $employeeInfo['EmpPH'],0,'L');
+	$pdf->SetFontSize(10);
 
 //SSS
 	$pdf->SetXY(34, 136.5);
-	$pdf->MultiCell(60, 3, $employeeInfo['EmpSSS'],0,'L');
+	if(strlen($employeeInfo['EmpSSS'])>24)
+	{
+		$pdf->SetFontSize(8);
+	}
+	$pdf->MultiCell(60, 2.8, $employeeInfo['EmpSSS'],0,'L');
+	$pdf->SetFontSize(10);
 
 //SPS LASTNAME	
 	$pdf->SetXY(34, 148);
-	$pdf->MultiCell(80, 3, $employeeInfo['EmpSpsLName'],0,'L');	
+	if(strlen($employeeInfo['EmpSpsLName'])>33)
+	{
+		$pdf->SetFontSize(8);
+	}
+	$pdf->MultiCell(80, 2.8, $employeeInfo['EmpSpsLName'],0,'L');	
+	$pdf->SetFontSize(10);
 	
 //SPS MIDDLENAME	
 	$pdf->SetXY(34, 153.5);
-	$pdf->MultiCell(80, 3, $employeeInfo['EmpSpsMName'],0,'L');	
+	if(strlen($employeeInfo['EmpSpsMName'])>33)
+	{
+		$pdf->SetFontSize(8);
+	}
+	$pdf->MultiCell(80, 2.8, $employeeInfo['EmpSpsMName'],0,'L');	
+	$pdf->SetFontSize(10);
 	
 // SPS FIRSTNAME
 	$pdf->SetXY(34, 159.5);
-	$pdf->MultiCell(80, 3, $employeeInfo['EmpSpsFName'],0,'L');
+	if(strlen($employeeInfo['EmpSpsFName'])>33)
+	{
+		$pdf->SetFontSize(8);
+	}
+	$pdf->MultiCell(80, 2.8, $employeeInfo['EmpSpsFName'],0,'L');
+	$pdf->SetFontSize(10);
 
 // SPS OCCUPATION 
 	$pdf->SetXY(34, 165.5);
-	$pdf->MultiCell(80, 3, $employeeInfo['EmpSpsJob'],0,'L');
+	if(strlen($employeeInfo['EmpSpsJob'])>33)
+	{
+		$pdf->SetFontSize(8);
+	}
+	$pdf->MultiCell(80, 2.8, $employeeInfo['EmpSpsJob'],0,'L');
+	$pdf->SetFontSize(10);
 	
 // SPS BUSINESS NAME	
 	$pdf->SetXY(34, 171);
-	$pdf->MultiCell(80, 3, $employeeInfo['EmpSpsBusDesc'],0,'L');
+	if(strlen($employeeInfo['EmpSpsBusDesc'])>33)
+	{
+		$pdf->SetFontSize(8);
+	}
+	$pdf->MultiCell(80, 2.8, $employeeInfo['EmpSpsBusDesc'],0,'L');
+	$pdf->SetFontSize(10);
 	
 // SPS BUSINESS ADDRESS	
 	$pdf->SetXY(34, 176.5);
-	$pdf->MultiCell(80, 3, $employeeInfo['EmpSpsBusAddSt'],0,'L');
+	if(strlen($employeeInfo['EmpSpsBusAddSt'])>33)
+	{
+		$pdf->SetFontSize(8);
+	}
+	$pdf->MultiCell(80, 2.8, $employeeInfo['EmpSpsBusAddSt'],0,'L');
+	$pdf->SetFontSize(10);
 	
 // SPS BUSINESS TEL NO	
 	$pdf->SetXY(34, 182);
-	$pdf->MultiCell(80, 3, $employeeInfo['EmpSpsBusTel'],0,'L');
+	if(strlen($employeeInfo['EmpSpsBusTel'])>33)
+	{
+		$pdf->SetFontSize(8);
+	}
+	$pdf->MultiCell(80, 2.8, $employeeInfo['EmpSpsBusTel'],0,'L');
+	$pdf->SetFontSize(10);
 	
 // FATHER LASTNAME	
 	$pdf->SetXY(37.5, 194);
-	$pdf->MultiCell(76.5, 3, $employeeInfo['EmpFatherLName'],0,'L');
+	if(strlen($employeeInfo['EmpFatherLName'])>31)
+	{
+		$pdf->SetFontSize(8);
+	}
+	$pdf->MultiCell(76.5, 2.8, $employeeInfo['EmpFatherLName'],0,'L');
+	$pdf->SetFontSize(10);
 	
 // FATHER MIDDLENAME
 	$pdf->SetXY(37.5, 199.5);
-	$pdf->MultiCell(76.5, 3, $employeeInfo['EmpFatherFName'],0,'L');
+	if(strlen($employeeInfo['EmpFatherFName'])>31)
+	{
+		$pdf->SetFontSize(8);
+	}
+	$pdf->MultiCell(76.5, 2.8, $employeeInfo['EmpFatherFName'],0,'L');
+	$pdf->SetFontSize(10);
 	
 // FATHER FIRSTNAME
 	$pdf->SetXY(37.5, 205);
-	$pdf->MultiCell(76.5, 3, $employeeInfo['EmpFatherMName'],0,'L');
+	if(strlen($employeeInfo['EmpFatherMName'])>31)
+	{
+		$pdf->SetFontSize(8);
+	}
+	$pdf->MultiCell(76.5, 2.8, $employeeInfo['EmpFatherMName'],0,'L');
+	$pdf->SetFontSize(10);
 	
 // MOTHER LASTNAME	
 	$pdf->SetXY(37.5, 217);
-	$pdf->MultiCell(76.5, 3, $employeeInfo['EmpMotherLName'],0,'L');
+	if(strlen($employeeInfo['EmpMotherLName'])>31)
+	{
+		$pdf->SetFontSize(8);
+	}
+	$pdf->MultiCell(76.5, 2.8, $employeeInfo['EmpMotherLName'],0,'L');
+	$pdf->SetFontSize(10);
 	
 // MOTHER FIRSTNAME	
 	$pdf->SetXY(37.5, 222.5);
-	$pdf->MultiCell(76.5, 3, $employeeInfo['EmpMotherFName'],0,'L');
+	if(strlen($employeeInfo['EmpMotherFName'])>31)
+	{
+		$pdf->SetFontSize(8);
+	}
+	$pdf->MultiCell(76.5, 2.8, $employeeInfo['EmpMotherFName'],0,'L');
+	$pdf->SetFontSize(10);
 	
 // MOTHER MIDDLENAME	
 	$pdf->SetXY(37.5, 228.5);
-	$pdf->MultiCell(76.5, 3, $employeeInfo['EmpMotherMName'],0,'L');
+	if(strlen($employeeInfo['EmpMotherMName'])>31)
+	{
+		$pdf->SetFontSize(8);
+	}
+	$pdf->MultiCell(76.5, 2.8, $employeeInfo['EmpMotherMName'],0,'L');
+	$pdf->SetFontSize(10);
 	
 //DEPENDENTS
 	$yCoordName=153.5;
@@ -279,13 +429,21 @@ $pdf->SetFont($fontUsed);
 	foreach($employeeInfo['0'] as $dependetArr)
 	{
 		$pdf->SetXY(114, $yCoordName);
-		$pdf->MultiCell(58.5, 3, $dependetArr['DpntFName']." ".$dependetArr['DpntMName']." ".$dependetArr['DpntLName'],0,'L');
-		
-		
+		if(strlen($dependetArr['DpntFName']." ".$dependetArr['DpntMName']." ".$dependetArr['DpntLName'])>24)
+		{
+			$pdf->SetFontSize(8);
+		}
+		$pdf->MultiCell(58.5, 2.8, $dependetArr['DpntFName']." ".$dependetArr['DpntMName']." ".$dependetArr['DpntLName'],0,'L');
 		$pdf->SetFontSize(10);
-		$pdf->SetXY(172.5, $yCoordBmonth);
-		$pdf->MultiCell(41.5, 3, $dependetArr['DpntBirthMonth']."/".$dependetArr['DpntBirthDate']."/".$dependetArr['DpntBirthYear'],0,'C');
 		
+		
+		$pdf->SetXY(172.5, $yCoordBmonth);
+		if(strlen($dependetArr['DpntBirthMonth']."/".$dependetArr['DpntBirthDate']."/".$dependetArr['DpntBirthYear'])>16)
+		{
+			$pdf->SetFontSize(8);
+		}
+		$pdf->MultiCell(41.5, 2.8, $dependetArr['DpntBirthMonth']."/".$dependetArr['DpntBirthDate']."/".$dependetArr['DpntBirthYear'],0,'C');
+		$pdf->SetFontSize(10);
 		
 		//$pdf->SetXY(182, $yCoordBmonth);
 		//$pdf->Write(0, $dependetArr['DpntBirthMonth']);
@@ -338,9 +496,13 @@ $pdf->SetFont($fontUsed);
 			$pdf->MultiCell(25, 2.6, $educDetail['EducCourse'],0,'C');
 			if(strlen($educDetail['EducCourse'])>9) $pdf->SetFontSize(10);
 			
+			$pdf->SetXY(114, 256);
+			if(strlen($educDetail['EducYrGrad'])>5) 
+			{
+				$pdf->SetFontSize(8);
+			}
+			$pdf->MultiCell(16, 2.8, $educDetail['EducYrGrad'],0,'C');
 			$pdf->SetFontSize(10);
-			$pdf->SetXY(114, 256);	
-			$pdf->MultiCell(16, 3.8, $educDetail['EducYrGrad'],0,'C');
 			
 			$pdf->SetXY(130, 254.5);
 			if(strlen($educDetail['EducGradeLvlUnits'])>8) 
@@ -351,12 +513,21 @@ $pdf->SetFont($fontUsed);
 			$pdf->MultiCell(22.5, 2.6, $educDetail['EducGradeLvlUnits'],0,'C');
 			if(strlen($educDetail['EducGradeLvlUnits'])>8) $pdf->SetFontSize(10);
 			
-			$pdf->SetFontSize(8);
 			$pdf->SetXY(153, 256);	
-			$pdf->MultiCell(19.5, 3.8, $educDetail['EducIncAttDateFromDate'],0,'C');
+			if(strlen($educDetail['EducIncAttDateFromDate'])>8) 
+			{
+				$pdf->SetFontSize(8);
+			}
+			$pdf->MultiCell(19.5, 2.8, $educDetail['EducIncAttDateFromDate'],0,'C');
+			$pdf->SetFontSize(10);
 			
 			$pdf->SetXY(172, 256);	
-			$pdf->MultiCell(16.3, 3.8, $educDetail['EducIncAttDateToDate'],0,'C');
+			if(strlen($educDetail['EducIncAttDateToDate'])>7) 
+			{
+				$pdf->SetFontSize(8);
+			}
+			$pdf->MultiCell(16.3, 2.8, $educDetail['EducIncAttDateToDate'],0,'C');
+			$pdf->SetFontSize(10);
 			
 			$pdf->SetFontSize(10);
 			$pdf->SetXY(188, 254);	
@@ -391,9 +562,13 @@ $pdf->SetFont($fontUsed);
 			$pdf->MultiCell(25, 2.6, $educDetail['EducCourse'],0,'C');
 			if(strlen($educDetail['EducCourse'])>9) $pdf->SetFontSize(10);
 			
-			$pdf->SetFontSize(10);
 			$pdf->SetXY(114, 265);
-			$pdf->MultiCell(16, 3.8, $educDetail['EducYrGrad'],0,'C');
+			if(strlen($educDetail['EducYrGrad'])>5) 
+			{
+				$pdf->SetFontSize(8);
+			}
+			$pdf->MultiCell(16, 2.8, $educDetail['EducYrGrad'],0,'C');
+			$pdf->SetFontSize(10);
 			
 			$pdf->SetXY(130, 263);	
 			if(strlen($educDetail['EducGradeLvlUnits'])>8) 
@@ -404,12 +579,21 @@ $pdf->SetFont($fontUsed);
 			$pdf->MultiCell(22.5, 3, $educDetail['EducGradeLvlUnits'],0,'C');
 			if(strlen($educDetail['EducGradeLvlUnits'])>8) $pdf->SetFontSize(10);
 			
-			$pdf->SetFontSize(8);
 			$pdf->SetXY(153, 265);	
-			$pdf->MultiCell(19.5, 3.8, $educDetail['EducIncAttDateFromDate'],0,'C');
+			if(strlen($educDetail['EducIncAttDateFromDate'])>8) 
+			{
+				$pdf->SetFontSize(8);
+			}
+			$pdf->MultiCell(19.5, 2.8, $educDetail['EducIncAttDateFromDate'],0,'C');
+			$pdf->SetFontSize(10);
 			
 			$pdf->SetXY(172, 265);	
-			$pdf->MultiCell(16.3, 3.8, $educDetail['EducIncAttDateToDate'],0,'C');
+			if(strlen($educDetail['EducIncAttDateToDate'])>7) 
+			{
+				$pdf->SetFontSize(8);
+			}
+			$pdf->MultiCell(16.3, 2.8, $educDetail['EducIncAttDateToDate'],0,'C');
+			$pdf->SetFontSize(10);
 			
 			$pdf->SetFontSize(10);
 			$pdf->SetXY(188, 263);
@@ -443,9 +627,13 @@ $pdf->SetFont($fontUsed);
 			$pdf->MultiCell(25, 3, $educDetail['EducCourse'],0,'C');
 			if(strlen($educDetail['EducCourse'])>9) $pdf->SetFontSize(10);
 			
-			$pdf->SetFontSize(10);
 			$pdf->SetXY(114, 275);
-			$pdf->MultiCell(16, 3.8, $educDetail['EducYrGrad'],0,'C');
+			if(strlen($educDetail['EducYrGrad'])>5) 
+			{
+				$pdf->SetFontSize(8);
+			}
+			$pdf->MultiCell(16, 2.8, $educDetail['EducYrGrad'],0,'C');
+			$pdf->SetFontSize(10);
 			
 			$pdf->SetXY(130, 273);	
 			if(strlen($educDetail['EducGradeLvlUnits'])>8) 
@@ -456,12 +644,21 @@ $pdf->SetFont($fontUsed);
 			$pdf->MultiCell(22.5, 3, $educDetail['EducGradeLvlUnits'],0,'C');
 			if(strlen($educDetail['EducGradeLvlUnits'])>8) $pdf->SetFontSize(10);
 			
-			$pdf->SetFontSize(8);
-			$pdf->SetXY(153, 275);	
-			$pdf->MultiCell(19.5, 3.8, $educDetail['EducIncAttDateFromDate'],0,'C');
+			$pdf->SetXY(153, 275);
+			if(strlen($educDetail['EducIncAttDateFromDate'])>8) 
+			{
+				$pdf->SetFontSize(8);
+			}
+			$pdf->MultiCell(19.5, 2.8, $educDetail['EducIncAttDateFromDate'],0,'C');
+			$pdf->SetFontSize(10);
 			
 			$pdf->SetXY(172, 275);	
-			$pdf->MultiCell(16.3, 3.8, $educDetail['EducIncAttDateToDate'],0,'C');
+			if(strlen($educDetail['EducIncAttDateToDate'])>7) 
+			{
+				$pdf->SetFontSize(8);
+			}
+			$pdf->MultiCell(16.3, 2.8, $educDetail['EducIncAttDateToDate'],0,'C');
+			$pdf->SetFontSize(10);
 			
 			$pdf->SetFontSize(10);
 			$pdf->SetXY(188, 273);
@@ -495,9 +692,13 @@ $pdf->SetFont($fontUsed);
 			$pdf->MultiCell(25, 3, $educDetail['EducCourse'],0,'C');
 			if(strlen($educDetail['EducCourse'])>9) $pdf->SetFontSize(10);
 			
-			$pdf->SetFontSize(10);
 			$pdf->SetXY(114, 284);
-			$pdf->MultiCell(16, 3.8, $educDetail['EducYrGrad'],0,'C');
+			if(strlen($educDetail['EducYrGrad'])>5) 
+			{
+				$pdf->SetFontSize(8);
+			}
+			$pdf->MultiCell(16, 2.8, $educDetail['EducYrGrad'],0,'C');
+			$pdf->SetFontSize(10);
 			
 			$pdf->SetXY(130, 282);	
 			if(strlen($educDetail['EducGradeLvlUnits'])>8) 
@@ -508,12 +709,21 @@ $pdf->SetFont($fontUsed);
 			$pdf->MultiCell(22.5, 3, $educDetail['EducGradeLvlUnits'],0,'C');
 			if(strlen($educDetail['EducGradeLvlUnits'])>8) $pdf->SetFontSize(10);
 			
-			$pdf->SetFontSize(8);
-			$pdf->SetXY(153, 284);	
-			$pdf->MultiCell(19.5, 3.8, $educDetail['EducIncAttDateFromDate'],0,'C');
+			$pdf->SetXY(153, 284);
+			if(strlen($educDetail['EducIncAttDateFromDate'])>8) 
+			{
+				$pdf->SetFontSize(8);
+			}
+			$pdf->MultiCell(19.5, 2.8, $educDetail['EducIncAttDateFromDate'],0,'C');
+			$pdf->SetFontSize(10);
 			
 			$pdf->SetXY(172, 284);	
-			$pdf->MultiCell(16.3, 3.8, $educDetail['EducIncAttDateToDate'],0,'C');
+			if(strlen($educDetail['EducIncAttDateToDate'])>7) 
+			{
+				$pdf->SetFontSize(8);
+			}
+			$pdf->MultiCell(16.3, 2.8, $educDetail['EducIncAttDateToDate'],0,'C');
+			$pdf->SetFontSize(10);
 			
 			$pdf->SetFontSize(10);
 			$pdf->SetXY(188, 282);	
@@ -546,9 +756,13 @@ $pdf->SetFont($fontUsed);
 			$pdf->MultiCell(25, 3, $educDetail['EducCourse'],0,'C');
 			if(strlen($educDetail['EducCourse'])>9) $pdf->SetFontSize(10);
 			
-			$pdf->SetFontSize(10);
 			$pdf->SetXY(114, 293);
-			$pdf->MultiCell(16, 3.8, $educDetail['EducYrGrad'],0,'C');
+			if(strlen($educDetail['EducYrGrad'])>5) 
+			{
+				$pdf->SetFontSize(8);
+			}
+			$pdf->MultiCell(16, 2.8, $educDetail['EducYrGrad'],0,'C');
+			$pdf->SetFontSize(10);
 			
 			$pdf->SetXY(130, 291);	
 			if(strlen($educDetail['EducGradeLvlUnits'])>8) 
@@ -559,12 +773,21 @@ $pdf->SetFont($fontUsed);
 			$pdf->MultiCell(22.5, 3, $educDetail['EducGradeLvlUnits'],0,'C');
 			if(strlen($educDetail['EducGradeLvlUnits'])>8) $pdf->SetFontSize(10);
 			
-			$pdf->SetFontSize(8);
-			$pdf->SetXY(153, 293);	
-			$pdf->MultiCell(19.5, 3.8, $educDetail['EducIncAttDateFromDate'],0,'C');
+			$pdf->SetXY(153, 293);
+			if(strlen($educDetail['EducIncAttDateFromDate'])>8) 
+			{
+				$pdf->SetFontSize(8);
+			}
+			$pdf->MultiCell(19.5, 2.8, $educDetail['EducIncAttDateFromDate'],0,'C');
+			$pdf->SetFontSize(10);
 			
 			$pdf->SetXY(172, 293);	
-			$pdf->MultiCell(16.3, 3.8, $educDetail['EducIncAttDateToDate'],0,'C');
+			if(strlen($educDetail['EducIncAttDateToDate'])>7) 
+			{
+				$pdf->SetFontSize(8);
+			}
+			$pdf->MultiCell(16.3, 2.8, $educDetail['EducIncAttDateToDate'],0,'C');
+			$pdf->SetFontSize(10);
 			
 			$pdf->SetFontSize(10);
 			$pdf->SetXY(188, 291);	
@@ -598,9 +821,13 @@ $pdf->SetFont($fontUsed);
 			$pdf->MultiCell(25, 3, $educDetail['EducCourse'],0,'C');
 			if(strlen($educDetail['EducCourse'])>9) $pdf->SetFontSize(10);
 			
-			$pdf->SetFontSize(10);
 			$pdf->SetXY(114, 302);
-			$pdf->MultiCell(16, 3.8, $educDetail['EducYrGrad'],0,'C');
+			if(strlen($educDetail['EducYrGrad'])>5) 
+			{
+				$pdf->SetFontSize(8);
+			}
+			$pdf->MultiCell(16, 2.8, $educDetail['EducYrGrad'],0,'C');
+			$pdf->SetFontSize(10);
 			
 			$pdf->SetXY(130, 300);	
 			if(strlen($educDetail['EducGradeLvlUnits'])>8) 
@@ -611,12 +838,21 @@ $pdf->SetFont($fontUsed);
 			$pdf->MultiCell(22.5, 3, $educDetail['EducGradeLvlUnits'],0,'C');
 			if(strlen($educDetail['EducGradeLvlUnits'])>8) $pdf->SetFontSize(10);
 			
-			$pdf->SetFontSize(8);
 			$pdf->SetXY(153, 302);	
-			$pdf->MultiCell(19.5, 3.8, $educDetail['EducIncAttDateFromDate'],0,'C');
+			if(strlen($educDetail['EducIncAttDateFromDate'])>8) 
+			{
+				$pdf->SetFontSize(8);
+			}
+			$pdf->MultiCell(19.5, 2.8, $educDetail['EducIncAttDateFromDate'],0,'C');
+			$pdf->SetFontSize(10);
 			
-			$pdf->SetXY(172, 302);	
-			$pdf->MultiCell(16.3, 3.8, $educDetail['EducIncAttDateToDate'],0,'C');
+			$pdf->SetXY(172, 302);
+			if(strlen($educDetail['EducIncAttDateToDate'])>7) 
+			{
+				$pdf->SetFontSize(8);
+			}
+			$pdf->MultiCell(16.3, 2.8, $educDetail['EducIncAttDateToDate'],0,'C');
+			$pdf->SetFontSize(10);
 			
 			$pdf->SetFontSize(10);
 			$pdf->SetXY(188, 300);
@@ -644,9 +880,13 @@ $pdf->SetFont($fontUsed);
 			if (strlen($educDetail['EducCourse'])>9) $pdf->SetFontSize(8);
 			$pdf->MultiCell(25, 3, $educDetail['EducCourse'],0,'C');
 			
-			$pdf->SetFontSize(10);
 			$pdf->SetXY(114, 310);
-			$pdf->MultiCell(16, 3.8, $educDetail['EducYrGrad'],0,'C');
+			if(strlen($educDetail['EducYrGrad'])>5) 
+			{
+				$pdf->SetFontSize(8);
+			}
+			$pdf->MultiCell(16, 2.8, $educDetail['EducYrGrad'],0,'C');
+			$pdf->SetFontSize(10);
 			
 			$pdf->SetXY(130, 309);	
 			if(strlen($educDetail['EducGradeLvlUnits'])>8) 
@@ -657,12 +897,21 @@ $pdf->SetFont($fontUsed);
 			$pdf->MultiCell(22.5, 3, $educDetail['EducGradeLvlUnits'],0,'C');
 			if(strlen($educDetail['EducGradeLvlUnits'])>8) $pdf->SetFontSize(10);
 			
-			$pdf->SetFontSize(8);
-			$pdf->SetXY(153, 310);	
-			$pdf->MultiCell(19.5, 3.8, $educDetail['EducIncAttDateFromDate'],0,'C');
+			$pdf->SetXY(153, 310);
+			if(strlen($educDetail['EducIncAttDateFromDate'])>8) 
+			{
+				$pdf->SetFontSize(8);
+			}
+			$pdf->MultiCell(19.5, 2.8, $educDetail['EducIncAttDateFromDate'],0,'C');
+			$pdf->SetFontSize(10);
 			
 			$pdf->SetXY(172, 310);	
-			$pdf->MultiCell(16.3, 3.8, $educDetail['EducIncAttDateToDate'],0,'C');
+			if(strlen($educDetail['EducIncAttDateToDate'])>7) 
+			{
+				$pdf->SetFontSize(8);
+			}
+			$pdf->MultiCell(16.3, 2.8, $educDetail['EducIncAttDateToDate'],0,'C');
+			$pdf->SetFontSize(10);
 			
 			$pdf->SetFontSize(10);
 			$pdf->SetXY(188, 308.5);
@@ -699,10 +948,20 @@ $cscYcoordPlace=28;
 			if(strlen($cseDetail['CSEDesc'])>25) $pdf->SetFontSize(10);
 			
 			$pdf->SetXY(69.5, $cscYcoord);	
-			$pdf->MultiCell(19, 3, $cseDetail['CSERating'],0,'C');
+			if(strlen($cseDetail['CSERating'])>7) 
+			{
+				$pdf->SetFontSize(8);
+			}
+			$pdf->MultiCell(19, 2.8, $cseDetail['CSERating'],0,'C');
+			$pdf->SetFontSize(10);
 			
-			$pdf->SetXY(88.8, $cscYcoord);	
-			$pdf->MultiCell(20.3, 3.8, $cseDetail['CSEExamDate'],0,'C');
+			$pdf->SetXY(88.8, $cscYcoord);
+			if(strlen($cseDetail['CSEExamDate'])>8) 
+			{
+				$pdf->SetFontSize(8);
+			}
+			$pdf->MultiCell(20.3, 2.8, $cseDetail['CSEExamDate'],0,'C');
+			$pdf->SetFontSize(10);
 			
 			$pdf->SetXY(109.4, $cscYcoordPlace);
 			if(strlen($cseDetail['CSEExamPlace'])>27) 
@@ -724,7 +983,7 @@ $cscYcoordPlace=28;
 			
 		$pdf->SetFontSize(8);
 			$pdf->SetXY(193.3, $cscYcoord);	
-			$pdf->MultiCell(16.2, 3.8, $cseDetail['CSELicReleaseDate'],0,'C');
+			$pdf->MultiCell(16.2, 2.8, $cseDetail['CSELicReleaseDate'],0,'C');
 			$cscYcoord=$cscYcoord+9.5;
 			$cscYcoordPlace=$cscYcoordPlace+9.5;
 	}
