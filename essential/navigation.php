@@ -28,7 +28,7 @@ echo '<ul class="nav navbar-nav pull-right">
 			<ul class="dropdown-menu">
 				<li class="dropdown-header">Applications</li>
 				<li class=""><a href="rptListofOpenPosition.php">List of Open Position</a></li>
-				<li class=""><a href="rptListofAppliciants.php">List of Appliciants</a></li>
+				<li class=""><a href="rptListofApplicants.php">List of Applicants</a></li>
 			</ul>
 
 		</li>

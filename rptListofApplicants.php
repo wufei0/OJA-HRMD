@@ -98,7 +98,7 @@
   				</form>
 
   				<div class="table" style="margin-top: 20px;">
-					<table id="tblJobOpening"
+					<table id="tblApplication"
 						data-toggle="table"
 						data-height="420"
 						data-sort-name="price"
@@ -107,19 +107,16 @@
 	  					style="width:1500px;">
 						<thead>
 							<tr>
-								<th  data-visible="true" data-checkbox="true"></th>
-								<th data-field="ApplicationNo" data-visible="true">Application No</th>
-								<th data-field="Applicant" data-sortable="true" data-sorter="true">Applicant</th>
+								<th data-field="applicant" data-sortable="true" data-sorter="true">Applicant</th>
 								<th data-field="position" data-sortable="true" data-sorter="true">Position</th>
 								<th data-field="itemNo" data-sortable="true" data-sorter="true">Item No</th>
+								<th data-field="salaryGrade" data-sortable="true" data-sorter="true">SG</th>
 								<th data-field="department" data-sortable="true" data-sorter="true">Department</th>
 								<th data-width="120" data-field="dateApply" data-sortable="true" data-sorter="true">Date Applied</th>
-								<th data-field="remark" data-sortable="true" data-sorter="true">Remark</th>
-								<th  data-field="dateUpdated" data-sortable="true" data-sorter="true">Date Updated</th>
 							</tr>
 						</thead>
 					</table>
-					<button type="button" class="btn btn-primary pull-right" style="margin-top:10px;">
+					<button id="btnPrint" type="button" class="btn btn-primary pull-right" style="margin-top:10px;">
 				      <span class="glyphicon glyphicon-print"></span> Print
 				    </button>
 					<div class="tclear"></div>
@@ -130,8 +127,31 @@
 	</div>
 </div>
 <!-- end content -->
+<!-- footer -->
+<footer class="">
+	<div class="container">
+		<div class="row">
+		
+			<div class="col-md-6 pull-left">
+				<p style="color:#fff; padding-top:5px;">Copyright &copy; 2016 HRMD</p>
+			</div>
+			<div class="col-md-6 pull-right text-right">
+				<img src="images/logo/iluvlaunion.gif" width="46" height="35" alt="I Love La Union" title="I Love La Union" class="img-circle" />&nbsp;
+				<img src="images/logo/pglu.png" width="40" height="35" alt="PGLU" title="PGLU" class="img-circle" />&nbsp;
+				<img src="images/logo/hr_logo.gif" width="40" height="35" alt="HR" title="HR" class="img-circle" />
+			</div>
+			
+		</div>
+	</div>
+</footer>
+<!-- end footer -->
 </body>
 </html>
+
+<?php
+	// includes modal
+	include('essential/modal.php');
+?>
 
 <script type="text/javascript" src="js/jquery-1.10.2.min.js"></script>
 <script type="text/javascript" src="js/bootstrap.min.js"></script>
@@ -145,51 +165,67 @@
 
 <script type="text/javascript">
 
+$(document).ready(function(){
+	$('#feedbackDiv').feedBackBox();
+	 loadApplications();
 
-// $(document).ready(function(){
-// 	$('#feedbackDiv').feedBackBox();
-// 	loadApplications();
+});
 
-// });
+$('#selDepartment').change(function (){
+	loadApplications();
+});
 
+$('#btnPrint').click(function (){
 
-// function loadApplications()
-// {
-// 	$.blockUI();
-// 	var mod="jobOpeningList";
-// 	var department;
-// 	if ($('#selDepartment').val('All')) 
-// 	{
-// 		department='All';
-// 	}
-// 	else
-// 	{
-// 		department=$('#selDepartment').val();
-// 	}
+var win = window.open('lib/pdf/rptListofApplicants.php?department='+$('#selDepartment').val(), '_blank');
+	if (win) 
+	{
+	    //Browser has allowed it to be opened
+	    win.focus();
+	} else {
+	    //Browser has blocked it
+	   $.growl.error({ message: "Please allows popups on this site" });
+	}
+}
+);
 
-// console.log(department);
+function loadApplications()
+{
+	$.blockUI();
+	var mod="jobApplications";
+	var department;
+	if ($('#selDepartment').val()=='All') 
+	{
+		department='%';
+	}
+	else
+	{
+		department=$('#selDepartment').val();
+	}
 
-// 	jQuery.ajax({
-// 	type: "POST",
-// 	url:"lib/getData/rptListofOpenPosition.php",
-// 	dataType:"json", // Data type, HTML, json etc.
-// 	data:{module:mod,department:department},
-// 	beforeSend: function() {
+console.log(department);
 
-// 		$('#tblJobOpening').bootstrapTable("showLoading");
-// 	},
-// 	success:function(response){
-// 		$('#tblJobOpening').bootstrapTable("hideLoading");
-// 		$('#tblJobOpening').bootstrapTable("load",response);
+	jQuery.ajax({
+	type: "POST",
+	url:"lib/getData/rptListofApplicants.php",
+	dataType:"json", // Data type, HTML, json etc.
+	data:{module:mod,department:department},
+	beforeSend: function() {
 
-// 		$.unblockUI();
-// 	},
-// 	error:function (xhr, ajaxOptions, thrownError){
-// 		$.growl.error({ message: thrownError });
-// 		$.unblockUI();
-// 	}
-// 	});
-// }
+		$('#tblApplication').bootstrapTable("showLoading");
+	},
+	success:function(response){
+		$('#tblApplication').bootstrapTable("hideLoading");
+		$('#tblApplication').bootstrapTable("load",response);
+
+		$.unblockUI();
+	},
+	error:function (xhr, ajaxOptions, thrownError){
+		$.growl.error({ message: thrownError });
+		$.unblockUI();
+	}
+	});
+}
 
 
 
@@ -214,7 +250,7 @@ function LoadDepartmentList()
 	{
 		echo "<option value='".$result['department_pk']."' >".$result['description']."</option>";
 	}
-	echo "<option value='ALL' selected>Select All</option>";
+	echo "<option value='%' selected>Select All</option>";
 	$query->close();
 	$con->close();
 }
