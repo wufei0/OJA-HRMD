@@ -5,7 +5,7 @@
 	require_once('essential/errorDescription.php');
 	$con=mysqli_connect($DB_HOST,$DB_USER,$DB_PASS,$DB_SCHEMA);
 
-
+	
 // 	$headers   = array();
 // $headers[] = "MIME-Version: 1.0";
 // $headers[] = "Content-type: text/plain; charset=iso-8859-1";

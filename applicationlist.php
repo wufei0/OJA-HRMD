@@ -6,7 +6,7 @@
 	require_once('essential/session.php');
 	require_once('essential/connection.php');
 	$con=mysqli_connect($DB_HOST,$DB_USER,$DB_PASS,$DB_SCHEMA);
-
+	if (!AmIAdmin($_SESSION['username']))  die();
 ?>
 
 <!DOCTYPE html>

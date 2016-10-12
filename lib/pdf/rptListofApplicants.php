@@ -8,6 +8,7 @@ require_once('fpdi/fpdi.php');
 require_once('../../essential/session.php');
 include("../../essential/connection.php");
 
+if (!AmIAdmin($_SESSION['username']))  die();
 // $position=listOfOpenPosition();
 
 // initiate FPDI
@@ -251,13 +252,22 @@ $pdf->AddPage("P","Letter");
 // $pdf->useTemplate($tplIdx, null, null, 0, 0, true);
 // $pdf->SetXY(54, $pdf->GetY());
 
-if ($_GET['department']=='%')
+if (($_GET['department']=='%')AND($_GET['position']=='%'))
 {
 	$pdf->MultiCell(195.9, 7, "List of Applicants",0,'C');
 }
-else
+elseif (($_GET['department']=='%') AND ($_GET['position']!='%'))
 {
-	$pdf->MultiCell(195.9, 7, "List of Open Positions at ".getDepartmentName($_GET['department'])."",0,'C');
+	$pdf->MultiCell(195.9, 7, "List of Applicants for ".getPositionName($_GET['position'])."",0,'C');
+}
+elseif (($_GET['department']!='%') AND ($_GET['position']!='%'))
+{
+	$pdf->MultiCell(195.9, 7, "List of Application on ".getDepartmentName($_GET['department'])."",0,'C');
+	$pdf->MultiCell(195.9, 7, "(".getPositionName($_GET['position']).")",0,'C');
+}
+elseif (($_GET['department']!='%') AND ($_GET['position']=='%'))
+{
+	$pdf->MultiCell(195.9, 7, "List of Application on ".getDepartmentName($_GET['department'])."",0,'C');
 }
 
 $pdf->SetFont($fontUsed);
@@ -301,8 +311,7 @@ $con=mysqli_connect($DB_HOST,$DB_USER,$DB_PASS,$DB_SCHEMA);
 
 $position = array();
 
-	$sql="SELECT `jobopening`.`position` AS position, `jobopening`.`itemno` AS itemNo, `jobopening`.`salarygrade` AS salaryGrade, `m_department`.`description` AS department, `security_user`.`lname` AS lName, `security_user`.`fname` AS fName, `application`.`dateapplied` AS dateApplied FROM application JOIN jobopening ON application.jobopening_fk = jobopening.jobopening_pk JOIN security_user ON application.securityuser_fk = security_user.email JOIN m_department ON jobopening.department_fk = m_department.department_pk WHERE `application`.`status` = 'P' AND department_pk like '".$_GET['department']."'";
-
+	$sql="SELECT `jobopening`.`position` AS position, `jobopening`.`itemno` AS itemNo, `jobopening`.`salarygrade` AS salaryGrade, `m_department`.`description` AS department, `security_user`.`lname` AS lName, `security_user`.`fname` AS fName, `application`.`dateapplied` AS dateApplied FROM application JOIN jobopening ON application.jobopening_fk = jobopening.jobopening_pk JOIN security_user ON application.securityuser_fk = security_user.email JOIN m_department ON jobopening.department_fk = m_department.department_pk WHERE `application`.`status` = 'P' AND department_pk like '".$_GET['department']."' AND jobopening_pk LIKE '".$_GET['position']."' ";
 $myQuery=mysqli_query($con,$sql);
 	// $resultArray=array();
 // $pdf->setX(10);
@@ -403,3 +412,14 @@ function getDepartmentName($department_pk)
 
 }
 
+function getPositionName($positionID)
+{
+	global $DB_HOST, $DB_USER,$DB_PASS, $DB_SCHEMA;
+	$con=mysqli_connect($DB_HOST,$DB_USER,$DB_PASS,$DB_SCHEMA);
+
+	$sql="SELECT position FROM jobopening WHERE jobopening_pk = '".$positionID."' ";
+	$myQuery=mysqli_query($con,$sql);
+	$result=mysqli_fetch_array($myQuery);
+	mysqli_close($con);
+	return $result['position'];
+}

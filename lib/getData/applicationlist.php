@@ -11,7 +11,6 @@ if (!isset($_POST['module']))
 	echo 'Dont link on this url directly.';
 	die();
 }
-
 // initialize DB connection
 include("../../essential/connection.php");
 

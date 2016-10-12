@@ -111,7 +111,7 @@ function logInModal()
     }
     });
   $('#myModal').modal('show');
-  $(document).on("submit","#formLogin",function(e){
+  $(document).on("click","#btnLogin",function(e){
     e.preventDefault();
     logIn(e);
   });

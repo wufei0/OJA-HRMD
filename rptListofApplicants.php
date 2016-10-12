@@ -4,6 +4,8 @@
 	require_once('essential/connection.php');
 	$con=mysqli_connect($DB_HOST,$DB_USER,$DB_PASS,$DB_SCHEMA);
 
+if (!AmIAdmin($_SESSION['username']))  die();
+
 ?>
 
 <!DOCTYPE html>
@@ -92,8 +94,24 @@
 		  				</div>
 	  				</div>
 
-  					<div class="form-group col-md-7">
-  						<!--<button type="submit" class="btn btn-default">Filter</button>-->
+	  				<div class="form-group col-md-5">
+						<div class="row">
+		  					<div class="col-md-2">
+		  						<label>Position:</label>
+		  					</div>
+		  					<div class="col-md-10">
+		  						<select id="selPosition" class="form-control selectpicker" data-live-search="true">
+		  						<?php 
+	  									loadPositions();
+  								 ?>
+		  						
+								</select>
+		  					</div>
+		  				</div>
+	  				</div>
+
+  					<div class="form-group col-md-2">
+  						<button id="btnFilter" type="submit" class="btn btn-primary">Filter</button>
   					</div>
   				</form>
 
@@ -167,17 +185,27 @@
 
 $(document).ready(function(){
 	$('#feedbackDiv').feedBackBox();
-	 loadApplications();
+	 // loadApplications();
 
 });
 
 $('#selDepartment').change(function (){
-	loadApplications();
+	// loadApplications();
+	loadPositions();
 });
+
+$('#btnFilter').click(function (e){
+	e.preventDefault();
+	loadApplications();
+	// loadPositions();
+});
+
+
+
 
 $('#btnPrint').click(function (){
 
-var win = window.open('lib/pdf/rptListofApplicants.php?department='+$('#selDepartment').val(), '_blank');
+var win = window.open('lib/pdf/rptListofApplicants.php?department='+$('#selDepartment').val()+'&position='+$('#selPosition').val(), '_blank');
 	if (win) 
 	{
 	    //Browser has allowed it to be opened
@@ -191,9 +219,20 @@ var win = window.open('lib/pdf/rptListofApplicants.php?department='+$('#selDepar
 
 function loadApplications()
 {
+
 	$.blockUI();
 	var mod="jobApplications";
 	var department;
+	var position;
+	if ($('#selPosition').val()=='All') 
+	{
+		position='%';
+	}
+	else
+	{
+		position=$('#selPosition').val();
+	}
+
 	if ($('#selDepartment').val()=='All') 
 	{
 		department='%';
@@ -203,13 +242,13 @@ function loadApplications()
 		department=$('#selDepartment').val();
 	}
 
-console.log(department);
+// console.log(department);
 
 	jQuery.ajax({
 	type: "POST",
 	url:"lib/getData/rptListofApplicants.php",
 	dataType:"json", // Data type, HTML, json etc.
-	data:{module:mod,department:department},
+	data:{module:mod,position:position,department:department},
 	beforeSend: function() {
 
 		$('#tblApplication').bootstrapTable("showLoading");
@@ -227,7 +266,45 @@ console.log(department);
 	});
 }
 
+function loadPositions()
+{
+	$.blockUI();
+	var mod="loadPositions";
+	var department;
+	if ($('#selDepartment').val()=='All') 
+	{
+		department='%';
+	}
+	else
+	{
+		department=$('#selDepartment').val();
+	}
 
+// console.log(department);
+
+	jQuery.ajax({
+	type: "POST",
+	url:"lib/getData/rptListofApplicants.php",
+	dataType:"html", // Data type, HTML, json etc.
+	data:{module:mod,department:department},
+	beforeSend: function() 
+	{
+	    $('#selPosition').empty();
+        
+	},
+	success:function(response)
+	{
+		$('#selPosition').append(response);
+        $('#selPosition').selectpicker('refresh');
+		$.unblockUI();
+	},
+	error:function (xhr, ajaxOptions, thrownError)
+	{
+		$.growl.error({ message: thrownError });
+		$.unblockUI();
+	}
+	});
+}
 
 
 
@@ -255,19 +332,22 @@ function LoadDepartmentList()
 	$con->close();
 }
 
-// function LoadJobList()
-// {
-// 	global $DB_HOST, $DB_USER,$DB_PASS, $DB_SCHEMA;
-// 	$con = new mysqli($DB_HOST,$DB_USER,$DB_PASS,$DB_SCHEMA);
-// 	$sql="SELECT jobopening_pk, position, salarygrade FROM jobopening ORDER BY position ASC";
+function loadPositions()
+{
+	global $DB_HOST, $DB_USER,$DB_PASS, $DB_SCHEMA;
+	$con = new mysqli($DB_HOST,$DB_USER,$DB_PASS,$DB_SCHEMA);
+	$sql="SELECT jobopening_pk, position, `m_department`.`description` FROM jobopening JOIN m_department ON jobopening.department_fk = m_department.department_pk  ORDER BY description ASC";
+	// WHERE postexpire > CURDATE() AND poststart < CURDATE()";
 
-// 	$query=$con->query($sql);
-// 	while ($result=$query->fetch_array(MYSQLI_ASSOC))
-// 	{
-// 		echo "<option data-subtext='SG".$result['salarygrade']."' value='".$result['jobopening_pk']."' >".$result['position']."</option>";
-// 	}
-// 	$query->close();
-// 	$con->close();
-// }
+	$query=$con->query($sql);
+	while ($result=$query->fetch_array(MYSQLI_ASSOC))
+	{
+		echo "<option data-subtext='".$result['description']."' value='".$result['jobopening_pk']."' >".$result['position']."</option>";
+	}
+	echo "<option value='%' selected>Select All</option>";
+	$query->close();
+	$con->close();
+}
+
 
 ?> 

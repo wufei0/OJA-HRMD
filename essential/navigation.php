@@ -22,7 +22,11 @@ echo '<ul class="nav navbar-nav pull-right">
 				<li><a href="#">Portfolio 2</a></li> --!>
 			</ul>
 		</li>
+';
 
+if (AmIAdmin($_SESSION['username']))
+{
+	echo '
 		<li class="dropdown">
 			<a href="#" class="dropdown-toggle" data-toggle="dropdown">Reports <b class="caret"></b></a>
 			<ul class="dropdown-menu">
@@ -32,7 +36,10 @@ echo '<ul class="nav navbar-nav pull-right">
 			</ul>
 
 		</li>
+		';
 
+
+echo '
 		<li class="dropdown">
 			<a href="#" class="dropdown-toggle" data-toggle="dropdown">Maintenance <b class="caret"></b></a>
 			<ul class="dropdown-menu">
@@ -45,6 +52,11 @@ echo '<ul class="nav navbar-nav pull-right">
 				<li><a href="#">Portfolio 2</a></li>
 			</ul>
 		</li>
+
+';
+}
+
+echo '
 		<li><a href="#">Help</a></li>
 	</ul>';
 

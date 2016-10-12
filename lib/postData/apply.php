@@ -14,6 +14,7 @@ if (!isset($_POST['module']))
 // initialize DB connection
 include("../../essential/connection.php");
 include("../makeKey/key.php");
+include("../../essential/audit.php");
 
 switch ($_POST['module']) 
 {
@@ -45,19 +46,22 @@ function applyJob()
 		echo('You had already applied for this position.');
 		die();
 	}
+	$transactionNo=makeTransactionNo();
 	$sql="INSERT INTO application(application_pk,jobopening_fk,securityuser_fk,dateapplied) VALUES (?,?,?,'".date("Y-m-d")."')";
-
+   
 	$stmt = mysqli_prepare($con,$sql);
 	if ( !$stmt ) 
 	{
 		$transaction=false;
 		$errMsg='mysqli error: '.mysqli_error($con);
+		insertToErrLog($transactionNo,$sql,"apply",$_SESSION['username'],$errMsg);
 	}
 	mysqli_stmt_bind_param($stmt, "sss", $derived_key, $_POST['jobId'], $_SESSION['username']);
 	if ( !mysqli_stmt_execute($stmt) )
 	{
 		$transaction=false;
 		$errMsg='stmt error: '.mysqli_stmt_error($stmt);
+		insertToErrLog($transactionNo,$sql,"apply",$_SESSION['username'],$errMsg);
 	}
 	mysqli_stmt_execute($stmt);
 	mysqli_stmt_close($stmt);
@@ -68,6 +72,7 @@ function applyJob()
 	{
 		$transaction=false;
 		$errMsg='mysqli error: '.mysqli_error($con);	
+		insertToErrLog($transactionNo,$sql,"apply",$_SESSION['username'],$errMsg);
 	}
 
 if ($transaction)

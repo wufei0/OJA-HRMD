@@ -13,6 +13,7 @@ if (!isset($_POST['module']))
 
 // initialize DB connection
 include("../../essential/connection.php");
+include("../../essential/audit.php");
 require_once('../../essential/errorDescription.php');
 
 switch ($_POST['module']) 
@@ -59,7 +60,7 @@ function logMeIn()
 	$password = stripslashes($_POST['userPassword']);
 	$username = mysqli_real_escape_string($con,$username);
 	$password = mysqli_real_escape_string($con,$password);
-
+	$transactionNo=makeTransactionNo();
 
 	$sql="SELECT username, fname, lname, email, activate FROM security_user WHERE email='".$username."'  AND password= '".sha1($password . getSalt($username))."'  ";
 	$query = mysqli_query($con,$sql);
@@ -76,11 +77,14 @@ function logMeIn()
 		$_SESSION['name']=$result['fname'] ." ".$result['lname'];
 		// $_SESSION['email']=$result['email'];
 		// mysqli_close($con);
+		insertToAudit($transactionNo,'Login from:'.$_SERVER['REMOTE_ADDR'].' Username: '.$_SESSION['username'],'login success',$username);
 		echo true;
 	}
 	elseif(mysqli_num_rows($query)==0)
 	{
 		echo "Invalid username or password.";
+		// insertToAudit($transactionNo,$sql,'login fail');
+		insertToAudit($transactionNo,'Login from:'.$_SERVER['REMOTE_ADDR'].' Username: '.$username,'login fail',$username);
 	}
 	else
 	{
@@ -232,6 +236,7 @@ function registerMe()
 	    printf("Connect failed: %s\n", mysqli_connect_error());
 	    exit();
 	}
+	$transactionNo=makeTransactionNo();
 	$sql="INSERT INTO security_user (email,fname,lname,password,mobileno,security_group_fk,salt_key,activation_url) VALUES (?,?,?,?,?,'SG0003',?,?)";
 
 	if ($stmt = $con->prepare($sql))

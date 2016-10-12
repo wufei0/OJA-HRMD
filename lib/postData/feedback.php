@@ -34,7 +34,7 @@ function feedback()
 
 	$feedbackMsg=mysqli_real_escape_string($con, $_POST['message']);
 	$sql="insert into feedback(message,username_fk) values ('".$feedbackMsg."','".$_SESSION['username']."')";
-	mysqli_query($con,$sql);
+	// mysqli_query($con,$sql);
 	if(mysqli_query($con,$sql))
 	{
 		echo "Thank You for your feedback. We will try to take a look at it ASAP.";

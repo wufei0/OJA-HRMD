@@ -18,9 +18,28 @@
 			exit();
 		}
 	}
+	if (!isset($_SESSION['username']) )
+	{
+		$_SESSION['username']=null;
+	}
 
 
+function AmIAdmin($username)
+{
+	global $DB_HOST, $DB_USER,$DB_PASS, $DB_SCHEMA;
+	$con=mysqli_connect($DB_HOST,$DB_USER,$DB_PASS,$DB_SCHEMA);
+	$sql="SELECT email FROM security_user JOIN security_group ON security_user.security_group_fk = security_group.securitygroup_pk WHERE email LIKE '".$username."'  AND securitygroup_description = 'Administrator' ";
+	$query=mysqli_query($con,$sql);
+	if(mysqli_num_rows($query)==1)
+	{
+		return true;
+	}
+	else
+	{
+		return false;
+	}
 
+}
 
 
 ?>

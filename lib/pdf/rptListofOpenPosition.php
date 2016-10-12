@@ -6,7 +6,9 @@ require_once('fpdi/fpdi.php');
 require_once('../../essential/session.php');
 include("../../essential/connection.php");
 
-// $position=listOfOpenPosition();
+
+if (!AmIAdmin($_SESSION['username']))  die();
+
 $textAlignment="C";
 class PDF extends FPDF
 {

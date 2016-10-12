@@ -25,7 +25,7 @@ $tplIdx = $pdf->importPage(1);
 $pdf->SetMargins(0,0,0);
 $pdf->SetAutoPageBreak('off');
 //$size = $pdf->getTemplateSize($tplIdx);
-$pdf->AddPage();
+$pdf->AddPage("L","legal");
 
 // use the imported page and place it at position 10,10 with a width of 100 mm
 $pdf->useTemplate($tplIdx, null, null, 0, 0, true);
@@ -927,7 +927,7 @@ $pdf->SetFont($fontUsed);
 	}
 	
 
-$pdf->AddPage();
+$pdf->AddPage("L","legal");
 $page2 = $pdf->importPage(2);
 $pdf->useTemplate($page2, null, null, 0, 0, true);
 

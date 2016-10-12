@@ -15,6 +15,7 @@ if (!isset($_POST['module']))
 // initialize DB connection
 include("../../essential/connection.php");
 include("../makeKey/key.php");
+include("../../essential/audit.php");
 
 switch ($_POST['module']) 
 {
@@ -42,13 +43,8 @@ function applicationList()
 	$returnMsg=array();
 	$errMsg=null;
 	$applicationArr=$_POST['jsonData'];
+	$transactionNo=makeTransactionNo();
 
-	// mysqli_autocommit($con, FALSE);
-	// $transaction=true;
-// print_r ($applicationArr[0]['Applicant']);
-// echo mail(getEmail($applicationArr[$pointerCounter]['ApplicationNo']),emailTable(strtoupper($applicationArr[0]['Applicant']),$_POST['timeOfInterview'],$_POST['dateOfInterview']);
-// die();
-// 	// echo true;
 	$headers   = array();
 	$headers[] = "MIME-Version: 1.0";
 	$headers[] = "Content-type: text/html; charset=iso-8859-1";
@@ -60,15 +56,17 @@ function applicationList()
 	$pointerCounter=0;
 	foreach($applicationArr as $schedApplications)
 	{
-		$applicantEmail=getEmail($schedApplications['ApplicationNo']);
+		$applicantEmail=getEmail($schedApplications['ApplicationNo'],$transactionNo);
 
 		if (mail($applicantEmail,"PGLU Online Application",emailSchedApplication(strtoupper($schedApplications['Applicant']),$_POST['dateOfInterview'],$_POST['timeOfInterview'],$schedApplications['position']),implode("\r\n", $headers)))
 			{
-				UpdateApplicationDetail($schedApplications['ApplicationNo']);
+				UpdateApplicationDetail($schedApplications['ApplicationNo'],$transactionNo);
+				insertToAudit($transactionNo,"send mail to:".$applicantEmail,'schedule interview',$_SESSION['username']);
 			}
 			else
 			{
 				$errMsg=$errMsg."Error sending mail to ".$applicantEmail."<br>";
+				insertToErrLog($transactionNo,null,"applicationlist",$_SESSION['username'],$errMsg);
 			}
 		$pointerCounter++;
 	}
@@ -78,27 +76,34 @@ function applicationList()
 
 }
 
-function UpdateApplicationDetail($applicationNo)
+function UpdateApplicationDetail($applicationNo,$transaction_no)
 {
 	global $DB_HOST, $DB_USER,$DB_PASS, $DB_SCHEMA;
 	$con=mysqli_connect($DB_HOST,$DB_USER,$DB_PASS,$DB_SCHEMA);
 
 	$sql="INSERT INTO applicationdetail(applicationdetail_pk,detail,update_by,application_fk) VALUES('APL".date("Y").date("m").makeKey('appDetail')."','Applicant Scheduled for Interview', '".$_SESSION['username']."','".$applicationNo."')";
-	
-	mysqli_query($con,$sql);
+	if(!mysqli_query($con,$sql))
+	{
+		insertToErrLog($transaction_no,$sql,"applicationlist",$_SESSION['username'],mysqli_error($con));
+	}
+
 	mysqli_close($con);
 
 }
 
 
 
-function getEmail($applicationNo)
+function getEmail($applicationNo,$transaction_no)
 {
 	global $DB_HOST, $DB_USER,$DB_PASS, $DB_SCHEMA;
 	$con=mysqli_connect($DB_HOST,$DB_USER,$DB_PASS,$DB_SCHEMA);
 
 	$sql="SELECT securityuser_fk FROM application WHERE application_pk = '".$applicationNo."' ";
 	$query=mysqli_query($con,$sql);
+	if(!mysqli_query($con,$sql))
+	{
+		insertToErrLog($transaction_no,$sql,"applicationlist",$_SESSION['username'],mysqli_error($con));
+	}
 	$result=mysqli_fetch_array($query);
 	mysqli_close($con);
 	// echo $result['securityuser_fk'];
@@ -200,7 +205,7 @@ function dropApplication()
 	global $DB_HOST, $DB_USER,$DB_PASS, $DB_SCHEMA;
 	$con=mysqli_connect($DB_HOST,$DB_USER,$DB_PASS,$DB_SCHEMA);
 	mysqli_autocommit($con, FALSE);
-
+	$transactionNo=makeTransactionNo();
 	$transaction=true;
 	$returnMsg=array();
 	$errMsg=null;
@@ -220,9 +225,12 @@ function dropApplication()
 		{
 			$transaction=false;
 			$errMsg='mysqli error: '.mysqli_error($con);
+			insertToErrLog($transactionNo,$sql,"applicationlist",$_SESSION['username'],mysqli_error($con));
+
 		}
 		else
 		{
+
 			$headers   = array();
 			$headers[] = "MIME-Version: 1.0";
 			$headers[] = "Content-type: text/html; charset=iso-8859-1";
@@ -231,11 +239,13 @@ function dropApplication()
 			$headers[] = "Reply-To: Recipient Name <jerome.marzan88@gmail.com>";
 			$headers[] = "Subject: PGLU Online Application";
 			$headers[] = "X-Mailer: PHP/".phpversion();
-			$applicantEmail=getEmail($applicationList['ApplicationNo']);
+			$applicantEmail=getEmail($applicationList['ApplicationNo'],$transactionNo);
+			insertToAudit($transactionNo,$sql,'drop application',$_SESSION['username']);
 			if (!mail($applicantEmail,"PGLU Online Application",emailDropApplication(strtoupper($applicationList['Applicant']),$applicationList['position']),implode("\r\n", $headers)))
 			{
 				$errMsg="Send mail failed.";
 				$transaction=false;
+				insertToErrLog($transactionNo,null,"applicationlist",$_SESSION['username'],$errMsg);
 			}
 
 		}
