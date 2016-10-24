@@ -46,6 +46,9 @@
 <!-- end header -->
 <!-- content -->
 <div class="container content">
+
+	<?php include("essential/leftmenu.php"); ?>
+
 	<div class="row">
 <!-- col-md-12 -->
 <!-- breadcrumb -->

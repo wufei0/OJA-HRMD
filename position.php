@@ -44,6 +44,9 @@
 <!-- end header -->
 <!-- content -->
 <div class="container content">
+
+	<?php include("essential/leftmenu.php"); ?>
+
 	<div class="row">
 <!-- col-md-12 -->
 <!-- breadcrumb -->
@@ -219,7 +222,10 @@
 
 
 <!-- includes -->
-
+<?php
+	// includes modal
+	include('essential/modal.php');
+?>
 <!-- end includes -->
 <script type="text/javascript" src="js/jquery-1.10.2.min.js"></script>
 <script type="text/javascript" src="js/bootstrap.min.js"></script>
