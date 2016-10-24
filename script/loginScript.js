@@ -103,7 +103,7 @@ function logInModal()
     {
       $('#model-content').html(response);
       $('#myModalLabel').html("Login");
-      $("#modal-footer").html("Not yet registered? Register <a href='#' onclick='registerInModal()'>here</a>");
+      $("#modal-footer").html(" <a href='#' onclick='registerInModal()'>Register</a> | <a href='#' onclick='renderForgotPassword()'>Forgot Password</a>");
     },
 
     error:function (xhr, ajaxOptions, thrownError){
@@ -199,6 +199,75 @@ function  registerMe(e)
     $.unblockUI();
 }
 
+
+function renderForgotPassword()
+{
+  $.blockUI();
+  var modName = "renderForgotPassword";
+  jQuery.ajax({
+    type: "POST",
+    url:"lib/authenticate/login.php", 
+    dataType:'text',
+    data:{module:modName},
+    beforeSend: function() 
+    {
+      $('#myModalLabel').html("Password Recovery"); 
+      $('#model-content').html("");
+      $('#modal-footer').html("");
+      $('#myModal').modal('show');
+    },
+    success:function(response)
+    {
+      $('#model-content').html(response);
+    },
+    error:function (xhr, ajaxOptions, thrownError){
+         $.growl.error({ message: thrownError });
+    }
+    });
+  $(document).on("submit","#modalPasswordRecover",function(e){
+    e.preventDefault();
+    forgotPassword(e);
+  });
+  $.unblockUI();
+}
+
+function forgotPassword(e)
+{
+  var modName="forgotPassword";
+  var emailAdd=$("#emailAddress").val();
+
+ e.preventDefault;
+ jQuery.ajax({
+        type: "POST",
+        url:"lib/authenticate/login.php",
+        dataType:'html',
+        data:{module:modName,emailAdd:emailAdd},
+        beforeSend: function()
+        {
+          $("#modal-footer").html("Sending email. Please wait...");
+        },
+        success:function(response)
+        {
+           if (response==true)
+          {
+            // location.reload();
+            $("#modal-footer").html("Send email complete. Follow instructions on email on how to recover account.");
+            // $("#modal-footer").html(response);
+          }
+          else
+          {
+            $("#modal-footer").html(response);
+            $("#modal-footer").append("<br> Send mail failed.");
+          }
+        },
+
+        error:function (xhr, ajaxOptions, thrownError)
+        {
+             $.growl.error({ message: thrownError });
+        }
+        });
+    $.unblockUI();
+}
 // $('#btnLogin').submit(function(e){
 //   e.preventDefault;
 // alert("as");

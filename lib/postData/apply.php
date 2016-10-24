@@ -13,8 +13,8 @@ if (!isset($_POST['module']))
 
 // initialize DB connection
 include("../../essential/connection.php");
-include("../makeKey/key.php");
 include("../../essential/audit.php");
+include("../makeKey/key.php");
 
 switch ($_POST['module']) 
 {

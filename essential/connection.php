@@ -1,6 +1,6 @@
 <?php
 
-$DB_HOST = 'docutracking';
+$DB_HOST = '10.10.4.59';
 $DB_USER = 'hr';
 $DB_PASS = 'hr';
 $DB_SCHEMA = 'oja';

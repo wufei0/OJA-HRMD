@@ -13,7 +13,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 <!-- 	<link rel="icon" href="images/home/icon/pglu.ico" type="image/x-icon"> -->
-
+    <title>OJA v1.0</title>
+    <link rel="icon" href="images/logo/icon_oja.gif" type="image/x-icon">
     <!-- Latest compiled and minified CSS -->
 	<link href="css/bootstrap.css" rel="stylesheet"/>
 	<link href="css/bootstrap-submenu.min.css" rel="stylesheet" />
@@ -38,29 +39,7 @@
 <header class="navbar">
 
 <!-- Fixed navbar -->
-    <div class="navbar navbar-default nav-bg navbar-fixed-top" role="navigation">
-      <div class="container">
-		  <div class="row">
-			<div class="col-md-12">
-				<div class="navbar-header">
-					<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-						<span class="sr-only">Toggle navigation</span>
-						<span class="icon-bar"></span>
-						<span class="icon-bar"></span>
-						<span class="icon-bar"></span>
-					</button>
-					<a class="navbar-brand" href="home.php" style="color: #e8e8e8;">PGLU OJA</a>
-				</div>
-
-				<div id="navHeader" class="navbar-collapse collapse">
-					<?php
-						require_once('essential/navigation.php');
-					?>
-				</div>
-			</div>
-		  </div>
-	  </div>
-    </div>
+<?php include("essential/header.php"); ?>
 </header>
 <!-- end header -->
 <!-- content -->
@@ -161,20 +140,7 @@
 </div>
 <!-- end content -->
 <!-- footer -->
-<footer class="">
-	<div class="container">
-		<div class="row">
-			<div class="col-md-6 pull-left">
-				<p style="color:#fff; padding-top:5px;">Copyright &copy; 2016 HRMD</p>
-			</div>
-			<div class="col-md-6 pull-right text-right">
-				<img src="images/logo/iluvlaunion.gif" width="46" height="35" alt="I Love La Union" title="I Love La Union" class="img-circle" />&nbsp;
-				<img src="images/logo/pglu.png" width="40" height="35" alt="PGLU" title="PGLU" class="img-circle" />&nbsp;
-				<img src="images/logo/hr_logo.gif" width="40" height="35" alt="HR" title="HR" class="img-circle" />
-			</div>
-		</div>
-	</div>
-</footer>
+<?php include("essential/footer.php"); ?>
 <!-- end footer -->
 
 

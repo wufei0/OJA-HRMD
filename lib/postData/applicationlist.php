@@ -48,14 +48,16 @@ function applicationList()
 	$headers   = array();
 	$headers[] = "MIME-Version: 1.0";
 	$headers[] = "Content-type: text/html; charset=iso-8859-1";
-	$headers[] = "From: Sender Name <jerome.marzan88@gmail.com>";
-	$headers[] = "Bcc: Sender Name <jerome.marzan88@gmail.com>";
+	$headers[] = "From: hrmd <jerome.marzan88@gmail.com>";
+	$headers[] = "Bcc: hrmd <jerome.marzan88@gmail.com>";
 	$headers[] = "Reply-To: Recipient Name <jerome.marzan88@gmail.com>";
 	$headers[] = "Subject: PGLU Online Application";
 	$headers[] = "X-Mailer: PHP/".phpversion();
 	$pointerCounter=0;
 	foreach($applicationArr as $schedApplications)
 	{
+		// echo $_POST['dateOfInterview'];
+		
 		$applicantEmail=getEmail($schedApplications['ApplicationNo'],$transactionNo);
 
 		if (mail($applicantEmail,"PGLU Online Application",emailSchedApplication(strtoupper($schedApplications['Applicant']),$_POST['dateOfInterview'],$_POST['timeOfInterview'],$schedApplications['position']),implode("\r\n", $headers)))
@@ -113,6 +115,9 @@ function getEmail($applicationNo,$transaction_no)
 
 function emailSchedApplication($Applicantname,$dateOfInterview,$timeOfInterview,$position)
 {
+	$date=date_create($dateOfInterview);
+	
+		
 	return '<table border="0" style="margin:auto;
 		width:500px; font-family:arial;">
 		<tr>
@@ -141,7 +146,7 @@ function emailSchedApplication($Applicantname,$dateOfInterview,$timeOfInterview,
 		border-right: 1px solid #e6e5e3;
 		border-top: none;
 		padding: 0px 30px 5px;
-		color: #333;">Date: <b>'.$dateOfInterview.'</b></td>
+		color: #333;">Date: <b>'.date_format($date, 'F d, Y').'</b></td>
 		</tr>
 		<tr>
 			<td style="font-family:arial; border-left: 1px solid #e6e5e3;
@@ -234,8 +239,8 @@ function dropApplication()
 			$headers   = array();
 			$headers[] = "MIME-Version: 1.0";
 			$headers[] = "Content-type: text/html; charset=iso-8859-1";
-			$headers[] = "From: Sender Name <jerome.marzan88@gmail.com>";
-			$headers[] = "Bcc: Sender Name <jerome.marzan88@gmail.com>";
+			$headers[] = "From: hrmd <jerome.marzan88@gmail.com>";
+			$headers[] = "Bcc: hrmd <jerome.marzan88@gmail.com>";
 			$headers[] = "Reply-To: Recipient Name <jerome.marzan88@gmail.com>";
 			$headers[] = "Subject: PGLU Online Application";
 			$headers[] = "X-Mailer: PHP/".phpversion();

@@ -12,7 +12,7 @@ if (!isset($_POST['module']))
 	die();
 }
 // initialize DB connection
-
+include("../../essential/connection.php");
 switch ($_POST['module']) 
 {
 	case 'jobOpeningList':

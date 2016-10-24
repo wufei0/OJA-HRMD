@@ -3,7 +3,7 @@
 	require_once('essential/session.php');
 	require_once('essential/connection.php');
 	require_once('essential/errorDescription.php');
-	$con=mysqli_connect($DB_HOST,$DB_USER,$DB_PASS,$DB_SCHEMA);
+	
 
 	
 // 	$headers   = array();
@@ -31,6 +31,8 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>OJA v1.0</title>
+    <link rel="icon" href="images/logo/icon_oja.gif" type="image/x-icon">
 <!-- 	<link rel="icon" href="images/home/icon/pglu.ico" type="image/x-icon"> -->
 
     <!-- Latest compiled and minified CSS -->
@@ -57,29 +59,8 @@
 <header class="navbar">
 
 <!-- Fixed navbar -->
-    <div class="navbar navbar-default nav-bg navbar-fixed-top" role="navigation">
-      <div class="container">
-		  <div class="row">
-			<div class="col-md-12">
-				<div class="navbar-header">
-					<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-						<span class="sr-only">Toggle navigation</span>
-						<span class="icon-bar"></span>
-						<span class="icon-bar"></span>
-						<span class="icon-bar"></span>
-					</button>
-					<a class="navbar-brand" href="home.php" style="color: #e8e8e8;">PGLU OJA</a>
-				</div>
+   <?php include("essential/header.php"); ?>
 
-				<div id="navHeader" class="navbar-collapse collapse">
-					<?php
-						require_once('essential/navigation.php');
-					?>
-				</div>
-			</div>
-		  </div>
-	  </div>
-    </div>
 </header>
 <!-- end header -->
 <!-- content -->
@@ -212,20 +193,7 @@ echo '
 </div>
 <!-- end content -->
 <!-- footer -->
-<footer class="">
-	<div class="container">
-		<div class="row">
-			<div class="col-md-6 pull-left">
-				<p style="color:#fff; padding-top:5px;">Copyright &copy; 2016 HRMD</p>
-			</div>
-			<div class="col-md-6 pull-right text-right">
-				<img src="images/logo/iluvlaunion.gif" width="46" height="35" alt="I Love La Union" title="I Love La Union" class="img-circle" />&nbsp;
-				<img src="images/logo/pglu.png" width="40" height="35" alt="PGLU" title="PGLU" class="img-circle" />&nbsp;
-				<img src="images/logo/hr_logo.gif" width="40" height="35" alt="HR" title="HR" class="img-circle" />
-			</div>
-		</div>
-	</div>
-</footer>
+<?php include("essential/footer.php"); ?>
 <!-- end footer -->
 
 
@@ -252,12 +220,15 @@ $(document).ready(function(){
 	$('#feedbackDiv').feedBackBox();
 	loadPositionList();
 	<?php
-		if (isset($_SESSION['username']))
+		if ((isset($_GET['passRenew'])) && (isset($_GET['email'])))
 		{
-			echo "$('#homebanner').remove();";
+			if (!isPasswordRecoUrlValid()) exit;
+			renderRecoverPassword();
+			changeRecoveryPassword();
 		}
 
 	  ?>
+
 
 });
 
@@ -292,122 +263,75 @@ function loadPositionList()
 
 }
 
+// <?php
+// if (isset($_GET['passRenew']))
+// 		{
+// 			if (!isPasswordRecoUrlValid()) exit;
+// 			renderRecoverPassword();
+// 		}
 
 
 
 
 
+// ?>
+<?php 
+function changeRecoveryPassword()
+{
+echo "
+function changeRecoveryPassword()
+{
 
+	
+	if ($('#recoverPassword').val()!=$('#recoverPasswordConfirm').val())
+	{
+		$.growl.error({ message: 'Password dont match.' });
+		return;
+	}
+	else if ($('#recoverPassword').val()=='')
+	{
+		$.growl.error({ message: 'Blank password' });
+		return;
+	}
 
+	$.blockUI();
+	var mod='changeRecoverPassword';
+	var passRenew='"; echo $_GET['passRenew'];
+	echo "';
+	var email='"; echo $_GET['email']; 
+	echo "';
+	var pass=$('#recoverPassword').val();
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-	// ///////////////////////GOOOOOGLE
-
-	// google.charts.load('current', {'packages':['line', 'corechart']});
-	//       google.charts.setOnLoadCallback(drawChart);
-
-	//     function drawChart() {
-
-	//       var button = document.getElementById('change-chart');
-	//       var chartDiv = document.getElementById('chart_div');
-
-	//       var data = new google.visualization.DataTable();
-	//       data.addColumn('date', 'Month');
-	//       data.addColumn('number', "Average Temperature");
-	//       data.addColumn('number', "Average Hours of Daylight");
-
-	//       data.addRows([
-	//         [new Date(2014, 0),  -.5,  5.7],
-	//         [new Date(2014, 1),   .4,  8.7],
-	//         [new Date(2014, 2),   .5,   12],
-	//         [new Date(2014, 3),  2.9, 15.3],
-	//         [new Date(2014, 4),  6.3, 18.6],
-	//         [new Date(2014, 5),    9, 20.9],
-	//         [new Date(2014, 6), 10.6, 19.8],
-	//         [new Date(2014, 7), 10.3, 16.6],
-	//         [new Date(2014, 8),  7.4, 13.3],
-	//         [new Date(2014, 9),  4.4,  9.9],
-	//         [new Date(2014, 10), 1.1,  6.6],
-	//         [new Date(2014, 11), -.2,  4.5]
-	//       ]);
-
-	//       var materialOptions = {
-	//         chart: {
-	//           title: 'Applicants Monthly Trend'
-	//         },
-	//         width: 1000,
-	//         height: 1000,
-	//         series: {
-	//           // Gives each series an axis name that matches the Y-axis below.
-	//           0: {axis: 'count'},
-	//           1: {axis: 'Month'}
-	//         },
-	//         axes: {
-	//           // Adds labels to each axis; they don't have to match the axis names.
-	//           y: {
-	//             Temps: {label: 'Temps (Celsius)'},
-	//             Daylight: {label: 'Daylight'}
-	//           }
-	//         }
-	//       };
-
-	//       var classicOptions = {
-	//         title: 'Average Temperatures and Daylight in Iceland Throughout the Year',
-	//         width: 900,
-	//         height: 500,
-	//         // Gives each series an axis that matches the vAxes number below.
-	//         series: {
-	//           0: {targetAxisIndex: 0},
-	//           1: {targetAxisIndex: 1}
-	//         },
-	//         vAxes: {
-	//           // Adds titles to each axis.
-	//           0: {title: 'Temps (Celsius)'},
-	//           1: {title: 'Daylight'}
-	//         },
-	//         hAxis: {
-	//           ticks: [new Date(2014, 0), new Date(2014, 1), new Date(2014, 2), new Date(2014, 3),
-	//                   new Date(2014, 4),  new Date(2014, 5), new Date(2014, 6), new Date(2014, 7),
-	//                   new Date(2014, 8), new Date(2014, 9), new Date(2014, 10), new Date(2014, 11)
-	//                  ]
-	//         },
-	//         vAxis: {
-	//           viewWindow: {
-	//             max: 30
-	//           }
-	//         }
-	//       };
-
-	//       function drawMaterialChart() {
-	//         var materialChart = new google.charts.Line(chartDiv);
-	//         materialChart.draw(data, materialOptions);
-	//         button.innerText = 'Change to Classic';
-	//         button.onclick = drawClassicChart;
-	//       }
-
-	//       function drawClassicChart() {
-	//         var classicChart = new google.visualization.LineChart(chartDiv);
-	//         classicChart.draw(data, classicOptions);
-	//         button.innerText = 'Change to Material';
-	//         button.onclick = drawMaterialChart;
-	//       }
-
-	//       drawMaterialChart();
-
-	//     }
+	jQuery.ajax({
+	type: 'POST',
+	url:'lib/authenticate/login.php',
+	dataType:'text', 
+	data:{module:mod,passRenew:passRenew,email:email,pass:pass},
+	beforeSend: function() {
+		$('#modal-footer').html('please wait...');
+	},
+	success:function(response){
+		if (response==true)
+		{
+			$('#modal-footer').html('Use your new password to Login. Page will reload.');
+			window.location.reload();
+		}
+		else
+		{
+			$('#modal-footer').html('Change Password failed. Try Again.');
+		}
+	},
+	error:function (xhr, ajaxOptions, thrownError){
+		$.growl.error({ message: thrownError });
+		$('#modal-footer').html(thrownError);
+	}
+	
+	});
+$.unblockUI();
+}
+";
+}
+?>
 </script>
 
 
@@ -415,3 +339,102 @@ function loadPositionList()
 
 </body>
 </html>
+
+
+
+
+<?php  
+
+
+function renderRecoverPassword()
+{
+	echo "
+	      $('#myModalLabel').html('Password Recovery'); 
+	      $('#model-content').html('');
+	      $('#modal-footer').html('');
+	      $('#myModal').modal('show');
+	      $('#model-content').html(\"<form role='form' id='fromChangePasswword'><div class='form-group'><div class='icon-addon addon-md'><input type='password' placeholder='password' class='form-control' id='recoverPassword' required><label for='email' class='fa fa-lock' rel='tooltip' title='email'></label></div></div><div class='form-group'><div class='icon-addon addon-md'><input id='recoverPasswordConfirm' type='password' name='pass' class='form-control input-md' placeholder='Confirm password' required><label for='email' class='fa fa-lock' rel='tooltip' title='email'></label>&nbsp<button id='btnChangePassword'  class='btn btn-primary btn-md btn-block pull-right' name='login' style='width:120px;' >Change Password</button></div></div></form>\");
+		";
+echo "
+
+  $(document).on('submit','#fromChangePasswword',function(e){
+    e.preventDefault();
+    changeRecoveryPassword();
+  });
+
+
+";
+// echo "
+
+
+// $('#btnChangePassword').submit(function (event){
+
+// 	event.preventDefault();
+// 	if ($('#recoverPassword').val()!=$('#recoverPasswordConfirm').val())
+// 	{
+// 		$.growl.error({ message: 'Password dont match.' });
+// 		return;
+// 	}
+// 	else if ($('#recoverPassword').val()=='')
+// 	{
+// 		$.growl.error({ message: 'Blank password' });
+// 		return;
+// 	}
+
+// 	$.blockUI();
+// 	var mod='changeRecoverPassword';
+// 	jQuery.ajax({
+// 	type: 'POST',
+// 	url:'lib/authenticate/login.php',
+// 	dataType:'text', // Data type, HTML, json etc.
+// 	data:{module:mod},
+// 	beforeSend: function() {
+// 		$('#modal-footer').html('');
+// 	},
+// 	success:function(response){
+// 		if (response==true)
+// 		{
+// 			$('#modal-footer').html('Use your new password to Login.');
+// 		}
+// 		else
+// 		{
+// 			$('#modal-footer').html('Change Password failed. Try Again.');
+// 		}
+// 	},
+// 	error:function (xhr, ajaxOptions, thrownError){
+// 		$.growl.error({ message: thrownError });
+// 	}
+	
+// 	});
+// $.unblockUI();
+// });
+
+
+// ";
+
+}
+
+function isPasswordRecoUrlValid()
+{
+	global $DB_HOST, $DB_USER,$DB_PASS, $DB_SCHEMA;
+	$con = new mysqli($DB_HOST,$DB_USER,$DB_PASS,$DB_SCHEMA);
+	$sql="SELECT count(email) FROM security_user  WHERE activation_url = ? AND email = ? ";
+	$stmt = $con->prepare($sql);
+	$stmt->bind_param("ss", $_GET['passRenew'],$_GET['email']);
+	$stmt->execute();
+	$stmt->bind_result($email);
+	$stmt->fetch();
+	$stmt->close();
+	
+	if ($email!=1)
+	{
+		return false;
+	}
+	else
+	{
+		return true;
+	}
+	$con->close();
+}
+
+?>

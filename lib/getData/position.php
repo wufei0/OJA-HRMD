@@ -13,7 +13,7 @@ if (!isset($_POST['module']))
 }
 
 // initialize DB connection
-
+include("../../essential/connection.php");
 switch ($_POST['module']) 
 {
 
@@ -76,11 +76,13 @@ function joblist()
 	$con=mysqli_connect($DB_HOST,$DB_USER,$DB_PASS,$DB_SCHEMA);
 	if (isset($_POST['strFilter']))
 	{
-		$sqlCondition=" WHERE (position LIKE '%".$_POST['strFilter']."%' OR `m_department`.`description` LIKE '%".$_POST['strFilter']."%') AND (postexpire > CURDATE() AND poststart < CURDATE())";
+		$sqlCondition=" WHERE (position LIKE '%".$_POST['strFilter']."%' OR `m_department`.`description` LIKE '%".$_POST['strFilter']."%') ";
+		// $sqlCondition=" WHERE (position LIKE '%".$_POST['strFilter']."%' OR `m_department`.`description` LIKE '%".$_POST['strFilter']."%') AND (postexpire > CURDATE() AND poststart < CURDATE())";
 	}
 	else
 	{
-		$sqlCondition=" WHERE  postexpire > CURDATE() AND poststart < CURDATE()";
+		// $sqlCondition=" WHERE  postexpire > CURDATE() AND poststart < CURDATE()";
+		$sqlCondition=" ";
 	}
 
 	$sql="SELECT jobopening_pk, itemno, position, salarygrade, poststart, m_department.description AS departmentName, m_department.department_pk as department_pk, postexpire FROM jobopening JOIN m_department on jobopening.department_fk = m_department.department_pk ".$sqlCondition." ORDER BY departmentName";

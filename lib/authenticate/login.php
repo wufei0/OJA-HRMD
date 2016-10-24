@@ -40,6 +40,18 @@ case 'registerMe':
 	registerMe();
 	break;
 
+case 'renderForgotPassword':
+	renderForgotPassword();
+	break;
+
+case 'forgotPassword':
+	forgotPassword();
+	break;
+
+case 'changeRecoverPassword':
+	changeRecoverPassword();
+	break;
+
 default:
 	echo "Module is Null.";
 	die();
@@ -142,7 +154,9 @@ function renderLogin()
 					<div class="icon-addon addon-md">
 						<input id="loginTxtPassword" type="password" name="pass" class="form-control input-md" placeholder="Password" required>
 						<label for="email" class="fa fa-lock" rel="tooltip" title="email"></label>
-						<button id="btnLogin" class="btn btn-primary btn-md btn-block pull-right" name="login" style="width:90px;" >Sign In</button>
+&nbsp<button id="btnLogin" class="btn btn-primary btn-md btn-block pull-right" name="login" style="width:90px;" >Sign In</button>
+						
+
 					</div>
 				</div>
 			</form>
@@ -331,7 +345,7 @@ function emailTable($accountName,$activateLink)
     border-right: 1px solid #e6e5e3;
     border-top: none;
     padding: 10px 30px 5px;
-    color: #333;"><p><a href="http://10.10.4.52/oja-hrmd/activate.php?activateUrl='.$activateLink.'" style="font-size: 16px;
+    color: #333;"><p><a href="http://pglu.sytes.net:802/activate.php?activateUrl='.$activateLink.'" style="font-size: 16px;
     display: inline-block;
     text-decoration: none;
     font-weight: bold;
@@ -374,6 +388,179 @@ Human Resource Mangement Division</p></td>
 	</table>';
 }
 
- ?>
 
+function renderForgotPassword()
+{
+	echo '
+
+
+					<div class="panel-body">
+				    	<form id="modalPasswordRecover" role="form">
+				    	<p>Enter your email address and we\'ll send you a link to reset your password.</p>
+					    	<div class="row">
+					    	 	<div class="col-md-12">
+
+						    	 	<div class="form-group">
+
+							    		<div class="icon-addon addon-md">
+
+											<input id="emailAddress" type="email" name="email" class="form-control input-md" placeholder="Email Address" required>
+											<label for="email" class="fa fa-envelope" rel="tooltip" title="email"></label>
+										</div>
+						    		</div>
+					    		</div>
+				    		</div>
+				    		
+				    	 	<input id="btnResetPassword" type="submit" value="Reset Password" class="btn btn-primary btn-block pull-right" style="width:110px;">
+				    	</form>
+					</div>';
+}
+
+
+
+
+
+function forgotPassword()
+{
+	global $DB_HOST, $DB_USER,$DB_PASS, $DB_SCHEMA;
+	$con = new mysqli($DB_HOST, $DB_USER, $DB_PASS, $DB_SCHEMA);
+	// $con->autocommit(FALSE);
+ 	if (mysqli_connect_errno()) 
+	{
+	    printf("Connect failed: %s\n", mysqli_connect_error());
+	    exit();
+	}
+
+	$sql="SELECT count(email),fname,lname,email FROM security_user WHERE email = ?";
+	if ($stmt = $con->prepare($sql))
+	{
+		$stmt->bind_param("s", $_POST['emailAdd']);
+		$stmt->execute();
+		$stmt->bind_result($email,$fname,$lname,$emailAddress);
+		$stmt->fetch();
+		$stmt->close();
+		if ($email==1)
+		{
+			$changePasswordURL=md5(uniqid('', true));
+			$headers   = array();
+			$headers[] = "MIME-Version: 1.0";
+			$headers[] = "Content-type: text/html; charset=iso-8859-1";
+			$headers[] = "From: HRMD <jerome.marzan88@gmail.com>";
+			$headers[] = "Bcc: HRMD <bcc@domain2.com>";
+			$headers[] = "Reply-To: Recipient Name <jerome.marzan88@gmail.com>";
+			$headers[] = "Subject: PGLU Online Application";
+			$headers[] = "X-Mailer: PHP/".phpversion();
+
+			if (!mail($emailAddress,"PGLU Online Application",emailForgotPassword(strtoupper($fname)." ".strtoupper($lname),$changePasswordURL,$_POST['emailAdd']),implode("\r\n", $headers)))
+			{
+				echo "Activation email not sent. Please notify administrator.";
+			}
+			else
+			{
+				$sql="UPDATE security_user SET activation_url = '".$changePasswordURL."' WHERE email='".$emailAddress."' ";
+				$con->query($sql);
+				echo true;
+			}
+		}
+		else
+		{
+			echo "Email Address not recognize. Check inputed email. ";
+		}
+	}
+	 $con->close();
+}
+
+function emailForgotPassword($accountName,$link,$email)
+{
+return '<table border="0" style="margin:auto;
+		width:500px; font-family:arial;">
+		<tr>
+			<th style="background-color:#054a75; margin:0;
+		color:#fff;
+		padding:16px 14px;
+		letter-spacing:1.2px;"><h1 style="font-size:16px;
+		font-family:arial;">PGLU Online Job Application</h1></th>
+		</tr>
+		<tr>
+			<td style="font-family:arial; border-left: 1px solid #e6e5e3;
+		border-right: 1px solid #e6e5e3;
+		border-top: none;
+		padding: 10px 30px 5px;
+		color: #333;"><p>Dear '.$accountName.',</p></td>
+		</tr>
+		<tr>
+			<td style="font-family:arial; border-left: 1px solid #e6e5e3;
+		border-right: 1px solid #e6e5e3;
+		border-top: none;
+		padding: 10px 30px 5px;
+		color: #333;"><p>You told us you forgot your password. If you really did, click button below to choose a new one:</p></td>
+		</tr>
+		<tr>
+			<td style="border-left: 1px solid #e6e5e3;
+    border-right: 1px solid #e6e5e3;
+    border-top: none;
+    padding: 10px 30px 5px;
+    color: #333;"><p><a href="http://pglu.sytes.net:802/home.php?passRenew='.$link.'&email='.$email.'" style="font-size: 16px;
+    display: inline-block;
+    text-decoration: none;
+    font-weight: bold;
+	font-family:arial;
+    padding: 12px 22px 13px;
+	border-radius:4px;
+    color: #fff;
+    min-height: 19px;
+    background-color: #248806;">Choose a new Password</a></td>
+		</tr>
+		<tr>
+			<td style="font-family:arial; border-left: 1px solid #e6e5e3;
+		border-right: 1px solid #e6e5e3;
+		border-top: none;
+		padding: 10px 30px 5px;
+		color: #333;"><p>If you didnt mean to reset your password, then you can just ignore this email.</p></td>
+		</tr>
+		
+		
+		<tr>
+			<td style="border-bottom:1px solid #e6e5e3; font-family:arial; border-left: 1px solid #e6e5e3;
+		border-right: 1px solid #e6e5e3;
+		border-top: none;
+		padding: 10px 30px 5px;
+		color: #333;"><p style="padding-bottom:40px;">Thank you.<br>
+Human Resource Mangement Division</p></td>
+		</tr>
+	</table>';
+}
+
+
+
+function changeRecoverPassword()
+{
+	global $DB_HOST, $DB_USER,$DB_PASS, $DB_SCHEMA;
+	$con = new mysqli($DB_HOST, $DB_USER, $DB_PASS, $DB_SCHEMA);
+	$sql="UPDATE security_user SET password = ?, activation_url = null WHERE activation_url=? AND email = ?";
+	if ($stmt = $con->prepare($sql))
+	{ 
+		$salt = getSalt($_POST['email']);
+		$hash = sha1($_POST['pass'] . $salt);
+		$stmt->bind_param("sss",$hash,$_POST['passRenew'] ,$_POST['email']);
+		$stmt->execute();
+		if ($con->affected_rows==1)
+		{
+			echo true;
+		}
+		else
+		{
+			echo false;
+			// echo $_POST['passRenew'];
+			// echo $_POST['email'];
+		}
+
+	}
+$stmt->close();
+$con->close();
+
+
+}
+
+?>
 

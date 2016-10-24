@@ -25,7 +25,7 @@ $tplIdx = $pdf->importPage(1);
 $pdf->SetMargins(0,0,0);
 $pdf->SetAutoPageBreak('off');
 //$size = $pdf->getTemplateSize($tplIdx);
-$pdf->AddPage("L","legal");
+$pdf->AddPage();
 
 // use the imported page and place it at position 10,10 with a width of 100 mm
 $pdf->useTemplate($tplIdx, null, null, 0, 0, true);
@@ -477,17 +477,17 @@ $pdf->SetFont($fontUsed);
 		if (($educDetail['EducLvlID']=='L01')AND($elemItem==1))
 		{
 			
-			$pdf->SetXY(34, 253.5);
+			$pdf->SetXY(34, 254);
 			if(strlen($educDetail['EducSchoolName'])>44) 
 			{
 				$pdf->SetFontSize(8);
-				$pdf->SetXY(34, 253.5);
+				$pdf->SetXY(34, 254);
 			}
 			$pdf->MultiCell(55, 3, $educDetail['EducSchoolName'],0,'L');
 			if(strlen($educDetail['EducSchoolName'])>44) $pdf->SetFontSize(9);
 			
 			
-			$pdf->SetXY(89, 253.8);	
+			$pdf->SetXY(89, 254);	
 			if(strlen($educDetail['EducCourse'])>9) 
 			{
 				$pdf->SetFontSize(8);
@@ -544,16 +544,16 @@ $pdf->SetFont($fontUsed);
 		if (($educDetail['EducLvlID']=='L02')AND($highschoolItem==1))
 		{
 			
-			$pdf->SetXY(34, 262.5);
+			$pdf->SetXY(34, 263);
 			if(strlen($educDetail['EducSchoolName'])>44) 
 			{
 				$pdf->SetFontSize(8);
-				$pdf->SetXY(34, 262.5);
+				$pdf->SetXY(34, 263);
 			}
 			$pdf->MultiCell(55, 3, $educDetail['EducSchoolName'],0,'L');
 			if(strlen($educDetail['EducSchoolName'])>44) $pdf->SetFontSize(10);
 			
-			$pdf->SetXY(89, 263);
+			$pdf->SetXY(89, 263.5);
 			if(strlen($educDetail['EducCourse'])>9) 
 			{
 				$pdf->SetFontSize(8);
@@ -609,20 +609,20 @@ $pdf->SetFont($fontUsed);
 //VOCATIONAL
 		if (($educDetail['EducLvlID']=='L07')AND($vocationalItem==1))
 		{
-			$pdf->SetXY(34, 272);
+			$pdf->SetXY(34, 272.3);
 			if(strlen($educDetail['EducSchoolName'])>44) 
 			{
 				$pdf->SetFontSize(8);
-				$pdf->SetXY(34, 272);
+				$pdf->SetXY(34, 272.3);
 			}
 			$pdf->MultiCell(55, 3, $educDetail['EducSchoolName'],0,'L');
 			if(strlen($educDetail['EducSchoolName'])>44) $pdf->SetFontSize(10);
 			
-			$pdf->SetXY(89, 272);
+			$pdf->SetXY(89, 272.3);
 			if(strlen($educDetail['EducCourse'])>9) 
 			{
 				$pdf->SetFontSize(8);
-				$pdf->SetXY(89, 272);
+				$pdf->SetXY(89, 272.3);
 			}
 			$pdf->MultiCell(25, 3, $educDetail['EducCourse'],0,'C');
 			if(strlen($educDetail['EducCourse'])>9) $pdf->SetFontSize(10);
@@ -674,20 +674,20 @@ $pdf->SetFont($fontUsed);
 //COLLEGE 
 		if (($educDetail['EducLvlID']=='L03')AND($collegeItem==1))
 		{
-			$pdf->SetXY(34, 281);
+			$pdf->SetXY(34, 281.5);
 			if(strlen($educDetail['EducSchoolName'])>44) 
 			{
 				$pdf->SetFontSize(8);
-				$pdf->SetXY(34, 281);
+				$pdf->SetXY(34, 281.5);
 			}
 			$pdf->MultiCell(55, 3, $educDetail['EducSchoolName'],0,'L');
 			if(strlen($educDetail['EducSchoolName'])>44) $pdf->SetFontSize(10);
 			
-			$pdf->SetXY(89, 281);
+			$pdf->SetXY(89, 281.5);
 			if(strlen($educDetail['EducCourse'])>9) 
 			{
 				$pdf->SetFontSize(8);
-				$pdf->SetXY(89, 281);
+				$pdf->SetXY(89, 281.5);
 			}
 			$pdf->MultiCell(25, 3, $educDetail['EducCourse'],0,'C');
 			if(strlen($educDetail['EducCourse'])>9) $pdf->SetFontSize(10);
@@ -738,20 +738,20 @@ $pdf->SetFont($fontUsed);
 		}
 		elseif(($educDetail['EducLvlID']=='L03')AND($collegeItem==2))	
 		{
-			$pdf->SetXY(34, 290);
+			$pdf->SetXY(34, 290.5);
 			if(strlen($educDetail['EducSchoolName'])>44) 
 			{
 				$pdf->SetFontSize(8);
-				$pdf->SetXY(34, 290);
+				$pdf->SetXY(34, 290.5);
 			}
 			$pdf->MultiCell(55, 3, $educDetail['EducSchoolName'],0,'L');
 			if(strlen($educDetail['EducSchoolName'])>44) $pdf->SetFontSize(10);
 			
-			$pdf->SetXY(89, 290);
+			$pdf->SetXY(89, 290.5);
 			if(strlen($educDetail['EducCourse'])>9) 
 			{
 				$pdf->SetFontSize(8);
-				$pdf->SetXY(89, 290);
+				$pdf->SetXY(89, 290.5);
 			}
 			$pdf->MultiCell(25, 3, $educDetail['EducCourse'],0,'C');
 			if(strlen($educDetail['EducCourse'])>9) $pdf->SetFontSize(10);
@@ -927,14 +927,14 @@ $pdf->SetFont($fontUsed);
 	}
 	
 
-$pdf->AddPage("L","legal");
+$pdf->AddPage();
 $page2 = $pdf->importPage(2);
 $pdf->useTemplate($page2, null, null, 0, 0, true);
 
 
 // CIVIL SERVICE
-$cscYcoord=28.5;
-$cscYcoordPlace=28;
+$cscYcoord=29;
+$cscYcoordPlace=28.5;
 	foreach($employeeInfo['2'] as $cseDetail)
 	{
 		$pdf->SetFontSize(10);
@@ -991,11 +991,11 @@ $cscYcoordPlace=28;
 // WORK EXPERIENCE
 	$wExpYcoordFrom=124;
 	$wExpYcoordTo=124;
-	$wExpYcoordPosition=121.5;
-	$wExpYcoordEmployee=121.5;
+	$wExpYcoordPosition=122.7;
+	$wExpYcoordEmployee=122.7;
 	$wExpYcoordMsalary=123;
 	$wExpYcoordGsalary=123;
-	$wExpYcoordApp=122.5;
+	$wExpYcoordApp=122.7;
 	$wExpYcoordGov=124;
 	foreach($employeeInfo['3'] as $workExpDetail)
 	{
@@ -1104,11 +1104,11 @@ $page3 = $pdf->importPage(3);
 $pdf->useTemplate($page3, null, null, 0, 0, true);
 
 // VOLUNTARY WORK
-$volYcoordname=30;
+$volYcoordname=30.5;
 $volYcoordFrom=32;
 $volYcoordTo=32;
 $volYcoordHour=32;
-$volYcoordPosition=30;
+$volYcoordPosition=31;
 	foreach($employeeInfo['4'] as $VolDetail)
 	{
 		$pdf->SetXY(7.5, $volYcoordname);
@@ -1181,11 +1181,11 @@ $volYcoordPosition=30;
 	
 
 // TRAINING PROGRAMS
-	$TrainDetailYcoord=104;
+	$TrainDetailYcoord=104.8;
 	$TrainDetailYcoordFrom=106;
 	$TrainDetailYcoordTo=106;
 	$TrainDetailYcoordHour=106;
-	$TrainDetailYcoordSponsor=104.5;
+	$TrainDetailYcoordSponsor=105;
 	foreach($employeeInfo['5'] as $TrainDetail)
 	{
 		$pdf->SetXY(7.5, $TrainDetailYcoord);
@@ -1254,7 +1254,7 @@ $volYcoordPosition=30;
 
 // OTHER INFORMATION
 	// Skills and Hobbies
-	$SkillsDetailYcoord=267;
+	$SkillsDetailYcoord=269.5;
 	foreach($employeeInfo['6'] as $SkillsDetail)
 	{
 		$pdf->SetXY(7.5, $SkillsDetailYcoord);
@@ -1268,7 +1268,7 @@ $volYcoordPosition=30;
 	}
 	
 	// NON-ACADEMIC
-	$NonAcadRecDetailYcoord=267;
+	$NonAcadRecDetailYcoord=269.5;
 	foreach($employeeInfo['7'] as $NonAcadDetail)
 	{
 		$pdf->SetXY(75.5, $NonAcadRecDetailYcoord);
@@ -1282,7 +1282,7 @@ $volYcoordPosition=30;
 	}
 	
 	// MEMBERSHIP ASSOCIATION
-	$MemAssOrgDetailYcoord=267;
+	$MemAssOrgDetailYcoord=269.5;
 	foreach($employeeInfo['8'] as $MemAssOrgDetail)
 	{
 		$pdf->SetXY(158, $MemAssOrgDetailYcoord);
@@ -1313,14 +1313,14 @@ foreach($employeeInfo['10'] as $questions)
 				$pdf->SetXY(142,17.8);
 				$pdf->SetFont('ZapfDingbats','', 9);
 				$pdf->Write(0, "4");
-				$pdf->SetXY(141.5,24.5);
+				$pdf->SetXY(141.5,25);
 				$pdf->SetFont($fontUsed);
 				if (strlen($questions['AnsDetails'])>26)
 				{
 					$pdf->MultiCell(59, 3, substr($questions['AnsDetails'],0,29),0,'L');
-					$pdf->SetXY(141.5,29);
+					$pdf->SetXY(141.5,29.5);
 					$pdf->MultiCell(59, 3, substr($questions['AnsDetails'],29,29),0,'L');
-					$pdf->SetXY(141.5,33.5);
+					$pdf->SetXY(141.5,34);
 					$pdf->MultiCell(59, 3, substr($questions['AnsDetails'],58,29),0,'L');
 				}
 				else
@@ -1341,17 +1341,17 @@ foreach($employeeInfo['10'] as $questions)
 		case "Q362":
 			if ($questions['AnsIsYes']=='1')
 			{
-				$pdf->SetXY(142,44);
+				$pdf->SetXY(141.7,44);
 				$pdf->SetFont('ZapfDingbats','', 9);
 				$pdf->Write(0, "4");
-				$pdf->SetXY(141.5,51.2);
+				$pdf->SetXY(141.5,52);
 				$pdf->SetFont($fontUsed);
 				if (strlen($questions['AnsDetails'])>26)
 				{
 					$pdf->MultiCell(60, 3, substr($questions['AnsDetails'],0,29),0,'L');
-					$pdf->SetXY(141.5,55.7);
+					$pdf->SetXY(141.5,56.5);
 					$pdf->MultiCell(60, 3, substr($questions['AnsDetails'],29,29),0,'L');
-					$pdf->SetXY(141.5,60.2);
+					$pdf->SetXY(141.5,61);
 					$pdf->MultiCell(60, 3, substr($questions['AnsDetails'],58,29),0,'L');
 				}
 				else
@@ -1363,7 +1363,7 @@ foreach($employeeInfo['10'] as $questions)
 			
 			else
 			{
-				$pdf->SetXY(155,44);
+				$pdf->SetXY(154.6,44);
 				$pdf->SetFont('ZapfDingbats','', 9);
 				$pdf->Write(0, "4");
 			}
@@ -1374,17 +1374,17 @@ foreach($employeeInfo['10'] as $questions)
 		case "Q371":
 			if ($questions['AnsIsYes']=='1')
 			{
-				$pdf->SetXY(142,67.5);
+				$pdf->SetXY(141.7,67.8);
 				$pdf->SetFont('ZapfDingbats','', 9);
 				$pdf->Write(0, "4");
-				$pdf->SetXY(141.5,75);
+				$pdf->SetXY(141.5,76);
 				$pdf->SetFont($fontUsed);
 				if (strlen($questions['AnsDetails'])>24)
 				{
 					$pdf->MultiCell(53, 3, substr($questions['AnsDetails'],0,24),0,'L');
-					$pdf->SetXY(141.5,80);
+					$pdf->SetXY(141.5,80.5);
 					$pdf->MultiCell(53, 3, substr($questions['AnsDetails'],24,24),0,'L');
-					$pdf->SetXY(141.5,85);
+					$pdf->SetXY(141.5,85.5);
 				}
 				else
 				{
@@ -1395,7 +1395,7 @@ foreach($employeeInfo['10'] as $questions)
 			
 			else
 			{
-				$pdf->SetXY(155,67.5);
+				$pdf->SetXY(154.6,67.8);
 				$pdf->SetFont('ZapfDingbats','', 9);
 				$pdf->Write(0, "4");
 			}
@@ -1404,17 +1404,17 @@ foreach($employeeInfo['10'] as $questions)
 		case "Q372":
 			if ($questions['AnsIsYes']=='1')
 			{
-				$pdf->SetXY(142,86.5);
+				$pdf->SetXY(141.7,87.5);
 				$pdf->SetFont('ZapfDingbats','', 9);
 				$pdf->Write(0, "4");
-				$pdf->SetXY(141.5,95);
+				$pdf->SetXY(141.5,95.8);
 				$pdf->SetFont($fontUsed);
 				if (strlen($questions['AnsDetails'])>24)
 				{
 					$pdf->MultiCell(53, 3, substr($questions['AnsDetails'],0,24),0,'L');
-					$pdf->SetXY(141.5,99.5);
+					$pdf->SetXY(141.5,100.5);
 					$pdf->MultiCell(53, 3, substr($questions['AnsDetails'],24,24),0,'L');
-					$pdf->SetXY(141.5,103.5);
+					$pdf->SetXY(141.5,104);
 				}
 				else
 				{
@@ -1425,7 +1425,7 @@ foreach($employeeInfo['10'] as $questions)
 			
 			else
 			{
-				$pdf->SetXY(155,86.5);
+				$pdf->SetXY(154.6,87.5);
 				$pdf->SetFont('ZapfDingbats','', 9);
 				$pdf->Write(0, "4");
 			}
@@ -1435,15 +1435,15 @@ foreach($employeeInfo['10'] as $questions)
 		case "Q380":
 			if ($questions['AnsIsYes']=='1')
 			{
-				$pdf->SetXY(141,106);
+				$pdf->SetXY(141,107.3);
 				$pdf->SetFont('ZapfDingbats','', 9);
 				$pdf->Write(0, "4");
-				$pdf->SetXY(141.5,113.8);
+				$pdf->SetXY(141.5,114.8);
 				$pdf->SetFont($fontUsed);
 				if (strlen($questions['AnsDetails'])>24)
 				{
 					$pdf->MultiCell(53, 3, substr($questions['AnsDetails'],0,24),0,'L');
-					$pdf->SetXY(141.5,118);
+					$pdf->SetXY(141.5,119.3);
 					$pdf->MultiCell(53, 3, substr($questions['AnsDetails'],24,24),0,'L');
 					$pdf->SetXY(141.5,123);
 				}
@@ -1456,7 +1456,7 @@ foreach($employeeInfo['10'] as $questions)
 			
 			else
 			{
-				$pdf->SetXY(154,106);
+				$pdf->SetXY(153.6,107.3);
 				$pdf->SetFont('ZapfDingbats','', 9);
 				$pdf->Write(0, "4");
 			}
@@ -1466,15 +1466,15 @@ foreach($employeeInfo['10'] as $questions)
 		case "Q390":
 			if ($questions['AnsIsYes']=='1')
 			{
-				$pdf->SetXY(141,125.5);
+				$pdf->SetXY(141,126.5);
 				$pdf->SetFont('ZapfDingbats','', 9);
 				$pdf->Write(0, "4");
-				$pdf->SetXY(141.5,136.8);
+				$pdf->SetXY(141.5,138);
 				$pdf->SetFont($fontUsed);
 				if (strlen($questions['AnsDetails'])>24)
 				{
 					$pdf->MultiCell(53, 3, substr($questions['AnsDetails'],0,24),0,'L');
-					$pdf->SetXY(141.5,141.5);
+					$pdf->SetXY(141.5,142.5);
 					$pdf->MultiCell(53, 3, substr($questions['AnsDetails'],24,24),0,'L');
 					$pdf->SetXY(141.5,145);
 				}
@@ -1487,7 +1487,7 @@ foreach($employeeInfo['10'] as $questions)
 			
 			else
 			{
-				$pdf->SetXY(154,125.5);
+				$pdf->SetXY(154,126.5);
 				$pdf->SetFont('ZapfDingbats','', 9);
 				$pdf->Write(0, "4");
 			}
@@ -1497,15 +1497,15 @@ foreach($employeeInfo['10'] as $questions)
 		case "Q400":
 			if ($questions['AnsIsYes']=='1')
 			{
-				$pdf->SetXY(141.8,151.2);
+				$pdf->SetXY(141.8,152.5);
 				$pdf->SetFont('ZapfDingbats','', 9);
 				$pdf->Write(0, "4");
-				$pdf->SetXY(141.5,159.8);
+				$pdf->SetXY(141.5,161);
 				$pdf->SetFont($fontUsed);
 				if (strlen($questions['AnsDetails'])>24)
 				{
 					$pdf->MultiCell(53, 3, substr($questions['AnsDetails'],0,24),0,'L');
-					$pdf->SetXY(141.5,164.3);
+					$pdf->SetXY(141.5,165.5);
 					$pdf->MultiCell(53, 3, substr($questions['AnsDetails'],24,24),0,'L');
 					$pdf->SetXY(141.5,169);
 				}
@@ -1518,7 +1518,7 @@ foreach($employeeInfo['10'] as $questions)
 			
 			else
 			{
-				$pdf->SetXY(154.5,151.2);
+				$pdf->SetXY(154.5,152.5);
 				$pdf->SetFont('ZapfDingbats','', 9);
 				$pdf->Write(0, "4");
 			}
@@ -1529,10 +1529,10 @@ foreach($employeeInfo['10'] as $questions)
 		case "Q411":
 			if ($questions['AnsIsYes']=='1')
 			{
-				$pdf->SetXY(141.5,185);
+				$pdf->SetXY(141.5,186.8);
 				$pdf->SetFont('ZapfDingbats','', 8);
 				$pdf->Write(0, "4");
-				$pdf->SetXY(172,188);
+				$pdf->SetXY(172,190);
 				$pdf->SetFont($fontUsed);
 				
 				$pdf->MultiCell(32, 2.8, substr($questions['AnsDetails'],0,14),0,'L');
@@ -1541,7 +1541,7 @@ foreach($employeeInfo['10'] as $questions)
 			
 			else
 			{
-				$pdf->SetXY(154.5,185);
+				$pdf->SetXY(154.5,186.8);
 				$pdf->SetFont('ZapfDingbats','', 9);
 				$pdf->Write(0, "4");
 			}
@@ -1550,10 +1550,10 @@ foreach($employeeInfo['10'] as $questions)
 		case "Q412":
 			if ($questions['AnsIsYes']=='1')
 			{
-				$pdf->SetXY(141.5,194.5);
+				$pdf->SetXY(141.5,196.3);
 				$pdf->SetFont('ZapfDingbats','', 8);
 				$pdf->Write(0, "4");
-				$pdf->SetXY(172,197.8);
+				$pdf->SetXY(172,199.5);
 				$pdf->SetFont($fontUsed);
 				
 				$pdf->MultiCell(32, 3, substr($questions['AnsDetails'],0,14),0,'L');
@@ -1561,7 +1561,7 @@ foreach($employeeInfo['10'] as $questions)
 			
 			else
 			{
-				$pdf->SetXY(154.5,194.5);
+				$pdf->SetXY(154.5,196.3);
 				$pdf->SetFont('ZapfDingbats','', 9);
 				$pdf->Write(0, "4");
 			}
@@ -1570,10 +1570,10 @@ foreach($employeeInfo['10'] as $questions)
 		case "Q413":
 			if ($questions['AnsIsYes']=='1')
 			{
-				$pdf->SetXY(141.5,204);
+				$pdf->SetXY(141.5,205.8);
 				$pdf->SetFont('ZapfDingbats','', 8);
 				$pdf->Write(0, "4");
-				$pdf->SetXY(172,207.5);
+				$pdf->SetXY(172,209);
 				$pdf->SetFont($fontUsed);
 				
 				$pdf->MultiCell(32, 3, substr($questions['AnsDetails'],0,14),0,'L');
@@ -1581,7 +1581,7 @@ foreach($employeeInfo['10'] as $questions)
 			
 			else
 			{
-				$pdf->SetXY(154.5,204);
+				$pdf->SetXY(154.5,205.8);
 				$pdf->SetFont('ZapfDingbats','', 10);
 				$pdf->Write(0, "4");
 			}
@@ -1591,7 +1591,7 @@ foreach($employeeInfo['10'] as $questions)
 
 $pdf->SetFont($fontUsed);
 
-	$RefNameDetailYcoord=226;
+	$RefNameDetailYcoord=228;
 	foreach($employeeInfo['9'] as $RefDetail)
 	{
 		$pdf->SetXY(8, $RefNameDetailYcoord);
@@ -1604,7 +1604,7 @@ $pdf->SetFont($fontUsed);
 		$pdf->SetFontSize(10);
 	}
 	
-	$RefAddDetailYcoord=226;
+	$RefAddDetailYcoord=228;
 	foreach($employeeInfo['9'] as $RefAddDetail)
 	{
 		$pdf->SetXY(81.8, $RefAddDetailYcoord);
@@ -1617,7 +1617,7 @@ $pdf->SetFont($fontUsed);
 		$pdf->SetFontSize(10);
 	}
 	
-	$RefTelDetailYcoord=226;
+	$RefTelDetailYcoord=228;
 	foreach($employeeInfo['9'] as $RefTelDetail)
 	{
 		$pdf->SetXY(139, $RefTelDetailYcoord);

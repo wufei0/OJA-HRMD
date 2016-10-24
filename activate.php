@@ -17,7 +17,7 @@ if($query->num_rows==1)
 {
 	$transactionNo=makeTransactionNo();
 	$result=$query->fetch_array(MYSQLI_ASSOC);
-	$sql="UPDATE security_user SET activate=1 WHERE email = '".$result['email']."' ";
+	$sql="UPDATE security_user SET activate=1,activation_url=null WHERE email = '".$result['email']."' ";
 	$query=$con->query($sql);
 
 	insertToAudit($transactionNo,$sql,'activate',null);
