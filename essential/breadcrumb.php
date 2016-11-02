@@ -25,7 +25,7 @@ function linkToLogin()
 {
 	if (isLoggedIn())
 	{
-		echo "Welcome, <a href='#' >".$_SESSION['name']."</a>";
+		echo "Welcome, <a href='userinfo.php' >".$_SESSION['name']."</a>";
 		echo ' | <a href="#" onclick="logOut(event)">Log Out</a></font>
 	  <div class="tclear"></div>
 		</ol>';
