@@ -16,7 +16,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 <!-- 	<link rel="icon" href="images/home/icon/pglu.ico" type="image/x-icon"> -->
-    <title>OJA v1.0</title>
+    <title><?php echo $SESSION_['sysVer']; ?></title>
     <link rel="icon" href="images/logo/icon_oja.gif" type="image/x-icon">
     <!-- Latest compiled and minified CSS -->
 	<link href="css/bootstrap.css" rel="stylesheet"/>
