@@ -4,7 +4,7 @@
 	require_once('essential/connection.php');
 	
 	
-	global $DB_HOST, $DB_USER,$DB_PASS, $DB_SCHEMA;
+	
 	$con=mysqli_connect($DB_HOST,$DB_USER,$DB_PASS,$DB_SCHEMA);
 	
 // 	$headers   = array();
@@ -131,13 +131,13 @@
 												<div class="form-group">
 													<label for="inputFirstName" class="col-sm-2 control-label">First Name:</label>
 													<div class="col-sm-10">
-													  <input type="type" id="fname" name="fname" class="form-control" placeholder="First Name" value="'.$result['fname'].'">
+													  <input type="type" id="fname" name="fname" class="form-control" placeholder="First Name" value="'.$result['fname'].'" required>
 													</div>
 												</div>
 												<div class="form-group">
 													<label for="inputLastName" class="col-sm-2 control-label">Last Name:</label>
 													<div class="col-sm-10">
-													  <input type="type" id="lname" name="lname" class="form-control" placeholder="Last Name" value="'.$result['lname'].'">
+													  <input type="type" id="lname" name="lname" class="form-control" placeholder="Last Name" value="'.$result['lname'].'" required>
 													</div>
 												</div>
 												<div class="form-group">
@@ -175,26 +175,26 @@
 									
 									<div class="col-sm-8">
 										
-												<form name="changePassword" class="form-horizontal" method="post">
+												<form id="changePassword" name="changePassword" class="form-horizontal" method="post">
 													<div class="form-group">
 														<label for="inputCurrentPass" class="col-sm-2 control-label">Current Password:</label>
 														<div class="col-sm-10">
-														  <input type="password" name="currentPass" class="form-control" placeholder="Current Password">
+														  <input id="currentPass" type="password" name="currentPass" class="form-control" placeholder="Current Password">
 														</div>
 													</div><br/>
 													<div class="form-group">
 														<label for="inputNewPass" class="col-sm-2 control-label">New Password:</label>
 														<div class="col-sm-10">
-														  <input type="password" name="newPass" class="form-control" placeholder="New Password">
+														  <input id="newPass" type="password" name="newPass" class="form-control" placeholder="New Password">
 														</div>
 													</div>
 													<div class="form-group">
 														<label for="inputVerifyPass" class="col-sm-2 control-label">Verify Password:</label>
 														<div class="col-sm-10">
-														  <input type="password" name="verifyPass" class="form-control" placeholder="Verify Password">
+														  <input id="verifyPass" type="password" name="verifyPass" class="form-control" placeholder="Verify Password">
 														</div>
 													</div>
-													<input class="btn btn-primary pull-right" type="submit" value="Save">
+													<input id="btnSavePass" class="btn btn-primary pull-right" type="submit" value="Save">
 												</form>
 												
 									</div>
@@ -241,17 +241,100 @@
 
 $(document).ready(function(){
 	$('#feedbackDiv').feedBackBox();
+
+
+
 });
 
-$( "#btnSaveUser" ).submit(function(event) {
-
+$('#frmUserInfo').submit(function(event) {
 	event.preventDefault();
+	$.blockUI();
+	var mod="changeUserInfo";
+	var userInfo ='{';
+	userInfo+='"lname":"'+ $('#lname').val() + '",';
+	userInfo+='"fname":"'+ $('#fname').val() + '"';
+	userInfo+='}';
+	userInfo=JSON.parse(userInfo);
+	console.log(userInfo);
+	// return;
+	jQuery.ajax({
+	type: 'POST',
+	url:'lib/postData/userinfo.php',
+	dataType:'json', 
+	data:{module:mod,userInfo:userInfo},
+	beforeSend: function() {
+		$('#btnSaveUser').val('please wait...');
+	},
+	success:function(response){
+		if (response['status']==true)
+		{
+			$.growl.notice({ message: response['message'] });
+		}
+		else
+		{
+			$.growl.error({ message: response['message'] });
+		}
+	},
+	error:function (xhr, ajaxOptions, thrownError){
+		$.growl.error({ message: thrownError });
+	}
+
+	});
+	$('#btnSaveUser').val('Save');
+	$.unblockUI();
 	
-	
+
+
+
 });
 
 
 
+$('#changePassword').submit(function(event) {
+	event.preventDefault();
+	$.blockUI();
+	if ($('#newPass').val()!=$('#verifyPass').val())
+	{
+		$.unblockUI();
+		$.growl.error({ message: " Password doesn't match the confirmation." });
+		return;
+	}
+
+	var mod="changePassword";
+	var userPass ='{';
+	userPass+='"password":"'+ $('#newPass').val() + '",';
+	userPass+='"currentPass":"'+ $('#currentPass').val() + '"';
+	userPass+='}';
+	userPass=JSON.parse(userPass);
+	console.log(userPass);
+	jQuery.ajax({
+	type: 'POST',
+	url:'lib/postData/userinfo.php',
+	dataType:'json', 
+	data:{module:mod,userPass:userPass},
+	beforeSend: function() {
+		$('#btnSavePass').val('please wait...');
+	},
+	success:function(response){
+		if (response['status']==true)
+		{
+			$.growl.notice({ message: response['message'] });
+		}
+		else
+		{
+			$.growl.error({ message: response['message'] });
+		}
+	},
+	error:function (xhr, ajaxOptions, thrownError){
+		$.growl.error({ message: thrownError });
+	}
+
+	});
+	$('#btnSavePass').val('Save');
+	$.unblockUI();
+	
+
+});
 
 
 </script>

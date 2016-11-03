@@ -263,6 +263,7 @@ color:#e8e8e8;
   position:fixed;
   left:0;
   top:126px;
+  z-index: 1000;
 }
 .leftmenu ul a,
 .leftmenu ul a:link,

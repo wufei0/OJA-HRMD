@@ -89,18 +89,18 @@ echo '
 <div class="row">
 	<div class="col-md-12">
 		<div id="homebanner" class="hero">
-			<div class="container">
-				<div class="row">
-						<div class="col-md-12">
-							<p>PGLU Online Job Application</p>
-							<img src="images/textonline.gif" width="750" height="60" />
-						<div class="button-text">
-							<a href="#" onclick="logInModal();"> SIGN IN </a>&nbsp;&nbsp;&nbsp;&nbsp;
-							<a href="#" onclick="registerInModal();"> SIGN UP </a>
-						</div>
+			
+			<div class="row">
+					<div class="col-md-12">
+						<p>PGLU Online Job Application</p>
+						<img src="images/textonline.gif" width="750" height="60" />
+					<div class="button-text">
+						<a href="#" onclick="logInModal();"> SIGN IN </a>&nbsp;&nbsp;&nbsp;&nbsp;
+						<a href="#" onclick="registerInModal();"> SIGN UP </a>
 					</div>
 				</div>
 			</div>
+			
 		</div>
 	</div>
 </div>'; }

@@ -57,7 +57,7 @@ function applicationList()
 	foreach($applicationArr as $schedApplications)
 	{
 		// echo $_POST['dateOfInterview'];
-		
+		 
 		$applicantEmail=getEmail($schedApplications['ApplicationNo'],$transactionNo);
 
 		if (mail($applicantEmail,"PGLU Online Application",emailSchedApplication(strtoupper($schedApplications['Applicant']),$_POST['dateOfInterview'],$_POST['timeOfInterview'],$schedApplications['position']),implode("\r\n", $headers)))
