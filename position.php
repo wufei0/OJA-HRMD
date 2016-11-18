@@ -278,7 +278,7 @@ $('#jobList').on('click-row.bs.table', function (e, row, $element) {
 		$('#txtPosition').val(row['position']);
 		$('#txtItem').val(row['itemNo']);
 		$('#txtSalaryGrade').val(row['salaryGrade']);
-		document.getElementById("txtDatePost").valueAsDate = row['datePost'];
+		// document.getElementById("txtDatePost").valueAsDate = row['datePost'];
 		$('#txtDatePost').val(row['datePost']);
 		$('#txtDateExpire').val(row['dateExpire']);
 		$('#selDepartment').selectpicker('val',row['department_pk']);

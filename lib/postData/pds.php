@@ -78,7 +78,7 @@ function updatePerInfo()
 	}
 
 
-	mysqli_stmt_bind_param($stmt, "ssssiiisssssssssssssssssssssssss",  $perInfo['EmpLName'], $perInfo['EmpMName'], $perInfo['EmpFName'], $perInfo['EmpExtName'], $perBday[1], $perBday[0], $perBday[2], $perInfo['EmpBirthPlace'], $perInfo['EmpSex'], $perInfo['EmpCivilStatus'], $perInfo['EmpCitizenship'], $perInfo['EmpHeight'], $perInfo['EmpWeight'], $perInfo['EmpBloodType'], $perInfo['EmpGSIS'], $perInfo['EmpHDMF'], $perInfo['EmpPH'], $perInfo['EmpSSS'], $perInfo['EmpResAddBrgy'], $perInfo['EmpResAddMun'], $perInfo['EmpResAddProv'], $perInfo['EmpResZipCode'], $perInfo['EmpResTel'], $perInfo['EmpPerAddBrgy'], $perInfo['EmpPerAddMun'], $perInfo['EmpPerAddProv'], $perInfo['EmpPerZipCode'], $perInfo['EmpPerTel'],$perInfo['EmpMobile'],  $perInfo['EmpEMail'],$perInfo['EmpAgencyNo'],$perInfo['EmpTIN']);
+	mysqli_stmt_bind_param($stmt, "ssssiiisssssssssssssssssssssssss",  $perInfo['EmpLName'], $perInfo['EmpMName'], $perInfo['EmpFName'], $perInfo['EmpExtName'], $perBday[1], $perBday[0], $perBday[2], $perInfo['EmpBirthPlace'], $perInfo['EmpSex'], $perInfo['EmpCivilStatus'], $perInfo['EmpCitizenship'], $perInfo['EmpHeight'], $perInfo['EmpWeight'], $perInfo['EmpBloodType'], $perInfo['EmpGSIS'], $perInfo['EmpHDMF'], $perInfo['EmpPH'], $perInfo['EmpSSS'], $perInfo['EmpResAddBrgy'], $perInfo['EmpResAddMun'], $perInfo['EmpResAddProv'], $perInfo['EmpResZipCode'], $perInfo['EmpResTel'], $perInfo['EmpPerAddBrgy'], $perInfo['EmpPerAddMun'], $perInfo['EmpPerAddProv'], $perInfo['EmpPerZipCode'], $perInfo['EmpPerTel'],$perInfo['EmpEMail'],  $perInfo['EmpMobile'],$perInfo['EmpAgencyNo'],$perInfo['EmpTIN']);
 
 
 		// mysqli_stmt_execute($stmt);
@@ -165,7 +165,7 @@ function updateFamBackground()
 	$sql="DELETE FROM empdependents WHERE `EmpID` ='".$_SESSION['username']."'";
 	mysqli_query($con,$sql);
 
-	$perFamBknd=$_POST['jsonData'];
+	// $perFamBknd=$_POST['jsonData'];
 	if (isset($perFamBknd['child']))
 	{
 		// $dependentList=array();
@@ -226,7 +226,7 @@ function updateEducBackground()
 	$returnMessage=array();
 	//explode birthdate (mm-dd-YY)
 	$educBackground=array();
-	$educBackground=$_POST['jsonData'];
+	
 	mysqli_autocommit($con, FALSE);
 	$transaction=true;
 
@@ -237,36 +237,40 @@ function updateEducBackground()
 		$errMsg='mysqli error: '.mysqli_error($con);	
 	}
 
-	foreach($educBackground['educ'] as $educValues)
+	if(isset($_POST['jsonData']))
 	{
-		// echo strtoupper($educValues['EducLvlID'])."<br>";
-		$educDateFrom=explode("-",date("m-d-Y", strtotime($educValues['EducIncAttDateFromDate'])));
-		$educDateTo=explode("-",date("m-d-Y", strtotime($educValues['EducIncAttDateToDate'])));
-
-		$sql="INSERT INTO `empeducbg`(`EducBgID`, `EmpID`, `EducLvlID`, `EducSchoolName`, `EducCourse`, `EducYrGrad`, `EducGradeLvlUnits`, `EducIncAttDateFromDay`, `EducIncAttDateFromMonth`, `EducIncAttDateFromYear`, `EducIncAttDateToDay`, `EducIncAttDateToMonth`, `EducIncAttDateToYear`, `EducAwards`) VALUES ('EDU".date('Y').date('m').makeKey('educBackground')."','".$_SESSION['username']."',?,?,?,?,?,?,?,?,?,?,?,?)";
-
-		$stmt = mysqli_prepare($con,$sql);
-		if (!$stmt)
+		$educBackground=$_POST['jsonData'];
+		foreach($educBackground['educ'] as $educValues)
 		{
-			$transaction=false;
-		  	// die('mysqli error: '.mysqli_error($con));
-  			$errMsg='mysqli error: '.mysqli_error($con);	
-		}
-		$EducSchoolName=strtoupper($educValues['EducSchoolName']);
-		$EducCourse=strtoupper($educValues['EducCourse']);
-		$EducGradeLvlUnits=strtoupper($educValues['EducGradeLvlUnits']);
-		$EducAwards=strtoupper($educValues['EducAwards']);
-		mysqli_stmt_bind_param($stmt, "sssisiiiiiis",$educValues['EducLvlID'],$EducSchoolName, $EducCourse, $educValues['EducYrGrad'], $EducGradeLvlUnits,$educDateFrom[1],$educDateFrom[0],$educDateFrom[2],$educDateTo[1],$educDateTo[0],$educDateTo[2], $EducAwards);
-		if ( !mysqli_execute($stmt) )
-		{
-			$transaction=false;
-			// die( 'stmt error: '.mysqli_stmt_error($stmt) );
-			$errMsg='stmt error: '.mysqli_stmt_error($stmt);	
-		}
-		mysqli_stmt_close($stmt);
+			// echo strtoupper($educValues['EducLvlID'])."<br>";
+			$educDateFrom=explode("-",date("m-d-Y", strtotime($educValues['EducIncAttDateFromDate'])));
+			$educDateTo=explode("-",date("m-d-Y", strtotime($educValues['EducIncAttDateToDate'])));
 
-	}
+			$sql="INSERT INTO `empeducbg`(`EducBgID`, `EmpID`, `EducLvlID`, `EducSchoolName`, `EducCourse`, `EducYrGrad`, `EducGradeLvlUnits`, `EducIncAttDateFromDay`, `EducIncAttDateFromMonth`, `EducIncAttDateFromYear`, `EducIncAttDateToDay`, `EducIncAttDateToMonth`, `EducIncAttDateToYear`, `EducAwards`) VALUES ('EDU".date('Y').date('m').makeKey('educBackground')."','".$_SESSION['username']."',?,?,?,?,?,?,?,?,?,?,?,?)";
 
+			$stmt = mysqli_prepare($con,$sql);
+			if (!$stmt)
+			{
+				$transaction=false;
+			  	// die('mysqli error: '.mysqli_error($con));
+	  			$errMsg='mysqli error: '.mysqli_error($con);	
+			}
+			$EducSchoolName=strtoupper($educValues['EducSchoolName']);
+			$EducCourse=strtoupper($educValues['EducCourse']);
+			$EducGradeLvlUnits=strtoupper($educValues['EducGradeLvlUnits']);
+			$EducAwards=strtoupper($educValues['EducAwards']);
+			$educLevel=getEducLvlId($educValues['EducLevel']);
+			mysqli_stmt_bind_param($stmt, "sssisiiiiiis",$educLevel,$EducSchoolName, $EducCourse, $educValues['EducYrGrad'], $EducGradeLvlUnits,$educDateFrom[1],$educDateFrom[0],$educDateFrom[2],$educDateTo[1],$educDateTo[0],$educDateTo[2], $EducAwards);
+			if ( !mysqli_execute($stmt) )
+			{
+				$transaction=false;
+				// die( 'stmt error: '.mysqli_stmt_error($stmt) );
+				$errMsg='stmt error: '.mysqli_stmt_error($stmt);	
+			}
+			mysqli_stmt_close($stmt);
+
+			}
+		}
 
 	if ($transaction)
 	{
@@ -286,13 +290,24 @@ function updateEducBackground()
 	die();
 }
 
+function getEducLvlId($educationLevel)	//GET EDUCATIONAL LEVEL DESCRIPTION
+{
+	global $DB_HOST, $DB_USER,$DB_PASS, $DB_SCHEMA;
+	$con=mysqli_connect($DB_HOST,$DB_USER,$DB_PASS,$DB_SCHEMA);
+
+	$sql="SELECT EducLvlID FROM m_educlevels WHERE EducLvlDesc = '".$educationLevel."' ";
+	$myQuery=mysqli_query($con,$sql);
+	$myResult=mysqli_fetch_array($myQuery);
+	return $myResult['EducLvlID'];
+}
+
 function updateEligibility()
 {
 	global $DB_HOST, $DB_USER,$DB_PASS, $DB_SCHEMA;
 	$con=mysqli_connect($DB_HOST,$DB_USER,$DB_PASS,$DB_SCHEMA);
 	$returnMessage=array();
 	$CSCEligibility=array();
-	$CSCEligibility=$_POST['jsonData'];
+	
 	mysqli_autocommit($con, FALSE);
 	$transaction=true;
 
@@ -303,37 +318,40 @@ function updateEligibility()
 		$errMsg='mysqli error: '.mysqli_error($con);	
 	}
 
-	foreach($CSCEligibility['CSC'] as $eligibilityValues)
+	if(isset($_POST['jsonData']))
 	{
-		// echo strtoupper($educValues['EducLvlID'])."<br>";
-		$CSCExamDate=explode("-",date("m-d-Y", strtotime($eligibilityValues['CSEExamDate'])));
-		$CSCLicReleaseDate=explode("-",date("m-d-Y", strtotime($eligibilityValues['CSELicReleaseDate'])));
-
-		$sql="INSERT INTO `empcse`(`CSEID`,`EmpID`,`CSEDesc`,`CSERating`,`CSEExamDay`,`CSEExamMonth`,`CSEExamYear`,`CSEExamPlace`,`CSELicNum`,`CSELicReleaseDay`,`CSELicReleaseMonth`,`CSELicReleaseYear`) VALUES ('CSE".date('Y').date('m').makeKey('cscEligibility')."','".$_SESSION['username']."',?,?,?,?,?,?,?,?,?,?)";
-
-		$stmt = mysqli_prepare($con,$sql);
-		if (!$stmt)
+		$CSCEligibility=$_POST['jsonData'];
+		foreach($CSCEligibility['CSC'] as $eligibilityValues)
 		{
-			$transaction=false;
-		  	// die('mysqli error: '.mysqli_error($con));
-		  	$errMsg='mysqli error: '.mysqli_error($con);
-		}
+			// echo strtoupper($educValues['EducLvlID'])."<br>";
+			$CSCExamDate=explode("-",date("m-d-Y", strtotime($eligibilityValues['CSEExamDate'])));
+			$CSCLicReleaseDate=explode("-",date("m-d-Y", strtotime($eligibilityValues['CSELicReleaseDate'])));
 
-		$CSEDesc=strtoupper($eligibilityValues['CSEDesc']);
-		$CSERating=strtoupper($eligibilityValues['CSERating']);
-		$CSEExamPlace=strtoupper($eligibilityValues['CSEExamPlace']);
-		$CSELicNum=strtoupper($eligibilityValues['CSELicNum']);
-		mysqli_stmt_bind_param($stmt, "ssiiissiii",$CSEDesc, $CSERating, $CSCExamDate[1],$CSCExamDate[0],$CSCExamDate[2], $CSEExamPlace, $CSELicNum, $CSCLicReleaseDate[1],$CSCLicReleaseDate[0],$CSCLicReleaseDate[2]);
-		if ( !mysqli_execute($stmt) )
-		{
-			$transaction=false;
-			// die( 'stmt error: '.mysqli_stmt_error($stmt) );
-			$errMsg='stmt error: '.mysqli_stmt_error($stmt);
+			$sql="INSERT INTO `empcse`(`CSEID`,`EmpID`,`CSEDesc`,`CSERating`,`CSEExamDay`,`CSEExamMonth`,`CSEExamYear`,`CSEExamPlace`,`CSELicNum`,`CSELicReleaseDay`,`CSELicReleaseMonth`,`CSELicReleaseYear`) VALUES ('CSE".date('Y').date('m').makeKey('cscEligibility')."','".$_SESSION['username']."',?,?,?,?,?,?,?,?,?,?)";
+
+			$stmt = mysqli_prepare($con,$sql);
+			if (!$stmt)
+			{
+				$transaction=false;
+			  	// die('mysqli error: '.mysqli_error($con));
+			  	$errMsg='mysqli error: '.mysqli_error($con);
+			}
+
+			$CSEDesc=strtoupper($eligibilityValues['CSEDesc']);
+			$CSERating=strtoupper($eligibilityValues['CSERating']);
+			$CSEExamPlace=strtoupper($eligibilityValues['CSEExamPlace']);
+			$CSELicNum=strtoupper($eligibilityValues['CSELicNum']);
+			mysqli_stmt_bind_param($stmt, "ssiiissiii",$CSEDesc, $CSERating, $CSCExamDate[1],$CSCExamDate[0],$CSCExamDate[2], $CSEExamPlace, $CSELicNum, $CSCLicReleaseDate[1],$CSCLicReleaseDate[0],$CSCLicReleaseDate[2]);
+			if ( !mysqli_execute($stmt) )
+			{
+				$transaction=false;
+				// die( 'stmt error: '.mysqli_stmt_error($stmt) );
+				$errMsg='stmt error: '.mysqli_stmt_error($stmt);
+			}
+			mysqli_stmt_close($stmt);
+			// echo $CSCLicReleaseDate[2]."<br>";
 		}
-		mysqli_stmt_close($stmt);
-		// echo $CSCLicReleaseDate[2]."<br>";
 	}
-
 
 	if ($transaction)
 	{
@@ -374,7 +392,7 @@ function  updateWorkExp()
 	$con=mysqli_connect($DB_HOST,$DB_USER,$DB_PASS,$DB_SCHEMA);
 	$returnMessage=array();
 	$WorkExp=array();
-	$WorkExp=$_POST['jsonData'];
+	
 	mysqli_autocommit($con, FALSE);
 	$transaction=true;
 
@@ -385,35 +403,38 @@ function  updateWorkExp()
 		$errMsg='mysqli error: '.mysqli_error($con);
 	}
 
-	foreach($WorkExp['WExp'] as $workExpValues)
+	if(isset($_POST['jsonData']))
 	{
-		// echo strtoupper($educValues['EducLvlID'])."<br>";
-		$workExpFromDate=explode("-",date("m-d-Y", strtotime($workExpValues['WExpFromDate'])));
-		$workExpToDate=explode("-",date("m-d-Y", strtotime($workExpValues['WExpToDate'])));
+		$WorkExp=$_POST['jsonData'];
+		foreach($WorkExp['WExp'] as $workExpValues)
+		{
+			// echo strtoupper($educValues['EducLvlID'])."<br>";
+			$workExpFromDate=explode("-",date("m-d-Y", strtotime($workExpValues['WExpFromDate'])));
+			$workExpToDate=explode("-",date("m-d-Y", strtotime($workExpValues['WExpToDate'])));
 
-		$sql="INSERT INTO `empworkexp`(`WExpID`,`EmpID`,`WExpFromDay`,`WExpFromMonth`,`WExpFromYear`,`WExpToDay`,`WExpToMonth`,`WExpToYear`,`WExpPosition`,`WExpEmployer`,`SalGrdID`,`WExpSalary`,`ApptStID`,`WExpIsGov`) VALUES ('WEXP".date('Y').date('m').makeKey('workExperience')."','".$_SESSION['username']."',?,?,?,?,?,?,?,?,?,?,?,?)";
-		$stmt = mysqli_prepare($con,$sql);
-		if (!$stmt)
-		{
-			$transaction=false;
-		  	// die('mysqli error: '.mysqli_error($con));
-		  	$errMsg='mysqli error: '.mysqli_error($con);
-		}
-		$WExpPosition=strtoupper($workExpValues['WExpPosition']);
-		$WExpEmployer=strtoupper($workExpValues['WExpEmployer']);
-		$WExpSalary=strtoupper($workExpValues['WExpSalary']);
-		$WExpIsGov=strtoupper($workExpValues['WExpIsGov']);
-		mysqli_stmt_bind_param($stmt, "iiiiiissssss", $workExpFromDate[1], $workExpFromDate[0], $workExpFromDate[2], $workExpToDate[1], $workExpToDate[0], $workExpToDate[2], $WExpPosition, $WExpEmployer, $workExpValues['SalGrdID'], $WExpSalary, $workExpValues['ApptStDesc'], $WExpIsGov);
-		if ( !mysqli_execute($stmt) )
-		{
-			$transaction=false;
-			// die( 'stmt error: '.mysqli_stmt_error($stmt) );
-			$errMsg='stmt error: '.mysqli_stmt_error($stmt);
-		}
-		mysqli_stmt_close($stmt);
+			$sql="INSERT INTO `empworkexp`(`WExpID`,`EmpID`,`WExpFromDay`,`WExpFromMonth`,`WExpFromYear`,`WExpToDay`,`WExpToMonth`,`WExpToYear`,`WExpPosition`,`WExpEmployer`,`SalGrdID`,`WExpSalary`,`ApptStID`,`WExpIsGov`) VALUES ('WEXP".date('Y').date('m').makeKey('workExperience')."','".$_SESSION['username']."',?,?,?,?,?,?,?,?,?,?,?,?)";
+			$stmt = mysqli_prepare($con,$sql);
+			if (!$stmt)
+			{
+				$transaction=false;
+			  	// die('mysqli error: '.mysqli_error($con));
+			  	$errMsg='mysqli error: '.mysqli_error($con);
+			}
+			$WExpPosition=strtoupper($workExpValues['WExpPosition']);
+			$WExpEmployer=strtoupper($workExpValues['WExpEmployer']);
+			$WExpSalary=strtoupper($workExpValues['WExpSalary']);
+			$WExpIsGov=strtoupper($workExpValues['WExpIsGov']);
+			mysqli_stmt_bind_param($stmt, "iiiiiissssss", $workExpFromDate[1], $workExpFromDate[0], $workExpFromDate[2], $workExpToDate[1], $workExpToDate[0], $workExpToDate[2], $WExpPosition, $WExpEmployer, $workExpValues['SalGrdID'], $WExpSalary, $workExpValues['ApptStDesc'], $WExpIsGov);
+			if ( !mysqli_execute($stmt) )
+			{
+				$transaction=false;
+				// die( 'stmt error: '.mysqli_stmt_error($stmt) );
+				$errMsg='stmt error: '.mysqli_stmt_error($stmt);
+			}
+			mysqli_stmt_close($stmt);
 		// echo $CSCLicReleaseDate[2]."<br>";
+		}
 	}
-
 
 	if ($transaction)
 	{
@@ -441,7 +462,7 @@ function updateVolOrg()
 	$con=mysqli_connect($DB_HOST,$DB_USER,$DB_PASS,$DB_SCHEMA);
 	$returnMessage=array();
 	$volOrg=array();
-	$volOrg=$_POST['jsonData'];
+	
 	mysqli_autocommit($con, FALSE);
 	$transaction=true;
 
@@ -451,39 +472,41 @@ function updateVolOrg()
 		$transaction=false;
 		$errMsg='mysqli error: '.mysqli_error($con);
 	}
-
-	foreach($volOrg['vWork'] as $volOrgExpValues)
+	if(isset($_POST['jsonData']))
 	{
-		// echo strtoupper($educValues['EducLvlID'])."<br>";
-		$volOrgFromDate=explode("-",date("m-d-Y", strtotime($volOrgExpValues['VolOrgFromDate'])));
-		$volOrgToDate=explode("-",date("m-d-Y", strtotime($volOrgExpValues['VolOrgToDate'])));
-
-
-		$sql="INSERT INTO `empvoluntaryorg` (`VolOrgID`,`EmpID`,`VolOrgName`,`VolOrgAddSt`,`VolOrgFromDay`,`VolOrgFromMonth`,
-`VolOrgFromYear`,`VolOrgToDay`,`VolOrgToMonth`,`VolOrgToYear`,`VolOrgHours`,`VolOrgDetails`) VALUES ('VORG".date('Y').date('m').makeKey('volOrganization')."','".$_SESSION['username']."',?,?,?,?,?,?,?,?,?,?)";
-
-
-		$stmt = mysqli_prepare($con,$sql);
-		if (!$stmt)
+		$volOrg=$_POST['jsonData'];
+		foreach($volOrg['vWork'] as $volOrgExpValues)
 		{
-			$transaction=false;
-		  	// die('mysqli error: '.mysqli_error($con));
-  			$errMsg='mysqli error: '.mysqli_error($con);
+			// echo strtoupper($educValues['EducLvlID'])."<br>";
+			$volOrgFromDate=explode("-",date("m-d-Y", strtotime($volOrgExpValues['VolOrgFromDate'])));
+			$volOrgToDate=explode("-",date("m-d-Y", strtotime($volOrgExpValues['VolOrgToDate'])));
+
+
+			$sql="INSERT INTO `empvoluntaryorg` (`VolOrgID`,`EmpID`,`VolOrgName`,`VolOrgAddSt`,`VolOrgFromDay`,`VolOrgFromMonth`,
+	`VolOrgFromYear`,`VolOrgToDay`,`VolOrgToMonth`,`VolOrgToYear`,`VolOrgHours`,`VolOrgDetails`) VALUES ('VORG".date('Y').date('m').makeKey('volOrganization')."','".$_SESSION['username']."',?,?,?,?,?,?,?,?,?,?)";
+
+
+			$stmt = mysqli_prepare($con,$sql);
+			if (!$stmt)
+			{
+				$transaction=false;
+			  	// die('mysqli error: '.mysqli_error($con));
+	  			$errMsg='mysqli error: '.mysqli_error($con);
+			}
+			$VolOrgName=strtoupper($volOrgExpValues['VolOrgName']);
+			$VolOrgAddSt=strtoupper($volOrgExpValues['VolOrgAddSt']);
+			$VolOrgDetails=strtoupper($volOrgExpValues['VolOrgDetails']);
+			mysqli_stmt_bind_param($stmt, "ssiiiiiiss", $VolOrgName, $VolOrgAddSt, $volOrgFromDate[1], $volOrgFromDate[0], $volOrgFromDate[2], $volOrgToDate[1], $volOrgToDate[0], $volOrgToDate[2], $volOrgExpValues['VolOrgHours'], $VolOrgDetails );
+			if ( !mysqli_execute($stmt) )
+			{
+				$transaction=false;
+				// die( 'stmt error: '.mysqli_stmt_error($stmt) );
+				$errMsg='stmt error: '.mysqli_stmt_error($stmt);
+			}
+			mysqli_stmt_close($stmt);
+			// echo $CSCLicReleaseDate[2]."<br>";
 		}
-		$VolOrgName=strtoupper($volOrgExpValues['VolOrgName']);
-		$VolOrgAddSt=strtoupper($volOrgExpValues['VolOrgAddSt']);
-		$VolOrgDetails=strtoupper($volOrgExpValues['VolOrgDetails']);
-		mysqli_stmt_bind_param($stmt, "ssiiiiiiss", $VolOrgName, $VolOrgAddSt, $volOrgFromDate[1], $volOrgFromDate[0], $volOrgFromDate[2], $volOrgToDate[1], $volOrgToDate[0], $volOrgToDate[2], $volOrgExpValues['VolOrgHours'], $VolOrgDetails );
-		if ( !mysqli_execute($stmt) )
-		{
-			$transaction=false;
-			// die( 'stmt error: '.mysqli_stmt_error($stmt) );
-			$errMsg='stmt error: '.mysqli_stmt_error($stmt);
-		}
-		mysqli_stmt_close($stmt);
-		// echo $CSCLicReleaseDate[2]."<br>";
 	}
-
 
 	if ($transaction)
 	{
@@ -512,7 +535,7 @@ function updateTraining()
 	$training=array();
 	$returnMessage=array();
 	// if(isset($_POST['jsonData'])){ die(); }
-	$training=$_POST['jsonData'];
+	
 	mysqli_autocommit($con, FALSE);
 	$transaction=true;
 
@@ -523,38 +546,41 @@ function updateTraining()
 		$errMsg='mysqli error: '.mysqli_error($con);
 	}
 
-	foreach($training['Train'] as $trainingValues)
+	if(isset($_POST['jsonData']))
 	{
-		// echo strtoupper($educValues['EducLvlID'])."<br>";
-		$trainingFromDate=explode("-",date("m-d-Y", strtotime($trainingValues['TrainFromDate'])));
-		$trainingToDate=explode("-",date("m-d-Y", strtotime($trainingValues['TrainToDate'])));
-
-
-	$sql="INSERT INTO `emptrainings`(`TrainID`,`EmpID`,`TrainDesc`,`TrainFromDay`,`TrainFromMonth`,`TrainFromYear`,`TrainToDay`,
-`TrainToMonth`,`TrainToYear`,`TrainHours`,`TrainSponsor`) VALUES ('TRN".date('Y').date('m').makeKey('trainings')."','".$_SESSION['username']."',?,?,?,?,?,?,?,?,?)";
-
-		$stmt = mysqli_prepare($con,$sql);
-		if (!$stmt)
+		$training=$_POST['jsonData'];
+		foreach($training['Train'] as $trainingValues)
 		{
-			$transaction=false;
-		  	// die('mysqli error: '.mysqli_error($con));
-		  	$errMsg='mysqli error: '.mysqli_error($con);
-		}
-		$TrainDesc=strtoupper($trainingValues['TrainDesc']);
-		$TrainHours=strtoupper($trainingValues['TrainHours']);
-		$TrainSponsor=strtoupper($trainingValues['TrainSponsor']);
+			// echo strtoupper($educValues['EducLvlID'])."<br>";
+			$trainingFromDate=explode("-",date("m-d-Y", strtotime($trainingValues['TrainFromDate'])));
+			$trainingToDate=explode("-",date("m-d-Y", strtotime($trainingValues['TrainToDate'])));
 
-		mysqli_stmt_bind_param($stmt, "siiiiiiss", $TrainDesc, $trainingFromDate[1], $trainingFromDate[0], $trainingFromDate[2], $trainingToDate[1], $trainingToDate[0], $trainingToDate[2], $TrainHours, $TrainSponsor);
-		if ( !mysqli_execute($stmt) )
-		{
-			$transaction=false;
-			// die( 'stmt error: '.mysqli_stmt_error($stmt) );
-			$errMsg='stmt error: '.mysqli_stmt_error($stmt);
+
+		$sql="INSERT INTO `emptrainings`(`TrainID`,`EmpID`,`TrainDesc`,`TrainFromDay`,`TrainFromMonth`,`TrainFromYear`,`TrainToDay`,
+	`TrainToMonth`,`TrainToYear`,`TrainHours`,`TrainSponsor`) VALUES ('TRN".date('Y').date('m').makeKey('trainings')."','".$_SESSION['username']."',?,?,?,?,?,?,?,?,?)";
+
+			$stmt = mysqli_prepare($con,$sql);
+			if (!$stmt)
+			{
+				$transaction=false;
+			  	// die('mysqli error: '.mysqli_error($con));
+			  	$errMsg='mysqli error: '.mysqli_error($con);
+			}
+			$TrainDesc=strtoupper($trainingValues['TrainDesc']);
+			$TrainHours=strtoupper($trainingValues['TrainHours']);
+			$TrainSponsor=strtoupper($trainingValues['TrainSponsor']);
+
+			mysqli_stmt_bind_param($stmt, "siiiiiiss", $TrainDesc, $trainingFromDate[1], $trainingFromDate[0], $trainingFromDate[2], $trainingToDate[1], $trainingToDate[0], $trainingToDate[2], $TrainHours, $TrainSponsor);
+			if ( !mysqli_execute($stmt) )
+			{
+				$transaction=false;
+				// die( 'stmt error: '.mysqli_stmt_error($stmt) );
+				$errMsg='stmt error: '.mysqli_stmt_error($stmt);
+			}
+			mysqli_stmt_close($stmt);
+			// echo $CSCLicReleaseDate[2]."<br>";
 		}
-		mysqli_stmt_close($stmt);
-		// echo $CSCLicReleaseDate[2]."<br>";
 	}
-
 
 	if ($transaction)
 	{

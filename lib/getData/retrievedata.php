@@ -39,11 +39,11 @@ function joblist()
 	$returnMessage=array();
 	if (isset($_POST['strFilter']))
 	{
-		$sqlCondition=" WHERE (position LIKE '%".$_POST['strFilter']."%' OR `m_department`.`description` LIKE '%".$_POST['strFilter']."%') AND (postexpire > CURDATE() AND poststart < CURDATE())";
+		$sqlCondition=" WHERE (position LIKE '%".$_POST['strFilter']."%' OR `m_department`.`description` LIKE '%".$_POST['strFilter']."%') AND (postexpire >= CURDATE() AND poststart <= CURDATE())";
 	}
 	else
 	{
-		$sqlCondition=" WHERE  postexpire > CURDATE() AND poststart < CURDATE()";
+		$sqlCondition=" WHERE  postexpire >= CURDATE() AND poststart <= CURDATE()";
 	}
 
 	$sql="SELECT jobopening_pk, itemno, position, salarygrade, poststart, m_department.description AS departmentName, m_department.department_pk as department_pk, postexpire FROM jobopening JOIN m_department on jobopening.department_fk = m_department.department_pk ".$sqlCondition." ORDER BY departmentName";

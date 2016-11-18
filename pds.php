@@ -263,13 +263,13 @@
 											
 											<div class="col-sm-3 form-group">
 												<label>Email Address</label>
-												<input id='EmpEMail' type="email" id="loginTxtUsername" placeholder="Email Address Here.." class="form-control" required>
+												<input id='EmpMobile' type="email" id="loginTxtUsername" placeholder="Email Address Here.." class="form-control" required>
 
 											</div>
 											
 											<div class="col-sm-3 form-group">
 												<label>Cellphone No.</label>
-												<input id='EmpMobile' type="text" placeholder="Phone Number Here.." class="form-control" required>
+												<input id='EmpEMail' type="text" placeholder="Phone Number Here.." class="form-control" required>
 											</div>
 											<div class="col-sm-3 form-group">
 												<label>Agency Employee No.</label>
@@ -2051,9 +2051,9 @@ function save() {
 	// }
 	data += '}';
 	data = JSON.parse(data);
-	console.log(data);
+	// console.log(data);
 
-if ($.isEmptyObject( data )) return;
+// if ($.isEmptyObject( data )) return;
 	var moduleName = 'updatePerInfo';
    $.blockUI();
     jQuery.ajax({
@@ -2086,6 +2086,7 @@ if ($.isEmptyObject( data )) return;
 
 function saveFamB()
 {
+
 $('#familyBackground').removeClass();
 $('#educBackground').addClass('active');
 	var data = '{';
@@ -2117,9 +2118,9 @@ $('#educBackground').addClass('active');
 	}
 	data += '}';
 	data = JSON.parse(data);
-	console.log(data);
-	return;
-if ($.isEmptyObject( data )) return;
+// 	console.log(data);
+	
+// if ($.isEmptyObject( data )) return;
 $.blockUI();
 	var moduleName = 'updateFamBackground';
     jQuery.ajax({
@@ -2182,9 +2183,9 @@ var data = '{';
 	}
 	data += '}';
 	data = JSON.parse(data);
-	console.log(data);
-	// return;
-if ($.isEmptyObject( data )) return;
+	// console.log(data);
+	 // return;
+// if ($.isEmptyObject( data )) return;
 $.blockUI();
 	var moduleName = 'updateEducBackground';
     jQuery.ajax({
@@ -2236,9 +2237,9 @@ $('#workExperTab').addClass('active');
 	}
 	data += '}';
 	data = JSON.parse(data);
-	console.log(data);
-	// return;
-if ($.isEmptyObject( data )) return;
+// 	console.log(data);
+// 	// return;
+// if ($.isEmptyObject( data )) return;
 $.blockUI();
 	var moduleName = 'updateEligibility';
     jQuery.ajax({
@@ -2292,9 +2293,9 @@ $('#voluntaryTab').addClass('active');
 	}
 	data += '}';
 	data = JSON.parse(data);
-	console.log(data);
+	// console.log(data);
 	// return;
-	if ($.isEmptyObject( data )) return;
+	// if ($.isEmptyObject( data )) return;
 	$.blockUI();
 	var moduleName = 'updateWorkExp';
     jQuery.ajax({
@@ -2345,9 +2346,9 @@ $('#trainingTab').addClass('active');
 	}
 	data += '}';
 	data = JSON.parse(data);
-	console.log(data);
-	// return;
-	if ($.isEmptyObject( data )) return;
+	// console.log(data);
+	// // return;
+	// if ($.isEmptyObject( data )) return;
 	$.blockUI();
 	var moduleName = 'updateVolOrg';
     jQuery.ajax({
@@ -2398,9 +2399,9 @@ $('#panelotherTab').addClass('active');
 	}
 	data += '}';
 	data = JSON.parse(data);
-	console.log(data);
-	// return;
-if ($.isEmptyObject( data )) return;
+// 	console.log(data);
+// 	// return;
+// if ($.isEmptyObject( data )) return;
 $.blockUI();
 
 	var moduleName = 'updateTraining';
@@ -2528,7 +2529,7 @@ if ($($('#tblMembership tbody tr')[0]).hasClass('no-records-found')) {
 
 	data += '}';
 	data = JSON.parse(data);
-	if ($.isEmptyObject( data )) return;
+	// if ($.isEmptyObject( data )) return;
 	$.blockUI();
 	var moduleName = 'updateOtherInfo';
     jQuery.ajax({
@@ -2598,7 +2599,7 @@ $.blockUI();
 			}).prop('selected', true);
 			$('#EmpPerAddProv').selectpicker('refresh');
 
-
+			console.log(response);
 			$("#EmpPerAddProv").trigger("change");
 			$("#EmpResAddProv").trigger("change");
 
@@ -2647,8 +2648,10 @@ var delay=10;
         	$('#EmpPerTel').val(response['EmpPerTel']);
         	$('#EmpResZipCode').val(response['EmpResZipCode']);
         	$('#EmpResTel').val(response['EmpResTel']);
+			
         	$('#EmpEMail').val(response['EmpEMail']);
         	$('#EmpMobile').val(response['EmpMobile']);
+			
         	$('#EmpAgencyNo').val(response['EmpAgencyNo']);
         	$('#EmpTIN').val(response['EmpTIN']);
         	$('#EmpGSIS').val(response['EmpGSIS']);
@@ -2673,11 +2676,13 @@ var delay=10;
 		{
 			$('#fbtblChild').bootstrapTable('insertRow', {index: 1, row: {  childFname:'<span class="DpntFName">'+value['DpntFName']+'</span>',childMname:'<span class="DpntMName">'+value['DpntMName']+'</span>',childLname:'<span class="DpntLName">'+value['DpntLName']+'</span>',childBirth:'<span class="DpntBDay">'+value['DpntBirthDate']+'</span>'} });
 		});
+        	
 //educational background
  		$('#tblEducation').bootstrapTable('removeAll');
         $.each(response[1],function( key, value )
 		{
 			educationNumber++;
+
 			$('#tblEducation').bootstrapTable('insertRow', {index: 1, row: {  No: '<span class="No">'+educationNumber+'</span>',
                 EducLvlID: '<span class="EducLvlID">'+value['EducLvlID']+'</span>',
                 EducLevel:  '<span class="EducLevel">'+value['EducLevel']+'</span>',

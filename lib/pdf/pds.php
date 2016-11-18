@@ -426,7 +426,22 @@ $pdf->SetFont($fontUsed);
 	$yCoordBmonth=153.5;
 	$yCoordBdate=154;
 	$yCoordByear=152.9;
-	foreach($employeeInfo['0'] as $dependetArr)
+
+////
+$dependent=$employeeInfo[0];
+$rank = [];
+foreach ($dependent as $key => $row) {
+
+$rank[] = $dependent[$key]['DpntBirthYear'];
+
+}
+
+array_multisort($rank, SORT_ASC, $dependent);
+
+// uasort($employeeInfo[0][0], 'sortMe');
+/////
+	// print_r($dependent); exit;
+	foreach($dependent as $dependetArr)
 	{
 		$pdf->SetXY(114, $yCoordName);
 		if(strlen($dependetArr['DpntFName']." ".$dependetArr['DpntMName']." ".$dependetArr['DpntLName'])>24)
@@ -935,7 +950,21 @@ $pdf->useTemplate($page2, null, null, 0, 0, true);
 // CIVIL SERVICE
 $cscYcoord=29;
 $cscYcoordPlace=28.5;
-	foreach($employeeInfo['2'] as $cseDetail)
+
+
+$eligibility=$employeeInfo[2];
+$rank = [];
+
+foreach ($eligibility as $key => $row) 
+{
+	$time = strtotime($eligibility[$key]['CSEExamDate']);
+	$rank[] = $time;
+}
+
+array_multisort($rank, SORT_DESC, $eligibility);
+
+
+	foreach($eligibility as $cseDetail)
 	{
 		$pdf->SetFontSize(10);
 			$pdf->SetXY(7, $cscYcoord);
@@ -960,6 +989,7 @@ $cscYcoordPlace=28.5;
 			{
 				$pdf->SetFontSize(8);
 			}
+
 			$pdf->MultiCell(20.3, 2.8, $cseDetail['CSEExamDate'],0,'C');
 			$pdf->SetFontSize(10);
 			
@@ -997,7 +1027,19 @@ $cscYcoordPlace=28.5;
 	$wExpYcoordGsalary=123;
 	$wExpYcoordApp=122.7;
 	$wExpYcoordGov=124;
-	foreach($employeeInfo['3'] as $workExpDetail)
+
+$workExp=$employeeInfo[3];
+$rank = [];
+foreach ($workExp as $key => $row) 
+{
+	$wholetime=$workExp[$key]['WExpFromMonth']."/".$workExp[$key]['WExpFromDay']."/".$workExp[$key]['WExpFromYear'];
+	$time = strtotime($wholetime);
+	$rank[] = $time;
+}
+
+array_multisort($rank, SORT_DESC, $workExp);
+
+	foreach($workExp as $workExpDetail)
 	{
 
 		$pdf->SetXY(7, $wExpYcoordFrom);
@@ -1109,7 +1151,21 @@ $volYcoordFrom=32;
 $volYcoordTo=32;
 $volYcoordHour=32;
 $volYcoordPosition=31;
-	foreach($employeeInfo['4'] as $VolDetail)
+
+
+$volWork=$employeeInfo[4];
+$rank = [];
+foreach ($volWork as $key => $row) 
+{
+	$wholetime=$volWork[$key]['VolOrgFromMonth']."/".$volWork[$key]['VolOrgFromDay']."/".$volWork[$key]['VolOrgFromYear'];
+	$time = strtotime($wholetime);
+	$rank[] = $time;
+}
+
+array_multisort($rank, SORT_DESC, $volWork);
+
+
+	foreach($volWork as $VolDetail)
 	{
 		$pdf->SetXY(7.5, $volYcoordname);
 		if(strlen($VolDetail['VolOrgName']." - ".$VolDetail['VolOrgAddSt'])>37) 
@@ -1186,7 +1242,20 @@ $volYcoordPosition=31;
 	$TrainDetailYcoordTo=106;
 	$TrainDetailYcoordHour=106;
 	$TrainDetailYcoordSponsor=105;
-	foreach($employeeInfo['5'] as $TrainDetail)
+
+	$training=$employeeInfo[5];
+$rank = [];
+foreach ($training as $key => $row) 
+{
+	$wholetime=$training[$key]['TrainFromMonth']."/".$training[$key]['TrainFromDay']."/".$training[$key]['TrainFromYear'];
+	$time = strtotime($wholetime);
+	$rank[] = $time;
+}
+
+array_multisort($rank, SORT_DESC, $training);
+
+
+	foreach($training as $TrainDetail)
 	{
 		$pdf->SetXY(7.5, $TrainDetailYcoord);
 		if(strlen($TrainDetail['TrainDesc'])>36) 
@@ -1630,6 +1699,8 @@ $pdf->SetFont($fontUsed);
 		$pdf->SetFontSize(10);
 	}
 
+
+
 $pdf->Output();
 
 
@@ -1819,5 +1890,18 @@ $sql="SELECT `RefLName`,`RefMName`,`RefFName`,`RefExtName`,`RefAddSt`,`RefAddBrg
 
 	return $empInfo;
 }
+
+
+//sort array
+function sortMe($a, $b) {
+    if ($a == $b) {
+        return 0;
+    }
+    return ($a < $b) ? -1 : 1;
+}
+
+
+
+
 
 ?>
