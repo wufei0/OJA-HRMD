@@ -38,7 +38,7 @@ global $DB_HOST, $DB_USER,$DB_PASS, $DB_SCHEMA;
 	
 
 
-	$sql="SELECT jobopening_pk, itemno, position, salarygrade, poststart, m_department.description AS departmentName, m_department.department_pk as department_pk, postexpire FROM jobopening JOIN m_department on jobopening.department_fk = m_department.department_pk  WHERE department_pk like '".$_POST['department']."' AND postexpire > CURDATE() AND poststart < CURDATE() ORDER BY departmentName";
+	$sql="SELECT jobopening_pk, itemno, position, salarygrade, poststart, m_department.description AS departmentName, m_department.department_pk as department_pk, postexpire FROM jobopening JOIN m_department on jobopening.department_fk = m_department.department_pk  WHERE department_pk like '".$_POST['department']."' AND postexpire >= CURDATE() AND poststart <= CURDATE() ORDER BY departmentName";
 	$myQuery=mysqli_query($con,$sql);
 	$resultArray=array();
 	while ($resultSet=mysqli_fetch_array($myQuery))

@@ -4,7 +4,7 @@ $DB_HOST = '10.10.4.59';
 $DB_USER = 'hr';
 $DB_PASS = 'hr';
 $DB_SCHEMA = 'oja';
-$SESSION_['sysVer']='OJA v1.03';
+$SESSION_['sysVer']='OJA v1.05';
 date_default_timezone_set("Asia/Manila");
 // $con = mysqli_connect("docutracking","hr","hr","oja");
 
